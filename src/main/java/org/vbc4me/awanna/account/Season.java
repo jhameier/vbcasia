@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * Represents a yearly set of activities associated with the Awanna program and
- * contains information such as session, student and staffing information
+ * contains information such as session (start and end dates + activities), student and staffing information
  */
 public final class Season {
 	
@@ -13,10 +13,6 @@ public final class Season {
 	private static Session session;
 	private static Map<String, Student> students = new HashMap<>();
 	private static Map<String, Staff> staff = new HashMap<>();
-	
-	public Season(String name) {
-		this.name = name;
-	}
 	
 	public Season(String name, Session session, Map<String, Student> students, Map<String, Staff> staff) {
 		this.name = name;

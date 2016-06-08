@@ -101,12 +101,17 @@ public class Student {
 	}
 	
 	/**
-	 * Returns the exact Age of this student in years.
+	 * Returns the exact Age of this student in years as of the current day.
 	 */
 	public Integer childAge() {
-		LocalDate today = LocalDate.now();
-		Period period = Period.between(childDOB, today);
-		return period.getYears();
+		return Period.between(childDOB, LocalDate.now()).getYears();
+	}
+	
+	/**
+	 * Returns the exact Age of this student in years from a specific day.
+	 */
+	public Integer childAge(LocalDate date) {
+		return Period.between(childDOB, date).getYears();
 	}
 	
 	/**
@@ -117,31 +122,23 @@ public class Student {
 	}
 	
 	/**
-	 * Allows input or update of this students grade.
-	 *
-	 * @param grade
-	 *            to set to
+	 * Input or update of this students grade.
 	 */
 	public void childGrade(String grade) {
 		this.childGrade = grade;
 	}
 	
 	/**
-	 * Returns the childDOB
+	 * Returns the child date of birth in the form of yyyy/MM/dd
 	 */
 	public LocalDate childDOB() {
 		return childDOB;
 	}
 	
-	public String birthday() {
-		return childDOB.toString();
-	}
-	
 	/**
 	 * Allows input or update of this students date of birth.
 	 *
-	 * @param dob
-	 *            to set to
+	 * @param dob to set to
 	 */
 	public void childDOB(LocalDate dob) {
 		this.childDOB = dob;
@@ -174,8 +171,8 @@ public class Student {
 	/**
 	 * @param photo of child to store
 	 */
-	public void childPhoto(BufferedImage path) {
-		this.childPhoto = path;
+	public void childPhoto(BufferedImage image) {
+		this.childPhoto = image;
 	}
 	
 	/**
@@ -186,10 +183,10 @@ public class Student {
 	}
 	
 	/**
-	 * @param photo image of parent to store
+	 * @param image image of parent to store
 	 */
-	public void parentPhoto(BufferedImage photo) {
-		this.parentPhoto = photo;
+	public void parentPhoto(BufferedImage image) {
+		this.parentPhoto = image;
 	}
 	
 	/**
@@ -287,7 +284,7 @@ public class Student {
 			throw new IllegalArgumentException("A zip code must have at least 5 characters");
 		}
 		
-		if (zip.contains("-") && (zip.length() < 10 || zip.length() > 10)) {
+		if (zip.contains("-") && zip.charAt(5) ==  '-' && (zip.length() < 10 || zip.length() > 10)) {
 			throw new IllegalArgumentException("An extended zip code must have exactly 9 characters with a dash ('-') "
 					+ "separating the first 5 characters from the last 4 characters");
 		}
@@ -319,9 +316,9 @@ public class Student {
 	}
 	
 	/**
-	 * Removes a phone number from this staff memeber's list of numbers. The
+	 * Removes a phone number from this student's list of numbers. The
 	 * number can be formatted xxx-xxx-xxxx or (xxx) xxx-xxxx or unformatted
-	 * xxxxxxxxxx and this method call will throw and Illegal Argument Exception
+	 * xxxxxxxxxx and this method call will throw an Illegal Argument Exception
 	 * if the number is not found in the list of known phone numbers.
 	 *
 	 * @param number
@@ -442,81 +439,176 @@ public class Student {
 		private Builder() {
 		}
 		
+		/**
+		 * Sets the first name for this student.
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder firstName(String first) {
 			this.childFirstName = first;
 			return this;
 		}
 		
+		/**
+		 * Sets the last name for this student.
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder lastName(String last) {
 			this.childLastName = last;
 			return this;
 		}
 		
+		/**
+		 * Sets the UUID for this student. The id must match the UUID {@link UUID toString()} method of 
+		 * UUID to be valid.
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder childId(String id) {
 			this.childId = UUID.fromString(id);
 			return this;
 		}
 		
+		/**
+		 * Generates a new random UUID to assign to this student.
+		 * 
+		 * @return this builder for method chaining
+		 */
+		public Builder childId() {
+			this.childId = UUID.randomUUID();
+			return this;
+		}
+		
+		/**
+		 *  Sets the current club of this student.
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder currentClub(String club) {
 			this.club = club;
 			return this;
 		}
 		
+		/**
+		 * Sets the grade of this student.
+		 *
+		 * @return this builder for method chaining
+		 */
 		public Builder childGrade(String childGrade) {
 			this.childGrade = childGrade;
 			return this;
 		}
 		
+		/**
+		 * Sets this students date of birth.
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder childDOB(LocalDate childDOB) {
 			this.childDOB = childDOB;
 			return this;
 		}
 		
+		// FIXME This should be a list so that multiple items can be added as separate objects.
+		/**
+		 * Sets the special needs of this student.
+		 * @param specialNeeds
+		 * @return
+		 */
 		public Builder specialNeeds(String specialNeeds) {
 			this.specialNeeds = specialNeeds;
 			return this;
 		}
 		
+		/**
+		 * Adds a photo to this students profile.
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder childPhoto(BufferedImage photo) {
 			this.childPhoto = photo;
 			return this;
 		}
 		
+		/**
+		 * Adds a photo to this students profile.
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder parentPhoto(BufferedImage photo) {
 			this.parentPhoto = photo;
 			return this;
 		}
 		
+
+		/**
+		 * Sets the parents first name associated with this student.
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder parentFirstName(String parentFirstName) {
 			this.parentFirstName = parentFirstName;
 			return this;
 		}
 		
+		/**
+		 * Sets the parents last name associated with this student.
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder parentLastName(String parentLastName) {
 			this.parentLastName = parentLastName;
 			return this;
 		}
 		
+		/**
+		 * Sets the street address of this student.
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder address(String address) {
 			this.address = address;
 			return this;
 		}
 		
+		/**
+		 * Sets the city associated with the this students street address.
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder city(String city) {
 			this.city = city;
 			return this;
 		}
 		
+		/**
+		 * Sets the state associated with this students street address.
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder state(String state) {
 			this.state = state;
 			return this;
 		}
 		
+		// FIXME this should check for proper formatting of the zip code for both 5 and 9 digit zip codes
+		/**
+		 * Sets the zip code associated with this students street address
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder zip(String zip) {
 			this.zip = zip;
 			return this;
 		}
 		
+		// FIXME this should check if the number exists and not add duplicate numbers
+		/**
+		 * Adds a new phone number associated with this student.
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder phoneNumber(String type, String number) {
 			if (phoneNumbers == null) {
 				phoneNumbers = new ArrayList<>();
@@ -526,21 +618,42 @@ public class Student {
 			return this;
 		}
 		
+		// FIXME this should check for correct formating of the email address
+		/**
+		 * Sets the email address associated with this student
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder emailAddress(String emailAddress) {
 			this.emailAddress = emailAddress;
 			return this;
 		}
 		
+		/**
+		 * Adds an emergency contact name to associate with this student.
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder emergencyContactName(String name) {
 			this.emergencyContactName = name;
 			return this;
 		}
 		
+		/**
+		 * Adds an emergency phone number to associate with this students emergency contact name.
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder emergencyContactPhone(PhoneNumber phone) {
 			this.emergencyContactPhone = phone;
 			return this;
 		}
 		
+		/**
+		 * Adds an Authorized {@link Pickup} to associate with this student.
+		 * 
+		 * @return this builder for method chaining
+		 */
 		public Builder authPickup(String first, String last, String relationship, BufferedImage photo) {
 			if (authPickup == null) {
 				authPickup = new ArrayList<>();
@@ -551,7 +664,8 @@ public class Student {
 		}
 		
 		/**
-		 * Builds a new Student Record.
+		 * Builds a new Student Record. The only required items is the students first and last name. 
+		 * All other information is optional at the time of creation.
 		 */
 		public Student done() {
 			Objects.requireNonNull(childFirstName, "First name is required");
