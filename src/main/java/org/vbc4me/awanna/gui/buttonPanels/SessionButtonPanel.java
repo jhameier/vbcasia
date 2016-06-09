@@ -53,5 +53,11 @@ public class SessionButtonPanel extends JPanel {
     	JButton btnSave = new JButton("Save");
     	btnSave.setAction(saveSessionAction);
     	add(btnSave);
+    	
+    	Component horizontalStrut_4 = Box.createHorizontalStrut(5);
+    	add(horizontalStrut_4);
+    	
+    	JButton btnNewActivity = new JButton("New Activity");
+    	add(btnNewActivity);
     }
 }

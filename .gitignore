@@ -2,3 +2,5 @@
 .svn
 *.iml
 *.class
+*.properties
+/target/
