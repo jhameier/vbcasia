@@ -3,4 +3,8 @@
 *.iml
 *.class
 *.properties
-target/
+.settings
+.classpath
+.project
+/target*/
+/temp/
