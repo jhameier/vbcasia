@@ -3,4 +3,4 @@
 *.iml
 *.class
 *.properties
-/target/
+target/
