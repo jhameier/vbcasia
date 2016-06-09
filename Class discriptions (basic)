@@ -1,0 +1,23 @@
+Season: Represents a yearly set of activities associated with a program and contains information such as 
+                session (start and end dates + activities), 
+                student and 
+                staffing information
+
+                Session: Represents a logical amount of time (starting and ending dates) and
+                                includes a set of activities that will take place within the given time period.
+                
+                                Activity: An event that is planned for participation of a student and staff members including a 
+                                                date, 
+                                                time,
+                                                 and a name for the activity.
+                
+                Student: an individual that takes part in planned activities and includes information such as having an Account, 
+                                personal information (parents, address, phone numbers, emergency contact info) as well as a list of 
+                                authorized persons to pickup and photos of all individuals associated with this student.
+                                
+                                Account: Holds information about a students financial info such as transactions and balanced owed.
+                                Pickup: Holds information about someone who is authorized to pick up the student from the planned activity 
+                                                and includes information such as name, phone numbers and photo to identify them.
+                
+                Staff: A staff is a individual of the organization that helps to oversee some event and includes personal information 
+                                such as contact information, photo, emergency contact info and assignments for a given event.
