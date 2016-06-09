@@ -1,6 +1,6 @@
 package org.vbc4me.awanna.gui.actions.record;
 
-import static org.vbc4me.awanna.gui.PrimaryGuiPanel.BUTTON;
+import static org.vbc4me.awanna.gui.PrimaryGuiPanel.RECORD;
 
 import java.awt.event.ActionEvent;
 
@@ -31,7 +31,7 @@ public class NewRecordAction extends AbstractAction {
 //    String title = "New Record";
 //    int messageType = JOptionPane.INFORMATION_MESSAGE;
 //    JOptionPane.showMessageDialog(frame, message, title, messageType);
-    PrimaryGuiPanel.changeButtonLayout(BUTTON);
+    PrimaryGuiPanel.changeButtonLayout(RECORD);
     PrimaryGuiPanel.displayPanel().setDisplayPanel(new StudentInputForm());
   }
 }

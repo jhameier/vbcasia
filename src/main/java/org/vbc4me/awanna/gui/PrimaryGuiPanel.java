@@ -35,7 +35,9 @@ import org.vbc4me.awanna.gui.actions.session.CopySessionAction;
 import org.vbc4me.awanna.gui.actions.session.NewSessionAction;
 import org.vbc4me.awanna.gui.actions.session.OpenSessionAction;
 import org.vbc4me.awanna.gui.actions.session.SaveSessionAction;
+import org.vbc4me.awanna.gui.buttonPanels.ActivityButtonPanel;
 import org.vbc4me.awanna.gui.buttonPanels.RecordButtonPanel;
+import org.vbc4me.awanna.gui.buttonPanels.SeasonButtonPanel;
 import org.vbc4me.awanna.gui.buttonPanels.SeasonButtonPanel;
 import org.vbc4me.awanna.gui.buttonPanels.SessionButtonPanel;
 import org.vbc4me.awanna.gui.forms.DisplayPanel;
@@ -55,7 +57,7 @@ public class PrimaryGuiPanel extends JFrame {
 	private static JPanel buttonCardPanel;
 	private static CardLayout buttonCardLayout;
 	private static DisplayPanel displayPanel;
-	public static final String BUTTON = "Button";
+	public static final String RECORD = "Record";
 	public static final String SEASON = "Season";
 	public static final String SESSION = "Session";
 	public static final String ACTIVITY = "Activity";
@@ -93,13 +95,16 @@ public class PrimaryGuiPanel extends JFrame {
 		getContentPane().add(buttonCardPanel, BorderLayout.NORTH);
 		
 		SeasonButtonPanel seasonButtonPanel = new SeasonButtonPanel(this);
-		buttonCardPanel.add(seasonButtonPanel, SEASON);
+		buttonCardPanel.add(seasonButtonPanel, PrimaryGuiPanel.SEASON);
 		
 		SessionButtonPanel sessionButtonPanel = new SessionButtonPanel(this);
-		buttonCardPanel.add(sessionButtonPanel, SESSION);
+		buttonCardPanel.add(sessionButtonPanel, PrimaryGuiPanel.SESSION);
 		
-		RecordButtonPanel buttonPanel = new RecordButtonPanel(this);
-		buttonCardPanel.add(buttonPanel, BUTTON);
+		RecordButtonPanel recordButtonPanel = new RecordButtonPanel(this);
+		buttonCardPanel.add(recordButtonPanel, PrimaryGuiPanel.RECORD);
+		
+		ActivityButtonPanel activityButtonPanel = new ActivityButtonPanel(this);
+		buttonCardPanel.add(activityButtonPanel, PrimaryGuiPanel.ACTIVITY); 
 		
 		displayPanel = new DisplayPanel();
 		JScrollPane scrollPane = new JScrollPane(displayPanel);

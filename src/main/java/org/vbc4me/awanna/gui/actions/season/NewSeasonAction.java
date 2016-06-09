@@ -14,9 +14,9 @@ import org.vbc4me.awanna.gui.PrimaryGuiPanel;
  */
 public class NewSeasonAction extends AbstractAction {
   private static final long serialVersionUID = -6301577011454895115L;
-  private PrimaryGuiPanel frame;
+  private JFrame frame;
 
-  public NewSeasonAction(PrimaryGuiPanel frame) {
+  public NewSeasonAction(JFrame frame) {
     this.frame = frame;
     putValue(NAME, "New Season");
     putValue(SHORT_DESCRIPTION, "Create a New Blank Season.");

@@ -7,24 +7,26 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
- * Used to save a new blank record.
+ * Used to copy an existing Season.
  *
- * @author John Hameier: June 2015.
+ * @author John Hameier: June 2016.
  */
-public class SaveSeasonAction extends AbstractAction {
+public class CopySeasonAction extends AbstractAction {
   private static final long serialVersionUID = -6301577011454895115L;
   private JFrame frame;
 
-  public SaveSeasonAction(JFrame frame) {
+  public CopySeasonAction(JFrame frame) {
     this.frame = frame;
-    putValue(NAME, "Save Season");
-    putValue(SHORT_DESCRIPTION, "Saves the currently Open Season.");
+    putValue(NAME, "Copy Season");
+    putValue(SHORT_DESCRIPTION, "Copies an existing Season.");
   }
 
   public void actionPerformed(ActionEvent e) {
-    String message = "This is activated from Save Season Action";
-    String title = "Save Currently Open Season";
+    String message = "This is activated from Copy Season Action";
+    String title = "Copy Season";
     int messageType = JOptionPane.INFORMATION_MESSAGE;
     JOptionPane.showMessageDialog(frame, message, title, messageType);
+
+
   }
 }

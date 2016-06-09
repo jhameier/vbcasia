@@ -3,20 +3,21 @@ package org.vbc4me.awanna.gui.actions.season;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import org.vbc4me.awanna.gui.PrimaryGuiPanel;
 
 /**
- * Used to create a new blank record.
+ * Used to create a new blank season record.
  *
  * @author John Hameier: June 2015.
  */
 public class OpenSeasonAction extends AbstractAction {
   private static final long serialVersionUID = -6301577011454895115L;
-  private PrimaryGuiPanel frame;
+  private JFrame frame;
 
-  public OpenSeasonAction(PrimaryGuiPanel frame) {
+  public OpenSeasonAction(JFrame frame) {
     this.frame = frame;
     putValue(NAME, "Open Season");
     putValue(SHORT_DESCRIPTION, "Opens an existing Season.");
