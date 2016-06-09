@@ -14,7 +14,7 @@ import javax.swing.*;
 import org.vbc4me.awanna.gui.buttonPanels.RecordButtonPanel;
 import org.vbc4me.awanna.gui.buttonPanels.SeasonButtonPanel;
 import org.vbc4me.awanna.gui.buttonPanels.SessionButtonPanel;
-import org.vbc4me.awanna.gui.forms.SeasonDisplayForm;
+import org.vbc4me.awanna.gui.forms.season.SeasonDisplayForm;
 import org.vbc4me.awanna.gui.forms.student.StudentDisplayForm;
 import org.vbc4me.awanna.gui.forms.student.StudentInputForm;
 
