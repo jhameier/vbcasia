@@ -4,9 +4,6 @@ import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-
-import org.vbc4me.awanna.gui.forms.DisplayPanel;
 
 import net.miginfocom.swing.MigLayout;
 

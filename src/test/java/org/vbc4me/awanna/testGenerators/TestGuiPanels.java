@@ -11,10 +11,10 @@ import java.util.List;
 
 import javax.swing.*;
 
-import org.vbc4me.awanna.gui.forms.record.RecordButtonPanel;
 import org.vbc4me.awanna.gui.forms.season.SeasonButtonPanel;
 import org.vbc4me.awanna.gui.forms.season.SeasonDisplayForm;
 import org.vbc4me.awanna.gui.forms.session.SessionButtonPanel;
+import org.vbc4me.awanna.gui.forms.student.RecordButtonPanel;
 import org.vbc4me.awanna.gui.forms.student.StudentDisplayForm;
 import org.vbc4me.awanna.gui.forms.student.StudentInputForm;
 

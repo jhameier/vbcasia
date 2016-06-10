@@ -37,9 +37,10 @@ import org.vbc4me.awanna.gui.actions.session.OpenSessionAction;
 import org.vbc4me.awanna.gui.actions.session.SaveSessionAction;
 import org.vbc4me.awanna.gui.forms.DisplayPanel;
 import org.vbc4me.awanna.gui.forms.activity.ActivityButtonPanel;
-import org.vbc4me.awanna.gui.forms.record.RecordButtonPanel;
 import org.vbc4me.awanna.gui.forms.season.SeasonButtonPanel;
+import org.vbc4me.awanna.gui.forms.season.SeasonDisplayForm;
 import org.vbc4me.awanna.gui.forms.session.SessionButtonPanel;
+import org.vbc4me.awanna.gui.forms.student.RecordButtonPanel;
 
 /**
  * Used to hold the primary applications layout and component panels. The only
@@ -96,6 +97,7 @@ public class PrimaryGuiPanel extends JFrame {
 		
 		final DisplayPanel displayPanel = new DisplayPanel();
 		getContentPane().add(displayPanel, BorderLayout.CENTER);
+		DisplayPanel.updateUpperPanel(new SeasonDisplayForm());
 		
 		/*
 		 * ***************** FILE MENU ************************

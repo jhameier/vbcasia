@@ -1,4 +1,4 @@
-package org.vbc4me.awanna.gui.forms.record;
+package org.vbc4me.awanna.gui.forms.student;
 
 import java.awt.Component;
 

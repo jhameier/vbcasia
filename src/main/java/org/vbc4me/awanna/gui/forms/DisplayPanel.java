@@ -2,10 +2,12 @@ package org.vbc4me.awanna.gui.forms;
 
 import java.awt.BorderLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
+import javax.swing.SpringLayout;
 import javax.swing.table.TableModel;
 
 /**
@@ -21,13 +23,12 @@ import javax.swing.table.TableModel;
 public final class DisplayPanel extends JPanel {
 	private static final long serialVersionUID = -3284524458172373047L;
 	private final static JTable table = new JTable();
-	private final static JPanel panel = new JPanel(new BorderLayout());
+	private final static JPanel panel = new JPanel();
 	
 	public DisplayPanel() {
 		setLayout(new BorderLayout());
 		final JSplitPane splitPane = new JSplitPane();
-		splitPane.setEnabled(false);
-		splitPane.setDividerSize(1);
+		splitPane.setDividerSize(5);
 		splitPane.setResizeWeight(0.5);
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		add(splitPane, BorderLayout.CENTER);
@@ -38,6 +39,7 @@ public final class DisplayPanel extends JPanel {
 		 * in the upper portion of the window.
 		 */
 		final JScrollPane upperScrollPane = new JScrollPane(panel);
+		
 		/*
 		 * Lower scroll pane holds a table and is place inside a panel's
 		 * BorderLayout.CENTER so that the table can display correctly.
@@ -45,10 +47,9 @@ public final class DisplayPanel extends JPanel {
 		 * different types of data in a custom spreadsheet style layout.
 		 */
 		final JScrollPane lowerScrollPane = new JScrollPane(table);
-		final JPanel lower = new JPanel(new BorderLayout());
-		lower.add(lowerScrollPane, BorderLayout.CENTER);
+		
 		splitPane.setTopComponent(upperScrollPane);
-		splitPane.setBottomComponent(lower);
+		splitPane.setBottomComponent(lowerScrollPane);
 		
 	}
 	
