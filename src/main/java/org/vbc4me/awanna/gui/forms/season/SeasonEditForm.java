@@ -30,6 +30,7 @@ public class SeasonEditForm extends JPanel {
 		
 		infoPanel = new JPanel();
 		infoPanel.setLayout(new MigLayout("", "[][][][]", "[][][][][][][]"));
+		add(infoPanel);
 		
 		JLabel lblSeason = new JLabel("Season");
 		lblSeason.setFont(new Font("Tahoma", Font.BOLD, 16));
