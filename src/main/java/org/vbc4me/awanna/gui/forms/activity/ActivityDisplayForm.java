@@ -1,4 +1,4 @@
-package org.vbc4me.awanna.gui.forms;
+package org.vbc4me.awanna.gui.forms.activity;
 
 import javax.swing.JPanel;
 

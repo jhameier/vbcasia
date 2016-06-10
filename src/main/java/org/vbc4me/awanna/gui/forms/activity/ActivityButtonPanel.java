@@ -1,4 +1,4 @@
-package org.vbc4me.awanna.gui.buttonPanels;
+package org.vbc4me.awanna.gui.forms.activity;
 
 import java.awt.Component;
 

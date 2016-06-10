@@ -6,7 +6,8 @@ import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 
 import org.vbc4me.awanna.gui.PrimaryGuiPanel;
-import org.vbc4me.awanna.gui.forms.ActivityDisplayForm;
+import org.vbc4me.awanna.gui.forms.DisplayPanel;
+import org.vbc4me.awanna.gui.forms.activity.ActivityDisplayForm;
 
 /**
  * Used to create a new blank record.
@@ -36,6 +37,6 @@ public class NewActivityRecordAction extends AbstractAction {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		PrimaryGuiPanel.changeButtonLayout(PrimaryGuiPanel.ACTIVITY);
-		PrimaryGuiPanel.displayPanel().setDisplayPanel(new ActivityDisplayForm());
+		DisplayPanel.updateUpperPanel(new ActivityDisplayForm());
 	}
 }

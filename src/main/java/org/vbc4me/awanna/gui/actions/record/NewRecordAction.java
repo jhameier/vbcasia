@@ -1,13 +1,12 @@
 package org.vbc4me.awanna.gui.actions.record;
 
-import static org.vbc4me.awanna.gui.PrimaryGuiPanel.RECORD;
-
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 
 import org.vbc4me.awanna.gui.PrimaryGuiPanel;
+import org.vbc4me.awanna.gui.forms.DisplayPanel;
 import org.vbc4me.awanna.gui.forms.student.StudentInputForm;
 
 
@@ -31,7 +30,7 @@ public class NewRecordAction extends AbstractAction {
 //    String title = "New Record";
 //    int messageType = JOptionPane.INFORMATION_MESSAGE;
 //    JOptionPane.showMessageDialog(frame, message, title, messageType);
-    PrimaryGuiPanel.changeButtonLayout(RECORD);
-    PrimaryGuiPanel.displayPanel().setDisplayPanel(new StudentInputForm());
+    PrimaryGuiPanel.changeButtonLayout(PrimaryGuiPanel.RECORD);
+    DisplayPanel.updateUpperPanel(new StudentInputForm());
   }
 }

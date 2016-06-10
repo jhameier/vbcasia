@@ -35,17 +35,16 @@ import org.vbc4me.awanna.gui.actions.session.CopySessionAction;
 import org.vbc4me.awanna.gui.actions.session.NewSessionAction;
 import org.vbc4me.awanna.gui.actions.session.OpenSessionAction;
 import org.vbc4me.awanna.gui.actions.session.SaveSessionAction;
-import org.vbc4me.awanna.gui.buttonPanels.ActivityButtonPanel;
-import org.vbc4me.awanna.gui.buttonPanels.RecordButtonPanel;
-import org.vbc4me.awanna.gui.buttonPanels.SeasonButtonPanel;
-import org.vbc4me.awanna.gui.buttonPanels.SeasonButtonPanel;
-import org.vbc4me.awanna.gui.buttonPanels.SessionButtonPanel;
 import org.vbc4me.awanna.gui.forms.DisplayPanel;
+import org.vbc4me.awanna.gui.forms.activity.ActivityButtonPanel;
+import org.vbc4me.awanna.gui.forms.record.RecordButtonPanel;
+import org.vbc4me.awanna.gui.forms.season.SeasonButtonPanel;
+import org.vbc4me.awanna.gui.forms.session.SessionButtonPanel;
 
 /**
  * Used to hold the primary applications layout and component panels. The only
  * necessary component to expose to outside classes is the card panel in which
- * all other panels will be placed allowing a seemless transition to display
+ * all other panels will be placed allowing a seem-less transition to display
  * different types of information.
  *
  * @author John Hameier: June 2015
@@ -71,16 +70,6 @@ public class PrimaryGuiPanel extends JFrame {
 	 */
 	public static void changeButtonLayout(String buttonPanel) {
 		buttonCardLayout.show(buttonCardPanel, buttonPanel);
-	}
-	
-	/**
-	 * Gets the primary display panel for this application. This is used to
-	 * display different displays in this window without having to create them
-	 * within the GUI itself. You can create different panels and call them from
-	 * an Action and replace the panels to the primary display.
-	 */
-	public static DisplayPanel displayPanel() {
-		return displayPanel;
 	}
 	
 	/**
