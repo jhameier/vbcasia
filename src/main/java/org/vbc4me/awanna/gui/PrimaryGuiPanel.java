@@ -228,11 +228,9 @@ public class PrimaryGuiPanel extends JFrame {
 	}
 	
 	/**
-	 * Initialize our Windowing System
+	 * Initialize our Windowing System and set window in center of primary default display.
 	 */
 	private static void initializeAndShowGui() {
-		
-		// Create the main window
 		mainWindow = new PrimaryGuiPanel();
 		Dimension windowSize = new Dimension(800, 800);
 		mainWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
