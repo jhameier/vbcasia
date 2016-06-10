@@ -55,7 +55,6 @@ public class PrimaryGuiPanel extends JFrame {
 	public static PrimaryGuiPanel mainWindow;
 	private static JPanel buttonCardPanel;
 	private static CardLayout buttonCardLayout;
-	private static DisplayPanel displayPanel;
 	public static final String RECORD = "Record";
 	public static final String SEASON = "Season";
 	public static final String SESSION = "Session";
@@ -83,21 +82,20 @@ public class PrimaryGuiPanel extends JFrame {
 		buttonCardPanel = new JPanel(buttonCardLayout);
 		getContentPane().add(buttonCardPanel, BorderLayout.NORTH);
 		
-		SeasonButtonPanel seasonButtonPanel = new SeasonButtonPanel(this);
+		final SeasonButtonPanel seasonButtonPanel = new SeasonButtonPanel(this);
 		buttonCardPanel.add(seasonButtonPanel, PrimaryGuiPanel.SEASON);
 		
-		SessionButtonPanel sessionButtonPanel = new SessionButtonPanel(this);
+		final SessionButtonPanel sessionButtonPanel = new SessionButtonPanel(this);
 		buttonCardPanel.add(sessionButtonPanel, PrimaryGuiPanel.SESSION);
 		
-		RecordButtonPanel recordButtonPanel = new RecordButtonPanel(this);
+		final RecordButtonPanel recordButtonPanel = new RecordButtonPanel(this);
 		buttonCardPanel.add(recordButtonPanel, PrimaryGuiPanel.RECORD);
 		
-		ActivityButtonPanel activityButtonPanel = new ActivityButtonPanel(this);
+		final ActivityButtonPanel activityButtonPanel = new ActivityButtonPanel(this);
 		buttonCardPanel.add(activityButtonPanel, PrimaryGuiPanel.ACTIVITY); 
 		
-		displayPanel = new DisplayPanel();
-		JScrollPane scrollPane = new JScrollPane(displayPanel);
-		getContentPane().add(scrollPane, BorderLayout.CENTER);
+		final DisplayPanel displayPanel = new DisplayPanel();
+		getContentPane().add(displayPanel, BorderLayout.CENTER);
 		
 		/*
 		 * ***************** FILE MENU ************************
