@@ -2,12 +2,10 @@ package org.vbc4me.awanna.gui.forms;
 
 import java.awt.BorderLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
-import javax.swing.SpringLayout;
 import javax.swing.table.TableModel;
 
 /**
@@ -58,7 +56,7 @@ public final class DisplayPanel extends JPanel {
 	 * different models, this table display can show various types of tables
 	 * without creating a separate JTable for each view needed.
 	 */
-	public static void addModel(TableModel dataModel) {
+	public static void updateLowerDisplay(TableModel dataModel) {
 		table.setModel(dataModel);
 		table.revalidate();
 	}
@@ -66,7 +64,7 @@ public final class DisplayPanel extends JPanel {
 	/**
 	 * Sets the upper display with the panel passed in. 
 	 */
-	public static void updateUpperPanel(JPanel display) {
+	public static void updateUpperDisplay(JPanel display) {
 		panel.removeAll();
 		panel.add(display, BorderLayout.CENTER);
 	}
@@ -78,7 +76,7 @@ public final class DisplayPanel extends JPanel {
 	 * style data. It should be noted that the tableModel is what is passed in and
 	 * the table is updated with the then data set and layout.
 	 */
-	public static void updateDisplays(JPanel textPanel, TableModel dataModel) {
+	public static void updateBothDisplays(JPanel textPanel, TableModel dataModel) {
 		panel.add(textPanel, BorderLayout.CENTER);
 		table.setModel(dataModel);
 	}

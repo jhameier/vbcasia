@@ -30,7 +30,7 @@ public class NewSeasonAction extends AbstractAction {
 		// int messageType = JOptionPane.INFORMATION_MESSAGE;
 		// JOptionPane.showMessageDialog(frame, message, title, messageType);
 		PrimaryGuiPanel.changeButtonLayout(PrimaryGuiPanel.SEASON);
-		DisplayPanel.updateUpperPanel(new SeasonDisplayForm());
+		DisplayPanel.updateUpperDisplay(new SeasonDisplayForm());
 		
 	}
 }

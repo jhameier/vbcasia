@@ -97,7 +97,7 @@ public class PrimaryGuiPanel extends JFrame {
 		
 		final DisplayPanel displayPanel = new DisplayPanel();
 		getContentPane().add(displayPanel, BorderLayout.CENTER);
-		DisplayPanel.updateUpperPanel(new SeasonDisplayForm());
+		DisplayPanel.updateUpperDisplay(new SeasonDisplayForm());
 		
 		/*
 		 * ***************** FILE MENU ************************

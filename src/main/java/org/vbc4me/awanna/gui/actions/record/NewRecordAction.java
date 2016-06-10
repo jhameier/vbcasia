@@ -31,6 +31,6 @@ public class NewRecordAction extends AbstractAction {
 //    int messageType = JOptionPane.INFORMATION_MESSAGE;
 //    JOptionPane.showMessageDialog(frame, message, title, messageType);
     PrimaryGuiPanel.changeButtonLayout(PrimaryGuiPanel.RECORD);
-    DisplayPanel.updateUpperPanel(new StudentInputForm());
+    DisplayPanel.updateUpperDisplay(new StudentInputForm());
   }
 }

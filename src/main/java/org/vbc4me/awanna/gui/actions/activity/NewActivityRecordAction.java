@@ -37,6 +37,6 @@ public class NewActivityRecordAction extends AbstractAction {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		PrimaryGuiPanel.changeButtonLayout(PrimaryGuiPanel.ACTIVITY);
-		DisplayPanel.updateUpperPanel(new ActivityDisplayForm());
+		DisplayPanel.updateUpperDisplay(new ActivityDisplayForm());
 	}
 }
