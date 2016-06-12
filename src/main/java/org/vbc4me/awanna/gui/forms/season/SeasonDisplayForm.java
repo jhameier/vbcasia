@@ -65,7 +65,6 @@ public class SeasonDisplayForm extends JPanel {
 		
 		lblNoOfStaff = new JLabel("");
 		infoPanel.add(lblNoOfStaff, "cell 3 6");
-		
 	}
 	
 }

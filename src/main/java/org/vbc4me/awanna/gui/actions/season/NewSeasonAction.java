@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import org.vbc4me.awanna.gui.PrimaryGuiPanel;
 import org.vbc4me.awanna.gui.forms.DisplayPanel;
 import org.vbc4me.awanna.gui.forms.season.SeasonDisplayForm;
+import org.vbc4me.awanna.gui.forms.season.SeasonEditForm;
 
 /**
  * Used to create a new blank Season.
@@ -25,12 +26,8 @@ public class NewSeasonAction extends AbstractAction {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		// String message = "This is activated from New Season Action";
-		// String title = "Create New Season";
-		// int messageType = JOptionPane.INFORMATION_MESSAGE;
-		// JOptionPane.showMessageDialog(frame, message, title, messageType);
 		PrimaryGuiPanel.changeButtonLayout(PrimaryGuiPanel.SEASON);
-		DisplayPanel.updateUpperDisplay(new SeasonDisplayForm());
-		
+		DisplayPanel.updateUpperDisplay(new SeasonEditForm());
+		PrimaryGuiPanel.mainWindow.pack();
 	}
 }

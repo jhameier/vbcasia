@@ -37,8 +37,11 @@ import org.vbc4me.awanna.gui.actions.session.OpenSessionAction;
 import org.vbc4me.awanna.gui.actions.session.SaveSessionAction;
 import org.vbc4me.awanna.gui.forms.DisplayPanel;
 import org.vbc4me.awanna.gui.forms.activity.ActivityButtonPanel;
+import org.vbc4me.awanna.gui.forms.season.SeasonBlankForm;
 import org.vbc4me.awanna.gui.forms.season.SeasonButtonPanel;
 import org.vbc4me.awanna.gui.forms.season.SeasonDisplayForm;
+import org.vbc4me.awanna.gui.forms.season.SeasonEditForm;
+import org.vbc4me.awanna.gui.forms.season.SeasonTableModel;
 import org.vbc4me.awanna.gui.forms.session.SessionButtonPanel;
 import org.vbc4me.awanna.gui.forms.student.RecordButtonPanel;
 
@@ -97,7 +100,9 @@ public class PrimaryGuiPanel extends JFrame {
 		
 		final DisplayPanel displayPanel = new DisplayPanel();
 		getContentPane().add(displayPanel, BorderLayout.CENTER);
-		DisplayPanel.updateUpperDisplay(new SeasonDisplayForm());
+		
+		DisplayPanel.updateUpperDisplay(new SeasonBlankForm());
+		DisplayPanel.updateLowerDisplay(new SeasonTableModel());
 		
 		/*
 		 * ***************** FILE MENU ************************

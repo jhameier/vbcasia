@@ -11,8 +11,11 @@ import java.util.List;
 
 import javax.swing.*;
 
+import org.vbc4me.awanna.gui.forms.activity.ActivityButtonPanel;
+import org.vbc4me.awanna.gui.forms.season.SeasonBlankForm;
 import org.vbc4me.awanna.gui.forms.season.SeasonButtonPanel;
 import org.vbc4me.awanna.gui.forms.season.SeasonDisplayForm;
+import org.vbc4me.awanna.gui.forms.season.SeasonEditForm;
 import org.vbc4me.awanna.gui.forms.session.SessionButtonPanel;
 import org.vbc4me.awanna.gui.forms.student.RecordButtonPanel;
 import org.vbc4me.awanna.gui.forms.student.StudentDisplayForm;
@@ -49,8 +52,12 @@ public class TestGuiPanels extends JFrame {
 		JPanel recBtnPanel = new RecordButtonPanel(null);
 		JPanel seaBtnPanel = new SeasonButtonPanel(null);
 		JPanel sesBtnPanel = new SessionButtonPanel(null);
+		JPanel actBtnPanel = new ActivityButtonPanel(null);
 		
+		SeasonBlankForm seasonBlankForm = new SeasonBlankForm();
 		SeasonDisplayForm seasonDisplayForm = new SeasonDisplayForm();
+		SeasonEditForm seasonEditForm = new SeasonEditForm();
+		
 		StudentDisplayForm studentDisplayForm = new StudentDisplayForm();
 		StudentInputForm studentInputForm = new StudentInputForm();
 		
@@ -67,6 +74,10 @@ public class TestGuiPanels extends JFrame {
 		windows.add(window5);
 		JFrame window6 = new TestGuiPanels(seasonDisplayForm, "Season Display Form");
 		windows.add(window6);
+		JFrame window7 = new TestGuiPanels(seasonBlankForm, "Season Blank Form");
+		windows.add(window7);
+		JFrame window8 = new TestGuiPanels(seasonEditForm, "Season Edit Form");
+		windows.add(window8);
 		
 		// Display all the current windows for inspection
 		Dimension offset = new Dimension(0, 0);

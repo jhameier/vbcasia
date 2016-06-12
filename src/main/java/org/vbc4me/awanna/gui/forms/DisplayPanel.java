@@ -67,6 +67,7 @@ public final class DisplayPanel extends JPanel {
 	public static void updateUpperDisplay(JPanel display) {
 		panel.removeAll();
 		panel.add(display, BorderLayout.CENTER);
+		panel.revalidate();
 	}
 	
 	/**
