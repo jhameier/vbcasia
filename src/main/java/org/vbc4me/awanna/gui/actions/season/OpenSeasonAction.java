@@ -6,8 +6,6 @@ import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import org.vbc4me.awanna.gui.PrimaryGuiPanel;
-
 /**
  * Used to create a new blank season record.
  *

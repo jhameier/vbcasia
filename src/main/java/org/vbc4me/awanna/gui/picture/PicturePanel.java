@@ -56,7 +56,10 @@ public class PicturePanel extends JFrame {
         imageG2d.dispose();
 
         final JPanel picturePanel = new JPanel() {
-            @Override
+
+			private static final long serialVersionUID = 2441054180872543658L;
+
+			@Override
             protected void paintComponent(Graphics g) {
                 Graphics2D g2d = (Graphics2D) g.create();
                 g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
@@ -75,7 +78,10 @@ public class PicturePanel extends JFrame {
         frame.add(btnPanel, BorderLayout.SOUTH);
 
         final JPanel pp = new JPanel() {
-            @Override
+
+			private static final long serialVersionUID = 4033579044363895357L;
+
+			@Override
             protected void paintComponent(Graphics g) {
                 Graphics2D g2d = (Graphics2D) g.create();
                 g2d.drawRect(x,y,w,h);

@@ -7,7 +7,6 @@ import javax.swing.JFrame;
 
 import org.vbc4me.awanna.gui.PrimaryGuiPanel;
 import org.vbc4me.awanna.gui.forms.DisplayPanel;
-import org.vbc4me.awanna.gui.forms.season.SeasonDisplayForm;
 import org.vbc4me.awanna.gui.forms.season.SeasonEditForm;
 
 /**

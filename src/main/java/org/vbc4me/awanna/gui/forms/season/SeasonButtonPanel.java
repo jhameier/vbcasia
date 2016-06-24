@@ -14,8 +14,6 @@ import org.vbc4me.awanna.gui.actions.season.CopySeasonAction;
 import org.vbc4me.awanna.gui.actions.season.NewSeasonAction;
 import org.vbc4me.awanna.gui.actions.season.OpenSeasonAction;
 import org.vbc4me.awanna.gui.actions.season.SaveSeasonAction;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class SeasonButtonPanel extends JPanel {
 	private static final long serialVersionUID = -8327426526043278048L;

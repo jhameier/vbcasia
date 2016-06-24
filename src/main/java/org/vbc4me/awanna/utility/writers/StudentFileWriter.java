@@ -29,7 +29,7 @@ public final class StudentFileWriter {
 	 *            of student to print or all for every student
 	 * @return true if successfully writes out to file.
 	 */
-	public static boolean write(Path path, String name) {
+	public static boolean writeFile(Path path, String name) {
 		
 		// Create the document
 		Document doc = new Document(new Element("students"));
@@ -61,10 +61,35 @@ public final class StudentFileWriter {
 		return true;
 	}
 	
+	public static boolean writeStream(Path path, String name) {
+		
+		// Create the document
+		Document doc = new Document(new Element("students"));
+		
+		Student student = Season.students().get(name);
+		
+		if (student == null) {
+			return false;
+		}
+		
+		doc.getRootElement().addContent(getMemberElement(student));
+		
+		try {
+			XMLOutputter xmlOutput = new XMLOutputter();
+			xmlOutput.setFormat(Format.getPrettyFormat());
+			xmlOutput.output(doc, new FileWriter(path.toFile()));
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
 	/**
 	 * Creates a {@link Student} {@link Element} with all information attached
 	 *
-	 * @param student record to convert into element object
+	 * @param student
+	 *            record to convert into element object
 	 * @return the element to attach to the xml document
 	 */
 	private static Element getMemberElement(Student student) {

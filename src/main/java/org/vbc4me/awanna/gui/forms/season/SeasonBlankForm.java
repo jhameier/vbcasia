@@ -4,7 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 
 public class SeasonBlankForm extends JPanel{
-	
+	private static final long serialVersionUID = 8195817917260397805L;
+
 	public SeasonBlankForm()  {
 		
 		JLabel lblSeasonFormClick = new JLabel("Season Form Click Open or create a new one.");

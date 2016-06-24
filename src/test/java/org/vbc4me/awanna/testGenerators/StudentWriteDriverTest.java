@@ -50,7 +50,7 @@ public class StudentWriteDriverTest {
 		Season.addStudent(student2);
 		
 		Path path = Paths.get("./", "TestStudent.stu");
-		boolean written = StudentFileWriter.write(path, "all");
+		boolean written = StudentFileWriter.writeFile(path, "all");
 		
 	}
 	

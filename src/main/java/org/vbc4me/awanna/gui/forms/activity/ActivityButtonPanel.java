@@ -15,7 +15,8 @@ import org.vbc4me.awanna.gui.actions.activity.NewActivityRecordAction;
 import org.vbc4me.awanna.gui.actions.activity.SaveActivityRecordAction;
 
 public class ActivityButtonPanel extends JPanel{
-    private JFrame frame;
+	private static final long serialVersionUID = -364619699132689562L;
+	private JFrame frame;
 	public static final JButton btnNew = new JButton("New");
 	public static final JButton btnEdit = new JButton("Edit");
 	public static final JButton btnCopy = new JButton("Copy");
