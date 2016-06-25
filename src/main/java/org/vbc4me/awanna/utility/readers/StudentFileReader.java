@@ -11,6 +11,7 @@ import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 import org.vbc4me.awanna.account.Account;
 import org.vbc4me.awanna.account.Activity;
+import org.vbc4me.awanna.account.Club;
 import org.vbc4me.awanna.account.Student;
 import org.vbc4me.awanna.account.Transaction;
 import org.xml.sax.helpers.DefaultHandler;
@@ -37,7 +38,7 @@ public class StudentFileReader extends DefaultHandler {
         	.childGrade(student.getChildText("grade"))
         	.childDOB(LocalDate.parse(student.getChildText("dob")))
         	.specialNeeds(student.getChildText("special-needs"))
-        	.currentClub(student.getChildText("club"));
+        	.currentClub(Club.valueOf(student.getChildText("club")));
         	// FIXME .childPhoto(student.getChildText("photo"));
 
         Element parent = student.getChild("parent");

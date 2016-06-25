@@ -1,6 +1,6 @@
 package org.vbc4me.awanna.account;
 
-import java.awt.image.BufferedImage;
+import java.awt.Image;
 import java.util.Objects;
 
 /**
@@ -11,9 +11,9 @@ public class Pickup {
 	private String first;
 	private String last;
 	private String relationship;
-	private BufferedImage photo;
+	private Image photo;
 	
-	private Pickup(String first, String last, String relationship, BufferedImage photo) {
+	private Pickup(String first, String last, String relationship, Image photo) {
 		this.first = Objects.requireNonNull(first);
 		this.last = Objects.requireNonNull(last);
 		this.relationship = Objects.requireNonNull(relationship);
@@ -36,11 +36,11 @@ public class Pickup {
 		return first + " " + last + " (" + relationship + ")";
 	}
 	
-	public void addPhoto(BufferedImage photo) {
+	public void addPhoto(Image photo) {
 		this.photo = photo;
 	}
 	
-	public BufferedImage photo() {
+	public Image photo() {
 		return photo;
 	}
 	
@@ -48,7 +48,7 @@ public class Pickup {
 		private String first;
 		private String last;
 		private String relationship;
-		private BufferedImage photo;
+		private Image photo;
 		
 		public Builder(String first, String last) {
 			this.first = first;
@@ -60,7 +60,7 @@ public class Pickup {
 			return this;
 		}
 		
-		public Builder photo(BufferedImage photo) {
+		public Builder photo(Image photo) {
 			this.photo = photo;
 			return this;
 		}

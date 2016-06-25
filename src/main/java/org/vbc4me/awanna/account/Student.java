@@ -1,11 +1,12 @@
 package org.vbc4me.awanna.account;
 
-import java.awt.image.BufferedImage;
+import java.awt.Image;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -16,11 +17,11 @@ public class Student {
 	private String childLastName;
 	private String childGrade;
 	private LocalDate childDOB;
-	private String specialNeeds;
-	private String club;
+	private Set<String> specialNeeds;
+	private Club club;
 	
-	private BufferedImage childPhoto;
-	private BufferedImage parentPhoto;
+	private Image childPhoto;
+	private Image parentPhoto;
 	
 	private String parentFirstName;
 	private String parentLastName;
@@ -69,7 +70,7 @@ public class Student {
 	 * Returns the club that this {@link Student} is associated with.
 	 */
 	public String currentClub() {
-		return club;
+		return club.name();
 	}
 	
 	/**
@@ -78,7 +79,7 @@ public class Student {
 	 * @param club
 	 *            this student belongs to
 	 */
-	public void currentClub(String club) {
+	public void currentClub(Club club) {
 		this.club = club;
 	}
 	
@@ -148,7 +149,12 @@ public class Student {
 	 * Returns the specialNeeds
 	 */
 	public String specialNeeds() {
-		return specialNeeds;
+		StringBuilder sb = new StringBuilder();
+		for(String str : specialNeeds) {
+			sb.append( str + " : ");
+		}
+		sb.reverse().replace(0, 3, "");
+		return sb.reverse().toString();
 	}
 	
 	/**
@@ -158,34 +164,38 @@ public class Student {
 	 *            to add to this students specialNeeds listing.
 	 */
 	public void addSpecialNeed(String need) {
-		this.specialNeeds = this.specialNeeds + ", " + need;
+		specialNeeds.add(need);
+	}
+	
+	public boolean removeSpecialNeed(String need) {
+		return specialNeeds.remove(need);
 	}
 	
 	/**
 	 * Returns the image of child's photo
 	 */
-	public BufferedImage childPhoto() {
+	public Image childPhoto() {
 		return childPhoto;
 	}
 	
 	/**
 	 * @param photo of child to store
 	 */
-	public void childPhoto(BufferedImage image) {
+	public void childPhoto(Image image) {
 		this.childPhoto = image;
 	}
 	
 	/**
 	 * Returns the image to parent's photo file
 	 */
-	public BufferedImage parentPhoto() {
+	public Image parentPhoto() {
 		return parentPhoto;
 	}
 	
 	/**
 	 * @param image image of parent to store
 	 */
-	public void parentPhoto(BufferedImage image) {
+	public void parentPhoto(Image image) {
 		this.parentPhoto = image;
 	}
 	
@@ -416,14 +426,14 @@ public class Student {
 	 */
 	public static class Builder {
 		private UUID childId;
-		private String club;
+		private Club club;
 		private String childFirstName;
 		private String childLastName;
 		private String childGrade;
 		private LocalDate childDOB;
-		private String specialNeeds;
-		private BufferedImage childPhoto;
-		private BufferedImage parentPhoto;
+		private Set<String> specialNeeds;
+		private Image childPhoto;
+		private Image parentPhoto;
 		private String parentFirstName;
 		private String parentLastName;
 		private String address;
@@ -485,7 +495,7 @@ public class Student {
 		 * 
 		 * @return this builder for method chaining
 		 */
-		public Builder currentClub(String club) {
+		public Builder currentClub(Club club) {
 			this.club = club;
 			return this;
 		}
@@ -517,7 +527,7 @@ public class Student {
 		 * @return
 		 */
 		public Builder specialNeeds(String specialNeeds) {
-			this.specialNeeds = specialNeeds;
+			this.specialNeeds.add(specialNeeds);
 			return this;
 		}
 		
@@ -526,7 +536,7 @@ public class Student {
 		 * 
 		 * @return this builder for method chaining
 		 */
-		public Builder childPhoto(BufferedImage photo) {
+		public Builder childPhoto(Image photo) {
 			this.childPhoto = photo;
 			return this;
 		}
@@ -536,7 +546,7 @@ public class Student {
 		 * 
 		 * @return this builder for method chaining
 		 */
-		public Builder parentPhoto(BufferedImage photo) {
+		public Builder parentPhoto(Image photo) {
 			this.parentPhoto = photo;
 			return this;
 		}
@@ -654,7 +664,7 @@ public class Student {
 		 * 
 		 * @return this builder for method chaining
 		 */
-		public Builder authPickup(String first, String last, String relationship, BufferedImage photo) {
+		public Builder authPickup(String first, String last, String relationship, Image photo) {
 			if (authPickup == null) {
 				authPickup = new ArrayList<>();
 			}
