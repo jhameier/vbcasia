@@ -11,11 +11,16 @@ public class PhoneNumber {
 
 	/**
 	 * Represents a persons phone number. The number should be in its raw form
-	 * such as 1234567890 and should contain 10 digits. The type is used to
-	 * classify the number such as home or cell or office etc.
-	 * 
-	 * @param type of phone number this is
-	 * @param number that can be dialed
+	 * such as 1234567890 and should contain 10 numeric digits. 
+	 *
+	 *<p>
+	 *If any of the following conditions are not met,
+	 * this constructor will throw and {@link IllegalArgumentException}:
+	 *    The input is not exactly 10 digits
+	 *    The input contains any character that is not numeric
+	 *
+	 * <p>
+	 *  The type is used to classify the number such as home or cell or office etc.
 	 */
 	public PhoneNumber(String type, String number) {
 
@@ -29,14 +34,20 @@ public class PhoneNumber {
 
 		if (number.length() < 10) {
 			throw new IllegalArgumentException(
-					"There are not enough numbers in the phone number. It should be 10 characters long.");
+					"There are not enough digits in the phone number. It should be 10 digits long.");
 		}
 
 		if (number.length() > 10) {
 			throw new IllegalArgumentException(
-					"There are too many numbers in the phone number. It should be 10 characters long.");
+					"There are too many digits in the phone number. It should be exactly 10 digits long.");
 		}
-
+		
+		for(int i = 0; i < number.length(); i++) {
+			if (number.charAt(i) <='0' && number.charAt(i) >= '9')
+				throw new IllegalArgumentException(
+						"The character: " + number.charAt(i) + " is not a numeric digit.");			
+		}
+		
 		this.type = type;
 		this.number = number;
 	}
