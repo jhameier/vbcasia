@@ -11,6 +11,7 @@ public class PhoneNumber {
 
 	/**
 	 * Represents a persons phone number. The number should be in its raw form
+<<<<<<< HEAD
 	 * such as 1234567890 and should contain 10 numeric digits. 
 	 *
 	 *<p>
@@ -48,6 +49,31 @@ public class PhoneNumber {
 						"The character: " + number.charAt(i) + " is not a numeric digit.");			
 		}
 		
+=======
+	 * such as 1234567890 and should contain 10 numeric digits. The type is used to
+	 * classify the number such as home or cell or office etc.
+	 */
+	public PhoneNumber(String type, String number) {
+
+		Objects.requireNonNull(type, "Phone Type can not be empty");
+		Objects.requireNonNull(number, "Phone Number can not be empty");
+
+		if (number.contains(" ") || number.contains("(") || number.contains(")") || number.contains("-")) {
+			throw new IllegalArgumentException(
+					"The number should not conatin special characters such as '(', ')', '-',  or blank spaces.");
+		}
+
+		if (number.length() < 10) {
+			throw new IllegalArgumentException(
+					"There are not enough numbers in the phone number. It should be 10 characters long.");
+		}
+
+		if (number.length() > 10) {
+			throw new IllegalArgumentException(
+					"There are too many numbers in the phone number. It should be 10 characters long.");
+		}
+
+>>>>>>> branch 'master' of https://github.com/jhameier/vbcasia.git
 		this.type = type;
 		this.number = number;
 	}
