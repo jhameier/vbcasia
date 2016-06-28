@@ -11,11 +11,8 @@ public class PhoneNumber {
 
 	/**
 	 * Represents a persons phone number. The number should be in its raw form
-	 * such as 1234567890 and should contain 10 digits. The type is used to
+	 * such as 1234567890 and should contain 10 numeric digits. The type is used to
 	 * classify the number such as home or cell or office etc.
-	 * 
-	 * @param type of phone number this is
-	 * @param number that can be dialed
 	 */
 	public PhoneNumber(String type, String number) {
 
