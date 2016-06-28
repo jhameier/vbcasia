@@ -65,11 +65,13 @@ public class StudentInputForm extends JPanel {
   private static final String AUTH2 = "auth2";
   private static final String AUTH3 = "auth3";
   private static final String AUTH4 = "auth4";
-  private static final String INPUT = "StudentInputForm";
 
 
   public StudentInputForm() {
-    setLayout(new MigLayout("", "[][90px][20px][40px][20px][80px][20px][30px][20px][80px][20px][60px][20px][80px][][80px][]", "[20px][20px][20px,grow][25px][20px][20px][20px,grow][25px][20px][20px][20px][20px][20px][20px][20px][25px,grow][25px,grow][25px,grow][25px,grow][20px]"));
+    setLayout(new MigLayout(""
+    		, "[][90px][20px][40px][20px][80px][20px][30px][20px][80px][20px][60px][20px][80px][][80px][]"
+    		, "[20px][20px][20px,grow][25px][20px][20px][20px,grow][25px][20px][20px][20px][20px][20px][20px][20px]"
+    				+ "[25px,grow][25px,grow][25px,grow][25px,grow][20px]"));
 
     JLabel lblChild = new JLabel("Child");
     lblChild.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -118,7 +120,7 @@ public class StudentInputForm extends JPanel {
 
     JButton btnAddChildPhoto = new JButton("Add Photo");
     add(btnAddChildPhoto, "cell 15 3,alignx left,aligny top");
-    AttachPhotoAction childPhotoAction = new AttachPhotoAction(this, CHILD, INPUT);
+    AttachPhotoAction childPhotoAction = new AttachPhotoAction(this, CHILD);
     btnAddChildPhoto.addActionListener(childPhotoAction);
 
     JLabel lblSpecialNeedsallergies = new JLabel("Special Needs/Allergies");
@@ -159,7 +161,7 @@ public class StudentInputForm extends JPanel {
 
     JButton btnAddParentPhoto = new JButton("Add Photo");
     add(btnAddParentPhoto, "cell 15 7,alignx left,aligny top");
-    AttachPhotoAction parentPhotoAction = new AttachPhotoAction(this, PARENT, INPUT);
+    AttachPhotoAction parentPhotoAction = new AttachPhotoAction(this, PARENT);
     btnAddParentPhoto.addActionListener(parentPhotoAction);
 
     JLabel lblCity = new JLabel("City");
@@ -263,7 +265,7 @@ public class StudentInputForm extends JPanel {
 
     JButton btnAddAuth1Photo = new JButton("Add Photo");
     add(btnAddAuth1Photo, "cell 15 15,alignx left,aligny top");
-    AttachPhotoAction auth1PhotoAction = new AttachPhotoAction(this, AUTH1, INPUT);
+    AttachPhotoAction auth1PhotoAction = new AttachPhotoAction(this, AUTH1);
     btnAddAuth1Photo.addActionListener(auth1PhotoAction);
     
     auth2PhotoPanel = new PreviewPanel();
@@ -293,7 +295,7 @@ public class StudentInputForm extends JPanel {
 
     JButton btnAddAuth2Photo = new JButton("Add Photo");
     add(btnAddAuth2Photo, "cell 15 16,alignx left,aligny top");
-    AttachPhotoAction auth2PhotoAction = new AttachPhotoAction(this, AUTH2, INPUT);
+    AttachPhotoAction auth2PhotoAction = new AttachPhotoAction(this, AUTH2);
     btnAddAuth2Photo.addActionListener(auth2PhotoAction);
     
     auth3PhotoPanel = new PreviewPanel();
@@ -323,7 +325,7 @@ public class StudentInputForm extends JPanel {
 
     JButton btnAddAuth3Photo = new JButton("Add Photo");
     add(btnAddAuth3Photo, "cell 15 17,alignx left,aligny top");
-    AttachPhotoAction auth3PhotoAction = new AttachPhotoAction(this, AUTH3, INPUT);
+    AttachPhotoAction auth3PhotoAction = new AttachPhotoAction(this, AUTH3);
     btnAddAuth3Photo.addActionListener(auth3PhotoAction);
     
     auth4PhotoPanel = new PreviewPanel();
@@ -353,7 +355,7 @@ public class StudentInputForm extends JPanel {
 
     JButton btnAddAuth4Photo = new JButton("Add Photo");
     add(btnAddAuth4Photo, "cell 15 18,alignx left,aligny top");
-    AttachPhotoAction auth4PhotoAction = new AttachPhotoAction(this, AUTH4, INPUT);
+    AttachPhotoAction auth4PhotoAction = new AttachPhotoAction(this, AUTH4);
     btnAddAuth4Photo.addActionListener(auth4PhotoAction);
   }
 

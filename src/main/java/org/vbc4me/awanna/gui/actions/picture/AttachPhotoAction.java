@@ -14,16 +14,11 @@ import java.io.IOException;
 
 /**
  * An action to call up a {@link JFileChooser} to select a photo to attach. The {@code JFileChooser}
- * uses a filter that only allows attaching a JPEG or GIF type file. The file that is associated
- * with the file chooser can be retrieved with a call to getType("file"), which will return
- * a string with the path to the file chosen.
- * <p>
- * Created by John Hameier December 2015.
+ * uses a filter that only allows attaching a JPEG, PNG or GIF type file. 
  */
 public class AttachPhotoAction extends AbstractAction {
 	private static final long serialVersionUID = 6935260325468086008L;
 	private JPanel panel;
-    private String panelType;
 
     /**
      * Constructs a action that allows attaching a photo to a {@link JPanel}.
@@ -32,9 +27,8 @@ public class AttachPhotoAction extends AbstractAction {
      * @param person    the identifier as to individual this photo is associated with
      * @param panelType the panel type to associate this action with
      */
-    public AttachPhotoAction(JPanel panel, String person, String panelType) {
+    public AttachPhotoAction(JPanel panel, String person) {
         this.panel = panel;
-        this.panelType = panelType;
         putValue("person", person);
         putValue(NAME, "About");
         putValue(SHORT_DESCRIPTION, "Displays Information about this Application");
@@ -47,7 +41,7 @@ public class AttachPhotoAction extends AbstractAction {
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                "Image File (jpg, png, gif", "jpg", "JPG", "png", "PNG", "gif", "GIF");
+                "Image File (jpg, png, gif)", "jpg", "JPG", "png", "PNG", "gif", "GIF");
         chooser.setFileFilter(filter);
 
         int returnValue = chooser.showOpenDialog(panel);
