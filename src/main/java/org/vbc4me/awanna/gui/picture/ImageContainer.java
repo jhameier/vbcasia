@@ -15,10 +15,10 @@ import java.awt.image.WritableRaster;
  */
 public final class ImageContainer {
 	
-	static BufferedImage image;				// Parent Image.
-	static BufferedImage thumbnail;		// Subset Image of size 100 x 100 (w, h).
-	static Dimension offset;						// The x and y offset of the upper left corner (0, 0) of the thumbnail in relation to the
-															//   parents upper left corner (0, 0).
+	private final BufferedImage image;				// Parent Image.
+	private final BufferedImage thumbnail;		// Subset Image of size 100 x 100 (w, h).
+	private final Dimension offset;						// The x and y offset of the upper left corner (0, 0) of the thumbnail in relation to the
+															                        //   parents upper left corner (0, 0).
 	
 	public ImageContainer(BufferedImage parent, BufferedImage thumbnail, Dimension offset) {
 		this.image = parent;
@@ -29,27 +29,27 @@ public final class ImageContainer {
 	/**
 	 * Returns a cloned copy of the primary parent image associated with this container. You cannot modify this containers offset.
 	 */
-	public static BufferedImage cloneImage() {
+	public BufferedImage cloneImage() {
 		return deepCopy(image);
 	}
 	
 	/**
 	 * Returns a cloned copy of the thumbnail image associated with this container. You cannot modify this containers offset.
 	 */
-	public static BufferedImage cloneThumbnail() {
+	public BufferedImage cloneThumbnail() {
 		return deepCopy(thumbnail);
 	}
 	/**
 	 * Return a new instance of the this containers offset. You cannot modify this containers offset.
 	 */
-	public static Dimension getOffset() {
+	public Dimension getOffset() {
 		return new Dimension(offset);
 	}
 	
 	/**
 	 *  Directly from Klark @  http://stackoverflow.com/questions/3514158/how-do-you-clone-a-bufferedimage
 	 */
-	private static BufferedImage deepCopy(BufferedImage bi) {
+	private BufferedImage deepCopy(BufferedImage bi) {
 		ColorModel cm = bi.getColorModel();
 		 boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
 		 WritableRaster raster = bi.copyData(null);
