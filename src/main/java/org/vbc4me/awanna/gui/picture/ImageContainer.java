@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
+import java.util.Objects;
 
 /**
  *   Container for holding data about an image, a thumbnail (a subset image of the parent image) and the data associated with 
@@ -20,16 +21,37 @@ public final class ImageContainer {
 	private final Dimension offset;						// The x and y offset of the upper left corner (0, 0) of the thumbnail in relation to the
 															                        //   parents upper left corner (0, 0).
 	
+	/**
+	 * Creates a blank container. Before accessing this containers data it is advisable to call the {@link #hasData()} method to 
+	 * verify that we have usable data.
+	 */
+	public ImageContainer() {
+		this.image = null;
+		this.thumbnail = null;
+		this.offset = null;
+	}
+	/**
+	 *  Creates a new immutable container with the primary image, thumbnail and offset of the thumbnail.
+	 */
 	public ImageContainer(BufferedImage parent, BufferedImage thumbnail, Dimension offset) {
-		this.image = parent;
-		this.thumbnail = thumbnail;
-		this.offset = offset;
+		this.image = Objects.requireNonNull(parent);
+		this.thumbnail = Objects.requireNonNull(thumbnail);
+		this.offset = Objects.requireNonNull(offset);
+	}
+	
+	/**
+	 * Returns if this container has data. It can be assumed that if this container has a valid parent image then all associated data
+	 * is present as well.
+	 */
+	public boolean hasData() {
+		return image != null;
 	}
 	
 	/**
 	 * Returns a cloned copy of the primary parent image associated with this container. You cannot modify this containers offset.
 	 */
 	public BufferedImage cloneImage() {
+		
 		return deepCopy(image);
 	}
 	
@@ -47,7 +69,7 @@ public final class ImageContainer {
 	}
 	
 	/**
-	 *  Directly from Klark @  http://stackoverflow.com/questions/3514158/how-do-you-clone-a-bufferedimage
+	 *  Directly from Klark:  http://stackoverflow.com/questions/3514158/how-do-you-clone-a-bufferedimage
 	 */
 	private BufferedImage deepCopy(BufferedImage bi) {
 		ColorModel cm = bi.getColorModel();
