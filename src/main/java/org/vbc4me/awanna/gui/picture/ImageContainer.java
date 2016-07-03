@@ -33,8 +33,8 @@ public final class ImageContainer {
 	/**
 	 *  Creates a new immutable container with the primary image, thumbnail and offset of the thumbnail.
 	 */
-	public ImageContainer(BufferedImage parent, BufferedImage thumbnail, Dimension offset) {
-		this.image = Objects.requireNonNull(parent);
+	public ImageContainer(BufferedImage primaryImage, BufferedImage thumbnail, Dimension offset) {
+		this.image = Objects.requireNonNull(primaryImage);
 		this.thumbnail = Objects.requireNonNull(thumbnail);
 		this.offset = Objects.requireNonNull(offset);
 	}
