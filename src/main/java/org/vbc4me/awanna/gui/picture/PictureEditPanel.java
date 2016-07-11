@@ -59,7 +59,7 @@ public class PictureEditPanel extends JDialog {
 		
 		// Create button panel
 		dialog.getContentPane().add(new EditPictureButtonPanel(new EditActionListener()), BorderLayout.NORTH);
-		
+		dialog.pack();
 		dialog.setVisible(true);
 	}
 	
@@ -84,13 +84,11 @@ public class PictureEditPanel extends JDialog {
 		protected void moveHorizontal(int distance) {
 			// FIXME Add constraints for keeping this inside of border area
 			xPos = xPos + distance;
-			revalidate();
 		}
 		
 		protected void moveVertical(int distance) {
 			// FIXME Add constraints for keeping this inside of border area
 			yPos = yPos + distance;
-			revalidate();
 		}
 		
 		protected void rotateImage(int theta) {
@@ -100,8 +98,7 @@ public class PictureEditPanel extends JDialog {
 			imageContainer = new ImageContainer(rotated, thumbnail, new Dimension(0, 0));
 		}
 		
-		protected void paintComponent(Graphics g) {
-			super.paintComponent(g);
+		protected void paintComponent(Graphics g) {			
 			if (getIcon() != null) {
 				// resizes the image bassed on container size
 				Dimension target = this.getSize();												// target container size  is JLabel
@@ -118,15 +115,18 @@ public class PictureEditPanel extends JDialog {
 				}
 				
 				setIcon(new ImageIcon(ImageContainer.getScaledImage(imageContainer.cloneImage(), scaledImageDimension)));
-				
+				super.paintComponent(g);
 				Graphics2D g2d = (Graphics2D)g.create();
 				g2d.setColor(Color.RED);
 				g2d.drawRect(xPos, yPos, width, height);
 			}
+			
 		}
 	}
 	
-	
+	/**
+	 *		Allows access to this panels methods from within the button panel
+	 */
 	protected class EditActionListener extends AbstractAction {
 		private static final long serialVersionUID = 3252488674763352416L;
 		
@@ -191,5 +191,5 @@ public class PictureEditPanel extends JDialog {
 			}
 		}
 	}
-	
+
 }
