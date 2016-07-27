@@ -7,14 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 
-import org.vbc4me.awanna.gui.picture.PictureEditPanel.EditActionListener;
-
 import net.miginfocom.swing.MigLayout;
 
 public class EditPictureButtonPanel extends JPanel{
 	private static final long serialVersionUID = 8369053030542399183L;
 
-	public EditPictureButtonPanel(EditActionListener editListener) {
+	public EditPictureButtonPanel(EditActionListener editActionListener) {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
@@ -22,23 +20,23 @@ public class EditPictureButtonPanel extends JPanel{
 		panel.setLayout(new MigLayout("", "[79px][75px]", "[30px][30px][30px]"));
 		
 		JButton btnExpand = new JButton("Expand +");
-		btnExpand.setActionCommand(editListener.EXPAND);
-		btnExpand.addActionListener(editListener);
+		btnExpand.setActionCommand(editActionListener.EXPAND);
+		btnExpand.addActionListener(editActionListener);
 		panel.add(btnExpand, "flowy,cell 0 0,growx,aligny center");
 		
 		JButton btnReduce = new JButton("Reduce -");
-		btnReduce.setActionCommand(editListener.REDUCE);
-		btnReduce.addActionListener(editListener);
+		btnReduce.setActionCommand(editActionListener.REDUCE);
+		btnReduce.addActionListener(editActionListener);
 		panel.add(btnReduce, "flowy,cell 1 0,growx,aligny center");
 		
 		JButton btnRotateCw = new JButton("Rotate CW");
-		btnRotateCw.setActionCommand(editListener.CLOCKWISE);
-		btnRotateCw.addActionListener(editListener);
+		btnRotateCw.setActionCommand(editActionListener.CLOCKWISE);
+		btnRotateCw.addActionListener(editActionListener);
 		panel.add(btnRotateCw, "cell 0 2,growx,aligny center");
 		
 		JButton btnRotateCcw = new JButton("Rotate CCW");
-		btnRotateCcw.setActionCommand(editListener.COUNTER_CLOCKWISE);
-		btnRotateCcw.addActionListener(editListener);
+		btnRotateCcw.setActionCommand(editActionListener.COUNTER_CLOCKWISE);
+		btnRotateCcw.addActionListener(editActionListener);
 		panel.add(btnRotateCcw, "cell 1 2,growx,aligny center");
 		
 		Component verticalStrut = Box.createVerticalStrut(20);
@@ -50,23 +48,23 @@ public class EditPictureButtonPanel extends JPanel{
 		panel_1.setLayout(new MigLayout("", "[50px][50px][50px][50px]", "[30px][30px][30px]"));
 		
 		JButton btnShiftUp = new JButton("Shift Up");
-		btnShiftUp.setActionCommand(editListener.UP);
-		btnShiftUp.addActionListener(editListener);
+		btnShiftUp.setActionCommand(editActionListener.UP);
+		btnShiftUp.addActionListener(editActionListener);
 		panel_1.add(btnShiftUp, "cell 1 0 2 1,growx");
 		
 		JButton btnShiftLeft = new JButton("Shift Left");
-		btnShiftLeft.setActionCommand(editListener.LEFT);
-		btnShiftLeft.addActionListener(editListener);
+		btnShiftLeft.setActionCommand(editActionListener.LEFT);
+		btnShiftLeft.addActionListener(editActionListener);
 		panel_1.add(btnShiftLeft, "cell 0 1 2 1,growx");
 		
 		JButton btnShiftRight = new JButton("Shift Right");
-		btnShiftRight.setActionCommand(editListener.RIGHT);
-		btnShiftRight.addActionListener(editListener);
+		btnShiftRight.setActionCommand(editActionListener.RIGHT);
+		btnShiftRight.addActionListener(editActionListener);
 		panel_1.add(btnShiftRight, "cell 2 1 2 1,growx");
 		
 		JButton btnShiftDown = new JButton("Shift Down");
-		btnShiftDown.setActionCommand(editListener.DOWN);
-		btnShiftDown.addActionListener(editListener);
+		btnShiftDown.setActionCommand(editActionListener.DOWN);
+		btnShiftDown.addActionListener(editActionListener);
 		panel_1.add(btnShiftDown, "cell 1 2 2 1,growx");
 		
 		JPanel panel_2 = new JPanel();
@@ -75,13 +73,13 @@ public class EditPictureButtonPanel extends JPanel{
 		panel_2.setLayout(new MigLayout("", "[89px]", "[30px][30px][30px]"));
 		
 		JButton btnSave = new JButton("Save Image");
-		btnSave.setActionCommand(editListener.SAVE);
-		btnSave.addActionListener(editListener);
+		btnSave.setActionCommand(editActionListener.SAVE);
+		btnSave.addActionListener(editActionListener);
 		panel_2.add(btnSave, "cell 0 0,growx,aligny center");
 		
 		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setActionCommand(editListener.CANCEL);
-		btnCancel.addActionListener(editListener);
+		btnCancel.setActionCommand(editActionListener.CANCEL);
+		btnCancel.addActionListener(editActionListener);
 		panel_2.add(btnCancel, "cell 0 1,growx,aligny center");	
 	}
 	

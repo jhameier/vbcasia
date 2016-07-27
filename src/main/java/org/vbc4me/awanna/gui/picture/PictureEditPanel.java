@@ -5,7 +5,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 import javax.swing.AbstractAction;
@@ -29,18 +33,41 @@ public class PictureEditPanel extends JDialog {
 	
 	private static final long serialVersionUID = 2852491616246379626L;
 	private ImageContainer imageContainer;
-	private final JDialog dialog;
 	private final ImageLabel label;
 	private ImageIcon icon;
-	private final Dimension DEFAULT_DIALOG_SIZE = new Dimension(600, 560);
-	private final int DEFAULT_BORDER_SIZE = 30;
+	private final Dimension DEFAULT_DIALOG_SIZE = new Dimension(600, 600);
 	private Dimension scaledImageDimension = new Dimension(0, 0);
+	
+	private Rectangle cropBox = new Rectangle(0,0,100,100);  		// box used as reference for the thumbnail image
+	private Rectangle imageArea = new Rectangle(0,0,600,600);	// area that contains the image label
+	private Point currentPosition = new Point();
+	private Point previousPosition = new Point();
+	private boolean outside = false;
+
+	protected ImageContainer imageContainer() {
+		return imageContainer;
+	}
+	
+	protected void imageContainer(ImageContainer container) {
+		this.imageContainer =  container;
+	}
+	
+	protected Rectangle cropBox() {
+		return cropBox;
+	}
+	
+	protected Dimension scaledImageDimension() {
+		return scaledImageDimension;
+	}
+	
+	protected Rectangle imageArea() {
+		return imageArea;
+	}
 	
 	public PictureEditPanel(JPanel parent, ImageContainer container) {
 		this.imageContainer = container;
-		this.dialog = new JDialog();
-		dialog.setMinimumSize(DEFAULT_DIALOG_SIZE);
-		dialog.setPreferredSize(DEFAULT_DIALOG_SIZE);
+		setMinimumSize(DEFAULT_DIALOG_SIZE);
+		setPreferredSize(DEFAULT_DIALOG_SIZE);
 		
 		// Scale the image to a standard size
 		Dimension dim = container.getImageSize();
@@ -49,147 +76,62 @@ public class PictureEditPanel extends JDialog {
 		Dimension sDim = new Dimension(600, (int) (dim.height * scale));
 		
 		// Setup Dialog
-		dialog.setTitle("Create Thumbnail");
-		dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		dialog.getContentPane().setLayout(new BorderLayout());
+		setTitle("Create Thumbnail");
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		getContentPane().setLayout(new BorderLayout());
 		
 		icon = new ImageIcon(imageContainer.getScaledImage(sDim));
-		label = new ImageLabel(icon);
-		dialog.add(label, BorderLayout.CENTER);
+		label = new ImageLabel(this, icon);
+		ImageMouseListener mouseListener = new ImageMouseListener();
+		label.addMouseListener(mouseListener);
+		label.addMouseMotionListener(mouseListener);
+		label.addMouseWheelListener(mouseListener);
+		add(label, BorderLayout.CENTER);
 		
 		// Create button panel
-		dialog.getContentPane().add(new EditPictureButtonPanel(new EditActionListener()), BorderLayout.NORTH);
-		dialog.pack();
-		dialog.setVisible(true);
+		EditPictureButtonPanel buttonPanel = new EditPictureButtonPanel(new EditActionListener(this, label));
+		getContentPane().add(buttonPanel, BorderLayout.NORTH);
+		pack();
+		setVisible(true);
 	}
 	
-	
-	/**
-	 * Custom label that allows automatic resizing of the {@link ImageIcon} when
-	 * the {@link JDialog dialog} this is attached to is resized.
-	 */
-	protected class ImageLabel extends JLabel {
-		private static final long serialVersionUID = 1827785467459231872L;
-		private int xPos = DEFAULT_BORDER_SIZE;
-		private int yPos = DEFAULT_BORDER_SIZE;
-		private int width = 100;
-		private int height = 100;
+	protected class ImageMouseListener extends MouseAdapter {
 		
-		public ImageLabel(ImageIcon icon) {
-			super(icon);
-			// crates a border around the image same as background color
-			setBorder(new LineBorder(getBackground(), DEFAULT_BORDER_SIZE));
-		}
-		
-		protected void moveHorizontal(int distance) {
-			// FIXME Add constraints for keeping this inside of border area
-			xPos = xPos + distance;
-		}
-		
-		protected void moveVertical(int distance) {
-			// FIXME Add constraints for keeping this inside of border area
-			yPos = yPos + distance;
-		}
-		
-		protected void rotateImage(int theta) {
-			// Get a new rotated image from the container and create a new container
-			BufferedImage rotated = imageContainer.rotate(imageContainer.cloneImage(), theta);
-			BufferedImage thumbnail = ImageContainer.createThumbnail(rotated);
-			imageContainer = new ImageContainer(rotated, thumbnail, new Dimension(0, 0));
-		}
-		
-		protected void paintComponent(Graphics g) {			
-			if (getIcon() != null) {
-				// resizes the image bassed on container size
-				Dimension target = this.getSize();												// target container size  is JLabel
-				Dimension original = imageContainer.getImageSize();		// gets the size of the original image
-				
-				// Automatically set the the width to the target width then scale height measurement
-				scaledImageDimension.width = target.width;
-				scaledImageDimension.height = (scaledImageDimension.width * original.height) / original.width;
-				
-				// Check to see if the height exceeds the current window height if so re-scale based off of height
-				if (scaledImageDimension.height > target.height) {
-					scaledImageDimension.height = target.height;
-					scaledImageDimension.width = (scaledImageDimension.height * original.width) / original.height;
-				}
-				
-				setIcon(new ImageIcon(ImageContainer.getScaledImage(imageContainer.cloneImage(), scaledImageDimension)));
-				super.paintComponent(g);
-				Graphics2D g2d = (Graphics2D)g.create();
-				g2d.setColor(Color.RED);
-				g2d.drawRect(xPos, yPos, width, height);
-			}
-			
-		}
-	}
-	
-	/**
-	 *		Allows access to this panels methods from within the button panel
-	 */
-	protected class EditActionListener extends AbstractAction {
-		private static final long serialVersionUID = 3252488674763352416L;
-		
-		// Used when specifying the Action Commands used by buttons
-		String REDUCE = "reduce";
-		String EXPAND = "expand";
-		String CLOCKWISE = "clockwise";
-		String COUNTER_CLOCKWISE = "counterclockwise";
-		String UP = "up";
-		String DOWN = "down";
-		String LEFT = "left";
-		String RIGHT = "right";
-		String SAVE = "save";
-		String CANCEL = "cancel";
-		
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			switch (e.getActionCommand()) {
-				case "reduce":
-					// reduce the size of the crop box
-					
-					break;
-				case "expand":
-					// expand the size of the crop box
+	    public void mousePressed(MouseEvent e) {
+	    	previousPosition.x = cropBox.x - e.getX();
+	    	previousPosition.y = cropBox.y - e.getY();
+	    	
+	    	if(cropBox.contains(e.getPoint())) {
+	    		updateLocation(e);
+	    	} else {
+	    		outside = true;
+	    	}
+	    }
+	    
+	    public void mouseDragged(MouseEvent e) {
+	    	if (!outside) {
+	    		updateLocation(e);
+	    	}
+	    }
 
-					break;
-				case "clockwise":
-					// rotate the full image clockwise
-					label.rotateImage(90);
-					break;
-				case "counterclockwise":
-					// rotate the full image counter clockwise
-					label.rotateImage(-90);
-					break;
-				case "up":
-					// move the crop box up
-					label.moveVertical(-2);
-					break;
-				case "down":
-					// move the crop box down
-					label.moveVertical(2);
-					break;
-				case "left":
-					// move the crop box left
-					label.moveHorizontal(-2);
-					break;
-				case "right":
-					// move the crop box right
-					label.moveHorizontal(2);
-					break;
-				case "save":
-					// save the current image and thumbnail to new
-					// ImageContainer
-					System.out.println("Icon Dimensions : " + icon.getIconWidth() + ":" + icon.getIconHeight());
-					System.out.println("nDim (used when paiting label) : " + scaledImageDimension);
-					break;
-				case "cancel":
-					dialog.dispose();
-					break;
-				default:
-					throw new IllegalArgumentException("Unknown action command" + e.getActionCommand());
+		public void mouseReleased(MouseEvent e) {
+			if (cropBox.contains(e.getPoint())) {
+				updateLocation(e);
+			} else {
+				outside = false;
 			}
 		}
-	}
+	    
+	    private void updateLocation(MouseEvent e) {
+	    	cropBox.setLocation(previousPosition.x + e.getX(), previousPosition.y + e.getY());
+	    	label.checkCropBox();
+	    	repaint();
+	    }
 
+        //	    public void mouseClicked(MouseEvent e) {}
+        //	    public void mouseEntered(MouseEvent e) {}
+        //	    public void mouseExited(MouseEvent e) {}
+        //	    public void mouseMoved(MouseEvent e) {}
+        //	    public void mouseWheelMoved(MouseWheelEvent e){}
+	}
 }
