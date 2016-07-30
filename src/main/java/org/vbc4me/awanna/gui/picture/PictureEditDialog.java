@@ -21,13 +21,13 @@ import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 
 /**
- * This represents a workable panel that allows manipulation of images. This
- * panels primary purpose allows modifications to the {@link BufferedImage image}
- * in order to get to a cropped image of the size 100 x 100. This panel does not
- * permanently store the image but has the methods necessary to create the
- * thumbnail image. As a side effect this will return an {@link ImageContainer
- * Image Container} that is used to store the information needed by this class
- * to make future changes.
+ * This represents a workable dialog that allows manipulation of images. This
+ * dialogs primary purpose allows modifications to the {@link BufferedImage image}
+ * in order to get to a cropped image of the size 100 x 100. This dialog does not
+ * permanently store the image but has the methods necessary to create  and display the
+ * image and a coping box. As a side effect this dialog will return an {@link ImageContainer
+ * Image Container} that is used to store the original image and the thumbnail image that 
+ * can be used by this dialog to make future changes.
  */
 public class PictureEditDialog extends JDialog {
 	
