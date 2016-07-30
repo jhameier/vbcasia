@@ -44,7 +44,7 @@ public class PictureEditDialog extends JDialog {
 	private Point previousPosition = new Point();
 	private boolean outside = false;
 	
-	private PictureEditPanel_JPanel imagePanel;
+	private PictureEditPanel imagePanel;
 
 	protected ImageContainer imageContainer() {
 		return imageContainer;
@@ -89,7 +89,7 @@ public class PictureEditDialog extends JDialog {
 		label.addMouseMotionListener(mouseListener);
 		label.addMouseWheelListener(mouseListener);
 //		add(label, BorderLayout.CENTER);
-		imagePanel = new PictureEditPanel_JPanel(this);
+		imagePanel = new PictureEditPanel(this);
 		add(imagePanel, BorderLayout.CENTER);
 		
 		// Create button panel

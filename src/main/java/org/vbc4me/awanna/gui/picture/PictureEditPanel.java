@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-public class PictureEditPanel_JPanel  extends JPanel {
+public class PictureEditPanel  extends JPanel {
 	private static final long serialVersionUID = -3994207055262982817L;
 	
 	private PictureEditDialog editPanel;
@@ -18,7 +18,7 @@ public class PictureEditPanel_JPanel  extends JPanel {
 	private CropBox cropBox;
 	private Point mouseClickOffset = new Point();
 
-	public PictureEditPanel_JPanel(PictureEditDialog panel){
+	public PictureEditPanel(PictureEditDialog panel){
 		this.editPanel = panel;
 		this.currentImage = panel.imageContainer().cloneImage();
 		cropBox = new CropBox();
