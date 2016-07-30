@@ -9,10 +9,10 @@ import javax.swing.AbstractAction;
  */
 public class EditActionListener extends AbstractAction {
 	private static final long serialVersionUID = 3252488674763352416L;
-	private final PictureEditPanel dialog;
+	private final PictureEditDialog dialog;
 	private final ImageLabel label;
 	
-	public EditActionListener(PictureEditPanel dialog, ImageLabel label) {
+	public EditActionListener(PictureEditDialog dialog, ImageLabel label) {
 		this.dialog = dialog;
 		this.label = label;
 	}

@@ -19,7 +19,7 @@ import javax.swing.border.LineBorder;
 public class ImageLabel extends JLabel {
 	private static final long serialVersionUID = 1827785467459231872L;
 	
-	private final PictureEditPanel dialog;
+	private final PictureEditDialog dialog;
 	protected Point previousPosition = new Point();
 	protected Point currentPosition = new Point();
 	
@@ -27,7 +27,7 @@ public class ImageLabel extends JLabel {
 	private boolean initial = true; 
 	
 	
-	public ImageLabel(PictureEditPanel dialog, ImageIcon icon) {
+	public ImageLabel(PictureEditDialog dialog, ImageIcon icon) {
 		super(icon);
 		this.dialog = dialog;
 		// crates a border around the image same as background color

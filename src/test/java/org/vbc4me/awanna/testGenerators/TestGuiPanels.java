@@ -62,22 +62,22 @@ public class TestGuiPanels extends JFrame {
 		StudentInputForm studentInputForm = new StudentInputForm();
 		
 		List<JFrame> windows = new ArrayList<>();
-		JFrame window1 = new TestGuiPanels(recBtnPanel, "Recod Button Panel");
-		windows.add(window1);
-		JFrame window2 = new TestGuiPanels(seaBtnPanel, "Season Button Panel");
-		windows.add(window2);
-		JFrame window3 = new TestGuiPanels(sesBtnPanel, "Session Button Panel");
-		windows.add(window3);
+//		JFrame window1 = new TestGuiPanels(recBtnPanel, "Recod Button Panel");
+//		windows.add(window1);
+//		JFrame window2 = new TestGuiPanels(seaBtnPanel, "Season Button Panel");
+//		windows.add(window2);
+//		JFrame window3 = new TestGuiPanels(sesBtnPanel, "Session Button Panel");
+//		windows.add(window3);
 		JFrame window4 = new TestGuiPanels(studentDisplayForm, "Student Display Form");
 		windows.add(window4);
 		JFrame window5 = new TestGuiPanels(studentInputForm, "Student Input Form");
 		windows.add(window5);
-		JFrame window6 = new TestGuiPanels(seasonDisplayForm, "Season Display Form");
-		windows.add(window6);
-		JFrame window7 = new TestGuiPanels(seasonBlankForm, "Season Blank Form");
-		windows.add(window7);
-		JFrame window8 = new TestGuiPanels(seasonEditForm, "Season Edit Form");
-		windows.add(window8);
+//		JFrame window6 = new TestGuiPanels(seasonDisplayForm, "Season Display Form");
+//		windows.add(window6);
+//		JFrame window7 = new TestGuiPanels(seasonBlankForm, "Season Blank Form");
+//		windows.add(window7);
+//		JFrame window8 = new TestGuiPanels(seasonEditForm, "Season Edit Form");
+//		windows.add(window8);
 		
 		// Display all the current windows for inspection
 		Dimension offset = new Dimension(0, 0);

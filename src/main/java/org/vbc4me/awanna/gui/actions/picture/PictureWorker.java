@@ -13,7 +13,7 @@ import javax.swing.SwingWorker;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.vbc4me.awanna.gui.picture.ImageContainer;
-import org.vbc4me.awanna.gui.picture.PictureEditPanel;
+import org.vbc4me.awanna.gui.picture.PictureEditDialog;
 
 public class PictureWorker extends SwingWorker<Void, Void> {
 	private final JPanel parent;
@@ -50,7 +50,7 @@ public class PictureWorker extends SwingWorker<Void, Void> {
 			preferences.put("DEFAULT_PATH", file.getAbsolutePath());
 			try {
 				BufferedImage origImage = ImageIO.read(file);
-				new PictureEditPanel(parent, new ImageContainer(origImage
+				new PictureEditDialog(parent, new ImageContainer(origImage
 																												, ImageContainer.createThumbnail(origImage)
 																												,  new Dimension(0,0)));
 			} catch (IOException e1) {

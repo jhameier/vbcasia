@@ -29,7 +29,7 @@ import javax.swing.border.LineBorder;
  * Image Container} that is used to store the information needed by this class
  * to make future changes.
  */
-public class PictureEditPanel extends JDialog {
+public class PictureEditDialog extends JDialog {
 	
 	private static final long serialVersionUID = 2852491616246379626L;
 	private ImageContainer imageContainer;
@@ -43,6 +43,8 @@ public class PictureEditPanel extends JDialog {
 	private Point currentPosition = new Point();
 	private Point previousPosition = new Point();
 	private boolean outside = false;
+	
+	private PictureEditPanel_JPanel imagePanel;
 
 	protected ImageContainer imageContainer() {
 		return imageContainer;
@@ -64,7 +66,7 @@ public class PictureEditPanel extends JDialog {
 		return imageArea;
 	}
 	
-	public PictureEditPanel(JPanel parent, ImageContainer container) {
+	public PictureEditDialog(JPanel parent, ImageContainer container) {
 		this.imageContainer = container;
 		setMinimumSize(DEFAULT_DIALOG_SIZE);
 		setPreferredSize(DEFAULT_DIALOG_SIZE);
@@ -86,7 +88,9 @@ public class PictureEditPanel extends JDialog {
 		label.addMouseListener(mouseListener);
 		label.addMouseMotionListener(mouseListener);
 		label.addMouseWheelListener(mouseListener);
-		add(label, BorderLayout.CENTER);
+//		add(label, BorderLayout.CENTER);
+		imagePanel = new PictureEditPanel_JPanel(this);
+		add(imagePanel, BorderLayout.CENTER);
 		
 		// Create button panel
 		EditPictureButtonPanel buttonPanel = new EditPictureButtonPanel(new EditActionListener(this, label));

@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.vbc4me.awanna.gui.picture.ImageContainer;
-import org.vbc4me.awanna.gui.picture.PictureEditPanel;
+import org.vbc4me.awanna.gui.picture.PictureEditDialog;
 import org.vbc4me.awanna.gui.picture.ThumbnailPanel;
 
 /**
@@ -68,7 +68,7 @@ public class AttachPhotoAction extends AbstractAction {
 			BufferedImage origImage;
 			try {
 				origImage = ImageIO.read(file);
-				new PictureEditPanel(parent, new ImageContainer(origImage
+				new PictureEditDialog(parent, new ImageContainer(origImage
 						, ImageContainer.createThumbnail(origImage)
 						,  new Dimension(0,0)));
 			} catch (IOException e) {

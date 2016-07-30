@@ -36,7 +36,7 @@ public class ThumbnailPanel extends JPanel {
 	}
 	
 	private void editThumbnail() {
-		new PictureEditPanel(this, imageContainer);
+		new PictureEditDialog(this, imageContainer);
 	}
 	
 }
