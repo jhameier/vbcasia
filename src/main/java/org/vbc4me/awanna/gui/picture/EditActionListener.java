@@ -10,11 +10,11 @@ import javax.swing.AbstractAction;
 public class EditActionListener extends AbstractAction {
 	private static final long serialVersionUID = 3252488674763352416L;
 	private final PictureEditDialog dialog;
-	private final ImageLabel label;
+	private final PictureEditPanel panel;
 	
-	public EditActionListener(PictureEditDialog dialog, ImageLabel label) {
+	public EditActionListener(PictureEditDialog dialog, PictureEditPanel imagePanel) {
 		this.dialog = dialog;
-		this.label = label;
+		this.panel = imagePanel;
 	}
 	
 	// Used when specifying the Action Commands used by buttons
@@ -33,46 +33,38 @@ public class EditActionListener extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 			case "reduce":
-				// reduce the size of the crop box
+				panel.reduceCropBox(10);
 				break;
 			case "expand":
-				// expand the size of the crop box
-
+				panel.expandCropBox(10);
 				break;
 			case "clockwise":
 				// rotate the full image clockwise
-				label.rotateImage(90);
+				panel.rotateImage(90);
 				break;
 			case "counterclockwise":
 				// rotate the full image counter clockwise
-				label.rotateImage(-90);
+				panel.rotateImage(-90);
 				break;
 			case "up":
 				// move the crop box up
-				label.moveVertical(-2);
+				panel.moveVertical(-2);
 				break;
 			case "down":
 				// move the crop box down
-				label.moveVertical(2);
+				panel.moveVertical(2);
 				break;
 			case "left":
 				// move the crop box left
-				label.moveHorizontal(-2);
+				panel.moveHorizontal(-2);
 				break;
 			case "right":
 				// move the crop box right
-				label.moveHorizontal(2);
+				panel.moveHorizontal(2);
 				break;
 			case "save":
 				// save the current image and thumbnail to new
 				// ImageContainer
-				System.out.println("Image Area : " + label.getBounds());
-				System.out.println("Label (x, y) : (" + label.getX() + ", " + label.getY() + ")");
-				System.out.println("Label (w, h) : (" + label.getWidth() + ", " + label.getHeight() + ")");
-				System.out.println("scaled image dimensions (used when paiting label) : " + dialog.scaledImageDimension());
-				System.out.println("Crop Box: " + dialog.cropBox().x + " : " + dialog.cropBox().y + " : " + dialog.cropBox().width + " : " + dialog.cropBox().height);
-				System.out.println("Image Icon : " + label.getIcon().getIconWidth() + " : " + label.getIcon().getIconHeight());
-				System.out.println("----------------------------------------------------------------------------");
 				break;
 			case "cancel":
 				dialog.dispose();
