@@ -1,6 +1,5 @@
 package org.vbc4me.awanna.gui.actions.picture;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -68,9 +67,7 @@ public class AttachPhotoAction extends AbstractAction {
 			BufferedImage origImage;
 			try {
 				origImage = ImageIO.read(file);
-				new PictureEditDialog(parent, new ImageContainer(origImage
-						, ImageContainer.createThumbnail(origImage)
-						,  new Dimension(0,0)));
+				new PictureEditDialog(parent, new ImageContainer(origImage, ImageContainer.createThumbnail(origImage)));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

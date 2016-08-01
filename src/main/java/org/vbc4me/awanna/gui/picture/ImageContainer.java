@@ -3,13 +3,11 @@ package org.vbc4me.awanna.gui.picture;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.WritableRaster;
 import java.util.Objects;
 
 /**
@@ -24,17 +22,13 @@ public final class ImageContainer {
 	
 	private final BufferedImage image;				// Parent Image.
 	private final BufferedImage thumbnail;		// Subset Image of size 100 x 100 (w, h).
-	private final Dimension offset;						// The x and y offset of the upper left corner (0, 0) of the thumbnail in relation to the
-															                        //   parents upper left corner (0, 0).
-	private boolean valid = false;						// used to signal if this has a valid image or is just holding a blank images.
 		
 	/**
 	 *  Creates a new immutable container with the primary image, thumbnail and offset of the thumbnail.
 	 */
-	public ImageContainer(BufferedImage primaryImage, BufferedImage thumbnail, Dimension offset) {
+	public ImageContainer(BufferedImage primaryImage, BufferedImage thumbnail) {
 		this.image = Objects.requireNonNull(primaryImage);
 		this.thumbnail = Objects.requireNonNull(thumbnail);
-		this.offset = Objects.requireNonNull(offset);
 	}
 	
 	/**
@@ -50,19 +44,9 @@ public final class ImageContainer {
 	public BufferedImage cloneThumbnail() {
 		return deepCopy(thumbnail);
 	}
-	/**
-	 * Return a new instance of this containers offset. You cannot modify this containers offset.
-	 */
-	public Dimension getOffset() {
-		return new Dimension(offset);
-	}
-	
-	public boolean isValid() {
-		return valid;
-	}
 	
 	/**
-	 *  Modifed from Klark:  http://stackoverflow.com/questions/3514158/how-do-you-clone-a-bufferedimage
+	 *  Modified from Klark:  http://stackoverflow.com/questions/3514158/how-do-you-clone-a-bufferedimage
 	 */
 	private BufferedImage deepCopy(BufferedImage image) {
 		 return new BufferedImage(image.getColorModel(), 
@@ -77,7 +61,7 @@ public final class ImageContainer {
 		BufferedImage thumb = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
 		img.createGraphics().setColor(new Color(0, true));
 		thumb.createGraphics().setColor(new Color(0, true));	
-		return new ImageContainer(img , thumb, new Dimension(0, 0));
+		return new ImageContainer(img , thumb);
 	}
 	
 	/**
@@ -87,6 +71,26 @@ public final class ImageContainer {
 		BufferedImage thumb = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
 		thumb.createGraphics().drawImage(image.getScaledInstance(100, 100, BufferedImage.TYPE_INT_RGB), 0, 0,  null);
 		return thumb;
+	}
+	
+	/**
+	 * Returns a thumbnail image of size 100 x 100 pixels based of the image and the position and size of the 
+	 * crop box passed in.
+	 */
+	public static BufferedImage createThumbnail(BufferedImage image, Point point, Dimension dimension) {
+		// point is the x,y of the crop box
+		// dimension is the size of the crop box
+		// image is the scaled version of the image as seen in the edit panel
+		int x = point.x;
+		int y = point.y;
+		int width = dimension.width;
+		int height = dimension.height;
+		// first create a scaled instance of the thumbnail to the full size
+		BufferedImage thumb = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		thumb.createGraphics().drawImage(
+				image.getScaledInstance(width, height, BufferedImage.TYPE_INT_RGB), x, y, width, height, null);
+		// return a 100 x 100 version
+		return createThumbnail(thumb);
 	}
 
 	/**
@@ -112,19 +116,6 @@ public final class ImageContainer {
 		BufferedImage img = new BufferedImage(dim.width, dim.height, BufferedImage.TYPE_INT_RGB);
 		img.createGraphics().drawImage(image.getScaledInstance(dim.width, dim.height, Image.SCALE_SMOOTH), 0, 0, null);
 		return img;
-	}
-	
-	public BufferedImage rotateImage(double theta) {
-		double rotation = Math.toRadians (theta);
-		double locationX = image.getWidth() / 2;
-		double locationY = image.getHeight() / 2;
-		
-		AffineTransform at = new AffineTransform();
-		at.setToQuadrantRotation(1, locationX, locationY);
-		AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-		BufferedImage rotated = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
-		op.filter(image, rotated);
-		return rotated;
 	}
 	
 	/**
@@ -163,8 +154,7 @@ public final class ImageContainer {
 	    AffineTransform at = new AffineTransform();
 	    at.rotate(ang, w / 2, h / 2);
 	    at.translate(x, y);
-	    AffineTransformOp op = new AffineTransformOp(at,
-	                                                 AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+	    AffineTransformOp op = new AffineTransformOp(at, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 	    op.filter(image, rotatedImage);
 	    image = rotatedImage;
 	    return image;

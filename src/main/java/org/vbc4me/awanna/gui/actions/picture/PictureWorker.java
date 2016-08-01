@@ -1,6 +1,5 @@
 package org.vbc4me.awanna.gui.actions.picture;
 
-import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -50,9 +49,7 @@ public class PictureWorker extends SwingWorker<Void, Void> {
 			preferences.put("DEFAULT_PATH", file.getAbsolutePath());
 			try {
 				BufferedImage origImage = ImageIO.read(file);
-				new PictureEditDialog(parent, new ImageContainer(origImage
-																												, ImageContainer.createThumbnail(origImage)
-																												,  new Dimension(0,0)));
+				new PictureEditDialog(parent, new ImageContainer(origImage, ImageContainer.createThumbnail(origImage)));
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
