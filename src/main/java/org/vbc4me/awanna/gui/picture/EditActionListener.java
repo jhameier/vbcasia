@@ -64,9 +64,10 @@ public class EditActionListener extends AbstractAction {
 				break;
 			case "save":
 				// save the current image and thumbnail to new
-				// ImageContainer
+				panel.saveThumbnail();
 				break;
 			case "cancel":
+				dialog.thumbnailPanel().resetThumbnail();;
 				dialog.dispose();
 				break;
 			default:

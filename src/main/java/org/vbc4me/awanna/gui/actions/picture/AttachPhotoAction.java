@@ -12,6 +12,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.vbc4me.awanna.account.Pickup;
+import org.vbc4me.awanna.gui.forms.student.StudentInputForm;
 import org.vbc4me.awanna.gui.picture.ImageContainer;
 import org.vbc4me.awanna.gui.picture.PictureEditDialog;
 import org.vbc4me.awanna.gui.picture.ThumbnailPanel;
@@ -22,20 +24,18 @@ import org.vbc4me.awanna.gui.picture.ThumbnailPanel;
  */
 public class AttachPhotoAction extends AbstractAction {
 	private static final long serialVersionUID = 6935260325468086008L;
-	private final JPanel parent;
+	private final ThumbnailPanel thumbnailPanel;
 
     /**
      * Constructs a action that allows attaching a photo to a {@link ThumbnailPanel} for display.
      *
      * @param panel: the parent panel that we want to center on
      */
-    public AttachPhotoAction(JPanel parent ) {
-        this.parent = parent;
+    public AttachPhotoAction(ThumbnailPanel thumbnailPanel) {
+        this.thumbnailPanel = thumbnailPanel;
     }
 
     public void actionPerformed(ActionEvent e) {
-//    	PictureWorker worker = new PictureWorker(parent);
-//    	worker.execute();
     	attachPhoto();
     }
 
@@ -51,7 +51,7 @@ public class AttachPhotoAction extends AbstractAction {
 				"PNG", "gif", "GIF");
 		chooser.setFileFilter(filter);
 		
-		int returnValue = chooser.showOpenDialog(parent);
+		int returnValue = chooser.showOpenDialog(thumbnailPanel.getParent());
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			
 			/*
@@ -66,8 +66,19 @@ public class AttachPhotoAction extends AbstractAction {
 			
 			BufferedImage origImage;
 			try {
+				// read in the image needed to make the thumbnail from and create an initial thumbnail from the entire image.
 				origImage = ImageIO.read(file);
-				new PictureEditDialog(parent, new ImageContainer(origImage, ImageContainer.createThumbnail(origImage)));
+				BufferedImage tempThumbnail = ImageContainer.createThumbnail(origImage);
+				
+				// Create a new image container
+				ImageContainer container = new ImageContainer(origImage, tempThumbnail);
+				
+				// Attach the new image container to the thumbnail panel
+				thumbnailPanel.updateThumbnail(container);
+				
+				// Create new dialog
+				new PictureEditDialog(thumbnailPanel);
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

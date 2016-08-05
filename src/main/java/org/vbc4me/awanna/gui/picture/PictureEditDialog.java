@@ -1,24 +1,11 @@
 package org.vbc4me.awanna.gui.picture;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-import javax.swing.AbstractAction;
-import javax.swing.ImageIcon;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-import javax.swing.border.LineBorder;
 
 /**
  * This represents a workable dialog that allows manipulation of images. This
@@ -32,44 +19,39 @@ import javax.swing.border.LineBorder;
 public class PictureEditDialog extends JDialog {
 	
 	private static final long serialVersionUID = 2852491616246379626L;
-	private ImageContainer imageContainer;
-	private final Dimension DEFAULT_DIALOG_SIZE = new Dimension(600, 600);
+	private final ThumbnailPanel thumbnailPanel;
+	private final Dimension DEFAULT_DIALOG_SIZE = new Dimension(600, 600);	
 	
-	private PictureEditPanel imagePanel;
-
-	protected ImageContainer imageContainer() {
-		return imageContainer;
-	}
-	
-	protected void imageContainer(ImageContainer container) {
-		this.imageContainer =  container;
-	}
-	
-	public PictureEditDialog(JPanel parent, ImageContainer container) {
-		this.imageContainer = container;
+	/**
+	 *  Constructs a new dialog that allows the creation of a thumbnail image
+	 *  used to display within some panel. All images needed to create and store the thumbnail are provided by the 
+	 *  {@link ThumbnailPanel panel} passed in.
+	 */	
+	public PictureEditDialog(ThumbnailPanel thumbnailPanel) {
+		this.thumbnailPanel = thumbnailPanel;
+		
 		setMinimumSize(DEFAULT_DIALOG_SIZE);
 		setPreferredSize(DEFAULT_DIALOG_SIZE);
 		
-		// Get the image size (full size of the original image)
-		Dimension dim = container.getImageSize();
-		
-		// create new dimension with a standardized width of 600 x a scaled height
-		double scale = 600 / dim.getWidth();
-		Dimension sDim = new Dimension(600, (int) (dim.height * scale));
-		
 		// Setup the Dialog
-		setTitle("Create Thumbnail");
+		setTitle("Update Thumbnail");
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout());
 		
-		imagePanel = new PictureEditPanel(this);
+		PictureEditPanel imagePanel = new PictureEditPanel(this);
 		add(imagePanel, BorderLayout.CENTER);
 		
 		// Create button panel
 		EditPictureButtonPanel buttonPanel = new EditPictureButtonPanel(new EditActionListener(this, imagePanel));
 		getContentPane().add(buttonPanel, BorderLayout.NORTH);
+		
+		setModalityType(ModalityType.APPLICATION_MODAL);
 		pack();
 		setVisible(true);
+	}
+	
+	protected ThumbnailPanel thumbnailPanel() {
+		return thumbnailPanel;
 	}
 	
 }

@@ -22,7 +22,7 @@ public final class ImageContainer {
 	
 	private final BufferedImage image;				// Parent Image.
 	private final BufferedImage thumbnail;		// Subset Image of size 100 x 100 (w, h).
-		
+	
 	/**
 	 *  Creates a new immutable container with the primary image, thumbnail and offset of the thumbnail.
 	 */
@@ -85,12 +85,10 @@ public final class ImageContainer {
 		int y = point.y;
 		int width = dimension.width;
 		int height = dimension.height;
-		// first create a scaled instance of the thumbnail to the full size
-		BufferedImage thumb = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		thumb.createGraphics().drawImage(
-				image.getScaledInstance(width, height, BufferedImage.TYPE_INT_RGB), x, y, width, height, null);
+		BufferedImage subImage = image.getSubimage(x, y, width, height);
+		
 		// return a 100 x 100 version
-		return createThumbnail(thumb);
+		return createThumbnail(subImage);
 	}
 
 	/**

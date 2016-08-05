@@ -11,30 +11,30 @@ import java.awt.image.BufferedImage;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+/**
+ * A canvas (jpanel)  used to display an image and croping box to aid in creation of a thumbnail image.
+ */
 public class PictureEditPanel  extends JPanel {
 	private static final long serialVersionUID = -3994207055262982817L;
 	
-	private PictureEditDialog panel;
-	private BufferedImage currentImage;
-	private Dimension currentDimension;
-	private final BufferedImage originalImage;
-	private CropBox cropBox;
-	private Point mouseClickOffset = new Point();
-	private boolean moveCrop;
-	private boolean mousePressed = false;
+	private PictureEditDialog dialog;  					// the dialog that this panel belongs to
+	private BufferedImage currentImage;		// the current image to create a thumbnail from
+	private Dimension currentDimension;		// the current dimension of the image as seen on the screen
+	private CropBox cropBox;								// the shape used to represent the crop box
+	private Point mouseClickOffset = new Point();		// the offset between where the mouse is clicked inside the crop box and the crop box origin.
+	private boolean moveCrop;							// set to true when we want to move the crop box with in this panel.
 
-	public PictureEditPanel(PictureEditDialog panel){
-		this.panel = panel;
-		this.currentImage = panel.imageContainer().cloneImage();
-		this.originalImage = currentImage;
+
+	public PictureEditPanel(PictureEditDialog dialog){
+		this.dialog = dialog;
+		this.currentImage = dialog.thumbnailPanel().imageContainer().cloneImage();
 		currentDimension = new Dimension(currentImage.getWidth(), currentImage.getHeight());
 		cropBox = new CropBox();
-		setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		setBorder(BorderFactory.createLineBorder(Color.PINK));
 		
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				mousePressed = true;
 				if (cropBox.contains(e.getPoint())) {
 					mouseClickOffset.x = e.getX() - cropBox.x;
 					mouseClickOffset.y = e.getY() - cropBox.y;
@@ -42,14 +42,6 @@ public class PictureEditPanel  extends JPanel {
 				} else {
 					moveCrop = false;					
 				}
-			}
-			
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				mousePressed = false;
-				if(moveCrop)
-					moveCrop = false;
 			}
 		});
 		
@@ -75,11 +67,25 @@ public class PictureEditPanel  extends JPanel {
 		});
 	}
 	
-	/**
-	 * Returns true if the mouse is currently being pressed. False otherwise.
-	 */
-	public boolean mousePressed() {
-		return mousePressed;
+	protected void saveThumbnail() {
+
+		ImageContainer currentContainer = new ImageContainer(currentImage, ImageContainer.createThumbnail(currentImage));
+		dialog.thumbnailPanel().updateThumbnail(currentContainer);
+		BufferedImage scaledImage = dialog.thumbnailPanel().imageContainer().getScaledImage(currentDimension);
+		int centerOfThisPanelX = getCenterCoordinate().x;      // also the center of the image
+		int centerOfThisPanelY = getCenterCoordinate().y;      // also the center of the image
+		int centerOfScaledImageX = scaledImage.getWidth() / 2;  // half the distance
+		int centerOfScaledImageY = scaledImage.getHeight() / 2;  // half the distance
+		Point scaledImageOrigin = new Point(centerOfThisPanelX - centerOfScaledImageX, 
+																				centerOfThisPanelY - centerOfScaledImageY);
+		Point cbOffset = new Point(cropBox.x - scaledImageOrigin.x , cropBox.y - scaledImageOrigin.y);
+		Dimension cbDim = new Dimension(cropBox.width, cropBox.height);
+		
+		BufferedImage thumbnail = ImageContainer.createThumbnail(scaledImage, cbOffset, cbDim);		
+		ImageContainer container = new ImageContainer(currentImage, thumbnail);
+		
+		dialog.thumbnailPanel().updateThumbnail(container);
+		dialog.dispose();
 	}
 	
 	protected void moveCropBox(int x, int y) {	
@@ -100,10 +106,10 @@ public class PictureEditPanel  extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		scaleImage();
-		Dimension centerDimension = getCenterCoordinate();
-		int xPos = centerDimension.width - (currentDimension.width / 2);
-		int yPos = centerDimension.height - (currentDimension.height / 2);
+		currentDimension = scaleImageDimensions();
+		Point centerDimension = getCenterCoordinate();
+		int xPos = centerDimension.x - (currentDimension.width / 2);
+		int yPos = centerDimension.y - (currentDimension.height / 2);
 		g.drawImage(currentImage, xPos, yPos, currentDimension.width, currentDimension.height,  null);
 		cropBox.paint(g);
 	}
@@ -111,15 +117,15 @@ public class PictureEditPanel  extends JPanel {
 	/**
 	 *  Returns the center coordinate of this container
 	 */
-	private Dimension getCenterCoordinate() {
-		return new Dimension(getWidth() / 2, getHeight() / 2);
+	private Point getCenterCoordinate() {
+		return new Point(getWidth() / 2, getHeight() / 2);
 	}
 	
 	/**
 	 * Scales the {@code currentImage} based on the dimensions of this container
 	 *   maintaining the aspect ratio of the {@code originalImage}.
 	 */
-	private void scaleImage() {
+	private Dimension scaleImageDimensions() {
 		Dimension targetSize = this.getSize();
 		Dimension currImageSize = new Dimension(currentImage.getWidth(), currentImage.getHeight());
 		Dimension scaledSize = new Dimension();
@@ -133,14 +139,14 @@ public class PictureEditPanel  extends JPanel {
 			scaledSize.height = targetSize.height;
 			scaledSize.width = (scaledSize.height * currImageSize.width) / currImageSize.height;
 		}
-		currentDimension =  scaledSize;
+		return scaledSize;
 	}
 
 	/**
 	 * Rotates the image displayed by the degree amount.
 	 */
 	public void rotateImage(int degree) {	
-		BufferedImage rotated = panel.imageContainer().rotate(currentImage, degree);
+		BufferedImage rotated = dialog.thumbnailPanel().imageContainer().rotate(currentImage, degree);
 		currentImage = rotated;
 		repaint();
 	}

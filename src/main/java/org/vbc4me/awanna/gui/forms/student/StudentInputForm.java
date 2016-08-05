@@ -8,6 +8,8 @@ import javax.swing.JTextField;
 
 import java.awt.Font;
 import net.miginfocom.swing.MigLayout;
+
+import org.vbc4me.awanna.gui.picture.ImageContainer;
 import org.vbc4me.awanna.gui.picture.ThumbnailPanel;
 import org.vbc4me.awanna.gui.actions.picture.AttachPhotoAction;
 
@@ -61,7 +63,7 @@ public class StudentInputForm extends JPanel {
 		lblChild.setFont(new Font("Tahoma", Font.BOLD, 14));
 		add(lblChild, "cell 1 1 5 1,growx,aligny top");
 		
-		childPhotoPanel = new ThumbnailPanel();
+		childPhotoPanel = new ThumbnailPanel("child");
 		childPhotoPanel.setBorder(null);
 		add(childPhotoPanel, "cell 1 2 1 2,grow");
 		
@@ -104,7 +106,7 @@ public class StudentInputForm extends JPanel {
 		
 		JButton btnAddChildPhoto = new JButton("Add Photo");
 		add(btnAddChildPhoto, "cell 15 3,alignx left,aligny top");
-		AttachPhotoAction childPhotoAction = new AttachPhotoAction(this);
+		AttachPhotoAction childPhotoAction = new AttachPhotoAction(childPhotoPanel);
 		btnAddChildPhoto.addActionListener(childPhotoAction);
 		
 		JLabel lblSpecialNeedsallergies = new JLabel("Special Needs/Allergies");
@@ -118,7 +120,7 @@ public class StudentInputForm extends JPanel {
 		lblParentgardian.setFont(new Font("Tahoma", Font.BOLD, 14));
 		add(lblParentgardian, "cell 1 5 2 1,alignx left,aligny top");
 		
-		parentPhotoPanel = new ThumbnailPanel();
+		parentPhotoPanel = new ThumbnailPanel("parent");
 		parentPhotoPanel.setBorder(null);
 		add(parentPhotoPanel, "cell 1 6 1 2,grow");
 		
@@ -145,7 +147,7 @@ public class StudentInputForm extends JPanel {
 		
 		JButton btnAddParentPhoto = new JButton("Add Photo");
 		add(btnAddParentPhoto, "cell 15 7,alignx left,aligny top");
-		AttachPhotoAction parentPhotoAction = new AttachPhotoAction(this);
+		AttachPhotoAction parentPhotoAction = new AttachPhotoAction(parentPhotoPanel);
 		btnAddParentPhoto.addActionListener(parentPhotoAction);
 		
 		JLabel lblCity = new JLabel("City");
@@ -222,7 +224,7 @@ public class StudentInputForm extends JPanel {
 		lblAuthorizedPickup.setFont(new Font("Tahoma", Font.BOLD, 14));
 		add(lblAuthorizedPickup, "cell 1 14 2 1,alignx left,aligny top");
 		
-		auth1PhotoPanel = new ThumbnailPanel();
+		auth1PhotoPanel = new ThumbnailPanel("auth1");
 		auth1PhotoPanel.setBorder(null);
 		add(auth1PhotoPanel, "cell 1 15,grow");
 		
@@ -249,10 +251,10 @@ public class StudentInputForm extends JPanel {
 		
 		JButton btnAddAuth1Photo = new JButton("Add Photo");
 		add(btnAddAuth1Photo, "cell 15 15,alignx left,aligny top");
-		AttachPhotoAction auth1PhotoAction = new AttachPhotoAction(this);
+		AttachPhotoAction auth1PhotoAction = new AttachPhotoAction(auth1PhotoPanel);
 		btnAddAuth1Photo.addActionListener(auth1PhotoAction);
 		
-		auth2PhotoPanel = new ThumbnailPanel();
+		auth2PhotoPanel = new ThumbnailPanel("auth2");
 		auth2PhotoPanel.setBorder(null);
 		add(auth2PhotoPanel, "cell 1 16,grow");
 		
@@ -279,10 +281,10 @@ public class StudentInputForm extends JPanel {
 		
 		JButton btnAddAuth2Photo = new JButton("Add Photo");
 		add(btnAddAuth2Photo, "cell 15 16,alignx left,aligny top");
-		AttachPhotoAction auth2PhotoAction = new AttachPhotoAction(this);
+		AttachPhotoAction auth2PhotoAction = new AttachPhotoAction(auth2PhotoPanel);
 		btnAddAuth2Photo.addActionListener(auth2PhotoAction);
 		
-		auth3PhotoPanel = new ThumbnailPanel();
+		auth3PhotoPanel = new ThumbnailPanel("auth3");
 		auth3PhotoPanel.setBorder(null);
 		add(auth3PhotoPanel, "cell 1 17,grow");
 		
@@ -309,10 +311,10 @@ public class StudentInputForm extends JPanel {
 		
 		JButton btnAddAuth3Photo = new JButton("Add Photo");
 		add(btnAddAuth3Photo, "cell 15 17,alignx left,aligny top");
-		AttachPhotoAction auth3PhotoAction = new AttachPhotoAction(this);
+		AttachPhotoAction auth3PhotoAction = new AttachPhotoAction(auth3PhotoPanel);
 		btnAddAuth3Photo.addActionListener(auth3PhotoAction);
 		
-		auth4PhotoPanel = new ThumbnailPanel();
+		auth4PhotoPanel = new ThumbnailPanel("auth4");
 		auth4PhotoPanel.setBorder(null);
 		add(auth4PhotoPanel, "cell 1 18,grow");
 		
@@ -339,7 +341,36 @@ public class StudentInputForm extends JPanel {
 		
 		JButton btnAddAuth4Photo = new JButton("Add Photo");
 		add(btnAddAuth4Photo, "cell 15 18,alignx left,aligny top");
-		AttachPhotoAction auth4PhotoAction = new AttachPhotoAction(this);
+		AttachPhotoAction auth4PhotoAction = new AttachPhotoAction(auth4PhotoPanel);
 		btnAddAuth4Photo.addActionListener(auth4PhotoAction);
+	}
+	
+	/**
+	 * Attaches the {@link ImageContainer container} which has the selected image and thumbnail
+	 * photos to associate with the input panel name.
+	 */
+	public void attachThumbnail(ImageContainer container, String panelName) {
+		switch(panelName) {
+			case "child":
+				childPhotoPanel.updateThumbnail(container);
+				break;
+			case "parent":
+				parentPhotoPanel.updateThumbnail(container);
+				break;
+			case "auth1":
+				auth1PhotoPanel.updateThumbnail(container);
+				break;
+			case "auth2":
+				auth2PhotoPanel.updateThumbnail(container);
+				break;
+			case "auth3":
+				auth3PhotoPanel.updateThumbnail(container);
+				break;
+			case "auth4":
+				auth4PhotoPanel.updateThumbnail(container);
+				break;
+			default:
+				throw new IllegalArgumentException("Unknown photo panel: " + panelName);
+		}
 	}
 }
