@@ -19,23 +19,30 @@ public class Session {
 	private boolean open = true;
 	
 	/**
-	 * Creates a new session with a start date but without activities associated
-	 * with it. The end date is automatically calculated for 6 months from the
-	 * start date. The end date can be adjusted when necessary.
-	 *
-	 * @param date
-	 *            that this session starts on
+	 * Creates a new session with the given start date. 
+	 * The end date is automatically calculated for 6 months from the
+	 * start date. The end date can be adjusted when necessary. 
+	 * 
+	 * <p>The new session will have no activities associated with it and must be added.
 	 */
 	public Session(LocalDate date) {
-		this.startDate = date;
-		this.endDate = date.plusWeeks(24);
+		this(date, 26);
 	}
 	
 	/**
-	 * Sets the end date of this Session
-	 *
-	 * @param date
-	 *            to set as the ending date
+	 * Creates a new session with the given start date.
+	 * The end date is calculated based on the number of weeks passed in.
+	 * The end date can be adjusted when necessary. 
+	 * 
+	 * <p>The new session will have no activities associated with it and must be added.
+	 */
+	public Session(LocalDate date, int numOfWeeks) {
+		this.startDate = date;
+		this.endDate = date.plusWeeks(numOfWeeks);
+	}
+	
+	/**
+	 * Sets the end date of this Session to a specific date.
 	 */
 	public void endDate(LocalDate date) {
 		checkIfSessionIsOpen();
@@ -85,7 +92,7 @@ public class Session {
 	}
 	
 	/**
-	 *  Returns an activity if one is found on the given date passed. If not an empty object will be returned
+	 *  Returns an activity if one is found on the date specified. If not an empty object will be returned
 	 */
 	public Optional<Activity> getActivity(LocalDate date) {
 		if (activities.get(date) != null) {
@@ -97,7 +104,11 @@ public class Session {
 	/**
 	 * Checks if this session is still open. This will return nothing if this
 	 * session is open but conversely will throw an {@link IllegalAccessError}
-	 * if it has been closed.
+	 * if it has been closed. This is here in an attempt to keep someone from performing
+	 * operations on an already closed session and it is left to the programmer to control
+	 * the program flow in order to avoid this from being called after a session has been closed.
+	 * the {@link #sessionIsOpen()} method should be called in order to avoid this from being
+	 * thrown.
 	 */
 	private void checkIfSessionIsOpen() {
 		if (!open) {
@@ -118,7 +129,7 @@ public class Session {
 	 * it has been closed.
 	 */
 	public void closeSession() {
-		this.open = false;
+		open = false;
 	}
 	
 	/**
@@ -126,8 +137,8 @@ public class Session {
 	 * rare circumstances that require addition information to be added. Add
 	 * data in an open session is logged for backup purposes.
 	 */
-	public void reopenSession() {
-		this.open = true;
+	protected void reopenSession() {
+		open = true;
 	}
 	
 }
