@@ -2,6 +2,8 @@ package org.vbc4me.awanna.account;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -16,10 +18,32 @@ public class Activity {
 	private final String activity;
 	private final double cost;
 
+	/** 
+	 * Returns an  Activity builder to aid in the creation of a new {@link Activity}.
+	 */
 	public static Builder build() {
 		return new Builder();
 	}
 
+	/**
+	 * Return a Sessions worth of {@link Activity activities} based on the start date and number of weeks,
+	 *  specific time (which is applied to all activities) and cost (which is applied to all activities). Weeks are automatically
+	 *  incremented.
+	 */
+	public static Map<LocalDate, Activity>createActivities(LocalDate date, double numberOfWeeks, LocalTime time, double cost) {
+		Map<LocalDate, Activity> activities = new HashMap<>();
+		for(int week = 0; week < numberOfWeeks; week++) {
+			Activity activity = Activity.build()
+															.date(date.plusWeeks(week))
+															.time(time)
+															.activity("Activity " + week)
+															.cost(cost)
+															.create();
+			activities.put(activity.date(),activity);
+		}
+		return activities;
+	}
+	
 	private Activity(Builder builder) {
 		this.date = builder.date;
 		this.time = builder.time;
