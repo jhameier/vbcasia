@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Represents a yearly set of activities associated with the Awanna program and
+ * Represents a yearly set of activities associated with an organization's program and
  * contains information such as session (start and end dates + activities), student and staffing information
  */
 public final class Season {
