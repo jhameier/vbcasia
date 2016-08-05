@@ -18,13 +18,20 @@ public class Account {
 	}
 
 	/**
-	 * Inserts a transaction into this account;
-	 * 
-	 * @param transaction
-	 *            to insert
+	 * Inserts a {@link Transaction} into this account; The amount from this transaction is added or subtracted 
+	 * from this {@link Account accounts} balance depending on the type of {@code transaction} this is.
 	 */
 	public void insertTransaction(Transaction transaction) {
 		this.transactions.put(transaction.activity().date(), transaction);
+		switch (transaction.type()) {
+			case "debit":
+				add(transaction.amount());
+				break;
+			case "credit":
+				subtract(transaction.amount());
+				break;
+			default: throw new IllegalArgumentException("Unknown transaction type: " + transaction.type());
+		}
 	}
 
 	/**
