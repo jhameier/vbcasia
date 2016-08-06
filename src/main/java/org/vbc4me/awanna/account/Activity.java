@@ -32,7 +32,7 @@ public class Activity {
 	 *  incremented.
 	 */
 	public static Map<LocalDate, Activity>createActivities(
-																									LocalDate date, double numberOfWeeks, LocalTime time, BigDecimal cost) {
+																									LocalDate date, double numberOfWeeks, LocalTime time, double cost) {
 		Map<LocalDate, Activity> activities = new HashMap<>();
 		for(int week = 0; week < numberOfWeeks; week++) {
 			Activity activity = Activity.build()
@@ -136,8 +136,8 @@ public class Activity {
 			return this;
 		}
 
-		public Builder cost(BigDecimal cost) {
-			this.cost = cost;
+		public Builder cost(double cost) {
+			this.cost = new BigDecimal(cost).setScale(2, BigDecimal.ROUND_HALF_UP);
 			return this;
 		}
 

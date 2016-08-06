@@ -86,7 +86,7 @@ public class Session {
 	 * @param date  of this activity
 	 * @param activity for members to participate in
 	 */
-	public void addActivity(LocalDate date, LocalTime time, String activity, BigDecimal cost) {
+	public void addActivity(LocalDate date, LocalTime time, String activity, double cost) {
 		checkIfSessionIsOpen();
 		Activity act = Activity.build().date(date).time(time).activity(activity).cost(cost).create();
 		activities.put(act.date(), act);
