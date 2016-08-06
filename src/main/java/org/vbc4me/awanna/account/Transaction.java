@@ -11,17 +11,15 @@ public class Transaction {
 	}
 	
 	private TYPE type;
-	private double amount;
 	private Activity activity;
 	
-	public Transaction(Transaction.TYPE type, double amount, Activity activity) {
+	public Transaction(Transaction.TYPE type, Activity activity) {
 		this.type = type;
-		this.amount = amount;
 		this.activity = activity;
 	}
 	
 	/**
-	 * Returns the type of transaction this is (Credit or Debit)
+	 * Returns the type of transaction this is (CREDIT or DEBIT)
 	 */
 	public String type() {
 		return type.toString();
@@ -31,7 +29,7 @@ public class Transaction {
 	 * Returns the amount of this transaction
 	 */
 	public double amount() {
-		return amount;
+		return activity.cost();
 	}
 	
 	/**

@@ -76,10 +76,8 @@ public class StudentFileReader extends DefaultHandler {
 
         account.adjustBalance(Double.valueOf(acct.getAttributeValue("balance")));
 
-
         List<Element> transactions = acct.getChildren();
         for(Element trans : transactions) {
-          // Get activity info (date, time,
           Element act = trans.getChild("activity");
 
           LocalDate date = LocalDate.parse(act.getAttributeValue("date"));
@@ -88,9 +86,8 @@ public class StudentFileReader extends DefaultHandler {
           Activity activity = Activity.build().date(date).time(time).activity(actName).cost(0.50).create();
 
           Transaction.TYPE type = Transaction.TYPE.valueOf(trans.getAttributeValue("type"));
-          double amount = Double.valueOf(trans.getAttributeValue("amount"));
 
-          Transaction transaction = new Transaction(type, amount,activity);
+          Transaction transaction = new Transaction(type, activity);
           st.account().insertTransaction(transaction);
         }
 

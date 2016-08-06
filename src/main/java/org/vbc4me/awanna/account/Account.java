@@ -2,6 +2,7 @@ package org.vbc4me.awanna.account;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ import java.util.Map;
  */
 public class Account {
 
-	private Double balance;
+	private double balance;
 	private Map<LocalDate, Transaction> transactions = new HashMap<>();
 
 	public Account() {
@@ -24,10 +25,10 @@ public class Account {
 	public void insertTransaction(Transaction transaction) {
 		this.transactions.put(transaction.activity().date(), transaction);
 		switch (transaction.type()) {
-			case "debit":
+			case "DEBIT":
 				add(transaction.amount());
 				break;
-			case "credit":
+			case "CREDIT":
 				subtract(transaction.amount());
 				break;
 			default: throw new IllegalArgumentException("Unknown transaction type: " + transaction.type());
