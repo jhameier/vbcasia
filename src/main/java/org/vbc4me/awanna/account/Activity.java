@@ -1,5 +1,6 @@
 package org.vbc4me.awanna.account;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
@@ -16,7 +17,7 @@ public class Activity {
 	private final LocalDate date;
 	private final LocalTime time;
 	private final String activity;
-	private final double cost;
+	private final BigDecimal cost;
 
 	/** 
 	 * Returns an  Activity builder to aid in the creation of a new {@link Activity}.
@@ -30,7 +31,8 @@ public class Activity {
 	 *  specific time (which is applied to all activities) and cost (which is applied to all activities). Weeks are automatically
 	 *  incremented.
 	 */
-	public static Map<LocalDate, Activity>createActivities(LocalDate date, double numberOfWeeks, LocalTime time, double cost) {
+	public static Map<LocalDate, Activity>createActivities(
+																									LocalDate date, double numberOfWeeks, LocalTime time, BigDecimal cost) {
 		Map<LocalDate, Activity> activities = new HashMap<>();
 		for(int week = 0; week < numberOfWeeks; week++) {
 			Activity activity = Activity.build()
@@ -75,7 +77,7 @@ public class Activity {
 	/**
 	 * Returns the cost of this activity
 	 */
-	public double cost() {
+	public BigDecimal cost() {
 		return cost;
 	}
 
@@ -97,7 +99,7 @@ public class Activity {
 
 		Activity activity = (Activity) obj;
 
-		return Double.compare(activity.cost, cost) == 0 && date.equals(activity.date) && time.equals(activity.time)
+		return cost.equals(activity.cost) && date.equals(activity.date) && time.equals(activity.time)
 				&& this.activity.equals(activity.activity);
 	}
 
@@ -108,7 +110,7 @@ public class Activity {
 		result = date.hashCode();
 		result = 31 * result + time.hashCode();
 		result = 31 * result + activity.hashCode();
-		temp = Double.doubleToLongBits(cost);
+		temp = 31 + result + cost.hashCode();
 		result = 31 * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
@@ -117,7 +119,7 @@ public class Activity {
 		private LocalDate date;
 		private LocalTime time;
 		private String activity;
-		private double cost;
+		private BigDecimal cost;
 
 		public Builder date(LocalDate date) {
 			this.date = date;
@@ -134,7 +136,7 @@ public class Activity {
 			return this;
 		}
 
-		public Builder cost(double cost) {
+		public Builder cost(BigDecimal cost) {
 			this.cost = cost;
 			return this;
 		}

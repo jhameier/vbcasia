@@ -1,6 +1,7 @@
 package org.vbc4me.awanna.utility.readers;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ public class StudentFileReader extends DefaultHandler {
 
         Element acct = student.getChild("account");
 
-        account.adjustBalance(Double.valueOf(acct.getAttributeValue("balance")));
+        account.adjustBalance(new BigDecimal(acct.getAttributeValue("balance")));
 
         List<Element> transactions = acct.getChildren();
         for(Element trans : transactions) {
@@ -83,7 +84,7 @@ public class StudentFileReader extends DefaultHandler {
           LocalDate date = LocalDate.parse(act.getAttributeValue("date"));
           LocalTime time = LocalTime.parse(act.getAttributeValue("time"));
           String actName = act.getText();
-          Activity activity = Activity.build().date(date).time(time).activity(actName).cost(0.50).create();
+          Activity activity = Activity.build().date(date).time(time).activity(actName).cost(new BigDecimal(0.50)).create();
 
           Transaction.TYPE type = Transaction.TYPE.valueOf(trans.getAttributeValue("type"));
 

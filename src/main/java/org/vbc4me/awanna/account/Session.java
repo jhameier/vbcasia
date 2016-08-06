@@ -1,5 +1,6 @@
 package org.vbc4me.awanna.account;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -85,7 +86,7 @@ public class Session {
 	 * @param date  of this activity
 	 * @param activity for members to participate in
 	 */
-	public void addActivity(LocalDate date, LocalTime time, String activity, double cost) {
+	public void addActivity(LocalDate date, LocalTime time, String activity, BigDecimal cost) {
 		checkIfSessionIsOpen();
 		Activity act = Activity.build().date(date).time(time).activity(activity).cost(cost).create();
 		activities.put(act.date(), act);

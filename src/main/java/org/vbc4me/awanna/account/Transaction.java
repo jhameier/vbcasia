@@ -1,5 +1,7 @@
 package org.vbc4me.awanna.account;
 
+import java.math.BigDecimal;
+
 /**
  * A class to represent a single transaction where money is received or credited
  * to an account.
@@ -28,7 +30,7 @@ public class Transaction {
 	/**
 	 * Returns the amount of this transaction
 	 */
-	public double amount() {
+	public BigDecimal amount() {
 		return activity.cost();
 	}
 	
