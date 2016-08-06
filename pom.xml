@@ -21,13 +21,11 @@
 		</plugins>
 	</build>
 	<repositories>
-	    
 		<repository>
 			<id>basex</id>
 			<name>BaseX Maven Repository</name>
 			<url>http://files.basex.org/maven</url>
 		</repository>
-		 
 	</repositories>
 	<dependencies>
 		 <dependency> <groupId>org.apache.derby</groupId> <artifactId>derby</artifactId> 
@@ -49,5 +47,10 @@
 			<artifactId>jdom2</artifactId>
 			<version>2.0.6</version>
 		</dependency>
+		<dependency>
+	        <groupId>org.joda</groupId>
+	        <artifactId>joda-money</artifactId>
+	        <version>0.11</version>
+	    </dependency>
 	</dependencies>
 </project>
