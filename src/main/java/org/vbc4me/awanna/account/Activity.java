@@ -16,7 +16,7 @@ import java.util.Objects;
 public class Activity {
 	private final LocalDate date;
 	private final LocalTime time;
-	private final String activity;
+	private final String name;
 	private final BigDecimal cost;
 
 	/** 
@@ -31,14 +31,13 @@ public class Activity {
 	 *  specific time (which is applied to all activities) and cost (which is applied to all activities). Weeks are automatically
 	 *  incremented.
 	 */
-	public static Map<LocalDate, Activity>createActivities(
-																									LocalDate date, double numberOfWeeks, LocalTime time, double cost) {
+	public static Map<LocalDate, Activity>createActivities(LocalDate date, double numberOfWeeks, LocalTime time, double cost) {
 		Map<LocalDate, Activity> activities = new HashMap<>();
 		for(int week = 0; week < numberOfWeeks; week++) {
 			Activity activity = Activity.build()
 															.date(date.plusWeeks(week))
 															.time(time)
-															.activity("Activity " + week)
+															.name("Activity " + week)
 															.cost(cost)
 															.create();
 			activities.put(activity.date(),activity);
@@ -49,7 +48,7 @@ public class Activity {
 	private Activity(Builder builder) {
 		this.date = builder.date;
 		this.time = builder.time;
-		this.activity = builder.activity;
+		this.name = builder.name;
 		this.cost = builder.cost;
 	}
 
@@ -70,8 +69,8 @@ public class Activity {
 	/**
 	 * Return the name of this activity.
 	 */
-	public String activity() {
-		return activity;
+	public String name() {
+		return name;
 	}
 
 	/**
@@ -100,7 +99,7 @@ public class Activity {
 		Activity activity = (Activity) obj;
 
 		return cost.equals(activity.cost) && date.equals(activity.date) && time.equals(activity.time)
-				&& this.activity.equals(activity.activity);
+				&& this.name.equals(activity.name);
 	}
 
 	@Override
@@ -109,7 +108,7 @@ public class Activity {
 		long temp;
 		result = date.hashCode();
 		result = 31 * result + time.hashCode();
-		result = 31 * result + activity.hashCode();
+		result = 31 * result + name.hashCode();
 		temp = 31 + result + cost.hashCode();
 		result = 31 * result + (int) (temp ^ (temp >>> 32));
 		return result;
@@ -118,7 +117,7 @@ public class Activity {
 	public static class Builder {
 		private LocalDate date;
 		private LocalTime time;
-		private String activity;
+		private String name;
 		private BigDecimal cost;
 
 		public Builder date(LocalDate date) {
@@ -131,8 +130,8 @@ public class Activity {
 			return this;
 		}
 
-		public Builder activity(String name) {
-			this.activity = name;
+		public Builder name(String name) {
+			this.name = name;
 			return this;
 		}
 
@@ -144,7 +143,7 @@ public class Activity {
 		public Activity create() {
 			Objects.requireNonNull(date);
 			Objects.requireNonNull(time);
-			Objects.requireNonNull(activity);
+			Objects.requireNonNull(name);
 			Objects.requireNonNull(cost);
 			return new Activity(this);
 		}

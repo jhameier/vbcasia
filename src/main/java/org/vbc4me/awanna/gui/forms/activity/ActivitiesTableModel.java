@@ -36,7 +36,7 @@ public class ActivitiesTableModel extends AbstractTableModel {
       case TIME:
         return activity.time();
       case ACTIVITY:
-        return activity.activity();
+        return activity.name();
     }
     return null;
   }

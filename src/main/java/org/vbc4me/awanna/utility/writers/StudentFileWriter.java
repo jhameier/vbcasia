@@ -186,7 +186,7 @@ public final class StudentFileWriter {
 			Element activity = new Element("activity");
 			activity.setAttribute("date", t.activity().date().toString());
 			activity.setAttribute("time", t.activity().time().toString());
-			activity.addContent(t.activity().activity());
+			activity.addContent(t.activity().name());
 			tr.addContent(activity);
 			trans.addContent(tr);
 		}

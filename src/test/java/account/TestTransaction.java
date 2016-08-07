@@ -20,7 +20,7 @@ public class TestTransaction {
 	 */
 	@Test
 	public void TestDebitTransaction() {
-		Activity debitActivity = Activity.build().activity("Debit").cost(1.52).date(date).time(time).create();
+		Activity debitActivity = Activity.build().name("Debit").cost(1.52).date(date).time(time).create();
 		Transaction transaction = new Transaction(Transaction.TYPE.DEBIT, debitActivity);
 		Assert.assertEquals(Transaction.TYPE.DEBIT.name(), transaction.type());
 	}
@@ -30,7 +30,7 @@ public class TestTransaction {
 	 */
 	@Test
 	public void TestCreditTransaction() {
-		Activity creditActivity = Activity.build().activity("Credit").cost(6.95).date(date).time(time).create();
+		Activity creditActivity = Activity.build().name("Credit").cost(6.95).date(date).time(time).create();
 		Transaction transaction = new Transaction(Transaction.TYPE.CREDIT, creditActivity);
 		Assert.assertEquals(Transaction.TYPE.CREDIT.name(), transaction.type());
 	}
@@ -40,7 +40,7 @@ public class TestTransaction {
 	 */
 	@Test
 	public void TestTransactionActivity() {
-		Activity activity = Activity.build().activity("Debit").cost(16.84).date(date).time(time).create();
+		Activity activity = Activity.build().name("Debit").cost(16.84).date(date).time(time).create();
 		Transaction transaction = new Transaction(Transaction.TYPE.DEBIT, activity);
 		Assert.assertEquals(activity, transaction.activity());
 		Assert.assertEquals(activity.cost(), transaction.activity().cost());
