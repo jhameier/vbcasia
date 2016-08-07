@@ -1,6 +1,5 @@
 package org.vbc4me.awanna.account;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
