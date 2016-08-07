@@ -86,7 +86,7 @@ public class Activity {
 	 */
 	@Override
 	public Activity clone() throws CloneNotSupportedException {
-		return (Activity) super.clone();
+		return Activity.build().name(name).cost(cost.doubleValue()).date(date).time(time).create();
 	}
 
 	@Override
