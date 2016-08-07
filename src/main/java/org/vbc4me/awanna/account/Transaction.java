@@ -24,7 +24,7 @@ public class Transaction {
 	 * Returns the type of transaction this is (CREDIT or DEBIT)
 	 */
 	public String type() {
-		return type.toString();
+		return type.name();
 	}
 	
 	/**
