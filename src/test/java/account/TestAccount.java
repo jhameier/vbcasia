@@ -73,13 +73,13 @@ public class TestAccount {
 		Assert.assertEquals(amount(5.00), account.balance());
 		
 		Activity activity1 = 
-										Activity.build().activity("Debit").cost(amount(1.51)).date(LocalDate.now()).time(LocalTime.now()).create();
+										Activity.build().activity("Debit").cost(1.51).date(LocalDate.now()).time(LocalTime.now()).create();
 		Transaction debit_transaction = new Transaction(Transaction.TYPE.DEBIT, activity1);
 		account.insertTransaction(debit_transaction);
 		Assert.assertEquals(amount(3.49), account.balance());
 				
 		Activity activity2 = 
-										 Activity.build().activity("Credit").cost(amount(1.25)).date(LocalDate.now()).time(LocalTime.now()).create();
+										 Activity.build().activity("Credit").cost(1.25).date(LocalDate.now()).time(LocalTime.now()).create();
 		Transaction credit_transaction = new Transaction(Transaction.TYPE.CREDIT, activity2);
 		account.insertTransaction(credit_transaction);
 		Assert.assertEquals(amount(4.74), account.balance());
