@@ -3,9 +3,9 @@ package org.vbc4me.awanna.account;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * An activity is an event that is planned for participation of a student and
@@ -27,12 +27,16 @@ public class Activity {
 	}
 
 	/**
-	 * Return a Sessions worth of {@link Activity activities} based on the start date and number of weeks,
+	 * Return a Sessions worth of {@link Activity activities} sorted by the start date and containing the number of weeks,
 	 *  specific time (which is applied to all activities) and cost (which is applied to all activities). Weeks are automatically
 	 *  incremented.
 	 */
-	public static Map<LocalDate, Activity>createActivities(LocalDate date, double numberOfWeeks, LocalTime time, double cost) {
-		Map<LocalDate, Activity> activities = new HashMap<>();
+	public static SortedMap<LocalDate, Activity>createActivities(LocalDate date, double numberOfWeeks, LocalTime time, double cost) {
+		Objects.requireNonNull(date);
+		Objects.requireNonNull(numberOfWeeks);
+		Objects.requireNonNull(time);
+		Objects.requireNonNull(cost);
+		SortedMap<LocalDate, Activity> activities = new TreeMap<>();
 		for(int week = 0; week < numberOfWeeks; week++) {
 			Activity activity = Activity.build()
 															.date(date.plusWeeks(week))
