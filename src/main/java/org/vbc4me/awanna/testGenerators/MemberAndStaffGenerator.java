@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.vbc4me.awanna.account.Club;
 import org.vbc4me.awanna.account.Season;
 import org.vbc4me.awanna.account.Staff;
 import org.vbc4me.awanna.account.Student;
@@ -89,7 +90,7 @@ public final class MemberAndStaffGenerator {
 					.city(addr[1].trim()).state(addr[2].trim()).zip(addr[3].trim()).phoneNumber("home", addr[5].trim())
 					.phoneNumber("cell", cell.trim()).email(email).specialNeeds(specialNeed(random))
 					.emergencyContactName(ecname[0] + " " + ecname[1]).emergencyContactNumber("cell", ecPhone)
-					.title("Some Title").club("A Club Name").photo(null).done();
+					.title("Some Title").club(Club.CUBBIES).photo(null).done();
 			Season.addStaff(staff);
 		}
 		

@@ -106,8 +106,8 @@ public final class StudentFileWriter {
 		element.addContent(new Element("dob").addContent(student.childDOB().toString()));
 		element.addContent(new Element("special-needs").addContent(student.specialNeeds()));
 		element.addContent(new Element("club").addContent(student.currentClub()));
-		element.addContent(new Element("photo").addContent(student.childPhoto().toString())); // FIXME
-																							  // Photo.toString()
+		element.addContent(new Element("photo").addContent(student.childPhoto().toString())); 
+		// FIXME Photo.toString()
 		
 		/* Set up Parent portion of record */
 		Element parent = new Element("parent");
@@ -133,8 +133,8 @@ public final class StudentFileWriter {
 		
 		// Email
 		parent.addContent(new Element("email-address").addContent(student.email()));
-		parent.addContent(new Element("photo").addContent(student.parentPhoto().toString())); // FIXME
-																							  // Photo.toString()
+		parent.addContent(new Element("photo").addContent(student.parentPhoto().toString())); 
+		// FIXME Photo.toString()
 		
 		// add parent info to student element
 		element.addContent(parent);
@@ -166,8 +166,8 @@ public final class StudentFileWriter {
 			auth.addContent(new Element("first").addContent(pu.firstName()));
 			auth.addContent(new Element("last").addContent(pu.lastName()));
 			auth.addContent(new Element("relationship").addContent(pu.relationship()));
-			auth.addContent(new Element("photo").addContent(pu.photo().toString())); // FIXME
-																					 // Photo.toString()
+			auth.addContent(new Element("photo").addContent(pu.photo().toString())); 
+			// FIXME Photo.toString()
 			
 			pickup.addContent(auth);
 		}
