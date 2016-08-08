@@ -27,11 +27,6 @@ public class PhoneNumber {
 		Objects.requireNonNull(type, "Phone Type can not be empty");
 		Objects.requireNonNull(number, "Phone Number can not be empty");
 
-		if (number.contains(" ") || number.contains("(") || number.contains(")") || number.contains("-")) {
-			throw new IllegalArgumentException(
-					"The number should not conatin special characters such as '(', ')', '-',  or blank spaces.");
-		}
-
 		if (number.length() < 10) {
 			throw new IllegalArgumentException(
 					"There are not enough digits in the phone number. It should be 10 digits long.");
