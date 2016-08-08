@@ -24,7 +24,7 @@ public class Staff {
 	private String specialNeeds;
 	private String emergencyContactName;
 	private PhoneNumber emergencyContactPhone;
-	private String assignedClub;
+	private Club assignedClub;
 	private String title;
 	
 	/**
@@ -56,7 +56,7 @@ public class Staff {
 	 * Returns the staff members currently assigned club (may be empty)
 	 */
 	public String assignedClub() {
-		return assignedClub;
+		return assignedClub.getName();
 	}
 	
 	/**
@@ -287,7 +287,7 @@ public class Staff {
 	public static class Builder {
 		
 		private String title;
-		private String club;
+		private Club club;
 		private String firstName;
 		private String lastName;
 		private String address;
@@ -319,7 +319,7 @@ public class Staff {
 			return this;
 		}
 		
-		public Builder club(String club) {
+		public Builder club(Club club) {
 			this.club = club;
 			return this;
 		}
