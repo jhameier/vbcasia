@@ -1,6 +1,7 @@
 package org.vbc4me.awanna.account;
 
 import java.text.ParseException;
+import java.util.List;
 import java.util.Objects;
 
 import javax.swing.text.MaskFormatter;
@@ -65,8 +66,22 @@ public class PhoneNumber {
 		return number;
 	}
 
+	/**
+	 * Returns a {@link String} with the type and phone number 
+	 * for use in displaying a well formated output in the form of:
+	 * 
+	 * <p> Number Type : (123) 456-7890
+	 */
 	public String toString() {
 		return type + ": " + formatPhoneNumber(number);
+	}
+	
+	public static boolean contains(List<PhoneNumber> numbers, PhoneNumber number) {
+		for (PhoneNumber num : numbers) {
+			if(num.equals(number))
+				return true;
+		}
+		return false;
 	}
 
 	private String formatPhoneNumber(String number) {
