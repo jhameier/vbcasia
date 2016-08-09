@@ -1,21 +1,24 @@
 package org.vbc4me.awanna.account;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
 
 /**
  *  Holds information about a students financial info such as transactions and balanced owed.
  */
 public class Account {
 
-	private BigDecimal balance;
-	private Map<LocalDate, Transaction> transactions = new HashMap<>();
+	private Money balance;
+	private final CurrencyUnit USD = CurrencyUnit.of("USD");
+	private final Map<LocalDate, Transaction> transactions = new HashMap<>();
 
 	public Account() {
-		this.balance = new BigDecimal(0.00).setScale(2, BigDecimal.ROUND_HALF_UP);
+		this.balance = Money.zero(USD);
 	}
 
 	/**
@@ -47,30 +50,28 @@ public class Account {
 	/**
 	 * Adds the <tt>amount</tt> to this <tt>accountBalance</tt>.
 	 */
-	public void add(BigDecimal amount) {
-		balance = balance.add(amount);
-		balance.setScale(2, BigDecimal.ROUND_HALF_UP);
+	public void add(Money amount) {
+		balance = balance.plus(amount);
 	}
 
 	/**
 	 * Subtracts the <tt>amount</tt> from this <tt>accountBalance</tt>.
 	 */
-	public void subtract(BigDecimal amount) {
-		balance = balance.subtract(amount);
-		balance.setScale(2, BigDecimal.ROUND_HALF_UP);
+	public void subtract(Money amount) {
+		balance = balance.minus(amount);
 	}
 
 	/**
 	 * Set the account <tt>balance</tt> to an exact amount.
 	 */
-	public void adjustBalance(BigDecimal amount) {
-		balance = amount.setScale(2, BigDecimal.ROUND_HALF_UP);
+	public void adjustBalance(Money amount) {
+		balance = amount;
 	}
 
 	/**
  	*  Returns this accounts balance
 	 */
-	public BigDecimal balance() {
+	public Money balance() {
 		return balance;
 	}
 

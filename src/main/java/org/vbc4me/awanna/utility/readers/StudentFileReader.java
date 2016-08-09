@@ -1,7 +1,6 @@
 package org.vbc4me.awanna.utility.readers;
 
 import java.io.File;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -10,6 +9,8 @@ import java.util.List;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
 import org.vbc4me.awanna.account.Account;
 import org.vbc4me.awanna.account.Activity;
 import org.vbc4me.awanna.account.Club;
@@ -75,7 +76,7 @@ public class StudentFileReader extends DefaultHandler {
 
         Element acct = student.getChild("account");
 
-        account.adjustBalance(new BigDecimal(acct.getAttributeValue("balance")));
+        account.adjustBalance(Money.of(CurrencyUnit.USD, Double.parseDouble(acct.getAttributeValue("balance"))));
 
         List<Element> transactions = acct.getChildren();
         for(Element trans : transactions) {

@@ -1,11 +1,13 @@
 package org.vbc4me.awanna.account;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 import java.util.SortedMap;
 import java.util.TreeMap;
+
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
 
 /**
  * An activity is an event that is planned for participation of a student and
@@ -17,7 +19,7 @@ public class Activity {
 	private final LocalDate date;
 	private final LocalTime time;
 	private final String name;
-	private final BigDecimal cost;
+	private final Money cost;
 
 	/** 
 	 * Returns an  Activity builder to aid in the creation of a new {@link Activity}.
@@ -80,7 +82,7 @@ public class Activity {
 	/**
 	 * Returns the cost of this activity
 	 */
-	public BigDecimal cost() {
+	public Money cost() {
 		return cost;
 	}
 
@@ -90,7 +92,7 @@ public class Activity {
 	 */
 	@Override
 	public Activity clone() throws CloneNotSupportedException {
-		return Activity.build().name(name).cost(cost.doubleValue()).date(date).time(time).create();
+		return Activity.build().name(name).cost(cost).date(date).time(time).create();
 	}
 
 	@Override
@@ -122,11 +124,16 @@ public class Activity {
 		private LocalDate date;
 		private LocalTime time;
 		private String name;
-		private BigDecimal cost;
+		private Money cost;
 
 		public Builder date(LocalDate date) {
 			this.date = date;
 			return this;
+		}
+
+		public Builder cost(Money cost2) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 
 		public Builder time(LocalTime time) {
@@ -140,7 +147,7 @@ public class Activity {
 		}
 
 		public Builder cost(double cost) {
-			this.cost = new BigDecimal(cost).setScale(2, BigDecimal.ROUND_HALF_UP);
+			this.cost = Money.of(CurrencyUnit.USD, cost);
 			return this;
 		}
 

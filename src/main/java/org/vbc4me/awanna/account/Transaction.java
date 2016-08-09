@@ -1,6 +1,6 @@
 package org.vbc4me.awanna.account;
 
-import java.math.BigDecimal;
+import org.joda.money.Money;
 
 /**
  * A class to represent a single transaction where money is received or credited
@@ -30,7 +30,7 @@ public class Transaction {
 	/**
 	 * Returns the amount of this transaction
 	 */
-	public BigDecimal amount() {
+	public Money amount() {
 		return activity.cost();
 	}
 	
