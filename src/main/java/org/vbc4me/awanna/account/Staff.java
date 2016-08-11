@@ -21,7 +21,8 @@ public class Staff {
 	private List<PhoneNumber> phoneNumbers;
 	private String email;
 	private BufferedImage photo;
-	private String specialNeeds;
+	private BufferedImage thumbnail;
+	private String specialNeeds = "";
 	private String emergencyContactName;
 	private PhoneNumber emergencyContactPhone;
 	private Club assignedClub;
@@ -41,8 +42,18 @@ public class Staff {
 		return id.toString();
 	}
 	
+	/**
+	 * Returns the type of record this is (staff).
+	 */
 	public String type() {
 		return recordType;
+	}
+	
+	/**
+	 *  Sets the title of this {@link Staff} memeber.
+	 */
+	public void title(String title) {
+		this.title = title;
 	}
 	
 	/**
@@ -143,6 +154,13 @@ public class Staff {
 	}
 	
 	/**
+	 * Sets the zip code of this {@link Staff}  member.
+	 */
+	public void zip(String zipcode) {
+		this.zip = zipcode;
+	}
+	
+	/**
 	 * Returns the staff members list of phone numbers
 	 */
 	public List<PhoneNumber> phoneNumbers() {
@@ -224,12 +242,13 @@ public class Staff {
 	
 	/**
 	 * Adds a special need to this staff members special need listing.
-	 *
-	 * @param need
-	 *            of the member
 	 */
 	public void addSpecialNeed(String need) {
-		specialNeeds += ", " + need;
+		if(specialNeeds != null) {
+			specialNeeds += ", " + need;
+		} else {
+			specialNeeds = need;
+		}
 	}
 	
 	/**
@@ -250,21 +269,36 @@ public class Staff {
 	}
 	
 	/**
-	 * Returns the path to this staff members photo
+	 * Returns the photo of this staff member.
 	 */
 	public BufferedImage photo() {
 		return photo;
 	}
 	
 	/**
-	 * Adds a path to a photo to this staff members record.
-	 *
-	 * @param photo path to add
+	 * Adds a photo to this staff members record.
 	 */
-	public void photo(BufferedImage photo) {
-		this.photo = photo;
+	public void photo(BufferedImage image) {
+		this.photo = image;
 	}
 	
+	/**
+	 * Returns the thumbnail photo of this staff member.
+	 */
+	public BufferedImage thumbnail() {
+		return thumbnail;
+	}
+	
+	/**
+	 * Adds a thumbnail photo of this staff member.
+	 */
+	public void thumbnail(BufferedImage image) {
+		this.thumbnail = image;
+	}
+	
+	/**
+	 * Constructs a new {@link Staff} object.
+	 */
 	private Staff(Builder builder) {
 		this.recordType = "staff";
 		this.title = builder.title;
@@ -279,6 +313,7 @@ public class Staff {
 		this.specialNeeds = builder.specialNeeds;
 		this.email = builder.email;
 		this.photo = builder.photo;
+		this.thumbnail = builder.thumbnail;
 		this.emergencyContactName = builder.emerContactName;
 		this.emergencyContactPhone = builder.emerContactNumber;
 		this.id = UUID.randomUUID();
@@ -298,6 +333,7 @@ public class Staff {
 		private String specialNeeds;
 		private String email;
 		private BufferedImage photo;
+		private BufferedImage thumbnail;
 		private String emerContactName;
 		private PhoneNumber emerContactNumber;
 		
@@ -362,6 +398,11 @@ public class Staff {
 		
 		public Builder photo(BufferedImage photo) {
 			this.photo = photo;
+			return this;
+		}
+		
+		public Builder thumbnail(BufferedImage thumbnail) {
+			this.thumbnail = thumbnail;
 			return this;
 		}
 		
