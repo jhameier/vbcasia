@@ -89,6 +89,17 @@ public class Pickup {
 		
 		public Builder thumbnail(BufferedImage thumbnail) {
 			this.thumbnail = thumbnail;
+<<<<<<< Upstream, based on origin/master
+=======
+			return this;
+		}
+		
+		public Builder thumbnailPath(String filepath) throws FileNotFoundException {
+			Path path = Paths.get(filepath);
+			if(!Files.exists(path))
+				throw new FileNotFoundException("The file path " + path + " was not found.");
+			this.thumbnailPath = path;
+>>>>>>> e67927a Correct spelling mistake in method call
 			return this;
 		}
 		
