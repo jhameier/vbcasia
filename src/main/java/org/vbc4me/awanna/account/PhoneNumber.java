@@ -78,9 +78,16 @@ public class PhoneNumber {
 	
 	public static boolean contains(List<PhoneNumber> numbers, PhoneNumber number) {
 		for (PhoneNumber num : numbers) {
-			if(num.equals(number))
+			if(num.number.equals(number.number))
 				return true;
 		}
+		return false;
+	}
+
+	public boolean isEqualTo(PhoneNumber phoneNumber) {
+		if((this.number.equals(phoneNumber.number)))
+			return true;
+		
 		return false;
 	}
 
@@ -95,5 +102,6 @@ public class PhoneNumber {
 		}
 
 	}
+
 
 }
