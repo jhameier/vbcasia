@@ -2,7 +2,7 @@ package org.vbc4me.awanna.account;
 
 import java.awt.image.BufferedImage;
 import java.util.Objects;
-
+// FIXME add javadoc comments
 /**
  * Represents a person authorized to pickup a child from the place where 
  * an activity is taking place.
