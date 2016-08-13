@@ -842,7 +842,8 @@ public class Student {
 		}
 		
 		/**
-		 * Adds an Authorized {@link Pickup} to associate with this student.
+		 * Adds an Authorized {@link Pickup} to associate with this student. Image files are the actual
+		 * {@link BufferedImage} files.
 		 * 
 		 * @return this builder for method chaining
 		 */
@@ -852,6 +853,22 @@ public class Student {
 				authPickup = new ArrayList<>();
 			}
 			Pickup pub = Pickup.build().first(first). last(last).relationship(relationship).photo(photo).thumbnail(thumb).done();
+			this.authPickup.add(pub);
+			return this;
+		}
+		
+		/**
+		 * Adds an Authorized {@link Pickup} to associate with this student. Image files are the actual
+		 * {@link BufferedImage} files.
+		 * 
+		 * @return this builder for method chaining
+		 * @throws FileNotFoundException if file that the paths point to do not exist
+		 */
+		public Builder authPickup(String first, String last, String relationship, String photo, String thumb) throws FileNotFoundException {
+			if (authPickup == null) {
+				authPickup = new ArrayList<>();
+			}
+			Pickup pub = Pickup.build().first(first). last(last).relationship(relationship).photoPath(photo).thumbnailPath(thumb).done();
 			this.authPickup.add(pub);
 			return this;
 		}
