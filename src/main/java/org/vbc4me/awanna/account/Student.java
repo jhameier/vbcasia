@@ -3,6 +3,11 @@ package org.vbc4me.awanna.account;
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -727,7 +732,6 @@ public class Student {
 			this.parentThumbnailPath = Paths.get(path);
 			return this;
 		}
-
 		/**
 		 * Sets the parents first name associated with this student.
 		 * 

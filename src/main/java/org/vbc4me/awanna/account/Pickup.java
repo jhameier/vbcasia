@@ -1,6 +1,6 @@
 package org.vbc4me.awanna.account;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.Objects;
 
 /**
@@ -11,13 +11,19 @@ public class Pickup {
 	private String first;
 	private String last;
 	private String relationship;
-	private Image photo;
+	private BufferedImage photo;
+	private BufferedImage thumbnail;
 	
-	private Pickup(String first, String last, String relationship, Image photo) {
-		this.first = Objects.requireNonNull(first);
-		this.last = Objects.requireNonNull(last);
-		this.relationship = Objects.requireNonNull(relationship);
-		this.photo = photo;
+	public static Builder build() {
+		return new Builder();
+	}
+	
+	private Pickup(Builder builder) {
+		this.first = builder.first;
+		this.last = builder.last;
+		this.relationship = builder.relationship;
+		this.photo = builder.photo;
+		this.thumbnail = builder.thumbnail;
 	}
 	
 	public String firstName() {
@@ -36,23 +42,39 @@ public class Pickup {
 		return first + " " + last + " (" + relationship + ")";
 	}
 	
-	public void addPhoto(Image photo) {
+	public void addPhoto(BufferedImage photo) {
 		this.photo = photo;
 	}
 	
-	public Image photo() {
+	public BufferedImage photo() {
 		return photo;
+	}
+	
+	public void addThumbail(BufferedImage thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	
+	public BufferedImage thumbnail() {
+		return thumbnail;
 	}
 	
 	static class Builder {
 		private String first;
 		private String last;
 		private String relationship;
-		private Image photo;
+		private BufferedImage photo;
+		private BufferedImage thumbnail;
 		
-		public Builder(String first, String last) {
+		public Builder() {}
+		
+		public Builder first(String first) {
 			this.first = first;
+			return this;
+		}
+		
+		public Builder last(String last) {
 			this.last = last;
+			return this;
 		}
 		
 		public Builder relationship(String relationship) {
@@ -60,8 +82,13 @@ public class Pickup {
 			return this;
 		}
 		
-		public Builder photo(Image photo) {
+		public Builder photo(BufferedImage photo) {
 			this.photo = photo;
+			return this;
+		}
+		
+		public Builder thumbnail(BufferedImage thumbnail) {
+			this.thumbnail = thumbnail;
 			return this;
 		}
 		
@@ -69,7 +96,7 @@ public class Pickup {
 			Objects.requireNonNull(first, "First name is required");
 			Objects.requireNonNull(last, "Last name is required");
 			Objects.requireNonNull(relationship, "Relationship is required");
-			return new Pickup(first, last, relationship, photo);
+			return new Pickup(this);
 		}
 		
 	}
