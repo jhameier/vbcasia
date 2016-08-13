@@ -1,9 +1,12 @@
 package org.vbc4me.awanna.account;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -17,11 +20,17 @@ public class Student {
 	private String childLastName;
 	private String childGrade;
 	private LocalDate childDOB;
-	private Set<String> specialNeeds;
+	private Set<String> specialNeeds = new HashSet<>();
 	private Club club;
 	
-	private Image childPhoto;
-	private Image parentPhoto;
+	private BufferedImage childPhoto;
+	private Path childPhotoPath;
+	private BufferedImage childThumbnail;
+	private Path childThumbnailPath;
+	private BufferedImage parentPhoto;
+	private Path parentPhotoPath;
+	private BufferedImage parentThumbnail;
+	private Path parentThumbnailPath;
 	
 	private String parentFirstName;
 	private String parentLastName;
@@ -33,7 +42,7 @@ public class Student {
 	private String emailAddress;
 	private String emergencyContactName;
 	private PhoneNumber emergencyContactPhone;
-	private List<Pickup> authPickup;
+	private List<Pickup> authPickup = new ArrayList<>();
 	
 	// Account is automatically created when a student record is created
 	private Account account = new Account();
@@ -105,14 +114,18 @@ public class Student {
 	 * Returns the exact Age of this student in years as of the current day.
 	 */
 	public Integer childAge() {
-		return Period.between(childDOB, LocalDate.now()).getYears();
+		Period p = Period.between(childDOB, LocalDate.now());
+		int age = p.getYears();
+		return age;
 	}
 	
 	/**
 	 * Returns the exact Age of this student in years from a specific day.
 	 */
 	public Integer childAge(LocalDate date) {
-		return Period.between(childDOB, date).getYears();
+		Period p = Period.between(childDOB, LocalDate.now());
+		int age = p.getYears();
+		return age;
 	}
 	
 	/**
@@ -172,31 +185,130 @@ public class Student {
 	}
 	
 	/**
-	 * Returns the image of child's photo
+	 * Returns the image of this student
 	 */
-	public Image childPhoto() {
+	public BufferedImage childPhoto() {
 		return childPhoto;
 	}
 	
 	/**
-	 * @param photo of child to store
+	 * Returns the path to the image of this student.
 	 */
-	public void childPhoto(Image image) {
+	public Path childPhotoPath() {
+		return childPhotoPath;
+	}
+	
+	/**
+	 * Stores an image photo to associate with this student.
+	 */
+	public void childPhoto(BufferedImage image) {
 		this.childPhoto = image;
 	}
 	
 	/**
-	 * Returns the image to parent's photo file
+	 * Sets the {@link Path} to this students photo.
+	 * 
+	 * <p>This method does not verify that the path exists.
 	 */
-	public Image parentPhoto() {
+	public void childPhotoPath(String path) {
+		this.childPhotoPath = Paths.get(path);
+	}
+	
+	/**
+	 * Returns the thumbnail image of this student
+	 */
+	public BufferedImage childThumbnail() {
+		return this.childThumbnail;
+	}
+
+	/**
+	 * Returns the path to this students thumbnail image.
+	 * 
+	 * <p>This method does not guarantee that the path to the file exists.
+	 * 
+	 */
+	public Path childThumbnailPath() {
+		return childThumbnailPath;
+	}
+
+	/**
+	 * Stores an image thumbnail to associated with this student.
+	 */
+	public void childThumbnail(BufferedImage image) {
+		this.childThumbnail = image;
+	}
+
+	/**
+	 * Sets the {@link Path} to this students thumbnail photo.
+	 * 
+	 * <p>This method does not verify that the path exists.
+	 */
+	public void childThumbnailPath(String path) {
+		this.childThumbnailPath = Paths.get(path);
+	}
+	
+	/**
+	 * Returns the image of the parent's photo.
+	 */
+	public BufferedImage parentPhoto() {
 		return parentPhoto;
 	}
 	
 	/**
-	 * @param image image of parent to store
+	 * Returns the path to this parents photo.
+	 * 
+	 * <p>This does not guarantee that the path to the file exists.
 	 */
-	public void parentPhoto(Image image) {
+	public Path parentPhotoPath() {
+		return parentPhotoPath;
+	}
+	
+	/**
+	 * Stores the parents photo associated with this student.
+	 */
+	public void parentPhoto(BufferedImage image) {
 		this.parentPhoto = image;
+	}
+	
+	/**
+	 * Sets the {@link Path} to this parents photo file.
+	 * 
+	 * <p>This does not guarantee that the file represented by this {@link Path} actually exists. 
+	 */
+	public void parentPhotoPath(String path) {
+		this.parentPhotoPath = Paths.get(path);
+	}
+	
+	/**
+	 * Returns the thumbnail image of the parent's photo.
+	 */
+	public BufferedImage parentThumbnail() {
+		return parentThumbnail;
+	}
+	
+	/**
+	 * Returns the path to this parents thumbnail image.
+	 * 
+	 * <p>This does not guarantee that the file represented by this {@link Path} actually exists.
+	 */
+	public Path parentThumbnailPath() {
+		return parentThumbnailPath;
+	}
+	
+	/**
+	 * Stores the parents photo associated with this student.
+	 */
+	public void parentThumbnail(BufferedImage image) {
+		this.parentThumbnail = image;
+	}
+	
+	/**
+	 * Stores the {@link Path} to this parents thumbnail image.
+	 * 
+	 * <p>This method does not verify that the path to the image file is valid.
+	 */
+	public void parentThumbnailPath(String path) {
+		this.parentThumbnailPath = Paths.get(path);
 	}
 	
 	/**
@@ -401,9 +513,15 @@ public class Student {
 		this.childDOB = builder.childDOB;
 		this.specialNeeds = builder.specialNeeds;
 		this.childPhoto = builder.childPhoto;
-		this.parentPhoto = builder.parentPhoto;
+		this.childPhotoPath = builder.childPhotoPath;
+		this.childThumbnail = builder.childThumbnail;
+		this.childThumbnailPath = builder.childThumbnailPath;
 		this.parentFirstName = builder.parentFirstName;
 		this.parentLastName = builder.parentLastName;
+		this.parentPhoto = builder.parentPhoto;
+		this.parentPhotoPath = builder.parentPhotoPath;
+		this.parentThumbnail = builder.parentThumbnail;
+		this.parentThumbnailPath = builder.parentThumbnailPath;
 		this.address = builder.address;
 		this.city = builder.city;
 		this.state = builder.state;
@@ -432,8 +550,14 @@ public class Student {
 		private String childGrade;
 		private LocalDate childDOB;
 		private Set<String> specialNeeds;
-		private Image childPhoto;
-		private Image parentPhoto;
+		private BufferedImage childPhoto;
+		private Path childPhotoPath;
+		private BufferedImage childThumbnail;
+		private Path childThumbnailPath;
+		private BufferedImage parentPhoto;
+		private Path parentPhotoPath;
+		private BufferedImage parentThumbnail;
+		private Path parentThumbnailPath;
 		private String parentFirstName;
 		private String parentLastName;
 		private String address;
@@ -520,14 +644,15 @@ public class Student {
 			return this;
 		}
 		
-		// FIXME This should be a list so that multiple items can be added as separate objects.
 		/**
 		 * Sets the special needs of this student.
 		 * @param specialNeeds
 		 * @return
 		 */
-		public Builder specialNeeds(String specialNeeds) {
-			this.specialNeeds.add(specialNeeds);
+		public Builder specialNeeds(String specialNeed) {
+			if(specialNeeds == null) 
+				specialNeeds = new HashSet<>();
+			this.specialNeeds.add(specialNeed);
 			return this;
 		}
 		
@@ -536,21 +661,72 @@ public class Student {
 		 * 
 		 * @return this builder for method chaining
 		 */
-		public Builder childPhoto(Image photo) {
+		public Builder childPhoto(BufferedImage photo) {
 			this.childPhoto = photo;
 			return this;
 		}
 		
 		/**
-		 * Adds a photo to this students profile.
+		 * Adds a {@link Path} to this students photo file.
+		 */
+		public Builder childPhotoPath(String path) {
+			this.childPhotoPath = Paths.get(path);
+			return this;
+		}
+		
+		/**
+		 * Adds a thumbnail photo to this students profile.
 		 * 
 		 * @return this builder for method chaining
 		 */
-		public Builder parentPhoto(Image photo) {
+		public Builder childThumbnail(BufferedImage thumbnail) {
+			this.childThumbnail = thumbnail;
+			return this;
+		}
+		
+		/**
+		 * Adds a {@link Path} to this students thumbnail photo file.
+		 */
+		public Builder childThumbnailPath(String path) {
+			this.childThumbnailPath = Paths.get(path);
+			return this;
+		}
+		
+		/**
+		 * Adds a parents photo to this students profile.
+		 * 
+		 * @return this builder for method chaining
+		 */
+		public Builder parentPhoto(BufferedImage photo) {
 			this.parentPhoto = photo;
 			return this;
 		}
 		
+		/**
+		 * Adds a {@link Path} to this students parent photo file.
+		 */
+		public Builder parentPhotoPath(String path) {
+			this.parentPhotoPath = Paths.get(path);
+			return this;
+		}
+		
+		/**
+		 * Adds a parents thumbnail photo to this students profile.
+		 * 
+		 * @return this builder for method chaining
+		 */
+		public Builder parentThmbnail(BufferedImage thunbnail) {
+			this.parentThumbnail = thunbnail;
+			return this;
+		}
+		
+		/**
+		 * Adds a {@link Path} to this students parents thumbnail photo file.
+		 */
+		public Builder parentThumbnailPath(String path) {
+			this.parentThumbnailPath = Paths.get(path);
+			return this;
+		}
 
 		/**
 		 * Sets the parents first name associated with this student.
@@ -613,9 +789,10 @@ public class Student {
 			return this;
 		}
 		
-		// FIXME this should check if the number exists and not add duplicate numbers
 		/**
-		 * Adds a new phone number associated with this student.
+		 * Adds a new phone number associated with this student. If the phone
+		 * number already exists in the list, this method just returns without adding 
+		 * a duplicate number.
 		 * 
 		 * @return this builder for method chaining
 		 */
@@ -624,7 +801,8 @@ public class Student {
 				phoneNumbers = new ArrayList<>();
 			}
 			PhoneNumber ph = new PhoneNumber(type, number);
-			this.phoneNumbers.add(ph);
+			if(!PhoneNumber.contains(phoneNumbers, ph))
+				this.phoneNumbers.add(ph);
 			return this;
 		}
 		
@@ -664,12 +842,13 @@ public class Student {
 		 * 
 		 * @return this builder for method chaining
 		 */
-		public Builder authPickup(String first, String last, String relationship, Image photo) {
+		public Builder authPickup(String first, String last, 
+															String relationship, BufferedImage photo, BufferedImage thumb) {
 			if (authPickup == null) {
 				authPickup = new ArrayList<>();
 			}
-			Pickup.Builder pub = new Pickup.Builder(first, last).relationship(relationship).photo(photo);
-			this.authPickup.add(pub.done());
+			Pickup pub = Pickup.build().first(first). last(last).relationship(relationship).photo(photo).thumbnail(thumb).done();
+			this.authPickup.add(pub);
 			return this;
 		}
 		
