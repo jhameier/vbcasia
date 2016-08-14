@@ -83,6 +83,7 @@ public class PrimaryGuiPanel extends JFrame {
 		buttonCardPanel = new JPanel(buttonCardLayout);
 		getContentPane().add(buttonCardPanel, BorderLayout.NORTH);
 		
+		// Creates the Button Panels for each of the display types
 		final SeasonButtonPanel seasonButtonPanel = new SeasonButtonPanel(this);
 		buttonCardPanel.add(seasonButtonPanel, PrimaryGuiPanel.SEASON);
 		
