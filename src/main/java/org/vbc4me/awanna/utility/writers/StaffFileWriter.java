@@ -78,7 +78,7 @@ public final class StaffFileWriter {
 		element.addContent(new Element("title").addContent(staff.title()));
 		
 		// Photo info
-		element.addContent(new Element("photo-path").addContent(staff.photo().toString())); // FIXME Photo.toString()
+		element.addContent(new Element("photo").addContent(staff.photoPath().toString()));
 		
 		return element;
 	}

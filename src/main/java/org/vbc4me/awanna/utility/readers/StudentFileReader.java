@@ -40,8 +40,9 @@ public class StudentFileReader extends DefaultHandler {
         	.childGrade(student.getChildText("grade"))
         	.childDOB(LocalDate.parse(student.getChildText("dob")))
         	.specialNeeds(student.getChildText("special-needs"))
-        	.currentClub(Club.valueOf(student.getChildText("club")));
-        	// FIXME .childPhoto(student.getChildText("photo"));
+        	.currentClub(Club.valueOf(student.getChildText("club")))
+        	.childPhotoPath(student.getChildText("photo"))
+        	.childThumbnailPath(student.getChildText("thumbnail"));
 
         Element parent = student.getChild("parent");
         studentBuilder.parentFirstName(parent.getChild("name").getChildText("first"))
@@ -50,8 +51,9 @@ public class StudentFileReader extends DefaultHandler {
             .city(parent.getChildText("city"))
             .state(parent.getChildText("state"))
             .zip(parent.getChildText("zip-code"))
-            .emailAddress(parent.getChildText("email-address"));
-            // FIXME .parentPhoto(parent.getChildText("photo"));
+            .emailAddress(parent.getChildText("email-address"))
+             .parentPhotoPath(parent.getChildText("photo"))
+             .parentThumbnailPath(parent.getChildText("thumbnail"));
 
         
         List<Element> ph = parent.getChild("phone-number").getChildren();
@@ -66,8 +68,9 @@ public class StudentFileReader extends DefaultHandler {
               pickup.getChildText("first"),
               pickup.getChildText("last"),
               pickup.getChildText("relationship"),
-              null);
-              // FIXME pickup.getChildText("photo"));
+              pickup.getChildText("photo"),
+              pickup.getChildText("thumbnail")) ;
+              
         }
 
         // build the student model

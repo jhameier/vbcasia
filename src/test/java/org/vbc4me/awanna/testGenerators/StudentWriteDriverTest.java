@@ -30,7 +30,7 @@ public class StudentWriteDriverTest {
 		stBuilder1.emailAddress("jdoe@gmail.com");
 		stBuilder1.childPhoto(null).parentPhoto(null);
 		stBuilder1.emergencyContactName("Susan Doe").emergencyContactPhone(new PhoneNumber("Home", "6095615432"));
-		stBuilder1.authPickup("Bill", "Doe", "Dad", null).authPickup("Harry", "Johnson", "Brother", null);
+		stBuilder1.authPickup("Bill", "Doe", "Dad").authPickup("Harry", "Johnson", "Brother");
 		
 		Builder stBuilder2 = Student.build().firstName("Mary").lastName("Matlin");
 		stBuilder2.childGrade(String.valueOf(3));
@@ -42,7 +42,7 @@ public class StudentWriteDriverTest {
 		stBuilder2.emailAddress("bhamstein1@gmail.com");
 		stBuilder2.childPhoto(null).parentPhoto(null);
 		stBuilder2.emergencyContactName("Sara Marlin").emergencyContactPhone(new PhoneNumber("Cell", "6095671258"));
-		stBuilder2.authPickup("Sarah", "Miller", "Grandmother", null).authPickup("Flex", "Hanson", "Uncle", null);
+		stBuilder2.authPickup("Sarah", "Miller", "Grandmother").authPickup("Flex", "Hanson", "Uncle");
 		
 		Student student1 = stBuilder1.done();
 		Student student2 = stBuilder2.done();

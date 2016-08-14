@@ -1,6 +1,10 @@
 package org.vbc4me.awanna.account;
 
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +25,9 @@ public class Staff {
 	private List<PhoneNumber> phoneNumbers;
 	private String email;
 	private BufferedImage photo;
+	private Path photoPath;
 	private BufferedImage thumbnail;
+	private Path thumbnailPath;
 	private String specialNeeds = "";
 	private String emergencyContactName;
 	private PhoneNumber emergencyContactPhone;
@@ -276,10 +282,27 @@ public class Staff {
 	}
 	
 	/**
+	 * Returns the path to the image file of this staff member. 
+	 */
+	public Path photoPath() {
+		return photoPath;
+	}
+	
+	/**
 	 * Adds a photo to this staff members record.
 	 */
 	public void photo(BufferedImage image) {
 		this.photo = image;
+	}
+	
+	/**
+	 * Adds a path to this staffs member image file;
+	 */
+	public void photoPath(String filepath) throws FileNotFoundException {
+		Path path = Paths.get(filepath);
+		if(!Files.exists(path))
+			throw new FileNotFoundException("The file " + path + " does not exist.");
+		this.photoPath = path;
 	}
 	
 	/**
@@ -290,11 +313,22 @@ public class Staff {
 	}
 	
 	/**
+	 * Returns the path to the image file of this staff member. 
+	 */
+	public Path thumbanilPath() {
+		return thumbnailPath;
+	}
+	
+	/**
 	 * Adds a thumbnail photo of this staff member.
 	 */
 	public void thumbnail(BufferedImage image) {
 		this.thumbnail = image;
 	}
+	
+	/**
+	 * Adds a path to the thumbnail image file.
+	 */
 	
 	/**
 	 * Constructs a new {@link Staff} object.

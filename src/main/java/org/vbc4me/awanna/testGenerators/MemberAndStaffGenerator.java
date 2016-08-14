@@ -70,7 +70,7 @@ public final class MemberAndStaffGenerator {
 			for (int j = 0; j < ap; ++j) {
 				int rr = random.nextInt(relation.length);
 				String[] name = names.remove(random.nextInt(names.size())).trim().split(" ");
-				sb.authPickup(name[0], name[1], relation[rr], null);
+				sb.authPickup(name[0], name[1], relation[rr]);
 			}
 			Season.addStudent(sb.done());
 		} // end create students
