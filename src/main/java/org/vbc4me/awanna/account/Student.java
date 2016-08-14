@@ -858,6 +858,19 @@ public class Student {
 		}
 		
 		/**
+		 * Builds a Authorized Pickup with just a first and last name and relationship. All other fields are optional.
+		 */
+		public Builder authPickup(String first, String last,  String relationship) {
+            if (authPickup == null) {
+            authPickup = new ArrayList<>();
+            }
+            Pickup pub = Pickup.build().first(first). last(last).relationship(relationship).done();
+            this.authPickup.add(pub);
+            return this;
+            }
+		
+		
+		/**
 		 * Adds an Authorized {@link Pickup} to associate with this student. Image files are the actual
 		 * {@link BufferedImage} files.
 		 * 
