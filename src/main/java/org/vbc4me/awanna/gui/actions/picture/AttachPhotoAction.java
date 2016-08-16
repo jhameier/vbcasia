@@ -9,11 +9,8 @@ import java.util.prefs.Preferences;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
-import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import org.vbc4me.awanna.account.Pickup;
-import org.vbc4me.awanna.gui.forms.student.StudentInputForm;
 import org.vbc4me.awanna.gui.picture.ImageContainer;
 import org.vbc4me.awanna.gui.picture.PictureEditDialog;
 import org.vbc4me.awanna.gui.picture.ThumbnailPanel;
