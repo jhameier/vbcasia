@@ -1,8 +1,10 @@
 package org.vbc4me.awanna.account;
 
 import java.awt.image.BufferedImage;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
-// FIXME add javadoc comments
+
 /**
  * Represents a person authorized to pickup a child from the place where 
  * an activity is taking place.
@@ -12,7 +14,9 @@ public class Pickup {
 	private String last;
 	private String relationship;
 	private BufferedImage photo;
+	private Path photoPath;
 	private BufferedImage thumbnail;
+	private Path thumbnailPath;
 	
 	public static Builder build() {
 		return new Builder();
@@ -23,7 +27,9 @@ public class Pickup {
 		this.last = builder.last;
 		this.relationship = builder.relationship;
 		this.photo = builder.photo;
+		this.photoPath = builder.photoPath;
 		this.thumbnail = builder.thumbnail;
+		this.thumbnailPath = builder.thumbnailPath;
 	}
 	
 	public String firstName() {
@@ -50,7 +56,15 @@ public class Pickup {
 		return photo;
 	}
 	
-	public void addThumbail(BufferedImage thumbnail) {
+	public void addPhotoPath(String path) {
+		this.photoPath = Paths.get(path);
+	}
+	
+	public Path photoPath() {
+		return photoPath;
+	}
+	
+	public void thumbnail(BufferedImage thumbnail) {
 		this.thumbnail = thumbnail;
 	}
 	
@@ -58,12 +72,22 @@ public class Pickup {
 		return thumbnail;
 	}
 	
+	public void addThumbnailPath(String path) {
+		this.thumbnailPath = Paths.get(path);
+	}
+	
+	public Path thumbnailPath() {
+		return thumbnailPath;
+	}
+	
 	static class Builder {
 		private String first;
 		private String last;
 		private String relationship;
 		private BufferedImage photo;
+		private Path photoPath;
 		private BufferedImage thumbnail;
+		private Path thumbnailPath;
 		
 		public Builder() {}
 		
@@ -87,19 +111,18 @@ public class Pickup {
 			return this;
 		}
 		
-		public Builder thumbnail(BufferedImage thumbnail) {
-			this.thumbnail = thumbnail;
-<<<<<<< Upstream, based on origin/master
-=======
+		public Builder photoPath(String path) {
+			this.photoPath = Paths.get(path);
 			return this;
 		}
 		
-		public Builder thumbnailPath(String filepath) throws FileNotFoundException {
-			Path path = Paths.get(filepath);
-			if(!Files.exists(path))
-				throw new FileNotFoundException("The file path " + path + " was not found.");
-			this.thumbnailPath = path;
->>>>>>> e67927a Correct spelling mistake in method call
+		public Builder thumbnail(BufferedImage thumbnail) {
+			this.thumbnail = thumbnail;
+			return this;
+		}
+		
+		public Builder thumbnailPath(String path) {
+			this.thumbnailPath = Paths.get(path);
 			return this;
 		}
 		

@@ -1,5 +1,6 @@
 package org.vbc4me.awanna.testGenerators;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -70,7 +71,9 @@ public final class MemberAndStaffGenerator {
 			for (int j = 0; j < ap; ++j) {
 				int rr = random.nextInt(relation.length);
 				String[] name = names.remove(random.nextInt(names.size())).trim().split(" ");
-				sb.authPickup(name[0], name[1], relation[rr]);
+				sb.authPickup(name[0], name[1], relation[rr], 
+						new BufferedImage(480, 640, BufferedImage.TYPE_INT_RGB), 
+						new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB));
 			}
 			Season.addStudent(sb.done());
 		} // end create students
