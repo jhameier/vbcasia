@@ -1,5 +1,6 @@
 package org.vbc4me.awanna.testGenerators;
 
+import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -30,7 +31,10 @@ public class StudentWriteDriverTest {
 		stBuilder1.emailAddress("jdoe@gmail.com");
 		stBuilder1.childPhoto(null).parentPhoto(null);
 		stBuilder1.emergencyContactName("Susan Doe").emergencyContactPhone(new PhoneNumber("Home", "6095615432"));
-		stBuilder1.authPickup("Bill", "Doe", "Dad", null, null) .authPickup("Harry", "Johnson", "Brother", null, null);
+		stBuilder1.authPickup("Bill", "Doe", "Dad", new BufferedImage(480,640, BufferedImage.TYPE_INT_RGB),
+																						    new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB)) 
+						   .authPickup("Harry", "Johnson", "Brother", new BufferedImage(480,640, BufferedImage.TYPE_INT_RGB),
+								   																				new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB));
 		
 		Builder stBuilder2 = Student.build().firstName("Mary").lastName("Matlin");
 		stBuilder2.childGrade(String.valueOf(3));
@@ -42,7 +46,10 @@ public class StudentWriteDriverTest {
 		stBuilder2.emailAddress("bhamstein1@gmail.com");
 		stBuilder2.childPhoto(null).parentPhoto(null);
 		stBuilder2.emergencyContactName("Sara Marlin").emergencyContactPhone(new PhoneNumber("Cell", "6095671258"));
-		stBuilder2.authPickup("Sarah", "Miller", "Grandmother", null, null).authPickup("Flex", "Hanson", "Uncle", null, null);
+		stBuilder2.authPickup("Sarah", "Miller", "Grandmother", new BufferedImage(480,640, BufferedImage.TYPE_INT_RGB), 
+																													   new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB))
+							.authPickup("Flex", "Hanson", "Uncle", new BufferedImage(480,640, BufferedImage.TYPE_INT_RGB), 
+																										new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB));
 		
 		Student student1 = stBuilder1.done();
 		Student student2 = stBuilder2.done();
