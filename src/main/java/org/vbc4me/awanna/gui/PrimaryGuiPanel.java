@@ -36,9 +36,7 @@ import org.vbc4me.awanna.gui.actions.session.OpenSessionAction;
 import org.vbc4me.awanna.gui.actions.session.SaveSessionAction;
 import org.vbc4me.awanna.gui.forms.DisplayPanel;
 import org.vbc4me.awanna.gui.forms.activity.ActivityButtonPanel;
-import org.vbc4me.awanna.gui.forms.season.SeasonBlankForm;
 import org.vbc4me.awanna.gui.forms.season.SeasonButtonPanel;
-import org.vbc4me.awanna.gui.forms.season.SeasonTableModel;
 import org.vbc4me.awanna.gui.forms.session.SessionButtonPanel;
 import org.vbc4me.awanna.gui.forms.student.RecordButtonPanel;
 
@@ -52,6 +50,8 @@ import org.vbc4me.awanna.gui.forms.student.RecordButtonPanel;
  */
 public class PrimaryGuiPanel extends JFrame {
 	private static final long serialVersionUID = 5953409495403830350L;
+	
+	private static DisplayPanel displayPanel;
 	
 	public static PrimaryGuiPanel mainWindow;
 	private static JPanel buttonCardPanel;
@@ -70,6 +70,10 @@ public class PrimaryGuiPanel extends JFrame {
 	 */
 	public static void changeButtonLayout(String buttonPanel) {
 		buttonCardLayout.show(buttonCardPanel, buttonPanel);
+	}
+	
+	public static DisplayPanel displayPanel() {
+		return displayPanel;
 	}
 	
 	/**
@@ -96,11 +100,8 @@ public class PrimaryGuiPanel extends JFrame {
 		final ActivityButtonPanel activityButtonPanel = new ActivityButtonPanel(this);
 		buttonCardPanel.add(activityButtonPanel, PrimaryGuiPanel.ACTIVITY); 
 		
-		final DisplayPanel displayPanel = new DisplayPanel();
+		displayPanel = new DisplayPanel();
 		getContentPane().add(displayPanel, BorderLayout.CENTER);
-		
-		DisplayPanel.updateUpperDisplay(new SeasonBlankForm());
-		DisplayPanel.updateLowerDisplay(new SeasonTableModel());
 		
 		/*
 		 * ***************** FILE MENU ************************

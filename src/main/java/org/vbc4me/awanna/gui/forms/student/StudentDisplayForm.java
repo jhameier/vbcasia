@@ -23,7 +23,6 @@ public final class StudentDisplayForm extends JPanel {
   private static final String AUTH2 = "auth2";
   private static final String AUTH3 = "auth3";
   private static final String AUTH4 = "auth4";
-  private static final String DISPLAY = "StudentDisplayForm";
 
   public static JPanel childPhotoPanel;
   public static JPanel parentPhotoPanel;

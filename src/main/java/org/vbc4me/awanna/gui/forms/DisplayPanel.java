@@ -56,7 +56,7 @@ public final class DisplayPanel extends JPanel {
 	 * different models, this table display can show various types of tables
 	 * without creating a separate JTable for each view needed.
 	 */
-	public static void updateLowerDisplay(TableModel dataModel) {
+	public void updateLowerDisplay(TableModel dataModel) {
 		table.setModel(dataModel);
 		table.revalidate();
 	}
@@ -64,7 +64,7 @@ public final class DisplayPanel extends JPanel {
 	/**
 	 * Sets the upper display with the panel passed in. 
 	 */
-	public static void updateUpperDisplay(JPanel display) {
+	public void updateUpperDisplay(JPanel display) {
 		panel.removeAll();
 		panel.add(display, BorderLayout.CENTER);
 		panel.revalidate();
@@ -77,7 +77,7 @@ public final class DisplayPanel extends JPanel {
 	 * style data. It should be noted that the tableModel is what is passed in and
 	 * the table is updated with the then data set and layout.
 	 */
-	public static void updateBothDisplays(JPanel textPanel, TableModel dataModel) {
+	public void updateBothDisplays(JPanel textPanel, TableModel dataModel) {
 		panel.add(textPanel, BorderLayout.CENTER);
 		table.setModel(dataModel);
 	}

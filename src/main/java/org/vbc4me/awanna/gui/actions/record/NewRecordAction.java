@@ -6,7 +6,6 @@ import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 
 import org.vbc4me.awanna.gui.PrimaryGuiPanel;
-import org.vbc4me.awanna.gui.forms.DisplayPanel;
 import org.vbc4me.awanna.gui.forms.student.StudentInputForm;
 
 
@@ -17,20 +16,14 @@ import org.vbc4me.awanna.gui.forms.student.StudentInputForm;
  */
 public class NewRecordAction extends AbstractAction {
   private static final long serialVersionUID = -6301577011454895115L;
-//  private JFrame frame;
 
   public NewRecordAction(JFrame frame) {
-//    this.frame = frame;
     putValue(NAME, "New Record");
     putValue(SHORT_DESCRIPTION, "Creates new blank information record ");
   }
 
   public void actionPerformed(ActionEvent e) {
-//    String message = "This is activated from New Record Action";
-//    String title = "New Record";
-//    int messageType = JOptionPane.INFORMATION_MESSAGE;
-//    JOptionPane.showMessageDialog(frame, message, title, messageType);
     PrimaryGuiPanel.changeButtonLayout(PrimaryGuiPanel.RECORD);
-    DisplayPanel.updateUpperDisplay(new StudentInputForm());
+    PrimaryGuiPanel.displayPanel().updateUpperDisplay(new StudentInputForm());
   }
 }

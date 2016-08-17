@@ -16,20 +16,18 @@ import org.vbc4me.awanna.gui.actions.activity.SaveActivityRecordAction;
 
 public class ActivityButtonPanel extends JPanel{
 	private static final long serialVersionUID = -364619699132689562L;
-	private JFrame frame;
 	public static final JButton btnNew = new JButton("New");
 	public static final JButton btnEdit = new JButton("Edit");
 	public static final JButton btnCopy = new JButton("Copy");
 	public static final JButton btnSave = new JButton("Save");
 	
 	public ActivityButtonPanel(JFrame frame) {
-		this.frame = frame;
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		Component horizontalStrut = Box.createHorizontalStrut(1);
 		add(horizontalStrut);
 		
-		Action createNewActivityRecordAction = new NewActivityRecordAction(frame);
+		Action createNewActivityRecordAction = new NewActivityRecordAction();
 		btnNew.setAction(createNewActivityRecordAction);
 		add(btnNew);
 		

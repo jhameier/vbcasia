@@ -11,8 +11,7 @@ import javax.swing.JTextField;
 
 public class SeasonEditForm extends JPanel {
 	private static final long serialVersionUID = -6531861712233753720L;
-	public JPanel infoPanel;
-	public DisplayPanel tablePanel;
+
 	
 	public JLabel lblSessionStartDate;
 	public JLabel lblSessionEndDate;
@@ -28,7 +27,7 @@ public class SeasonEditForm extends JPanel {
 	
 	public SeasonEditForm() {
 		
-		infoPanel = new JPanel();
+		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(new MigLayout("", "[][][][]", "[][][][][][][]"));
 		add(infoPanel);
 		
@@ -74,10 +73,7 @@ public class SeasonEditForm extends JPanel {
 		
 		lblNoOfStaff = new JLabel("");
 		infoPanel.add(lblNoOfStaff, "flowx,cell 3 6");
-		
-		tablePanel = new DisplayPanel();
-		add(infoPanel);
-		
+				
 		txtStartDate = new JTextField();
 		infoPanel.add(txtStartDate, "cell 3 2");
 		txtStartDate.setColumns(10);
