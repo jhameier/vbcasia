@@ -1,5 +1,6 @@
 package org.vbc4me.awanna.gui.actions.season;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -24,7 +25,7 @@ public class NewSeasonAction extends AbstractAction {
 	
 	public void actionPerformed(ActionEvent e) {
 		PrimaryGuiPanel.changeButtonLayout(PrimaryGuiPanel.SEASON);
-		PrimaryGuiPanel.displayPanel().updateBothDisplays(new SeasonEditForm(), new SeasonTableModel());
+		PrimaryGuiPanel.displayPanel().updateBothDisplays(new SeasonEditForm(), BorderLayout.WEST, new SeasonTableModel());
 		PrimaryGuiPanel.mainWindow.pack();
 	}
 }

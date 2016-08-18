@@ -9,25 +9,25 @@ import javax.swing.JTable;
 import javax.swing.table.TableModel;
 
 /**
- * This class handles the various spreadsheet styles to display. This uses a
- * Border layout manager to handle the proper display setup for this panel to
+ * This class handles the various spreadsheet styles and JPanels to display. This uses a
+ * JSplitPane to handle the proper display setup for this panel to
  * display correctly. This is a generic shell for a table, and can be changed by
  * passing in new table models to display different types of data in different
  * ways by calling setTableDisplay(TableModel) and passing in the model of the
  * data that needs to be displayed.
  *
- * @author John Hameier July 2015: updated June 2016
+ * @author John Hameier 2016
  */
 public final class DisplayPanel extends JPanel {
 	private static final long serialVersionUID = -3284524458172373047L;
 	private final static JTable table = new JTable();
-	private final static JPanel panel = new JPanel();
+	private final static JPanel panel = new JPanel(new BorderLayout());
+	private final JSplitPane splitPane;
 	
 	public DisplayPanel() {
 		setLayout(new BorderLayout());
-		final JSplitPane splitPane = new JSplitPane();
-		splitPane.setDividerSize(5);
-		splitPane.setResizeWeight(0.5);
+		splitPane = new JSplitPane();
+		splitPane.setOneTouchExpandable(true);
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		add(splitPane, BorderLayout.CENTER);
 		
@@ -48,7 +48,6 @@ public final class DisplayPanel extends JPanel {
 		
 		splitPane.setTopComponent(upperScrollPane);
 		splitPane.setBottomComponent(lowerScrollPane);
-		
 	}
 	
 	/**
@@ -58,15 +57,18 @@ public final class DisplayPanel extends JPanel {
 	 */
 	public void updateLowerDisplay(TableModel dataModel) {
 		table.setModel(dataModel);
+		splitPane.setDividerLocation(0.60);
 		table.revalidate();
 	}
 	
 	/**
-	 * Sets the upper display with the panel passed in. 
+	 * Sets the upper display with the panel passed in, using the layout provided. The display uses
+	 * a Border Layout so a proper uses example {@code BorderLayout.WEST}. 
 	 */
-	public void updateUpperDisplay(JPanel display) {
+	public void updateUpperDisplay(JPanel display, String layout) {
 		panel.removeAll();
-		panel.add(display, BorderLayout.CENTER);
+		panel.add(display, layout);
+		splitPane.setDividerLocation(0.60);
 		panel.revalidate();
 	}
 	
@@ -77,9 +79,11 @@ public final class DisplayPanel extends JPanel {
 	 * style data. It should be noted that the tableModel is what is passed in and
 	 * the table is updated with the then data set and layout.
 	 */
-	public void updateBothDisplays(JPanel textPanel, TableModel dataModel) {
-		panel.add(textPanel, BorderLayout.CENTER);
+	public void updateBothDisplays(JPanel textPanel, String layout, TableModel dataModel) {
+		panel.removeAll();
+		panel.add(textPanel, layout);
 		table.setModel(dataModel);
+		splitPane.setDividerLocation(0.60);
 	}
 	
 }

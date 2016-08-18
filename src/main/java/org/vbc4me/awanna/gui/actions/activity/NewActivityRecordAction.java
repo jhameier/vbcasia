@@ -1,5 +1,6 @@
 package org.vbc4me.awanna.gui.actions.activity;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -26,6 +27,6 @@ public class NewActivityRecordAction extends AbstractAction {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		PrimaryGuiPanel.changeButtonLayout(PrimaryGuiPanel.ACTIVITY);
-		PrimaryGuiPanel.displayPanel().updateUpperDisplay(new ActivityDisplayForm());
+		PrimaryGuiPanel.displayPanel().updateUpperDisplay(new ActivityDisplayForm(), BorderLayout.WEST);
 	}
 }
