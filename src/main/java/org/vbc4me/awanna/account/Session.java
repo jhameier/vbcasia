@@ -6,13 +6,16 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Represents a logical amount of time including a set of activities that will
  * take place within the given time period.
  */
-public class Session {
+public final class Session {
 	
+	private Session session;
+	private UUID id;
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private Map<LocalDate, Activity> activities = new HashMap<>();
@@ -25,8 +28,12 @@ public class Session {
 	 * 
 	 * <p>The new session will have no activities associated with it and must be added.
 	 */
-	public Session(LocalDate date) {
-		this(date, 26);
+	public Session instantiate(LocalDate date) {
+		if(session != null) {
+			return session;
+		}  else {
+			return instantiate(date, 26);
+		}
 	}
 	
 	/**
@@ -36,7 +43,15 @@ public class Session {
 	 * 
 	 * <p>The new session will have no activities associated with it and must be added.
 	 */
-	public Session(LocalDate date, int numOfWeeks) {
+	private Session instantiate(LocalDate date, int numOfWeeks) {
+		if(this.session != null) {
+			return session;
+		} else {
+			return new Session(date, numOfWeeks);			
+		}
+	}
+	
+	private Session(LocalDate date, int numOfWeeks) {
 		this.startDate = date;
 		this.endDate = date.plusWeeks(numOfWeeks);
 	}
