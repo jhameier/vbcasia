@@ -2,6 +2,7 @@ package org.vbc4me.awanna.account;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Represents a yearly set of activities associated with an organization's program and
@@ -9,6 +10,7 @@ import java.util.Map;
  */
 public final class Season {
 	
+	private final UUID id;
 	private final String name;
 	private static Session session;
 	private static Map<String, Student> students = new HashMap<>();
@@ -19,6 +21,14 @@ public final class Season {
 		Season.session = session;
 		Season.students = students;
 		Season.staff = staff;
+		this.id = UUID.randomUUID();
+	}
+	
+	/**
+	 * Return the id of this {@link Season}.
+	 */
+	public String id() {
+		return id.toString();
 	}
 	
 	/**
