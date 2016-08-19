@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE season>
+<season>
+    <session>
+        <startdate>01012016</startdate>
+        <enddate>12312016</enddate>
+        <activities>
+            <activity>
+                <event>name 1</event>
+                <description>some activity info</description>
+                <date>01072016</date>
+                <time>06:30:00PM</time>
+                <cost>0.50</cost>
+            </activity>
+            <activity>
+                <event>name 2</event>
+                <description>some activity info</description>
+                <date>01142016</date>
+                <time>06:30:00PM</time>
+                <cost>0.50</cost>
+            </activity>
+        </activities>
+    </session>
+    <student>path/to/student.stu/file</student>
+    <staff>path/to/staff.stf/file</staff>
+</season>
