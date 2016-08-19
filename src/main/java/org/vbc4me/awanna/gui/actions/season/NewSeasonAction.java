@@ -26,6 +26,5 @@ public class NewSeasonAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		PrimaryGuiPanel.changeButtonLayout(PrimaryGuiPanel.SEASON);
 		PrimaryGuiPanel.displayPanel().updateBothDisplays(new SeasonEditForm(), BorderLayout.WEST, new SeasonTableModel());
-		PrimaryGuiPanel.mainWindow.pack();
 	}
 }
