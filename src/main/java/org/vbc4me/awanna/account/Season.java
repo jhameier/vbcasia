@@ -12,15 +12,15 @@ public final class Season {
 	
 	private final UUID id;
 	private final String name;
-	private static Session session;
-	private static Map<String, Student> students = new HashMap<>();
-	private static Map<String, Staff> staff = new HashMap<>();
+	private Session session;
+	private Map<String, Student> students = new HashMap<>();
+	private Map<String, Staff> staff = new HashMap<>();
 	
 	public Season(String name, Session session, Map<String, Student> students, Map<String, Staff> staff) {
 		this.name = name;
-		Season.session = session;
-		Season.students = students;
-		Season.staff = staff;
+		this.session = session;
+		this.students = students;
+		this.staff = staff;
 		this.id = UUID.randomUUID();
 	}
 	
@@ -48,7 +48,7 @@ public final class Season {
 	/**
 	 * Returns all the {@link Student}s that are associated with this Season.
 	 */
-	public static Map<String, Student> students() {
+	public Map<String, Student> students() {
 		return students;
 	}
 	
@@ -59,7 +59,7 @@ public final class Season {
 	 * @param name
 	 *            of the student to retrieve (first last)
 	 */
-	public static Student getStudentByName(String name) {
+	public Student getStudentByName(String name) {
 		if (students.containsKey(name)) {
 			return students.get(name);
 		}
@@ -69,22 +69,22 @@ public final class Season {
 	/**
 	 * Adds a single {@link Student} to this Seasons list of students.
 	 */
-	public static void addStudent(Student student) {
+	public void addStudent(Student student) {
 		students.put(student.childLastName(), student);
 	}
 	
 	/**
 	 * Returns all the {@link Staff} associated with this Season.
 	 */
-	public static Map<String, Staff> staff() {
+	public Map<String, Staff> staff() {
 		return staff;
 	}
 	
 	/**
 	 * Adds a {@link Staff} member to this {@code Seasons} list of staff members
 	 */
-	public static void addStaff(Staff staff) {
-		Season.staff.put(staff.lastName(), staff);
+	public void addStaff(Staff staff) {
+		this.staff.put(staff.lastName(), staff);
 	}
 	
 }

@@ -117,6 +117,13 @@ public final class Session {
 	}
 	
 	/**
+	 * Returns all the {@link Activity activities} associated with this {@link Session}.
+	 */
+	public Map<LocalDate, Activity> activities() {
+		return activities;
+	}
+	
+	/**
 	 * Checks if this session is still open. This will return nothing if this
 	 * session is open but conversely will throw an {@link IllegalAccessError}
 	 * if it has been closed. This is here in an attempt to keep someone from performing

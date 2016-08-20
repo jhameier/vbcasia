@@ -29,19 +29,19 @@ public final class StudentFileWriter {
 	 *            of student to print or all for every student
 	 * @return true if successfully writes out to file.
 	 */
-	public static boolean writeFile(Path path, String name) {
+	public static boolean writeFile(Path path, String name, Season season) {
 		
 		// Create the document
 		Document doc = new Document(new Element("students"));
 		
 		if (name.equals("all")) {
 			// attach all students
-			for (Student student : Season.students().values()) {
+			for (Student student : season.students().values()) {
 				doc.getRootElement().addContent(getMemberElement(student));
 			}
 			
 		} else {
-			Student student = Season.students().get(name);
+			Student student = season.students().get(name);
 			
 			if (student == null) {
 				return false;
@@ -61,12 +61,12 @@ public final class StudentFileWriter {
 		return true;
 	}
 	
-	public static boolean writeStream(Path path, String name) {
+	public static boolean writeStream(Path path, String name, Season season) {
 		
 		// Create the document
 		Document doc = new Document(new Element("students"));
 		
-		Student student = Season.students().get(name);
+		Student student = season.students().get(name);
 		
 		if (student == null) {
 			return false;

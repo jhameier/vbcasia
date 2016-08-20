@@ -11,13 +11,13 @@ import org.vbc4me.awanna.account.*;
 
 public final class StaffFileWriter {
 	
-	public static void write(Path path) {
+	public static void write(Path path, Season season) {
 		
 		// Create the document
 		Document doc = new Document(new Element("staff"));
 		
 		// attach staff members
-		for (Staff staff : Season.staff().values()) {
+		for (Staff staff : season.staff().values()) {
 			doc.getRootElement().addContent(getMemberElement(staff));
 		}
 		
