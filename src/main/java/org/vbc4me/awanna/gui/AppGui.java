@@ -31,6 +31,7 @@ import org.vbc4me.awanna.gui.actions.record.CopyRecordAction;
 import org.vbc4me.awanna.gui.actions.record.NewRecordAction;
 import org.vbc4me.awanna.gui.actions.record.SaveRecordAction;
 import org.vbc4me.awanna.gui.forms.DisplayPanel;
+import org.vbc4me.awanna.gui.forms.season.SeasonBlankForm;
 import org.vbc4me.awanna.gui.forms.season.actions.NewSeasonAction;
 import org.vbc4me.awanna.gui.forms.season.actions.OpenSeasonAction;
 import org.vbc4me.awanna.gui.forms.session.actions.CopySessionAction;
@@ -77,6 +78,7 @@ public class AppGui extends JFrame {
 	public AppGui() { 
 		
 		displayPanel = new DisplayPanel();
+		displayPanel.updateContentDisplay(new SeasonBlankForm());
 		getContentPane().add(displayPanel, BorderLayout.CENTER);
 		
 		/*
@@ -201,6 +203,11 @@ public class AppGui extends JFrame {
 		Action preferences = new PreferenceAction(this);
 		mntmPref.addActionListener(preferences);
 		mnHelp.add(mntmPref);
+		
+		/* *******************************************************************
+		 *  establish the basic windowing structure.
+		 *********************************************************************/
+		
 	}
 	
 	public static void main(String[] args) {
