@@ -1,6 +1,5 @@
 package org.vbc4me.awanna.gui.forms.season.actions;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
