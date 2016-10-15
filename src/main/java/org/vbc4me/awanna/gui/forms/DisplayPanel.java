@@ -87,8 +87,8 @@ public final class DisplayPanel extends JPanel {
 	 * <p>This only updates the content side of the upper display and not the button side of the display.
 	 * If changing both content and button is the desired action see {@link #}
 	 */
-	public void updateContentDisplay(JPanel display, String layout) {
-		contentPanel.add(display, layout);
+	public void updateContentDisplay(JPanel display) {
+		contentPanel.add(display);
 	}
 	
 	/**
