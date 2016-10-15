@@ -8,7 +8,7 @@ public class SeasonBlankForm extends JPanel{
 
 	public SeasonBlankForm()  {
 		
-		JLabel lblSeasonFormClick = new JLabel("Season Form Click Open or create a new one.");
+		JLabel lblSeasonFormClick = new JLabel("No open Season. Click File -> 'Open Season' or 'New Season' to create a new one.");
 		add(lblSeasonFormClick);
 		
 	}
