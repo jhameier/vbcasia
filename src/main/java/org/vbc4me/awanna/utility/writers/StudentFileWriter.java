@@ -183,7 +183,7 @@ public final class StudentFileWriter {
 			tr.setAttribute("type", t.type());
 			tr.setAttribute("amount", String.valueOf(t.amount()));
 			
-			Element activity = new Element("activity");
+			Element activity = new Element("actions");
 			activity.setAttribute("date", t.activity().date().toString());
 			activity.setAttribute("time", t.activity().time().toString());
 			activity.addContent(t.activity().name());

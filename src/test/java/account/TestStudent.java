@@ -5,11 +5,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.vbc4me.awanna.account.PhoneNumber;
 import org.vbc4me.awanna.account.Student;
-
-import junit.framework.Assert;
 
 public class TestStudent {
 	

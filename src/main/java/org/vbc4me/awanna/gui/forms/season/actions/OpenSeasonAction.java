@@ -1,4 +1,4 @@
-package org.vbc4me.awanna.gui.actions.season;
+package org.vbc4me.awanna.gui.forms.season.actions;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -6,21 +6,20 @@ import java.util.prefs.Preferences;
 
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JPanel;
 
 /**
- * Used to create a new blank season record.
+ * Used to create a new blank actions record.
  *
  * @author John Hameier: June 2015.
  */
 public class OpenSeasonAction extends AbstractAction {
 	private static final long serialVersionUID = -6301577011454895115L;
-	private JFrame frame;
+	private JPanel panel;
 	
-	public OpenSeasonAction(JFrame frame) {
-		this.frame = frame;
+	public OpenSeasonAction(JPanel panel) {
+		this.panel = panel;
 		putValue(NAME, "Open Season");
 		putValue(SHORT_DESCRIPTION, "Opens an existing Season.");
 	}
@@ -41,7 +40,7 @@ public class OpenSeasonAction extends AbstractAction {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Season File", "sea");
 		chooser.setFileFilter(filter);
 		
-		int returnValue = chooser.showOpenDialog(frame);
+		int returnValue = chooser.showOpenDialog(panel);
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			
 			File file = new File(chooser.getSelectedFile().getAbsolutePath());

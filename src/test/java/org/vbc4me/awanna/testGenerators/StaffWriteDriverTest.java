@@ -25,11 +25,11 @@ public class StaffWriteDriverTest {
 				.email("bhamstein1@gmail.com").specialNeeds("asthma symptoms").emergencyContactName("Sara Marlin")
 				.emergencyContactNumber("Cell", "6095671258").club(Club.SPARKS).title("Aide").photo(null).done();
 		
-		Season.staff().put(staff1.id(), staff1);
-		Season.staff().put(staff2.id(), staff2);
+//		Season.staff().put(staff1.id(), staff1);
+//		Season.staff().put(staff2.id(), staff2);
 		
 		Path path = Paths.get("./", "TestStaff.stf");
-		StaffFileWriter.write(path);
+//		StaffFileWriter.write(path);
 		
 	}
 	

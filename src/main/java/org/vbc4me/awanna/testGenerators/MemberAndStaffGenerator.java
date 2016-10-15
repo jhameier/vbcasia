@@ -75,7 +75,7 @@ public final class MemberAndStaffGenerator {
 						new BufferedImage(480, 640, BufferedImage.TYPE_INT_RGB), 
 						new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB));
 			}
-			Season.addStudent(sb.done());
+//			Season.addStudent(sb.done());
 		} // end create students
 		
 		// Create Staff 25
@@ -94,11 +94,11 @@ public final class MemberAndStaffGenerator {
 					.phoneNumber("cell", cell.trim()).email(email).specialNeeds(specialNeed(random))
 					.emergencyContactName(ecname[0] + " " + ecname[1]).emergencyContactNumber("cell", ecPhone)
 					.title("Some Title").club(Club.CUBBIES).photo(null).done();
-			Season.addStaff(staff);
+//			Season.addStaff(staff);
 		}
 		
 		// Write files out		
-		StudentFileWriter.writeFile(path, "all");
+//		StudentFileWriter.writeFile(path, "all");
 	}
 	
 	private static void read(String fileName, List<String> names) {

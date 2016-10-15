@@ -2,6 +2,7 @@ package org.vbc4me.awanna.gui.forms;
 
 import java.awt.BorderLayout;
 
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -20,23 +21,34 @@ import javax.swing.table.TableModel;
  */
 public final class DisplayPanel extends JPanel {
 	private static final long serialVersionUID = -3284524458172373047L;
-	private final static JTable table = new JTable();
-	private final static JPanel panel = new JPanel(new BorderLayout());
+	private final JTable table = new JTable();
+	private final JPanel panel = new JPanel();
 	private final JSplitPane splitPane;
+	private JPanel contentPanel;
+	private JPanel buttonPanel;
 	
 	public DisplayPanel() {
 		setLayout(new BorderLayout());
 		splitPane = new JSplitPane();
+		splitPane.setResizeWeight(0.5);
 		splitPane.setOneTouchExpandable(true);
 		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		add(splitPane, BorderLayout.CENTER);
 		
 		/*
-		 * Upper scroll pane holds a panel with a border layout. We place in this
-		 * panel's BorderLayout.CENTER so that we can change what is displayed 
+		 * Upper scroll pane holds 2 panels, 1 panel with a border layout for content and the other for the button panel. 
+		 * We place in this panel's BorderLayout.CENTER so that we can change what is displayed 
 		 * in the upper portion of the window.
 		 */
 		final JScrollPane upperScrollPane = new JScrollPane(panel);
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		buttonPanel = new JPanel();
+		panel.add(buttonPanel);
+
+		contentPanel = new JPanel();
+		panel.add(contentPanel);
+		
 		
 		/*
 		 * Lower scroll pane holds a table and is place inside a panel's
@@ -55,21 +67,36 @@ public final class DisplayPanel extends JPanel {
 	 * different models, this table display can show various types of tables
 	 * without creating a separate JTable for each view needed.
 	 */
-	public void updateLowerDisplay(TableModel dataModel) {
+	public void updateTableDisplay(TableModel dataModel) {
 		table.setModel(dataModel);
-		splitPane.setDividerLocation(0.60);
 		table.revalidate();
 	}
 	
 	/**
-	 * Sets the upper display with the panel passed in, using the layout provided. The display uses
-	 * a Border Layout so a proper uses example {@code BorderLayout.WEST}. 
+	 * Sets the upper content display with the panel passed in, using the layout provided. The display uses
+	 * a Border Layout so passing in a layout is required such as {@code BorderLayout.WEST}. 
+	 * 
+	 * <p>This only updates the content side of the upper display and not the button side of the display.
+	 * If changing both content and button is the desired action see {@link #}
 	 */
-	public void updateUpperDisplay(JPanel display, String layout) {
-		panel.removeAll();
-		panel.add(display, layout);
-		splitPane.setDividerLocation(0.60);
-		panel.revalidate();
+	public void updateContentDisplay(JPanel display, String layout) {
+		contentPanel.add(display, layout);
+	}
+	
+	/**
+	 *  Sets the upper button panel with the panel passed in. 
+	 */
+	public void updateButtonDisplay(JPanel btnPanel) {
+		buttonPanel.add(btnPanel);
+	}
+	
+	/**
+	 * Updates the upper content and button panels. The content panel requires a layout option to be set such as 
+	 * {@code BorderLayout.WEST}.
+	 */
+	public void updateUpperDisplay(JPanel btnPanel, JPanel display) {
+		buttonPanel.add(btnPanel);
+		contentPanel.add(display);
 	}
 	
 	/**
@@ -79,11 +106,18 @@ public final class DisplayPanel extends JPanel {
 	 * style data. It should be noted that the tableModel is what is passed in and
 	 * the table is updated with the then data set and layout.
 	 */
-	public void updateBothDisplays(JPanel textPanel, String layout, TableModel dataModel) {
-		panel.removeAll();
-		panel.add(textPanel, layout);
+	public void updateAllDisplays(JPanel textPanel, JPanel btnPanel, TableModel dataModel) {
+		buttonPanel.removeAll();
+		buttonPanel.add(btnPanel);
+		
+		contentPanel.removeAll();
+		contentPanel.add(textPanel);
+		
+		table.removeAll();
 		table.setModel(dataModel);
-		splitPane.setDividerLocation(0.60);
+		
+		panel.revalidate();
+		table.revalidate();
 	}
 	
 }

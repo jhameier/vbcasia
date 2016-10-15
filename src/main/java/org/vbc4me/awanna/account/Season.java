@@ -6,7 +6,7 @@ import java.util.UUID;
 
 /**
  * Represents a yearly set of activities associated with an organization's program and
- * contains information such as session (start and end dates + activities), student and staffing information
+ * contains information such as actions (start and end dates + activities), student and staffing information
  */
 public final class Season {
 	

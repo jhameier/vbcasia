@@ -22,11 +22,11 @@ public final class Session {
 	private boolean open = true;
 	
 	/**
-	 * Creates a new session with the given start date. 
+	 * Creates a new actions with the given start date.
 	 * The end date is automatically calculated for 6 months from the
 	 * start date. The end date can be adjusted when necessary. 
 	 * 
-	 * <p>The new session will have no activities associated with it and must be added.
+	 * <p>The new actions will have no activities associated with it and must be added.
 	 */
 	public Session instantiate(LocalDate date) {
 		if(session != null) {
@@ -37,11 +37,11 @@ public final class Session {
 	}
 	
 	/**
-	 * Creates a new session with the given start date.
+	 * Creates a new actions with the given start date.
 	 * The end date is calculated based on the number of weeks passed in.
 	 * The end date can be adjusted when necessary. 
 	 * 
-	 * <p>The new session will have no activities associated with it and must be added.
+	 * <p>The new actions will have no activities associated with it and must be added.
 	 */
 	private Session instantiate(LocalDate date, int numOfWeeks) {
 		if(this.session != null) {
@@ -95,9 +95,9 @@ public final class Session {
 	}
 	
 	/**
-	 * Adds an activity to this Session
+	 * Adds an actions to this Session
 	 *
-	 * @param date  of this activity
+	 * @param date  of this actions
 	 * @param activity for members to participate in
 	 */
 	public void addActivity(LocalDate date, LocalTime time, String activity, double cost) {
@@ -107,7 +107,7 @@ public final class Session {
 	}
 	
 	/**
-	 *  Returns an activity if one is found on the date specified. If not an empty object will be returned
+	 *  Returns an actions if one is found on the date specified. If not an empty object will be returned
 	 */
 	public Optional<Activity> getActivity(LocalDate date) {
 		if (activities.get(date) != null) {
@@ -124,22 +124,22 @@ public final class Session {
 	}
 	
 	/**
-	 * Checks if this session is still open. This will return nothing if this
-	 * session is open but conversely will throw an {@link IllegalAccessError}
+	 * Checks if this actions is still open. This will return nothing if this
+	 * actions is open but conversely will throw an {@link IllegalAccessError}
 	 * if it has been closed. This is here in an attempt to keep someone from performing
-	 * operations on an already closed session and it is left to the programmer to control
-	 * the program flow in order to avoid this from being called after a session has been closed.
+	 * operations on an already closed actions and it is left to the programmer to control
+	 * the program flow in order to avoid this from being called after a actions has been closed.
 	 * the {@link #sessionIsOpen()} method should be called in order to avoid this from being
 	 * thrown.
 	 */
 	private void checkIfSessionIsOpen() {
 		if (!open) {
-			throw new IllegalAccessError("You can not add an activity to a closed session");
+			throw new IllegalAccessError("You can not add an actions to a closed actions");
 		}
 	}
 	
 	/**
-	 * Returns if this session is open and available to add and modify students,
+	 * Returns if this actions is open and available to add and modify students,
 	 * staff and activities.
 	 */
 	public boolean sessionIsOpen() {
@@ -147,7 +147,7 @@ public final class Session {
 	}
 	
 	/**
-	 * Closes this session. Closed sessions can not be modified in anyway after
+	 * Closes this actions. Closed sessions can not be modified in anyway after
 	 * it has been closed.
 	 */
 	public void closeSession() {
@@ -155,9 +155,9 @@ public final class Session {
 	}
 	
 	/**
-	 * This will reopen a session if it is closed. This should only be used in
+	 * This will reopen a actions if it is closed. This should only be used in
 	 * rare circumstances that require addition information to be added. Add
-	 * data in an open session is logged for backup purposes.
+	 * data in an open actions is logged for backup purposes.
 	 */
 	protected void reopenSession() {
 		open = true;

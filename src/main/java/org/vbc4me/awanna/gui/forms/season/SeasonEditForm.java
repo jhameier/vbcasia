@@ -4,10 +4,12 @@ import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import org.vbc4me.awanna.gui.forms.DisplayPanel;
+
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
+import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JTextField;
 
 public class SeasonEditForm extends JPanel {
 	private static final long serialVersionUID = -6531861712233753720L;
@@ -19,16 +21,16 @@ public class SeasonEditForm extends JPanel {
 	public JLabel lblNoOfStudents;
 	public JLabel lblNumberOfStaff;
 	public JLabel lblNoOfStaff;
-	private JTextField txtStartDate;
-	private JTextField txtEndDate;
 	private JLabel lblDisplayNumberActivities;
 	private JLabel lblDisplayNumberStudents;
 	private JLabel lblDisplayNumberStaff;
+	private DatePicker startdatePicker;
+	private DatePicker enddatePicker;
 	
 	public SeasonEditForm() {
 		
 		JPanel infoPanel = new JPanel();
-		infoPanel.setLayout(new MigLayout("", "[][][][]", "[][][][][][][]"));
+		infoPanel.setLayout(new MigLayout("", "[][][][][]", "[][][][][][][]"));
 		add(infoPanel);
 		
 		JLabel lblSeason = new JLabel("Season");
@@ -59,12 +61,28 @@ public class SeasonEditForm extends JPanel {
 		lblNumberOfActivities.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		infoPanel.add(lblNumberOfActivities, "cell 1 4 2 1,alignx right,aligny center");
 		
+		startdatePicker = new DatePicker();
+        startdatePicker.addDateChangeListener(new DateChangeListener() {
+            @Override
+            public void dateChanged(DateChangeEvent event) {
+                if (event.getNewDate() != null) {
+                    enddatePicker.setDate(startdatePicker.getDate().plusWeeks(24));
+                } else {
+                    enddatePicker.clear();
+                }
+            }
+        });
+		infoPanel.add(startdatePicker, "cell 3 2");
+		
+		enddatePicker = new DatePicker();
+		infoPanel.add(enddatePicker, "cell 3 3");
+
 		lblNoOfActivities = new JLabel("");
 		infoPanel.add(lblNoOfActivities, "flowx,cell 3 4");
 		
 		JLabel lblNumberOfStudents = new JLabel("Number of Students:");
 		infoPanel.add(lblNumberOfStudents, "cell 1 5 2 1,alignx right,aligny center");
-		
+
 		lblNoOfStudents = new JLabel("");
 		infoPanel.add(lblNoOfStudents, "flowx,cell 3 5");
 		
@@ -73,14 +91,6 @@ public class SeasonEditForm extends JPanel {
 		
 		lblNoOfStaff = new JLabel("");
 		infoPanel.add(lblNoOfStaff, "flowx,cell 3 6");
-				
-		txtStartDate = new JTextField();
-		infoPanel.add(txtStartDate, "cell 3 2");
-		txtStartDate.setColumns(10);
-		
-		txtEndDate = new JTextField();
-		infoPanel.add(txtEndDate, "cell 3 3,aligny top");
-		txtEndDate.setColumns(10);
 		
 		lblDisplayNumberActivities = new JLabel("");
 		infoPanel.add(lblDisplayNumberActivities, "cell 3 4");
@@ -90,6 +100,7 @@ public class SeasonEditForm extends JPanel {
 		
 		lblDisplayNumberStaff = new JLabel("");
 		infoPanel.add(lblDisplayNumberStaff, "cell 3 6");
+		
 	}
 	
 }

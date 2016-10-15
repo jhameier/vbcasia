@@ -28,17 +28,13 @@ import org.vbc4me.awanna.gui.actions.misc.ProgramHelpAction;
 import org.vbc4me.awanna.gui.actions.record.CopyRecordAction;
 import org.vbc4me.awanna.gui.actions.record.NewRecordAction;
 import org.vbc4me.awanna.gui.actions.record.SaveRecordAction;
-import org.vbc4me.awanna.gui.actions.season.NewSeasonAction;
-import org.vbc4me.awanna.gui.actions.season.OpenSeasonAction;
-import org.vbc4me.awanna.gui.actions.session.CopySessionAction;
-import org.vbc4me.awanna.gui.actions.session.NewSessionAction;
-import org.vbc4me.awanna.gui.actions.session.OpenSessionAction;
-import org.vbc4me.awanna.gui.actions.session.SaveSessionAction;
 import org.vbc4me.awanna.gui.forms.DisplayPanel;
-import org.vbc4me.awanna.gui.forms.activity.ActivityButtonPanel;
-import org.vbc4me.awanna.gui.forms.season.SeasonButtonPanel;
-import org.vbc4me.awanna.gui.forms.session.SessionButtonPanel;
-import org.vbc4me.awanna.gui.forms.student.RecordButtonPanel;
+import org.vbc4me.awanna.gui.forms.season.actions.NewSeasonAction;
+import org.vbc4me.awanna.gui.forms.season.actions.OpenSeasonAction;
+import org.vbc4me.awanna.gui.forms.session.actions.CopySessionAction;
+import org.vbc4me.awanna.gui.forms.session.actions.NewSessionAction;
+import org.vbc4me.awanna.gui.forms.session.actions.OpenSessionAction;
+import org.vbc4me.awanna.gui.forms.session.actions.SaveSessionAction;
 
 /**
  * Used to hold the primary applications layout and component panels. The only
@@ -56,10 +52,6 @@ public class PrimaryGuiPanel extends JFrame {
 	public static PrimaryGuiPanel mainWindow;
 	private static JPanel buttonCardPanel;
 	private static CardLayout buttonCardLayout;
-	public static final String RECORD = "Record";
-	public static final String SEASON = "Season";
-	public static final String SESSION = "Session";
-	public static final String ACTIVITY = "Activity";
 	
 	private static LookAndFeelInfo[] lookList = UIManager.getInstalledLookAndFeels();
 	
@@ -71,7 +63,10 @@ public class PrimaryGuiPanel extends JFrame {
 	public static void changeButtonLayout(String buttonPanel) {
 		buttonCardLayout.show(buttonCardPanel, buttonPanel);
 	}
-	
+
+	/**
+	 * Return the current {@link DisplayPanel}.
+	 */
 	public static DisplayPanel displayPanel() {
 		return displayPanel;
 	}
@@ -81,24 +76,7 @@ public class PrimaryGuiPanel extends JFrame {
 	 * border layout with a menu bar, button panel in the north and the card
 	 * panel in the center components.
 	 */
-	public PrimaryGuiPanel() {
-		
-		buttonCardLayout = new CardLayout(5, 5);
-		buttonCardPanel = new JPanel(buttonCardLayout);
-		getContentPane().add(buttonCardPanel, BorderLayout.NORTH);
-		
-		// Creates the Button Panels for each of the display types
-		final SeasonButtonPanel seasonButtonPanel = new SeasonButtonPanel(this);
-		buttonCardPanel.add(seasonButtonPanel, PrimaryGuiPanel.SEASON);
-		
-		final SessionButtonPanel sessionButtonPanel = new SessionButtonPanel(this);
-		buttonCardPanel.add(sessionButtonPanel, PrimaryGuiPanel.SESSION);
-		
-		final RecordButtonPanel recordButtonPanel = new RecordButtonPanel(this);
-		buttonCardPanel.add(recordButtonPanel, PrimaryGuiPanel.RECORD);
-		
-		final ActivityButtonPanel activityButtonPanel = new ActivityButtonPanel(this);
-		buttonCardPanel.add(activityButtonPanel, PrimaryGuiPanel.ACTIVITY); 
+	public PrimaryGuiPanel() { 
 		
 		displayPanel = new DisplayPanel();
 		getContentPane().add(displayPanel, BorderLayout.CENTER);
@@ -114,51 +92,51 @@ public class PrimaryGuiPanel extends JFrame {
 		menuBar.add(mnFile);
 		
 		JMenuItem mntmNewSeason = new JMenuItem("New Season");
-		Action newSeasonAction = new NewSeasonAction(this);
+		Action newSeasonAction = new NewSeasonAction(displayPanel);
 		mntmNewSeason.addActionListener(newSeasonAction);
 		mnFile.add(mntmNewSeason);
 		
 		JMenuItem mntmOpenSeason = new JMenuItem("Open Season");
-		Action openSeasonAction = new OpenSeasonAction(this);
+		Action openSeasonAction = new OpenSeasonAction(displayPanel);
 		mntmOpenSeason.addActionListener(openSeasonAction);
 		mnFile.add(mntmOpenSeason);
 		
 		mnFile.addSeparator();
 		
 		JMenuItem mntmNewSession = new JMenuItem("New Session");
-		Action newSessionAction = new NewSessionAction(this);
+		Action newSessionAction = new NewSessionAction(displayPanel);
 		mntmNewSession.addActionListener(newSessionAction);
 		mnFile.add(mntmNewSession);
 		
 		JMenuItem mntmOpenSession = new JMenuItem("Open Session");
-		Action openSessionAction = new OpenSessionAction(this);
+		Action openSessionAction = new OpenSessionAction(displayPanel);
 		mntmOpenSession.addActionListener(openSessionAction);
 		mnFile.add(mntmOpenSession);
 		
 		JMenuItem mntmCopySession = new JMenuItem("Copy Session");
-		Action copySessionAction = new CopySessionAction(this);
+		Action copySessionAction = new CopySessionAction(displayPanel);
 		mntmCopySession.addActionListener(copySessionAction);
 		mnFile.add(mntmCopySession);
 		
 		JMenuItem mntmSaveSession = new JMenuItem("Save Session");
-		Action saveSessionAction = new SaveSessionAction(this);
+		Action saveSessionAction = new SaveSessionAction(displayPanel);
 		mntmSaveSession.addActionListener(saveSessionAction);
 		mnFile.add(mntmSaveSession);
 		
 		mnFile.addSeparator();
 		
 		JMenuItem mntmNewRecord = new JMenuItem("New Record");
-		Action newRecordAction = new NewRecordAction(this);
+		Action newRecordAction = new NewRecordAction(displayPanel);
 		mntmNewRecord.addActionListener(newRecordAction);
 		mnFile.add(mntmNewRecord);
 		
 		JMenuItem mntmEdit = new JMenuItem("Edit Record");
-		Action editRecordAction = new EditAction(this);
+		Action editRecordAction = new EditAction(displayPanel);
 		mntmEdit.addActionListener(editRecordAction);
 		mnFile.add(mntmEdit);
 		
 		JMenuItem mntmSaveRecord = new JMenuItem("Save Record");
-		Action saveRecordAction = new SaveRecordAction(this);
+		Action saveRecordAction = new SaveRecordAction(displayPanel);
 		mntmSaveRecord.addActionListener(saveRecordAction);
 		mnFile.add(mntmSaveRecord);
 		
@@ -180,7 +158,7 @@ public class PrimaryGuiPanel extends JFrame {
 		mnEdit.add(mntmCut);
 		
 		JMenuItem mntmCopy = new JMenuItem("Copy");
-		Action copyRecordAction = new CopyRecordAction(this);
+		Action copyRecordAction = new CopyRecordAction(displayPanel);
 		mntmCopy.addActionListener(copyRecordAction);
 		mnEdit.add(mntmCopy);
 		
@@ -249,5 +227,6 @@ public class PrimaryGuiPanel extends JFrame {
 				screenRect.height / 2 - windowSize.height / 2);
 		mainWindow.pack();
 		mainWindow.setVisible(true);
+
 	}
 }

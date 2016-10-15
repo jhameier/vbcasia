@@ -53,11 +53,11 @@ public class StudentWriteDriverTest {
 		
 		Student student1 = stBuilder1.done();
 		Student student2 = stBuilder2.done();
-		Season.addStudent(student1);
-		Season.addStudent(student2);
+//		Season.addStudent(student1);
+//		Season.addStudent(student2);
 		
 		Path path = Paths.get("./", "TestStudent.stu");
-		boolean written = StudentFileWriter.writeFile(path, "all");
+//		boolean written = StudentFileWriter.writeFile(path, "all");
 		
 	}
 	

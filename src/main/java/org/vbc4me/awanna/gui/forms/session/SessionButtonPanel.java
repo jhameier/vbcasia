@@ -6,24 +6,22 @@ import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import org.vbc4me.awanna.gui.actions.session.CopySessionAction;
-import org.vbc4me.awanna.gui.actions.session.NewSessionAction;
-import org.vbc4me.awanna.gui.actions.session.OpenSessionAction;
-import org.vbc4me.awanna.gui.actions.session.SaveSessionAction;
+import org.vbc4me.awanna.gui.forms.session.actions.CopySessionAction;
+import org.vbc4me.awanna.gui.forms.session.actions.NewSessionAction;
+import org.vbc4me.awanna.gui.forms.session.actions.OpenSessionAction;
+import org.vbc4me.awanna.gui.forms.session.actions.SaveSessionAction;
 
 public class SessionButtonPanel extends JPanel {
 	private static final long serialVersionUID = -169212683318427227L;
-	private JFrame frame;
-	private final Action openSessionAction = new OpenSessionAction(frame);
-	private final Action createNewSessionAction = new NewSessionAction(frame);
-	private final Action copySessionAction = new CopySessionAction(frame);
-	private final Action saveSessionAction = new SaveSessionAction(frame);
+
+	private final Action openSessionAction = new OpenSessionAction(this);
+	private final Action createNewSessionAction = new NewSessionAction(this);
+	private final Action copySessionAction = new CopySessionAction(this);
+	private final Action saveSessionAction = new SaveSessionAction(this);
 	
-	public SessionButtonPanel(JFrame frame) {
-		this.frame = frame;
+	public SessionButtonPanel() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		Component horizontalStrut = Box.createHorizontalStrut(1);

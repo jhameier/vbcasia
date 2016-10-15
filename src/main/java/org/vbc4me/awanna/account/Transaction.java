@@ -35,7 +35,7 @@ public class Transaction {
 	}
 	
 	/**
-	 * Returns the activity associated with this account
+	 * Returns the actions associated with this account
 	 */
 	public Activity activity() {
 		return activity;

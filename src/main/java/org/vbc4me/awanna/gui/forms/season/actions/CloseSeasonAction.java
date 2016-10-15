@@ -1,8 +1,8 @@
-package org.vbc4me.awanna.gui.actions.season;
+package org.vbc4me.awanna.gui.forms.season.actions;
 
 import javax.swing.AbstractAction;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import java.awt.event.ActionEvent;
 
@@ -13,23 +13,23 @@ import java.awt.event.ActionEvent;
  */
 public class CloseSeasonAction extends AbstractAction {
 	private static final long serialVersionUID = -6301577011454895115L;
-	private JFrame frame;
+	private JPanel panel;
 	
-	public CloseSeasonAction(JFrame frame) {
-		this.frame = frame;
+	public CloseSeasonAction(JPanel panel) {
+		this.panel = panel;
 		putValue(NAME, "Close Season");
 		putValue(SHORT_DESCRIPTION, "Closes an existing Season.");
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		String message = "This will close a Season out. Closing a season cannot be undone!\n\n"
+		String message = "This will close a Season out. Closing a actions cannot be undone!\n\n"
 				+ "Are you sure you wish to continue?";
 		String title = "Close Existing Season Conformation";
 		int messageType = JOptionPane.WARNING_MESSAGE;
-		int confirmed = JOptionPane.showConfirmDialog(frame, message, title, messageType);
+		int confirmed = JOptionPane.showConfirmDialog(panel, message, title, messageType);
 		
 		if (confirmed == JOptionPane.OK_OPTION) {
-			JOptionPane.showMessageDialog(frame, "Closing Season out.");
+			JOptionPane.showMessageDialog(panel, "Closing Season out.");
 		}
 	}
 }

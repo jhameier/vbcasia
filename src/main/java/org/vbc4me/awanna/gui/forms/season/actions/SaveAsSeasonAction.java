@@ -1,10 +1,12 @@
-package org.vbc4me.awanna.gui.actions.season;
+package org.vbc4me.awanna.gui.forms.season.actions;
 
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import org.vbc4me.awanna.gui.forms.season.SeasonButtonPanel;
 
 /**
  * Used to copy an existing Season.
@@ -13,10 +15,10 @@ import javax.swing.JOptionPane;
  */
 public class SaveAsSeasonAction extends AbstractAction {
   private static final long serialVersionUID = -6301577011454895115L;
-  private JFrame frame;
+  private JPanel panel;
 
-  public SaveAsSeasonAction(JFrame frame) {
-    this.frame = frame;
+  public SaveAsSeasonAction(JPanel panel) {
+    this.panel = panel;
     putValue(NAME, "SaveAs Season");
     putValue(SHORT_DESCRIPTION, "Saves the currently open Season with a new name.");
   }
@@ -25,7 +27,7 @@ public class SaveAsSeasonAction extends AbstractAction {
     String message = "This is activated from SaveAs Season Action";
     String title = "SaveAs Season";
     int messageType = JOptionPane.INFORMATION_MESSAGE;
-    JOptionPane.showMessageDialog(frame, message, title, messageType);
+    JOptionPane.showMessageDialog(panel, message, title, messageType);
 
 
   }

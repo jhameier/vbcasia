@@ -83,7 +83,7 @@ public class StudentFileReader extends DefaultHandler {
 
         List<Element> transactions = acct.getChildren();
         for(Element trans : transactions) {
-          Element act = trans.getChild("activity");
+          Element act = trans.getChild("actions");
 
           LocalDate date = LocalDate.parse(act.getAttributeValue("date"));
           LocalTime time = LocalTime.parse(act.getAttributeValue("time"));

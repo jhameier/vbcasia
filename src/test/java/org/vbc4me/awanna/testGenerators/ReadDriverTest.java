@@ -20,20 +20,20 @@ public class ReadDriverTest {
   public static void main (String[] args) throws IOException {
     Path path = Paths.get("./", "VictoryAwannaFall2015.xml");
     MemberAndStaffGenerator.parse(path);
-//    SeasonClosed.session().startDate(LocalDate.now());
+//    SeasonClosed.actions().startDate(LocalDate.now());
 
     File file = new File(path.toString());
 
     List<Student> students = StudentFileReader.parse(file);
 
     for(Student student : students) {
-      Season.addStudent(student);
+//      Season.addStudent(student);
     }
 
 //    System.out.println("Members directory created.");
 //    System.out.println("Total number of members created: " + SeasonClosed.students().size());
-//    System.out.println("The session start date is: " + SeasonClosed.session().startDate());
-//    System.out.println("The session end date is: " + SeasonClosed.session().endDate());
+//    System.out.println("The actions start date is: " + SeasonClosed.actions().startDate());
+//    System.out.println("The actions end date is: " + SeasonClosed.actions().endDate());
 
   }
 

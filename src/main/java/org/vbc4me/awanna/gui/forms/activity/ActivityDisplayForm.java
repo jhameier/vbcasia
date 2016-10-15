@@ -4,8 +4,10 @@ import javax.swing.JPanel;
 
 public class ActivityDisplayForm extends JPanel{
 	private static final long serialVersionUID = 7122328988240684439L;
+	JPanel panel;
 
-	public ActivityDisplayForm() {
+	public ActivityDisplayForm(JPanel panel) {
+		this.panel = panel;
 		// TODO Auto-generated constructor stub
 	}
 	

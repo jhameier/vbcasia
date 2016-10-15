@@ -10,8 +10,8 @@ import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 
 /**
- * An activity is an event that is planned for participation of a student and
- * staff members including a date, time and a name for the activity.
+ * An actions is an event that is planned for participation of a student and
+ * staff members including a date, time and a name for the actions.
  *
  * @author John Hameier 2015
  */
@@ -59,28 +59,28 @@ public class Activity {
 	}
 
 	/**
-	 * Returns the date associated with this activity.
+	 * Returns the date associated with this actions.
 	 */
 	public LocalDate date() {
 		return date;
 	}
 
 	/**
-	 * Returns the start time associated with this activity.
+	 * Returns the start time associated with this actions.
 	 */
 	public LocalTime time() {
 		return time;
 	}
 
 	/**
-	 * Return the name of this activity.
+	 * Return the name of this actions.
 	 */
 	public String name() {
 		return name;
 	}
 
 	/**
-	 * Returns the cost of this activity
+	 * Returns the cost of this actions
 	 */
 	public Money cost() {
 		return cost;
