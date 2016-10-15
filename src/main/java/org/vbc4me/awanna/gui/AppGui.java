@@ -20,6 +20,8 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.WindowConstants;
 
+import org.vbc4me.awanna.Workspace;
+import org.vbc4me.awanna.account.Season;
 import org.vbc4me.awanna.gui.actions.misc.AboutAction;
 import org.vbc4me.awanna.gui.actions.misc.EditAction;
 import org.vbc4me.awanna.gui.actions.misc.LookAndFeelAction;
@@ -44,25 +46,14 @@ import org.vbc4me.awanna.gui.forms.session.actions.SaveSessionAction;
  *
  * @author John Hameier: June 2015
  */
-public class PrimaryGuiPanel extends JFrame {
+public class AppGui extends JFrame {
 	private static final long serialVersionUID = 5953409495403830350L;
 	
 	private static DisplayPanel displayPanel;
-	
-	public static PrimaryGuiPanel mainWindow;
-	private static JPanel buttonCardPanel;
-	private static CardLayout buttonCardLayout;
+	public static AppGui mainWindow;
+	private static Workspace workspace;
 	
 	private static LookAndFeelInfo[] lookList = UIManager.getInstalledLookAndFeels();
-	
-	/**
-	 * Change the card layout for this applications button layout. Currently
-	 * available button layouts are: SeasonButtonPanel, SessionButtonPanel and
-	 * RecordButtonPanel. You call PrimaryGuiPanel.getButtonLayout().
-	 */
-	public static void changeButtonLayout(String buttonPanel) {
-		buttonCardLayout.show(buttonCardPanel, buttonPanel);
-	}
 
 	/**
 	 * Return the current {@link DisplayPanel}.
@@ -72,11 +63,18 @@ public class PrimaryGuiPanel extends JFrame {
 	}
 	
 	/**
+	 * Returns the currently active workspace.
+	 */
+	public static Workspace workspace() {
+		return workspace;
+	}
+	
+	/**
 	 * Primary constructor that lays out the basic application structure using a
 	 * border layout with a menu bar, button panel in the north and the card
 	 * panel in the center components.
 	 */
-	public PrimaryGuiPanel() { 
+	public AppGui() { 
 		
 		displayPanel = new DisplayPanel();
 		getContentPane().add(displayPanel, BorderLayout.CENTER);
@@ -206,17 +204,17 @@ public class PrimaryGuiPanel extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(PrimaryGuiPanel::initializeAndShowGui);
+		SwingUtilities.invokeLater(AppGui::initializeAndShowGui);
 	}
 	
 	/**
 	 * Initialize our Windowing System and set window in center of primary default display.
 	 */
 	private static void initializeAndShowGui() {
-		mainWindow = new PrimaryGuiPanel();
+		mainWindow = new AppGui();
 		Dimension windowSize = new Dimension(800, 800);
 		mainWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		mainWindow.setTitle("Awanna Session Workspace");
+		mainWindow.setTitle("Awanna Workspace");
 		mainWindow.setPreferredSize(windowSize);
 		
 		// Set window in center of Default Monitor Window

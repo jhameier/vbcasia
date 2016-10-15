@@ -7,7 +7,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import org.vbc4me.awanna.gui.PrimaryGuiPanel;
+import org.vbc4me.awanna.gui.AppGui;
 import org.vbc4me.awanna.gui.forms.student.RecordButtonPanel;
 import org.vbc4me.awanna.gui.forms.student.StudentInputForm;
 
@@ -27,6 +27,6 @@ public class NewRecordAction extends AbstractAction {
   }
 
   public void actionPerformed(ActionEvent e) {
-    PrimaryGuiPanel.displayPanel().updateUpperDisplay(new StudentInputForm(), new RecordButtonPanel());
+    AppGui.displayPanel().updateUpperDisplay(new StudentInputForm(), new RecordButtonPanel());
   }
 }

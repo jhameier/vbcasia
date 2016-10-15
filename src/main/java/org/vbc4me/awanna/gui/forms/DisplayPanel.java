@@ -8,6 +8,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
+import java.awt.Component;
+import java.awt.FlowLayout;
 
 /**
  * This class handles the various spreadsheet styles and JPanels to display. This uses a
@@ -44,9 +46,15 @@ public final class DisplayPanel extends JPanel {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
 		buttonPanel = new JPanel();
+		FlowLayout flowLayout_1 = (FlowLayout) buttonPanel.getLayout();
+		flowLayout_1.setAlignment(FlowLayout.LEADING);
+		buttonPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panel.add(buttonPanel);
 
 		contentPanel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) contentPanel.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEADING);
+		contentPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panel.add(contentPanel);
 		
 		

@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JPanel;
 
-import org.vbc4me.awanna.gui.PrimaryGuiPanel;
+import org.vbc4me.awanna.gui.AppGui;
 import org.vbc4me.awanna.gui.forms.activity.ActivityButtonPanel;
 import org.vbc4me.awanna.gui.forms.activity.ActivityDisplayForm;
 
@@ -29,6 +29,6 @@ public class NewActivityRecordAction extends AbstractAction {
 	 * display panels
 	 */
 	public void actionPerformed(ActionEvent e) {
-		PrimaryGuiPanel.displayPanel().updateUpperDisplay(new ActivityDisplayForm(panel), new ActivityButtonPanel());
+		AppGui.displayPanel().updateUpperDisplay(new ActivityDisplayForm(panel), new ActivityButtonPanel());
 	}
 }
