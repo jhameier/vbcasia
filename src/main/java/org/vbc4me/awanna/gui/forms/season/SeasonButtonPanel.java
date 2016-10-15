@@ -2,7 +2,6 @@ package org.vbc4me.awanna.gui.forms.season;
 
 import javax.swing.Action;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import org.vbc4me.awanna.gui.forms.season.actions.CloseSeasonAction;
