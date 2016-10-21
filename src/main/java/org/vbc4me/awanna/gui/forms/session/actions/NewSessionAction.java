@@ -19,6 +19,7 @@ public class NewSessionAction extends AbstractAction {
     this.panel = panel;
     putValue(NAME, "New Session");
     putValue(SHORT_DESCRIPTION, "Creates new blank Session.");
+    setEnabled(false);
   }
 
   public void actionPerformed(ActionEvent e) {
@@ -26,7 +27,5 @@ public class NewSessionAction extends AbstractAction {
     String title = "Create New Session";
     int messageType = JOptionPane.INFORMATION_MESSAGE;
     JOptionPane.showMessageDialog(panel, message, title, messageType);
-
-
   }
 }
