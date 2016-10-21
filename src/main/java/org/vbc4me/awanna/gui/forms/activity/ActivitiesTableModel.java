@@ -7,7 +7,7 @@ import javax.swing.table.AbstractTableModel;
 
 import org.vbc4me.awanna.account.Activity;
 
-public class ActivitiesTableModel extends AbstractTableModel {
+public final class ActivitiesTableModel extends AbstractTableModel {
   private static final long serialVersionUID = 8530443718844287586L;
 
   public static final int DATE = 0;
