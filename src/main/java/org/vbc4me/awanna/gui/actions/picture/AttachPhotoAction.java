@@ -19,14 +19,14 @@ import org.vbc4me.awanna.gui.picture.ThumbnailPanel;
  * An action to call up a {@link JFileChooser} to select a photo to attach. The {@code JFileChooser}
  * uses a filter that only allows attaching a JPEG, PNG or GIF type file. 
  */
-public class AttachPhotoAction extends AbstractAction {
+public final class AttachPhotoAction extends AbstractAction {
 	private static final long serialVersionUID = 6935260325468086008L;
 	private final ThumbnailPanel thumbnailPanel;
 
     /**
      * Constructs a action that allows attaching a photo to a {@link ThumbnailPanel} for display.
      *
-     * @param panel: the parent panel that we want to center on
+     * @param thumbnailPanel: the parent panel that we want to center on
      */
     public AttachPhotoAction(ThumbnailPanel thumbnailPanel) {
         this.thumbnailPanel = thumbnailPanel;

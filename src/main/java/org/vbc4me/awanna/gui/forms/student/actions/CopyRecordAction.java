@@ -6,7 +6,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class CopyRecordAction extends AbstractAction {
+public final class CopyRecordAction extends AbstractAction {
     private static final long serialVersionUID = -1288201101615570596L;
     private JPanel panel;
 

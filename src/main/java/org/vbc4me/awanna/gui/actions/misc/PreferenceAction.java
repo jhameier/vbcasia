@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 /*
  *  Action Classes for Buttons and Menu Items
  */
-public class PreferenceAction extends AbstractAction {
+public final class PreferenceAction extends AbstractAction {
     private static final long serialVersionUID = -6301577011454895115L;
     private  JFrame frame;
     

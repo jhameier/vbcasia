@@ -8,7 +8,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-public class LookAndFeelAction extends AbstractAction {
+public final class LookAndFeelAction extends AbstractAction {
   private static final long serialVersionUID = -1288201101615570596L;
   private JFrame frame;
 

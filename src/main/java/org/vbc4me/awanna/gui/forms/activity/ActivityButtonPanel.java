@@ -13,7 +13,7 @@ import org.vbc4me.awanna.gui.forms.activity.actions.EditActivityAction;
 import org.vbc4me.awanna.gui.forms.activity.actions.NewActivityRecordAction;
 import org.vbc4me.awanna.gui.forms.activity.actions.SaveActivityRecordAction;
 
-public class ActivityButtonPanel extends JPanel{
+public final class ActivityButtonPanel extends JPanel{
 	private static final long serialVersionUID = -364619699132689562L;
 		
 	public ActivityButtonPanel() {

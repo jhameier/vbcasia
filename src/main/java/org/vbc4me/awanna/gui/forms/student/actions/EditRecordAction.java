@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 /**
  * Action Class for Buttons and Menu Items
  */
-public class EditRecordAction extends AbstractAction {
+public final class EditRecordAction extends AbstractAction {
     private static final long serialVersionUID = -6301577011454895115L;
     private JPanel panel;
 

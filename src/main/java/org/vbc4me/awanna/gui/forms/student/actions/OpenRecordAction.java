@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  *
  * @author John Hameier: June 2015.
  */
-public class OpenRecordAction extends AbstractAction {
+public final class OpenRecordAction extends AbstractAction {
     private static final long serialVersionUID = -6301577011454895115L;
     private JFrame frame;
 

@@ -13,7 +13,7 @@ import org.vbc4me.awanna.gui.forms.season.SeasonButtonPanel;
  *
  * @author John Hameier: June 2016.
  */
-public class SaveAsSeasonAction extends AbstractAction {
+public final class SaveAsSeasonAction extends AbstractAction {
   private static final long serialVersionUID = -6301577011454895115L;
   private JPanel panel;
 

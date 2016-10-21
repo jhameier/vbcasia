@@ -14,7 +14,7 @@ import javax.swing.JPanel;
  *
  * @author John Hameier: June 2015.
  */
-public class OpenSeasonAction extends AbstractAction {
+public final class OpenSeasonAction extends AbstractAction {
 	private static final long serialVersionUID = -6301577011454895115L;
 	private JPanel panel;
 	

@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
  *
  * @author John Hameier: June 2015.
  */
-public class CloseSeasonAction extends AbstractAction {
+public final class CloseSeasonAction extends AbstractAction {
 	private static final long serialVersionUID = -6301577011454895115L;
 	private JPanel panel;
 	

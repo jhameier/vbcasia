@@ -6,7 +6,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class AboutAction extends AbstractAction {
+public final class AboutAction extends AbstractAction {
 	private static final long serialVersionUID = -1288201101615570596L;
 	private JFrame frame;
 

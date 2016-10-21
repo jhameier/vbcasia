@@ -6,7 +6,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class CopySessionAction extends AbstractAction {
+public final class CopySessionAction extends AbstractAction {
     private static final long serialVersionUID = 8569314471846162511L;
     private JPanel frame;
 

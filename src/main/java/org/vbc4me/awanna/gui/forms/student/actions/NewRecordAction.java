@@ -17,7 +17,7 @@ import org.vbc4me.awanna.gui.forms.student.StudentInputForm;
  *
  * @author John Hameier: June 2015.
  */
-public class NewRecordAction extends AbstractAction {
+public final class NewRecordAction extends AbstractAction {
     private static final long serialVersionUID = -6301577011454895115L;
     private JPanel panel;
 

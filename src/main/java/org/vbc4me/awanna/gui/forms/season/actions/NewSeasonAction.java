@@ -16,7 +16,7 @@ import org.vbc4me.awanna.gui.forms.season.SeasonTableModel;
  *
  * @author John Hameier: June 2015.
  */
-public class NewSeasonAction extends AbstractAction {
+public final class NewSeasonAction extends AbstractAction {
 	private static final long serialVersionUID = -6301577011454895115L;
 	private JPanel panel;
 	

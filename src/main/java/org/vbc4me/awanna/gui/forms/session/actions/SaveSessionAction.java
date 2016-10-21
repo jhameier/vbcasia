@@ -11,7 +11,7 @@ import javax.swing.JPanel;
  *
  * @author John Hameier: June 2015.
  */
-public class SaveSessionAction extends AbstractAction {
+public final class SaveSessionAction extends AbstractAction {
     private static final long serialVersionUID = -6301577011454895115L;
     private JPanel panel;
 
