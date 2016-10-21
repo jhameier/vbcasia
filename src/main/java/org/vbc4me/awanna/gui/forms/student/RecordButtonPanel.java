@@ -6,13 +6,12 @@ import javax.swing.Action;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import org.vbc4me.awanna.gui.actions.misc.EditAction;
-import org.vbc4me.awanna.gui.actions.record.CopyRecordAction;
-import org.vbc4me.awanna.gui.actions.record.NewRecordAction;
-import org.vbc4me.awanna.gui.actions.record.SaveRecordAction;
+import org.vbc4me.awanna.gui.forms.student.actions.CopyRecordAction;
+import org.vbc4me.awanna.gui.forms.student.actions.NewRecordAction;
+import org.vbc4me.awanna.gui.forms.student.actions.SaveRecordAction;
 
 public class RecordButtonPanel extends JPanel {
 	private static final long serialVersionUID = 1909642709713212890L;
