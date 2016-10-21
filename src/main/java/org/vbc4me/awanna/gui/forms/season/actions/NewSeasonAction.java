@@ -6,6 +6,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JPanel;
 
 import org.vbc4me.awanna.gui.AppGui;
+import org.vbc4me.awanna.gui.forms.DisplayContainer;
 import org.vbc4me.awanna.gui.forms.season.SeasonButtonPanel;
 import org.vbc4me.awanna.gui.forms.season.SeasonEditForm;
 import org.vbc4me.awanna.gui.forms.season.SeasonTableModel;
@@ -26,7 +27,8 @@ public class NewSeasonAction extends AbstractAction {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		AppGui.displayPanel().updateAllDisplays(new SeasonEditForm(),  
-				new SeasonButtonPanel(), new SeasonTableModel());
+		 DisplayContainer container = new DisplayContainer(new SeasonEditForm(), 
+				 new SeasonButtonPanel(), new SeasonTableModel());
+		AppGui.displayPanel().updateAllDisplays(container);
 	}
 }

@@ -13,6 +13,7 @@ import javax.swing.*;
 
 import oracle.jrockit.jfr.JFR;
 
+import org.vbc4me.awanna.gui.forms.DisplayContainer;
 import org.vbc4me.awanna.gui.forms.DisplayPanel;
 import org.vbc4me.awanna.gui.forms.activity.ActivityButtonPanel;
 import org.vbc4me.awanna.gui.forms.season.SeasonBlankForm;
@@ -83,7 +84,7 @@ public class TestGuiPanels extends JFrame {
 //		JFrame window8 = new TestGuiPanels(seasonEditForm, "Season Edit Form");
 //		windows.add(window8);
 		DisplayPanel panel = new DisplayPanel();
-		panel.updateAllDisplays(new SeasonEditForm(), new SeasonButtonPanel(), new SeasonTableModel());
+		panel.updateAllDisplays(new DisplayContainer(new SeasonEditForm(), new SeasonButtonPanel(), new SeasonTableModel()));
 		JFrame window9 = new TestGuiPanels(panel, "Display Panel");
 		windows.add(window9);
 		

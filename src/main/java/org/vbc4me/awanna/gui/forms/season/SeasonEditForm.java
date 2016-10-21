@@ -10,6 +10,12 @@ import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.time.LocalDate;
 
 public class SeasonEditForm extends JPanel {
 	private static final long serialVersionUID = -6531861712233753720L;
@@ -26,11 +32,17 @@ public class SeasonEditForm extends JPanel {
 	private JLabel lblDisplayNumberStaff;
 	private DatePicker startdatePicker;
 	private DatePicker enddatePicker;
+	private JLabel lblName;
+	private JTextField nameField;
+	private SeasonButtonPanel btnPanel;
+
+
+	private SeasonButtonPanel buttonPanel;
 	
 	public SeasonEditForm() {
 		
 		JPanel infoPanel = new JPanel();
-		infoPanel.setLayout(new MigLayout("", "[][][][][]", "[][][][][][][]"));
+		infoPanel.setLayout(new MigLayout("", "[][][][grow][]", "[][][][][][][]"));
 		add(infoPanel);
 		
 		JLabel lblSeason = new JLabel("Season");
@@ -40,6 +52,16 @@ public class SeasonEditForm extends JPanel {
 		JLabel lblSession = new JLabel("Session:");
 		lblSession.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		infoPanel.add(lblSession, "cell 1 1,alignx right,aligny center");
+		
+		lblName = new JLabel("Name:");
+		infoPanel.add(lblName, "cell 2 1,alignx trailing,aligny center");
+		
+		nameField = new JTextField();
+		nameField.setColumns(10);
+		LocalDate date = LocalDate.now();
+		String name = "Awanna Season " + date.getYear(); 
+		nameField.setText(name);
+		infoPanel.add(nameField, "cell 3 1,growx");
 		
 		JLabel lblStartDate = new JLabel("Start Date:");
 		lblStartDate.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -67,8 +89,10 @@ public class SeasonEditForm extends JPanel {
             public void dateChanged(DateChangeEvent event) {
                 if (event.getNewDate() != null) {
                     enddatePicker.setDate(startdatePicker.getDate().plusWeeks(24));
+                    btnPanel.enableCreate(true);
                 } else {
                     enddatePicker.clear();
+                    btnPanel.enableCreate(false);
                 }
             }
         });
@@ -100,7 +124,5 @@ public class SeasonEditForm extends JPanel {
 		
 		lblDisplayNumberStaff = new JLabel("");
 		infoPanel.add(lblDisplayNumberStaff, "cell 3 6");
-		
 	}
-	
 }

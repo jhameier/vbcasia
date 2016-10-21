@@ -221,7 +221,7 @@ public class AppGui extends JFrame {
 		mainWindow = new AppGui();
 		Dimension windowSize = new Dimension(800, 800);
 		mainWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		mainWindow.setTitle("Awanna Workspace");
+		mainWindow.setTitle("Awana Workspace");
 		mainWindow.setPreferredSize(windowSize);
 		
 		// Set window in center of Default Monitor Window
