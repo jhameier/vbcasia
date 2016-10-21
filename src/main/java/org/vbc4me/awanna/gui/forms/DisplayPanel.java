@@ -89,6 +89,7 @@ public final class DisplayPanel extends JPanel {
 	 */
 	public void updateContentDisplay(JPanel display) {
 		contentPanel.add(display);
+        splitPane.setDividerLocation(-1);
 	}
 	
 	/**
@@ -96,15 +97,17 @@ public final class DisplayPanel extends JPanel {
 	 */
 	public void updateButtonDisplay(JPanel btnPanel) {
 		buttonPanel.add(btnPanel);
+        splitPane.setDividerLocation(-1);
 	}
 	
 	/**
 	 * Updates the upper content and button panels. The content panel requires a layout option to be set such as 
 	 * {@code BorderLayout.WEST}.
 	 */
-	public void updateUpperDisplay(JPanel btnPanel, JPanel display) {
+	public void updateUpperDisplay(JPanel content, JPanel btnPanel) {
 		buttonPanel.add(btnPanel);
-		contentPanel.add(display);
+		contentPanel.add(content);
+        splitPane.setDividerLocation(-1);
 	}
 	
 	/**
@@ -114,18 +117,18 @@ public final class DisplayPanel extends JPanel {
 	 * style data. It should be noted that the tableModel is what is passed in and
 	 * the table is updated with the then data set and layout.
 	 */
-	public void updateAllDisplays(JPanel textPanel, JPanel btnPanel, TableModel dataModel) {
+	public void updateAllDisplays(DisplayContainer container) {
 		buttonPanel.removeAll();
-		buttonPanel.add(btnPanel);
+		buttonPanel.add(container.getButtonPanel());
 		
 		contentPanel.removeAll();
-		contentPanel.add(textPanel);
+		contentPanel.add(container.getContent());
 		
 		table.removeAll();
-		table.setModel(dataModel);
-		
+		table.setModel(container.getTableModel());
+
+        splitPane.setDividerLocation(-1);
 		panel.revalidate();
 		table.revalidate();
-	}
-	
+	}	
 }
