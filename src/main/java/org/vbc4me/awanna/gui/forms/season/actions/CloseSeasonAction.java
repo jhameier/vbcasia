@@ -19,6 +19,7 @@ public class CloseSeasonAction extends AbstractAction {
 		this.panel = panel;
 		putValue(NAME, "Close Season");
 		putValue(SHORT_DESCRIPTION, "Closes an existing Season.");
+		setEnabled(false);
 	}
 	
 	public void actionPerformed(ActionEvent e) {

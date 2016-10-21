@@ -21,6 +21,7 @@ public class SaveAsSeasonAction extends AbstractAction {
     this.panel = panel;
     putValue(NAME, "SaveAs Season");
     putValue(SHORT_DESCRIPTION, "Saves the currently open Season with a new name.");
+    setEnabled(false);
   }
 
   public void actionPerformed(ActionEvent e) {
