@@ -1,4 +1,4 @@
-package org.vbc4me.awanna.gui.actions.misc;
+package org.vbc4me.awanna.gui.actions;
 
 import java.awt.event.ActionEvent;
 
