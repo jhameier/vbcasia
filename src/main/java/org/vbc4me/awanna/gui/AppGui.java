@@ -75,12 +75,17 @@ public class AppGui extends JFrame {
 	 * border layout with a menu bar, button panel in the north and the card
 	 * panel in the center components.
 	 */
-	public AppGui() { 
+	public AppGui() {
+
+        /* *******************************************************************
+		 *  establish the basic windowing structure.
+		 *********************************************************************/
 		
 		displayPanel = new DisplayPanel();
 		displayPanel.updateContentDisplay(new SeasonBlankForm());
 		getContentPane().add(displayPanel, BorderLayout.CENTER);
-		
+
+
 		/*
 		 * ***************** FILE MENU ************************
 		 */
@@ -203,11 +208,7 @@ public class AppGui extends JFrame {
 		Action preferences = new PreferenceAction(this);
 		mntmPref.addActionListener(preferences);
 		mnHelp.add(mntmPref);
-		
-		/* *******************************************************************
-		 *  establish the basic windowing structure.
-		 *********************************************************************/
-		
+
 	}
 	
 	public static void main(String[] args) {
