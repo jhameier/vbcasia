@@ -17,17 +17,18 @@ import org.vbc4me.awanna.gui.forms.season.SeasonTableModel;
  */
 @SuppressWarnings("unused")
 public class CreateSeasonAction extends AbstractAction {
-	private static final long serialVersionUID = 5370980765758188903L;
-	private JPanel panel;
-	
-	public CreateSeasonAction(JPanel panel) {
-		this.panel = panel;
-		putValue(NAME, "Create Season");
-		putValue(SHORT_DESCRIPTION, "Create a New Season.");
-	}
-	
-	public void actionPerformed(ActionEvent e) {
-		
-		
-	}
+    private static final long serialVersionUID = 5370980765758188903L;
+    private JPanel panel;
+
+    public CreateSeasonAction(JPanel panel) {
+        this.panel = panel;
+        putValue(NAME, "Create Season");
+        putValue(SHORT_DESCRIPTION, "Create a New Season.");
+        setEnabled(false);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+
+
+    }
 }
