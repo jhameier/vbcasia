@@ -10,37 +10,19 @@ import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 
 import net.miginfocom.swing.MigLayout;
+
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.time.LocalDate;
 
 public class SeasonEditForm extends JPanel {
 	private static final long serialVersionUID = -6531861712233753720L;
 
-	
-	public JLabel lblSessionStartDate;
-	public JLabel lblSessionEndDate;
-	public JLabel lblNoOfActivities;
-	public JLabel lblNoOfStudents;
-	public JLabel lblNumberOfStaff;
-	public JLabel lblNoOfStaff;
-	private JLabel lblDisplayNumberActivities;
-	private JLabel lblDisplayNumberStudents;
-	private JLabel lblDisplayNumberStaff;
-	private DatePicker startdatePicker;
+    private DatePicker startdatePicker;
 	private DatePicker enddatePicker;
-	private JLabel lblName;
-	private JTextField nameField;
-	private SeasonButtonPanel btnPanel;
+    private JTextField nameField;
 
-
-	private SeasonButtonPanel buttonPanel;
-	
 	public SeasonEditForm() {
-		
+
 		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(new MigLayout("", "[][][][grow][]", "[][][][][][][]"));
 		add(infoPanel);
@@ -52,30 +34,32 @@ public class SeasonEditForm extends JPanel {
 		JLabel lblSession = new JLabel("Session:");
 		lblSession.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		infoPanel.add(lblSession, "cell 1 1,alignx right,aligny center");
-		
-		lblName = new JLabel("Name:");
+
+        JLabel lblName = new JLabel("Name:");
 		infoPanel.add(lblName, "cell 2 1,alignx trailing,aligny center");
-		
+
 		nameField = new JTextField();
+		nameField.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		nameField.setColumns(10);
+        nameField.setSize(nameField.getWidth(), 25);
 		LocalDate date = LocalDate.now();
-		String name = "Awanna Season " + date.getYear(); 
+		String name = "Awanna Season " + date.getYear();
 		nameField.setText(name);
 		infoPanel.add(nameField, "cell 3 1,growx");
 		
 		JLabel lblStartDate = new JLabel("Start Date:");
 		lblStartDate.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		infoPanel.add(lblStartDate, "cell 1 2 2 1,alignx right,aligny center");
-		
-		lblSessionStartDate = new JLabel("");
+
+        JLabel lblSessionStartDate = new JLabel("");
 		lblSessionStartDate.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		infoPanel.add(lblSessionStartDate, "flowx,cell 3 2");
 		
 		JLabel lblEndDate = new JLabel("End Date:");
 		lblEndDate.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		infoPanel.add(lblEndDate, "cell 1 3 2 1,alignx right,aligny center");
-		
-		lblSessionEndDate = new JLabel("");
+
+        JLabel lblSessionEndDate = new JLabel("");
 		lblSessionEndDate.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		infoPanel.add(lblSessionEndDate, "flowx,cell 3 3");
 		
@@ -88,11 +72,11 @@ public class SeasonEditForm extends JPanel {
             @Override
             public void dateChanged(DateChangeEvent event) {
                 if (event.getNewDate() != null) {
-                    enddatePicker.setDate(startdatePicker.getDate().plusWeeks(24));
-                    btnPanel.enableCreate(true);
+                    enddatePicker.setDate(startdatePicker.getDate().plusMonths(9));
+                    SeasonButtonPanel.createAction.setEnabled(true);
                 } else {
                     enddatePicker.clear();
-                    btnPanel.enableCreate(false);
+					SeasonButtonPanel.createAction.setEnabled(true);
                 }
             }
         });
@@ -101,28 +85,37 @@ public class SeasonEditForm extends JPanel {
 		enddatePicker = new DatePicker();
 		infoPanel.add(enddatePicker, "cell 3 3");
 
-		lblNoOfActivities = new JLabel("");
+        JLabel lblNoOfActivities = new JLabel("");
 		infoPanel.add(lblNoOfActivities, "flowx,cell 3 4");
 		
 		JLabel lblNumberOfStudents = new JLabel("Number of Students:");
 		infoPanel.add(lblNumberOfStudents, "cell 1 5 2 1,alignx right,aligny center");
 
-		lblNoOfStudents = new JLabel("");
+        JLabel lblNoOfStudents = new JLabel("");
 		infoPanel.add(lblNoOfStudents, "flowx,cell 3 5");
-		
-		lblNumberOfStaff = new JLabel("Number of Staff:");
+
+        JLabel lblNumberOfStaff = new JLabel("Number of Staff:");
 		infoPanel.add(lblNumberOfStaff, "cell 1 6 2 1,alignx right,aligny center");
-		
-		lblNoOfStaff = new JLabel("");
+
+        JLabel lblNoOfStaff = new JLabel("");
 		infoPanel.add(lblNoOfStaff, "flowx,cell 3 6");
-		
-		lblDisplayNumberActivities = new JLabel("");
+
+        JLabel lblDisplayNumberActivities = new JLabel("");
 		infoPanel.add(lblDisplayNumberActivities, "cell 3 4");
-		
-		lblDisplayNumberStudents = new JLabel("");
+
+        JLabel lblDisplayNumberStudents = new JLabel("");
 		infoPanel.add(lblDisplayNumberStudents, "cell 3 5");
-		
-		lblDisplayNumberStaff = new JLabel("");
+
+        JLabel lblDisplayNumberStaff = new JLabel("");
 		infoPanel.add(lblDisplayNumberStaff, "cell 3 6");
 	}
+
+	public LocalDate startDate() {
+        return startdatePicker.getDate();
+    }
+
+    public LocalDate endDate() {
+        return enddatePicker.getDate();
+    }
+
 }
