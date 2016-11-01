@@ -1,6 +1,9 @@
 package org.vbc4me.awanna.gui.forms;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -8,8 +11,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
-import java.awt.Component;
-import java.awt.FlowLayout;
 
 /**
  * This class handles the various spreadsheet styles and JPanels to display. This uses a
@@ -28,8 +29,6 @@ public final class DisplayPanel extends JPanel {
 	private final JSplitPane splitPane;
 	private JPanel contentPanel;
 	private JPanel buttonPanel;
-
-    private DisplayContainer container;
 	
 	public DisplayPanel() {
 		setLayout(new BorderLayout());
@@ -71,8 +70,6 @@ public final class DisplayPanel extends JPanel {
 		splitPane.setTopComponent(upperScrollPane);
 		splitPane.setBottomComponent(lowerScrollPane);
 
-        // holds our currently loaded panels and model
-        container = new DisplayContainer(contentPanel, buttonPanel, table.getModel());
 	}
 	
 	/**
@@ -81,8 +78,7 @@ public final class DisplayPanel extends JPanel {
 	 * without creating a separate JTable for each view needed.
 	 */
 	public void updateTableDisplay(TableModel dataModel) {
-        container = container.updateTableModel(dataModel);
-		table.setModel(container.getTableModel());
+		table.setModel(dataModel);
 		table.revalidate();
 	}
 	
@@ -94,17 +90,24 @@ public final class DisplayPanel extends JPanel {
 	 * If changing both content and button is the desired action see {@link #}
 	 */
 	public void updateContentDisplay(JPanel display) {
-        container = container.updateContentPanel(display);
-		contentPanel.add(container.getContent());
+		contentPanel.removeAll();
+		contentPanel.add(display);
         splitPane.setDividerLocation(-1);
+	}
+	
+	public void updateContentDisplay(List<JPanel> panels) {
+		contentPanel.removeAll();
+		for (JPanel panel : panels) {
+			contentPanel.add(panel);
+		}
+		splitPane.setDividerLocation(-1);
 	}
 	
 	/**
 	 *  Sets the upper button panel with the panel passed in. 
 	 */
 	public void updateButtonDisplay(JPanel btnPanel) {
-        container = container.updateButtonPanel(btnPanel);
-		buttonPanel.add(container.getButtonPanel());
+		buttonPanel.add(btnPanel);
         splitPane.setDividerLocation(-1);
 	}
 	
@@ -113,9 +116,8 @@ public final class DisplayPanel extends JPanel {
 	 * {@code BorderLayout.WEST}.
 	 */
 	public void updateUpperDisplay(JPanel content, JPanel btnPanel) {
-        container = container.updateContentAndButtonPanels(content, btnPanel);
-		buttonPanel.add(container.getButtonPanel());
-		contentPanel.add(container.getContent());
+		buttonPanel.add(btnPanel);
+		contentPanel.add(content);
         splitPane.setDividerLocation(-1);
 	}
 	
@@ -126,26 +128,18 @@ public final class DisplayPanel extends JPanel {
 	 * style data. It should be noted that the tableModel is what is passed in and
 	 * the table is updated with the then data set and layout.
 	 */
-	public void updateAllDisplays(DisplayContainer displayContainer) {
-        container = displayContainer;
+	public void updateAllDisplays(JPanel content, JPanel btnPanel, TableModel model) {
 		buttonPanel.removeAll();
-		buttonPanel.add(container.getButtonPanel());
+		buttonPanel.add(btnPanel);
 		
 		contentPanel.removeAll();
-		contentPanel.add(container.getContent());
+		contentPanel.add(content);
 		
 		table.removeAll();
-		table.setModel(container.getTableModel());
+		table.setModel(model);
 
 		panel.revalidate();
 		table.revalidate();
         splitPane.setDividerLocation(-1);
 	}
-
-    /**
-     * Returns the container holding the currently loaded displays.
-     */
-	public DisplayContainer displayContainer() {
-        return container;
-    }
 }
