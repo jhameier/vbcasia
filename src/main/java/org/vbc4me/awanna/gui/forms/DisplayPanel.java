@@ -3,7 +3,6 @@ package org.vbc4me.awanna.gui.forms;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
-import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -25,10 +24,14 @@ import javax.swing.table.TableModel;
 public final class DisplayPanel extends JPanel {
 	private static final long serialVersionUID = -3284524458172373047L;
 	private final JTable table = new JTable();
-	private final JPanel panel = new JPanel();
+	private final JPanel contentPanel = new JPanel();
 	private final JSplitPane splitPane;
-	private JPanel contentPanel;
-	private JPanel buttonPanel;
+	private JPanel bottomLeftPanel;
+	private JPanel upperLeftPanel;
+	private JPanel leftPanel;
+	private JPanel rightPanel;
+	private JPanel upperRightPanel;
+	private JPanel lowerRightPanel;
 	
 	public DisplayPanel() {
 		setLayout(new BorderLayout());
@@ -39,24 +42,45 @@ public final class DisplayPanel extends JPanel {
 		add(splitPane, BorderLayout.CENTER);
 		
 		/*
-		 * Upper scroll pane holds 2 panels, 1 panel with a border layout for content and the other for the button panel. 
-		 * We place in this panel's BorderLayout.CENTER so that we can change what is displayed 
-		 * in the upper portion of the window.
+		 * Upper scroll pane holds 3 panels, 1 panel with a border layout for content and the other for the button panel. 
+		 * 
+		 *  | ------------------- | -------------------- |
+		 *  |                               |                                |
+		 *  |-------------------- | -------------------- |
+		 *  |                               |                                |
+		 *  |-------------------- | -------------------- |
+		 *  |                                                                 |
+		 *  |                                                                 |
+		 *  | ------------------------------------------ |
 		 */
-		final JScrollPane upperScrollPane = new JScrollPane(panel);
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		final JScrollPane upperScrollPane = new JScrollPane(contentPanel);
+		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.X_AXIS));
 		
-		buttonPanel = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) buttonPanel.getLayout();
-		flowLayout_1.setAlignment(FlowLayout.LEADING);
-		buttonPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-		panel.add(buttonPanel);
-
-		contentPanel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) contentPanel.getLayout();
-		flowLayout.setAlignment(FlowLayout.LEADING);
-		contentPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-		panel.add(contentPanel);
+		leftPanel = new JPanel();
+		contentPanel.add(leftPanel);
+		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+		
+		upperLeftPanel = new JPanel();
+		leftPanel.add(upperLeftPanel);
+		FlowLayout fl_leftUpperPanel = (FlowLayout) upperLeftPanel.getLayout();
+		fl_leftUpperPanel.setAlignment(FlowLayout.LEADING);
+		upperLeftPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		
+		bottomLeftPanel = new JPanel();
+		leftPanel.add(bottomLeftPanel);
+		FlowLayout fl_leftBottomPanel = (FlowLayout) bottomLeftPanel.getLayout();
+		fl_leftBottomPanel.setAlignment(FlowLayout.LEADING);
+		bottomLeftPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		
+		rightPanel = new JPanel();
+		contentPanel.add(rightPanel);
+		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+		
+		upperRightPanel = new JPanel();
+		rightPanel.add(upperRightPanel);
+		
+		lowerRightPanel = new JPanel();
+		rightPanel.add(lowerRightPanel);
 		
 		
 		/*
@@ -69,7 +93,7 @@ public final class DisplayPanel extends JPanel {
 		
 		splitPane.setTopComponent(upperScrollPane);
 		splitPane.setBottomComponent(lowerScrollPane);
-
+		
 	}
 	
 	/**
@@ -81,44 +105,52 @@ public final class DisplayPanel extends JPanel {
 		table.setModel(dataModel);
 		table.revalidate();
 	}
-	
+		
 	/**
-	 * Sets the upper content display with the panel passed in, using the layout provided. The display uses
-	 * a Border Layout so passing in a layout is required such as {@code BorderLayout.WEST}. 
-	 * 
-	 * <p>This only updates the content side of the upper display and not the button side of the display.
-	 * If changing both content and button is the desired action see {@link #}
+	 * Sets the left bottom panel.
 	 */
-	public void updateContentDisplay(JPanel display) {
-		contentPanel.removeAll();
-		contentPanel.add(display);
-        splitPane.setDividerLocation(-1);
-	}
-	
-	public void updateContentDisplay(List<JPanel> panels) {
-		contentPanel.removeAll();
-		for (JPanel panel : panels) {
-			contentPanel.add(panel);
-		}
+	public void updateBottomLeft(JPanel panel) {
+		bottomLeftPanel.removeAll();
+		bottomLeftPanel.add(panel);
 		splitPane.setDividerLocation(-1);
 	}
 	
 	/**
-	 *  Sets the upper button panel with the panel passed in. 
+	 *  Sets the left upper panel. 
 	 */
-	public void updateButtonDisplay(JPanel btnPanel) {
-		buttonPanel.add(btnPanel);
-        splitPane.setDividerLocation(-1);
+	public void updateUpperLeft(JPanel panel) {
+		upperLeftPanel.removeAll();
+		upperLeftPanel.add(panel);
+		splitPane.setDividerLocation(-1);
 	}
 	
+	/**
+	 * Sets the right lower panel.
+	 */
+	public void updateLowerRight(JPanel panel) {
+		lowerRightPanel.removeAll();
+		lowerRightPanel.add(panel);
+		splitPane.setDividerLocation(-1);
+	}
+	
+	/**
+	 * Sets the right upper panel.
+	 */
+	public void updateUpperRight(JPanel panel) {
+		upperRightPanel.removeAll();
+		upperRightPanel.add(panel);
+		splitPane.setDividerLocation(-1);
+	}
 	/**
 	 * Updates the upper content and button panels. The content panel requires a layout option to be set such as 
 	 * {@code BorderLayout.WEST}.
 	 */
 	public void updateUpperDisplay(JPanel content, JPanel btnPanel) {
-		buttonPanel.add(btnPanel);
-		contentPanel.add(content);
-        splitPane.setDividerLocation(-1);
+		upperLeftPanel.removeAll();
+		upperLeftPanel.add(btnPanel);
+		bottomLeftPanel.removeAll();
+		bottomLeftPanel.add(content);
+		splitPane.setDividerLocation(-1);
 	}
 	
 	/**
@@ -128,18 +160,21 @@ public final class DisplayPanel extends JPanel {
 	 * style data. It should be noted that the tableModel is what is passed in and
 	 * the table is updated with the then data set and layout.
 	 */
-	public void updateAllDisplays(JPanel content, JPanel btnPanel, TableModel model) {
-		buttonPanel.removeAll();
-		buttonPanel.add(btnPanel);
+	public void updateAllDisplays(JPanel content, JPanel btnPanel, JPanel sidePanel, TableModel model) {
+		upperLeftPanel.removeAll();
+		upperLeftPanel.add(btnPanel);
 		
-		contentPanel.removeAll();
-		contentPanel.add(content);
+		bottomLeftPanel.removeAll();
+		bottomLeftPanel.add(content);
+		
+		lowerRightPanel.removeAll();
+		lowerRightPanel.add(sidePanel);
 		
 		table.removeAll();
 		table.setModel(model);
-
-		panel.revalidate();
+		
+		contentPanel.revalidate();
 		table.revalidate();
-        splitPane.setDividerLocation(-1);
+		splitPane.setDividerLocation(-1);
 	}
 }

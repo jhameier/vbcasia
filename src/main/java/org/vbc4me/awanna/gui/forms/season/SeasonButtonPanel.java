@@ -1,62 +1,47 @@
 package org.vbc4me.awanna.gui.forms.season;
 
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import org.vbc4me.awanna.gui.forms.season.actions.CloseSeasonAction;
-import org.vbc4me.awanna.gui.forms.season.actions.CreateSeasonAction;
-import org.vbc4me.awanna.gui.forms.season.actions.NewSeasonAction;
-import org.vbc4me.awanna.gui.forms.season.actions.OpenSeasonAction;
-import org.vbc4me.awanna.gui.forms.season.actions.SaveAsSeasonAction;
-import org.vbc4me.awanna.gui.forms.season.actions.SaveSeasonAction;
-
 import net.miginfocom.swing.MigLayout;
+import org.vbc4me.awanna.gui.forms.season.actions.*;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
-public class SeasonButtonPanel extends JPanel {
+public final class SeasonButtonPanel extends JPanel {
 	private static final long serialVersionUID = -8327426526043278048L;
-	private final JButton btnCreate;
-	private final Action createSeasonAction;
-	
-	public SeasonButtonPanel() {
-		setLayout(new MigLayout("", "[50px][50px][50px][50px][50px][50px]", "[23px][]"));
+    public static CloseSeasonAction closeAction;
+    public static CreateSeasonAction createAction;
+    public static NewSeasonAction newAction;
+    public static OpenSeasonAction openAction;
+    public static SaveAsSeasonAction saveAsAction;
+    public static SaveSeasonAction saveAction;
+
+    public SeasonButtonPanel() {
+    	setBorder(new LineBorder(new Color(0, 0, 0)));
+		setLayout(new MigLayout("", "[50px][50px][50px][50px]", "[23px][][]"));
 		
-		JButton btnNew = new JButton("New");
-		final Action createNewSeasonAction = new NewSeasonAction(this);
-		btnNew.setAction(createNewSeasonAction);
-		add(btnNew, "cell 0 0 2 1,growx,aligny center");
-		
-		JButton btnOpen = new JButton("Open");
-		final Action openSeasonAction = new OpenSeasonAction(this);
-		btnOpen.setAction(openSeasonAction);
+		createAction = new CreateSeasonAction();
+        JButton btnCreate = new JButton(createAction);
+		add(btnCreate, "cell 0 0 2 1,growx,aligny center");
+
+		openAction = new OpenSeasonAction();
+        JButton btnOpen = new JButton(openAction);
 		add(btnOpen, "cell 2 0 2 1,growx,aligny center");
 		
-		JButton btnSave = new JButton("Save");
-		final Action saveSeasonAction = new SaveSeasonAction(this);
-		btnSave.setAction(saveSeasonAction);
+		saveAction = new SaveSeasonAction();
+        JButton btnSave = new JButton(saveAction);
 		add(btnSave, "cell 0 1 2 1,growx,aligny center");
+        
+		saveAsAction = new SaveAsSeasonAction();
+        JButton btnSaveAs = new JButton(saveAsAction);
+		add(btnSaveAs, "cell 2 1 2 1,growx,aligny center");
 		
-		JButton btnClose = new JButton("Close");
-		final CloseSeasonAction closeSeasonAction = new CloseSeasonAction(this);
-		btnClose.setAction(closeSeasonAction);
-		add(btnClose, "cell 4 0 2 1,growx,aligny center");
+		closeAction = new CloseSeasonAction();
+		JButton btnClose = new JButton(closeAction);
+		add(btnClose, "cell 1 2 2 1,growx,aligny center");
 		
-		JButton btnCopy = new JButton("SaveAs");
-		final Action copySeasonAction = new SaveAsSeasonAction(this);
-		btnCopy.setAction(copySeasonAction);
-		add(btnCopy, "cell 2 1 2 1,growx,aligny center");
-		
-		btnCreate = new JButton("Create");
-		createSeasonAction = new CreateSeasonAction(this);
-		btnCreate.setAction(createSeasonAction);
-		createSeasonAction.setEnabled(false);
-		add(btnCreate, "cell 4 1 2 1,growx,aligny center");
+		newAction = new NewSeasonAction();
 	}
 
-	/**
-	 * Enable or disable the create button action. True enables the action and button false disables.
-	 */
-	public void enableCreate(boolean enabled) {
-		createSeasonAction.setEnabled(enabled);
-	}
 }

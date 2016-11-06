@@ -3,9 +3,9 @@ package account;
 import java.awt.image.BufferedImage;
 
 import org.junit.Test;
-import org.vbc4me.awanna.account.Club;
-import org.vbc4me.awanna.account.PhoneNumber;
-import org.vbc4me.awanna.account.Staff;
+import org.vbc4me.awanna.facets.Club;
+import org.vbc4me.awanna.facets.PhoneNumber;
+import org.vbc4me.awanna.facets.Staff;
 
 import junit.framework.Assert;
 

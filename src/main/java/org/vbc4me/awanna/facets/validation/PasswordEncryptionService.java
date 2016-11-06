@@ -1,4 +1,4 @@
-package org.vbc4me.awanna.account.validation;
+package org.vbc4me.awanna.facets.validation;
 
 
 import java.security.NoSuchAlgorithmException;

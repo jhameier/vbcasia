@@ -1,21 +1,23 @@
-package org.vbc4me.awanna.gui.forms.activity;
+package org.vbc4me.awanna.gui.forms.session;
 
+import javax.swing.table.AbstractTableModel;
+import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.table.AbstractTableModel;
-
-import org.vbc4me.awanna.facets.Activity;
-
-public final class ActivitiesTableModel extends AbstractTableModel {
+public class SessionTableModel extends AbstractTableModel {
   private static final long serialVersionUID = 8530443718844287586L;
 
-  public static final int DATE = 0;
-  public static final int TIME = 1;
-  public static final int ACTIVITY = 2;
+  public static final int SELECT = 0;
+  public static final int NUMBER = 1;
+  public static final int NAME = 2;
+  public static final int CREATED = 3;
+  public static final int CLOSED = 4;
+  public static final int MODIFIED = 5;
 
-  private String[] columnNames = {"Date", "Time", "Activity"};
-  private List<Activity> data = new ArrayList<>();
+  private String[] columnNames = {"Select", "Number", "Name", "Date Created", "Date Closed", "Date Last Modified"};
+  private List<File> data = new ArrayList<>();
 
   @Override
   public int getRowCount() {
@@ -29,20 +31,11 @@ public final class ActivitiesTableModel extends AbstractTableModel {
 
   @Override
   public Object getValueAt(int row, int column) {
-    Activity activity = data.get(row);
-    switch (column) {
-      case DATE:
-        return activity.date();
-      case TIME:
-        return activity.time();
-      case ACTIVITY:
-        return activity.name();
-    }
-    return null;
+    return data.get(row).getName();
   }
 
-  public void addData(Activity activity) {
-    data.add(activity);
+  public void addData(File file) {
+    data.add(file);
   }
 
   /**
@@ -63,7 +56,7 @@ public final class ActivitiesTableModel extends AbstractTableModel {
    * @return if this cell is able to be edited
    */
   public boolean isCellEditable(int row, int column) {
-    return false;
+    return column == 0;
   }
 
   /**
@@ -74,11 +67,13 @@ public final class ActivitiesTableModel extends AbstractTableModel {
       case 0:
         return Boolean.class;
       case 1:
+        return Integer.class;
       case 2:
-      case 3:
         return String.class;
+      case 3:
       case 4:
-        return Double.class;
+      case 5:
+        return LocalDate.class;
       default:
         return Object.class;
     }

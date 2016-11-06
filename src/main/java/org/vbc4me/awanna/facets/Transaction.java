@@ -1,4 +1,4 @@
-package org.vbc4me.awanna.account;
+package org.vbc4me.awanna.facets;
 
 import org.joda.money.Money;
 

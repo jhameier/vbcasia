@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.vbc4me.awanna.account.PhoneNumber;
+import org.vbc4me.awanna.facets.PhoneNumber;
 
 import junit.framework.Assert;
 

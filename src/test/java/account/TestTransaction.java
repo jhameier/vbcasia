@@ -5,8 +5,8 @@ import java.time.LocalTime;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.vbc4me.awanna.account.Activity;
-import org.vbc4me.awanna.account.Transaction;
+import org.vbc4me.awanna.facets.Activity;
+import org.vbc4me.awanna.facets.Transaction;
 
 /**
  * Test class for {@link Transaction}.

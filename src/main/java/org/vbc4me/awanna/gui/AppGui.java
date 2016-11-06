@@ -18,23 +18,16 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.WindowConstants;
 
-import org.vbc4me.awanna.Workspace;
-import org.vbc4me.awanna.gui.actions.misc.AboutAction;
-import org.vbc4me.awanna.gui.forms.student.actions.EditRecordAction;
-import org.vbc4me.awanna.gui.actions.misc.LookAndFeelAction;
-import org.vbc4me.awanna.gui.actions.misc.PreferenceAction;
-import org.vbc4me.awanna.gui.actions.misc.ProgramHelpAction;
-import org.vbc4me.awanna.gui.forms.student.actions.CopyRecordAction;
-import org.vbc4me.awanna.gui.forms.student.actions.NewRecordAction;
-import org.vbc4me.awanna.gui.forms.student.actions.SaveRecordAction;
+import org.vbc4me.awanna.gui.actions.AboutAction;
+import org.vbc4me.awanna.gui.actions.LookAndFeelAction;
+import org.vbc4me.awanna.gui.actions.PreferenceAction;
+import org.vbc4me.awanna.gui.actions.ProgramHelpAction;
 import org.vbc4me.awanna.gui.forms.DisplayPanel;
-import org.vbc4me.awanna.gui.forms.season.SeasonBlankForm;
-import org.vbc4me.awanna.gui.forms.season.actions.NewSeasonAction;
-import org.vbc4me.awanna.gui.forms.season.actions.OpenSeasonAction;
-import org.vbc4me.awanna.gui.forms.session.actions.CopySessionAction;
-import org.vbc4me.awanna.gui.forms.session.actions.NewSessionAction;
-import org.vbc4me.awanna.gui.forms.session.actions.OpenSessionAction;
-import org.vbc4me.awanna.gui.forms.session.actions.SaveSessionAction;
+import org.vbc4me.awanna.gui.forms.season.SeasonButtonPanel;
+import org.vbc4me.awanna.gui.forms.season.SeasonContainer;
+import org.vbc4me.awanna.gui.forms.session.SessionButtonPanel;
+import org.vbc4me.awanna.gui.forms.session.SessionContainer;
+import org.vbc4me.awanna.gui.forms.student.StudentContainer;
 
 /**
  * Used to hold the primary applications layout and component panels. The only
@@ -48,9 +41,8 @@ public class AppGui extends JFrame {
 	private static final long serialVersionUID = 5953409495403830350L;
 	
 	private static DisplayPanel displayPanel;
-	public static AppGui mainWindow;
-	private static Workspace workspace;
-	
+	private static AppGui mainWindow;
+
 	private static LookAndFeelInfo[] lookList = UIManager.getInstalledLookAndFeels();
 
 	/**
@@ -58,13 +50,6 @@ public class AppGui extends JFrame {
 	 */
 	public static DisplayPanel displayPanel() {
 		return displayPanel;
-	}
-	
-	/**
-	 * Returns the currently active workspace.
-	 */
-	public static Workspace workspace() {
-		return workspace;
 	}
 	
 	/**
@@ -79,11 +64,11 @@ public class AppGui extends JFrame {
 		 *********************************************************************/
 		
 		displayPanel = new DisplayPanel();
-		displayPanel.updateContentDisplay(new SeasonBlankForm());
+        new SeasonContainer();
+        new SessionContainer();
+        new StudentContainer();
+		displayPanel.updateBottomLeft(SeasonContainer.blankForm);
 		getContentPane().add(displayPanel, BorderLayout.CENTER);
-
-        // Represents our currently working session
-		Workspace.setContainer(displayPanel.displayContainer());
 
 		/*
 		 * ***************** FILE MENU ************************
@@ -94,47 +79,36 @@ public class AppGui extends JFrame {
 		
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
-		
-		JMenuItem mntmNewSeason = new JMenuItem("New Season");
-		Action newSeasonAction = new NewSeasonAction(displayPanel);
-		mntmNewSeason.addActionListener(newSeasonAction);
+
+		JMenuItem mntmNewSeason = new JMenuItem(SeasonButtonPanel.newAction);
 		mnFile.add(mntmNewSeason);
 		
-		JMenuItem mntmOpenSeason = new JMenuItem("Open Season");
-		Action openSeasonAction = new OpenSeasonAction(displayPanel);
-		mntmOpenSeason.addActionListener(openSeasonAction);
+		JMenuItem mntmOpenSeason = new JMenuItem(SeasonButtonPanel.openAction);
 		mnFile.add(mntmOpenSeason);
 		
 		mnFile.addSeparator();
-		
-		Action newSessionAction = new NewSessionAction(displayPanel);
-		JMenuItem mntmNewSession = new JMenuItem(newSessionAction);
+
+		JMenuItem mntmNewSession = new JMenuItem(SessionButtonPanel.newAction);
 		mnFile.add(mntmNewSession);
 
-		Action openSessionAction = new OpenSessionAction(displayPanel);
-		JMenuItem mntmOpenSession = new JMenuItem(openSessionAction);
+		JMenuItem mntmOpenSession = new JMenuItem(SessionButtonPanel.openAction);
 		mnFile.add(mntmOpenSession);
 		
-		Action copySessionAction = new CopySessionAction(displayPanel);
-		JMenuItem mntmCopySession = new JMenuItem(copySessionAction);
+		JMenuItem mntmCopySession = new JMenuItem(SessionButtonPanel.copyAction);
 		mnFile.add(mntmCopySession);
 		
-		Action saveSessionAction = new SaveSessionAction(displayPanel);
-		JMenuItem mntmSaveSession = new JMenuItem(saveSessionAction);
+		JMenuItem mntmSaveSession = new JMenuItem(SessionButtonPanel.saveAction);
 		mnFile.add(mntmSaveSession);
 		
 		mnFile.addSeparator();
 		
-		Action newRecordAction = new NewRecordAction(displayPanel);
-		JMenuItem mntmNewRecord = new JMenuItem(newRecordAction);
+		JMenuItem mntmNewRecord = new JMenuItem(StudentContainer.newAction);
 		mnFile.add(mntmNewRecord);
 		
-		Action editRecordAction = new EditRecordAction(displayPanel);
-		JMenuItem mntmEdit = new JMenuItem(editRecordAction);
+		JMenuItem mntmEdit = new JMenuItem(StudentContainer.editAction);
 		mnFile.add(mntmEdit);
 		
-		Action saveRecordAction = new SaveRecordAction(displayPanel);
-		JMenuItem mntmSaveRecord = new JMenuItem(saveRecordAction);
+		JMenuItem mntmSaveRecord = new JMenuItem(StudentContainer.saveAction);
 		mnFile.add(mntmSaveRecord);
 		
 		/*
@@ -154,8 +128,7 @@ public class AppGui extends JFrame {
 		JMenuItem mntmCut = new JMenuItem("Cut");
 		mnEdit.add(mntmCut);
 		
-		Action copyRecordAction = new CopyRecordAction(displayPanel);
-		JMenuItem mntmCopy = new JMenuItem(copyRecordAction);
+		JMenuItem mntmCopy = new JMenuItem(StudentContainer.copyAction);
 		mnEdit.add(mntmCopy);
 		
 		JMenuItem mntmPaste = new JMenuItem("Paste");
@@ -186,7 +159,7 @@ public class AppGui extends JFrame {
 		}
 		
 		Action aboutAction = new AboutAction(this);
-		JMenuItem mntmAbout = new JMenuItem(aboutAction);
+        JMenuItem mntmAbout = new JMenuItem(aboutAction);
 		mnHelp.add(mntmAbout);
 		
 		Action programHelp = new ProgramHelpAction(this);

@@ -7,8 +7,8 @@ import java.util.Locale;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.vbc4me.awanna.account.PhoneNumber;
-import org.vbc4me.awanna.account.Student;
+import org.vbc4me.awanna.facets.PhoneNumber;
+import org.vbc4me.awanna.facets.Student;
 
 public class TestStudent {
 	

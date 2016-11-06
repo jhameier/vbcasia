@@ -1,4 +1,4 @@
-package org.vbc4me.awanna.account;
+package org.vbc4me.awanna.facets;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,12 +16,10 @@ public final class Season {
 	private Map<String, Student> students = new HashMap<>();
 	private Map<String, Staff> staff = new HashMap<>();
 	
-	public Season(String name, Session session, Map<String, Student> students, Map<String, Staff> staff) {
+	public Season(String name, Session session) {
+		this.id = UUID.randomUUID();
 		this.name = name;
 		this.session = session;
-		this.students = students;
-		this.staff = staff;
-		this.id = UUID.randomUUID();
 	}
 	
 	/**
@@ -39,21 +37,21 @@ public final class Season {
 	}
 	
 	/**
-	 * Returns the {@link Session} associated with this {@code Season}.
+	 * Returns the {@link Session} associated with this {@code SeasonContainer}.
 	 */
 	public Session session() {
 		return session;
 	}
 	
 	/**
-	 * Returns all the {@link Student}s that are associated with this Season.
+	 * Returns all the {@link Student}s that are associated with this SeasonContainer.
 	 */
 	public Map<String, Student> students() {
 		return students;
 	}
 	
 	/**
-	 * Returns a {@link Student} from this {@code Season}'s list of
+	 * Returns a {@link Student} from this {@code SeasonContainer}'s list of
 	 * {@code Student}s.
 	 *
 	 * @param name
@@ -74,7 +72,7 @@ public final class Season {
 	}
 	
 	/**
-	 * Returns all the {@link Staff} associated with this Season.
+	 * Returns all the {@link Staff} associated with this SeasonContainer.
 	 */
 	public Map<String, Staff> staff() {
 		return staff;
@@ -85,6 +83,20 @@ public final class Season {
 	 */
 	public void addStaff(Staff staff) {
 		this.staff.put(staff.lastName(), staff);
+	}
+	
+	/**
+	 * Adds an existing set of students to the currently loaded season.
+	 */
+	public void addStudents(Map<String, Student> students) {
+		this.students = students;
+	}
+	
+	/**
+	 * Adds an existing set of staff to the currently loaded season.
+	 */
+	public void addStaff(Map<String, Staff> staff) {
+		this.staff = staff;
 	}
 	
 }

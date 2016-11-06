@@ -1,7 +1,7 @@
 package account;
 
 import org.junit.Test;
-import org.vbc4me.awanna.account.Club;
+import org.vbc4me.awanna.facets.Club;
 
 import junit.framework.Assert;
 

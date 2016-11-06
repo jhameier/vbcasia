@@ -1,4 +1,4 @@
-package org.vbc4me.awanna.account;
+package org.vbc4me.awanna.facets;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -14,46 +14,43 @@ import java.util.UUID;
  */
 public final class Session {
 	
-	private Session session;
 	private UUID id;
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private Map<LocalDate, Activity> activities = new HashMap<>();
 	private boolean open = true;
+
 	
 	/**
-	 * Creates a new actions with the given start date.
-	 * The end date is automatically calculated for 6 months from the
-	 * start date. The end date can be adjusted when necessary. 
-	 * 
-	 * <p>The new actions will have no activities associated with it and must be added.
-	 */
-	public Session instantiate(LocalDate date) {
-		if(session != null) {
-			return session;
-		}  else {
-			return instantiate(date, 26);
-		}
-	}
-	
-	/**
-	 * Creates a new actions with the given start date.
+	 * Creates a new Session with the given start date.
 	 * The end date is calculated based on the number of weeks passed in.
 	 * The end date can be adjusted when necessary. 
 	 * 
-	 * <p>The new actions will have no activities associated with it and must be added.
+	 * <p>The new session will have no activities associated with it and these must be added.
 	 */
-	private Session instantiate(LocalDate date, int numOfWeeks) {
-		if(this.session != null) {
-			return session;
-		} else {
-			return new Session(date, numOfWeeks);			
-		}
-	}
-	
-	private Session(LocalDate date, int numOfWeeks) {
+	public Session(LocalDate date, int numOfWeeks) {
+        this.id = UUID.randomUUID();
 		this.startDate = date;
 		this.endDate = date.plusWeeks(numOfWeeks);
+	}
+
+    /**
+     * Creates a new Session with the given start and end dates.
+     * The end date can be adjusted when necessary.
+     *
+     * <p>The new session will have no activities associated with it and these must be added.
+     */
+	public Session(LocalDate start, LocalDate end) {
+        this.id = UUID.randomUUID();
+        this.startDate = start;
+        this.endDate = end;
+    }
+	
+	/**
+	 * Return the unique id for this {@link Session}.
+	 */
+	public UUID id() {
+		return id;
 	}
 	
 	/**

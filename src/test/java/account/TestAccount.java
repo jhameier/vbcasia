@@ -8,9 +8,9 @@ import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import org.junit.Assert;
 import org.junit.Test;
-import org.vbc4me.awanna.account.Account;
-import org.vbc4me.awanna.account.Activity;
-import org.vbc4me.awanna.account.Transaction;
+import org.vbc4me.awanna.facets.Account;
+import org.vbc4me.awanna.facets.Activity;
+import org.vbc4me.awanna.facets.Transaction;
 
 /**
  * Test class for {@link Account}.

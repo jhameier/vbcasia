@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 import net.miginfocom.swing.MigLayout;
-import org.vbc4me.awanna.gui.actions.picture.AttachPhotoAction;
+import org.vbc4me.awanna.gui.picture.actions.AttachPhotoAction;
 import java.awt.BorderLayout;
 
 public final class StudentDisplayForm extends JPanel {

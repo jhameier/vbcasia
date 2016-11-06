@@ -9,7 +9,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.junit.Test;
-import org.vbc4me.awanna.account.Activity;
+import org.vbc4me.awanna.facets.Activity;
 
 import junit.framework.Assert;
 

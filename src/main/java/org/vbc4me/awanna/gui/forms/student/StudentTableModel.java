@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import org.vbc4me.awanna.account.Student;
+import org.vbc4me.awanna.facets.Student;
 
 public class StudentTableModel extends AbstractTableModel {
   private static final long serialVersionUID = 4272448093197382220L;
@@ -18,8 +18,8 @@ public class StudentTableModel extends AbstractTableModel {
   protected String[] columnNames;
   protected List<Student> data;
 
-  public StudentTableModel(String[] columnNames) {
-    this.columnNames = columnNames;
+  public StudentTableModel() {
+    this.columnNames = new String[]{};
     data = new ArrayList<>();
   }
 

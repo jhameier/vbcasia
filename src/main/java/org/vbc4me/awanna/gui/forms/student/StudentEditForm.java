@@ -11,9 +11,9 @@ import net.miginfocom.swing.MigLayout;
 
 import org.vbc4me.awanna.gui.picture.ImageContainer;
 import org.vbc4me.awanna.gui.picture.ThumbnailPanel;
-import org.vbc4me.awanna.gui.actions.picture.AttachPhotoAction;
+import org.vbc4me.awanna.gui.picture.actions.AttachPhotoAction;
 
-public class StudentInputForm extends JPanel {
+public class StudentEditForm extends JPanel {
 	
 	private static final long serialVersionUID = -6820054695958009796L;
 	public JTextField txtChildFirstName;
@@ -53,7 +53,7 @@ public class StudentInputForm extends JPanel {
 	public static ThumbnailPanel auth3PhotoPanel;
 	public static ThumbnailPanel auth4PhotoPanel;
 	
-	public StudentInputForm() {
+	public StudentEditForm() {
 		setLayout(new MigLayout("",
 				"[][90px][20px][40px][20px][80px][20px][30px][20px][80px][20px][60px][20px][80px][][80px][]",
 				"[20px][20px][20px,grow][25px][20px][20px][20px,grow][25px][20px][20px][20px][20px][20px][20px][20px]"

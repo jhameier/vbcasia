@@ -8,10 +8,10 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import org.vbc4me.awanna.gui.forms.student.actions.EditRecordAction;
-import org.vbc4me.awanna.gui.forms.student.actions.CopyRecordAction;
-import org.vbc4me.awanna.gui.forms.student.actions.NewRecordAction;
-import org.vbc4me.awanna.gui.forms.student.actions.SaveRecordAction;
+import org.vbc4me.awanna.gui.forms.student.actions.EditStudentRecordAction;
+import org.vbc4me.awanna.gui.forms.student.actions.CopyStudentRecordAction;
+import org.vbc4me.awanna.gui.forms.student.actions.NewStudentRecordAction;
+import org.vbc4me.awanna.gui.forms.student.actions.SaveStudentRecordAction;
 
 public class RecordButtonPanel extends JPanel {
 	private static final long serialVersionUID = 1909642709713212890L;
@@ -27,28 +27,28 @@ public class RecordButtonPanel extends JPanel {
 		Component horizontalStrut = Box.createHorizontalStrut(1);
 		add(horizontalStrut);
 		
-		Action createNewRecordAction = new NewRecordAction(this);
+		Action createNewRecordAction = new NewStudentRecordAction(this);
 		btnNew.setAction(createNewRecordAction);
 		add(btnNew);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(5);
 		add(horizontalStrut_1);
 		
-		Action loadRecordAction = new EditRecordAction(this);
+		Action loadRecordAction = new EditStudentRecordAction(this);
 		btnEdit.setAction(loadRecordAction);
 		add(btnEdit);
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(5);
 		add(horizontalStrut_2);
 		
-		Action copyRecordAction = new CopyRecordAction(this);
+		Action copyRecordAction = new CopyStudentRecordAction(this);
 		btnCopy.setAction(copyRecordAction);
 		add(btnCopy);
 		
 		Component horizontalStrut_3 = Box.createHorizontalStrut(5);
 		add(horizontalStrut_3);
 		
-		Action saveRecordAction = new SaveRecordAction(this);
+		Action saveRecordAction = new SaveStudentRecordAction(this);
 		btnSave.setAction(saveRecordAction);
 		add(btnSave);
 	}

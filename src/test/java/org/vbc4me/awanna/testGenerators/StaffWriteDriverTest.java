@@ -3,9 +3,9 @@ package org.vbc4me.awanna.testGenerators;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.vbc4me.awanna.account.Club;
-import org.vbc4me.awanna.account.Season;
-import org.vbc4me.awanna.account.Staff;
+import org.vbc4me.awanna.facets.Club;
+import org.vbc4me.awanna.facets.Season;
+import org.vbc4me.awanna.facets.Staff;
 import org.vbc4me.awanna.utility.writers.StaffFileWriter;
 
 public class StaffWriteDriverTest {

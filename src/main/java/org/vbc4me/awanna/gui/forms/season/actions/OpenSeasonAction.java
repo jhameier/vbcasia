@@ -7,7 +7,6 @@ import java.util.prefs.Preferences;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.JPanel;
 
 /**
  * Used to create a new blank actions record.
@@ -16,17 +15,15 @@ import javax.swing.JPanel;
  */
 public final class OpenSeasonAction extends AbstractAction {
 	private static final long serialVersionUID = -6301577011454895115L;
-	private JPanel panel;
 	
-	public OpenSeasonAction(JPanel panel) {
-		this.panel = panel;
+	public OpenSeasonAction() {
 		putValue(NAME, "Open Season");
 		putValue(SHORT_DESCRIPTION, "Opens an existing Season.");
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		// String message = "This is activated from Open Season Action";
-		// String title = "Open Existing Season";
+		// String message = "This is activated from Open SeasonContainer Action";
+		// String title = "Open Existing SeasonContainer";
 		// int messageType = JOptionPane.INFORMATION_MESSAGE;
 		// JOptionPane.showMessageDialog(frame, message, title, messageType);
 		
@@ -40,7 +37,7 @@ public final class OpenSeasonAction extends AbstractAction {
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Season File", "sea");
 		chooser.setFileFilter(filter);
 		
-		int returnValue = chooser.showOpenDialog(panel);
+		int returnValue = chooser.showOpenDialog(null);
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			
 			File file = new File(chooser.getSelectedFile().getAbsolutePath());

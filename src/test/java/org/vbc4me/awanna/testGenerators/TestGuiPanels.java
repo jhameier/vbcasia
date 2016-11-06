@@ -9,22 +9,14 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.WindowConstants;
 
-import oracle.jrockit.jfr.JFR;
-
-import org.vbc4me.awanna.gui.forms.DisplayContainer;
 import org.vbc4me.awanna.gui.forms.DisplayPanel;
-import org.vbc4me.awanna.gui.forms.activity.ActivityButtonPanel;
-import org.vbc4me.awanna.gui.forms.season.SeasonBlankForm;
 import org.vbc4me.awanna.gui.forms.season.SeasonButtonPanel;
-import org.vbc4me.awanna.gui.forms.season.SeasonDisplayForm;
-import org.vbc4me.awanna.gui.forms.season.SeasonEditForm;
-import org.vbc4me.awanna.gui.forms.season.SeasonTableModel;
-import org.vbc4me.awanna.gui.forms.session.SessionButtonPanel;
-import org.vbc4me.awanna.gui.forms.student.RecordButtonPanel;
-import org.vbc4me.awanna.gui.forms.student.StudentDisplayForm;
-import org.vbc4me.awanna.gui.forms.student.StudentInputForm;
+import org.vbc4me.awanna.gui.forms.season.SeasonContainer;
 
 /**
  * Used to test panel classes in the ide without having to run the entire
@@ -54,37 +46,28 @@ public class TestGuiPanels extends JFrame {
 	}
 	
 	private static void initializeAndShowGui() {
-		JPanel recBtnPanel = new RecordButtonPanel();
-		JPanel seaBtnPanel = new SeasonButtonPanel();
-		JPanel sesBtnPanel = new SessionButtonPanel();
-		JPanel actBtnPanel = new ActivityButtonPanel();
-		
-		SeasonBlankForm seasonBlankForm = new SeasonBlankForm();
-		SeasonDisplayForm seasonDisplayForm = new SeasonDisplayForm();
-		SeasonEditForm seasonEditForm = new SeasonEditForm();
-		
-		StudentDisplayForm studentDisplayForm = new StudentDisplayForm();
-		StudentInputForm studentInputForm = new StudentInputForm();
-		
+
 		List<JFrame> windows = new ArrayList<>();
 //		JFrame window1 = new TestGuiPanels(recBtnPanel, "Recod Button Panel");
 //		windows.add(window1);
-//		JFrame window2 = new TestGuiPanels(seaBtnPanel, "Season Button Panel");
-//		windows.add(window2);
+		JFrame window2 = new TestGuiPanels(new SeasonButtonPanel(), "SeasonContainer Button Panel");
+		windows.add(window2);
 //		JFrame window3 = new TestGuiPanels(sesBtnPanel, "Session Button Panel");
 //		windows.add(window3);
 //		JFrame window4 = new TestGuiPanels(studentDisplayForm, "Student Display Form");
 //		windows.add(window4);
 //		JFrame window5 = new TestGuiPanels(studentInputForm, "Student Input Form");
 //		windows.add(window5);
-//		JFrame window6 = new TestGuiPanels(seasonDisplayForm, "Season Display Form");
+//		JFrame window6 = new TestGuiPanels(seasonDisplayForm, "SeasonContainer Display Form");
 //		windows.add(window6);
-//		JFrame window7 = new TestGuiPanels(seasonBlankForm, "Season Blank Form");
+//		JFrame window7 = new TestGuiPanels(seasonBlankForm, "SeasonContainer Blank Form");
 //		windows.add(window7);
-//		JFrame window8 = new TestGuiPanels(seasonEditForm, "Season Edit Form");
+//		JFrame window8 = new TestGuiPanels(seasonEditForm, "SeasonContainer Edit Form");
 //		windows.add(window8);
+
+        new SeasonContainer();
 		DisplayPanel panel = new DisplayPanel();
-		panel.updateAllDisplays(new DisplayContainer(new SeasonEditForm(), new SeasonButtonPanel(), new SeasonTableModel()));
+		panel.updateAllDisplays(SeasonContainer.editForm, SeasonContainer.buttonPanel, new JPanel(), SeasonContainer.tableModel);
 		JFrame window9 = new TestGuiPanels(panel, "Display Panel");
 		windows.add(window9);
 		

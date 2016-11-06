@@ -17,8 +17,6 @@ import org.vbc4me.awanna.gui.forms.student.StudentEditForm;
  */
 public final class NewStudentRecordAction extends AbstractAction {
     private static final long serialVersionUID = -6301577011454895115L;
-    private JPanel panel;
-
     public NewStudentRecordAction(JPanel panel) {
         putValue(NAME, "New Record");
         putValue(SHORT_DESCRIPTION, "Creates new blank information record ");

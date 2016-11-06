@@ -11,11 +11,11 @@ import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
-import org.vbc4me.awanna.account.Account;
-import org.vbc4me.awanna.account.Activity;
-import org.vbc4me.awanna.account.Club;
-import org.vbc4me.awanna.account.Student;
-import org.vbc4me.awanna.account.Transaction;
+import org.vbc4me.awanna.facets.Account;
+import org.vbc4me.awanna.facets.Activity;
+import org.vbc4me.awanna.facets.Club;
+import org.vbc4me.awanna.facets.Student;
+import org.vbc4me.awanna.facets.Transaction;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class StudentFileReader extends DefaultHandler {

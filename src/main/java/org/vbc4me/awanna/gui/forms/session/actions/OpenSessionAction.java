@@ -3,7 +3,6 @@ package org.vbc4me.awanna.gui.forms.session.actions;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
