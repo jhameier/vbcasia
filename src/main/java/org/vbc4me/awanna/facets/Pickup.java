@@ -44,6 +44,10 @@ public class Pickup {
 		return relationship;
 	}
 	
+	/**
+	 * Returns the first and last name and the relationship of this {@link Pickup}.
+	 */
+	@Override
 	public String toString() {
 		return first + " " + last + " (" + relationship + ")";
 	}
