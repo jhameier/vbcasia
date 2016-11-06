@@ -21,7 +21,7 @@ public class TestActivity {
 	 */
 	@Test
 	public void TestActivityBuild() {
-		Activity activity = Activity.build().name("Test1").cost(1.23).date(date).time(time).create();
+		Activity activity = Activity.builder().name("Test1").cost(1.23).date(date).time(time).create();
 		Assert.assertEquals("Test1", activity.name());
 		Assert.assertEquals(new BigDecimal(1.23).setScale(2, BigDecimal.ROUND_HALF_UP), activity.cost());
 		Assert.assertEquals(date, activity.date());
@@ -34,7 +34,7 @@ public class TestActivity {
 	@Test (expected = NullPointerException.class)
 	public void TestActivityNameThrows() {
 		@SuppressWarnings("unused")
-		Activity activity = Activity.build().cost(1.23).date(date).time(time).create();
+		Activity activity = Activity.builder().cost(1.23).date(date).time(time).create();
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class TestActivity {
 	@Test (expected = NullPointerException.class)
 	public void TestActivityCostThrows() {
 		@SuppressWarnings("unused")
-		Activity activity = Activity.build().name("Test").date(date).time(time).create();
+		Activity activity = Activity.builder().name("Test").date(date).time(time).create();
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class TestActivity {
 	@Test (expected = NullPointerException.class)
 	public void TestActivityDateThrows() {
 		@SuppressWarnings("unused")
-		Activity activity = Activity.build().name("Test").cost(1.23).time(time).create();
+		Activity activity = Activity.builder().name("Test").cost(1.23).time(time).create();
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class TestActivity {
 	@Test (expected = NullPointerException.class)
 	public void TestActivityTimeThrows() {
 		@SuppressWarnings("unused")
-		Activity activity = Activity.build().name("Test").cost(1.23).date(date).create();
+		Activity activity = Activity.builder().name("Test").cost(1.23).date(date).create();
 	}
 	
 	/**
@@ -69,7 +69,7 @@ public class TestActivity {
 	 */
 	@Test
 	public void TestClone() {
-		Activity expected = Activity.build().name("Test1").cost(1.23).date(date).time(time).create();
+		Activity expected = Activity.builder().name("Test1").cost(1.23).date(date).time(time).create();
 		Activity actual = null;		
 		try {
 			actual = expected.clone();
@@ -84,7 +84,7 @@ public class TestActivity {
 	 */
 	@Test
 	public void TestHashCode() {
-		Activity expected = Activity.build().name("Test1").cost(1.23).date(date).time(time).create();
+		Activity expected = Activity.builder().name("Test1").cost(1.23).date(date).time(time).create();
 		Activity actual = null;		
 		try {
 			actual = expected.clone();
@@ -99,7 +99,7 @@ public class TestActivity {
 	 */
 	@Test
 	public void TestEquals() {
-		Activity expected = Activity.build().name("Test1").cost(1.23).date(date).time(time).create();
+		Activity expected = Activity.builder().name("Test1").cost(1.23).date(date).time(time).create();
 		Activity actual = null;		
 		try {
 			actual = expected.clone();

@@ -24,7 +24,7 @@ public class Activity {
 	/** 
 	 * Returns an  Activity builder to aid in the creation of a new {@link Activity}.
 	 */
-	public static Builder build() {
+	public static Builder builder() {
 		return new Builder();
 	}
 
@@ -40,7 +40,7 @@ public class Activity {
 		Objects.requireNonNull(cost);
 		SortedMap<LocalDate, Activity> activities = new TreeMap<>();
 		for(int week = 0; week < numberOfWeeks; week++) {
-			Activity activity = Activity.build()
+			Activity activity = Activity.builder()
 															.date(date.plusWeeks(week))
 															.time(time)
 															.name("Activity " + week)
@@ -92,7 +92,7 @@ public class Activity {
 	 */
 	@Override
 	public Activity clone() throws CloneNotSupportedException {
-		return Activity.build().name(name).cost(cost).date(date).time(time).create();
+		return Activity.builder().name(name).cost(cost).date(date).time(time).create();
 	}
 
 	@Override

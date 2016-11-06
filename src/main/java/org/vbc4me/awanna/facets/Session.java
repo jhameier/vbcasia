@@ -99,7 +99,7 @@ public final class Session {
 	 */
 	public void addActivity(LocalDate date, LocalTime time, String activity, double cost) {
 		checkIfSessionIsOpen();
-		Activity act = Activity.build().date(date).time(time).name(activity).cost(cost).create();
+		Activity act = Activity.builder().date(date).time(time).name(activity).cost(cost).create();
 		activities.put(act.date(), act);
 	}
 	
