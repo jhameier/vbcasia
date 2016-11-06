@@ -10,7 +10,7 @@ import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 
 /**
- * An actions is an event that is planned for participation of a student and
+ * An activity is an event that is planned for participation of a student and
  * staff members including a date, time and a name for the actions.
  *
  * @author John Hameier 2015
