@@ -7,7 +7,7 @@ import java.util.Objects;
 
 /**
  * Represents a person authorized to pickup a child from the place where 
- * an actions is taking place.
+ * an activity is taking place.
  */
 public class Pickup {
 	private String first;
