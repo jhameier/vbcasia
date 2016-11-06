@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Student {
@@ -784,6 +786,16 @@ public class Student {
 		 * @return this builder for method chaining
 		 */
 		public Builder zip(String zip) {
+			if(zip.length() < 5 || zip.length() > 10) {
+				throw new IllegalArgumentException("Zip code has the wrong number of characters");
+			}
+			
+			Pattern pattern = Pattern.compile("^?<code>[0-9]{5} | ?<code>[0-9{5}-?<extended>[0-9]{4}");
+			Matcher matcher = pattern.matcher(zip);
+			if (!matcher.matches()) {
+				throw new IllegalArgumentException("The zip code \" " + zip + "\" does not match a  standard zip code pattern"
+						+ " such as 12345 or 12345-6789");
+			}
 			this.zip = zip;
 			return this;
 		}
