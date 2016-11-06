@@ -779,7 +779,6 @@ public class Student {
 			return this;
 		}
 		
-		// FIXME this should check for proper formatting of the zip code for both 5 and 9 digit zip codes
 		/**
 		 * Sets the zip code associated with this students street address
 		 * 
