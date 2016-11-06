@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Represents a yearly set of activities associated with an organization's program and
- * contains information such as actions (start and end dates + activities), student and staffing information
+ * Represents a yearly set of records associated with an organization's program and
+ * contains information such as events (start and end dates + activities), student and staffing information.
  */
 public final class Season {
 	

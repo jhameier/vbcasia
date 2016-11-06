@@ -11,7 +11,7 @@ import org.joda.money.Money;
 
 /**
  * An activity is an event that is planned for participation of a student and
- * staff members including a date, time and a name for the actions.
+ * staff members including a date, time and a name for the activity.
  *
  * @author John Hameier 2015
  */
