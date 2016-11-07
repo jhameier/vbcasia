@@ -1,4 +1,4 @@
-package account;
+package facets;
 
 import org.junit.Test;
 import org.vbc4me.awanna.facets.Club;

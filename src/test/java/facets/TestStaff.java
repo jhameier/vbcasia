@@ -1,4 +1,4 @@
-package account;
+package facets;
 
 import java.awt.image.BufferedImage;
 
