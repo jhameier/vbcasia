@@ -121,7 +121,7 @@ public final class StudentFileWriter {
 		parent.addContent(new Element("address").addContent(student.address()));
 		parent.addContent(new Element("city").addContent(student.city()));
 		parent.addContent(new Element("state").addContent(student.state()));
-		parent.addContent(new Element("zip-code").addContent(student.zip()));
+		parent.addContent(new Element("zip-code").addContent(student.zip().toString()));
 		
 		// Phone Numbers
 		Element phNumber = new Element("phone-number");
