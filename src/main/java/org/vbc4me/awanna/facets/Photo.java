@@ -2,6 +2,7 @@ package org.vbc4me.awanna.facets;
 
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
+import java.util.Objects;
 
 /**
  * Structure to hold photo, thumbnail and path to the image file.
@@ -19,6 +20,10 @@ public class Photo {
 	 * @param thumbnail: the thumbnail of the image
 	 */
 	public Photo(Path photoPath, BufferedImage photo, Path thumbPath, BufferedImage thumbnail) {
+		Objects.requireNonNull(photoPath);
+		Objects.requireNonNull(thumbPath);
+		Objects.requireNonNull(photo);
+		Objects.requireNonNull(thumbnail);
 		this.photoPath = photoPath;
 		this.photo = photo;
 		this.thumbPath = thumbPath;
