@@ -14,6 +14,7 @@ import org.joda.money.Money;
 import org.vbc4me.awanna.facets.Account;
 import org.vbc4me.awanna.facets.Activity;
 import org.vbc4me.awanna.facets.Club;
+import org.vbc4me.awanna.facets.Photo;
 import org.vbc4me.awanna.facets.Student;
 import org.vbc4me.awanna.facets.Transaction;
 import org.xml.sax.helpers.DefaultHandler;
@@ -35,16 +36,17 @@ public class StudentFileReader extends DefaultHandler {
       for (Element student : list) {
 	String first = student.getChild("name").getChildText("first");
 	String last = student.getChild("name").getChildText("last");
-        Student.Builder studentBuilder = Student.build().firstName(first).lastName(last)
+	Photo cphoto = new Photo(null, null, null, null);
+        Student.Builder studentBuilder = Student.builder().firstName(first).lastName(last)
         	.childId(student.getAttributeValue("childId"))
         	.childGrade(student.getChildText("grade"))
         	.childDOB(LocalDate.parse(student.getChildText("dob")))
         	.specialNeeds(student.getChildText("special-needs"))
         	.currentClub(Club.valueOf(student.getChildText("club")))
-        	.childPhotoPath(student.getChildText("photo"))
-        	.childThumbnailPath(student.getChildText("thumbnail"));
+        	.childPhoto(cphoto);
 
         Element parent = student.getChild("parent");
+        Photo pphoto = new Photo(null, null, null, null);
         studentBuilder.parentFirstName(parent.getChild("name").getChildText("first"))
             .parentLastName(parent.getChild("name").getChildText("last"))
             .address(parent.getChildText("address"))
@@ -52,9 +54,7 @@ public class StudentFileReader extends DefaultHandler {
             .state(parent.getChildText("state"))
             .zip(parent.getChildText("zip-code"))
             .emailAddress(parent.getChildText("email-address"))
-             .parentPhotoPath(parent.getChildText("photo"))
-             .parentThumbnailPath(parent.getChildText("thumbnail"));
-
+             .parentPhoto(pphoto);
         
         List<Element> ph = parent.getChild("phone-number").getChildren();
         System.out.println();

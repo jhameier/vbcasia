@@ -19,43 +19,42 @@ public class Photo {
 	 * @param photo: the image 
 	 * @param thumbnail: the thumbnail of the image
 	 */
-	public Photo(Path photoPath, BufferedImage photo, Path thumbPath, BufferedImage thumbnail) {
-		Objects.requireNonNull(photoPath);
-		Objects.requireNonNull(thumbPath);
-		Objects.requireNonNull(photo);
-		Objects.requireNonNull(thumbnail);
-		this.photoPath = photoPath;
-		this.photo = photo;
-		this.thumbPath = thumbPath;
-		this.thumbnail = thumbnail;
+	public Photo(Path path, BufferedImage image, Path tpath, BufferedImage thumb) {
+		Objects.requireNonNull(path);
+		Objects.requireNonNull(image);
+		Objects.requireNonNull(tpath);
+		Objects.requireNonNull(thumb);
+		this.photoPath = path;
+		this.photo = image;
+		this.thumbPath = tpath;
+		this.thumbnail = thumb;
 	}
 
 	/**
 	 * @return the path
 	 */
-	public final Path photoPath() {
+	public Path photoPath() {
 		return photoPath;
 	}
 	
 	/**
 	 * @return the thumbnail path
 	 */
-	public final Path thumbnailPath() {
+	public Path thumbnailPath() {
 		return thumbPath;
 	}
 	
 	/**
 	 * @return the thumbnail
 	 */
-	public final BufferedImage thumbnail() {
+	public BufferedImage thumbnail() {
 		return thumbnail;
 	}
 
 	/**
 	 * @return the photo
 	 */
-	public final BufferedImage photo() {
+	public BufferedImage photo() {
 		return photo;
 	}
-	
 }

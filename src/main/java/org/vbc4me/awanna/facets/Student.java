@@ -2,7 +2,6 @@ package org.vbc4me.awanna.facets;
 
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
@@ -25,21 +24,15 @@ public class Student {
 	private Set<String> specialNeeds = new HashSet<>();
 	private Club club;
 	
-	private BufferedImage childPhoto;
-	private Path childPhotoPath;
-	private BufferedImage childThumbnail;
-	private Path childThumbnailPath;
-	private BufferedImage parentPhoto;
-	private Path parentPhotoPath;
-	private BufferedImage parentThumbnail;
-	private Path parentThumbnailPath;
+	private Photo childPhoto;
+	private Photo parentPhoto;
 	
 	private String parentFirstName;
 	private String parentLastName;
 	private String address;
 	private String city;
 	private String state;
-	private String zip;
+	private Zipcode zip;
 	private List<PhoneNumber> phoneNumbers;
 	private String emailAddress;
 	private String emergencyContactName;
@@ -52,7 +45,7 @@ public class Student {
 	/**
 	 * Return a builder that allows construction of a Student Record
 	 */
-	public static Builder build() {
+	public static Builder builder() {
 		return new Builder();
 	}
 	
@@ -190,70 +183,37 @@ public class Student {
 	 * Returns the image of this student
 	 */
 	public BufferedImage childPhoto() {
-		return childPhoto;
+		return childPhoto.photo();
 	}
 	
 	/**
 	 * Returns the path to the image of this student.
 	 */
 	public Path childPhotoPath() {
-		return childPhotoPath;
-	}
-	
-	/**
-	 * Stores an image photo to associate with this student.
-	 */
-	public void childPhoto(BufferedImage image) {
-		this.childPhoto = image;
-	}
-	
-	/**
-	 * Sets the {@link Path} to this students photo.
-	 * 
-	 * <p>This method does not verify that the path exists.
-	 */
-	public void childPhotoPath(String path) {
-		this.childPhotoPath = Paths.get(path);
+		return childPhoto.photoPath();
 	}
 	
 	/**
 	 * Returns the thumbnail image of this student
 	 */
 	public BufferedImage childThumbnail() {
-		return this.childThumbnail;
+		return childPhoto.thumbnail();
 	}
 
 	/**
 	 * Returns the path to this students thumbnail image.
 	 * 
 	 * <p>This method does not guarantee that the path to the file exists.
-	 * 
 	 */
 	public Path childThumbnailPath() {
-		return childThumbnailPath;
+		return childPhoto.thumbnailPath();
 	}
 
-	/**
-	 * Stores an image thumbnail to associated with this student.
-	 */
-	public void childThumbnail(BufferedImage image) {
-		this.childThumbnail = image;
-	}
-
-	/**
-	 * Sets the {@link Path} to this students thumbnail photo.
-	 * 
-	 * <p>This method does not verify that the path exists.
-	 */
-	public void childThumbnailPath(String path) {
-		this.childThumbnailPath = Paths.get(path);
-	}
-	
 	/**
 	 * Returns the image of the parent's photo.
 	 */
 	public BufferedImage parentPhoto() {
-		return parentPhoto;
+		return parentPhoto.photo();
 	}
 	
 	/**
@@ -262,55 +222,23 @@ public class Student {
 	 * <p>This does not guarantee that the path to the file exists.
 	 */
 	public Path parentPhotoPath() {
-		return parentPhotoPath;
+		return parentPhoto.photoPath();
 	}
 	
 	/**
-	 * Stores the parents photo associated with this student.
-	 */
-	public void parentPhoto(BufferedImage image) {
-		this.parentPhoto = image;
-	}
-	
-	/**
-	 * Sets the {@link Path} to this parents photo file.
-	 * 
-	 * <p>This does not guarantee that the file represented by this {@link Path} actually exists. 
-	 */
-	public void parentPhotoPath(String path) {
-		this.parentPhotoPath = Paths.get(path);
-	}
-	
-	/**
-	 * Returns the thumbnail image of the parent's photo.
+	 * Returns the thumbnail image of this student
 	 */
 	public BufferedImage parentThumbnail() {
-		return parentThumbnail;
+		return parentPhoto.thumbnail();
 	}
-	
+
 	/**
-	 * Returns the path to this parents thumbnail image.
+	 * Returns the path to this students thumbnail image.
 	 * 
-	 * <p>This does not guarantee that the file represented by this {@link Path} actually exists.
+	 * <p>This method does not guarantee that the path to the file exists.
 	 */
 	public Path parentThumbnailPath() {
-		return parentThumbnailPath;
-	}
-	
-	/**
-	 * Stores the parents photo associated with this student.
-	 */
-	public void parentThumbnail(BufferedImage image) {
-		this.parentThumbnail = image;
-	}
-	
-	/**
-	 * Stores the {@link Path} to this parents thumbnail image.
-	 * 
-	 * <p>This method does not verify that the path to the image file is valid.
-	 */
-	public void parentThumbnailPath(String path) {
-		this.parentThumbnailPath = Paths.get(path);
+		return parentPhoto.thumbnailPath();
 	}
 	
 	/**
@@ -395,7 +323,7 @@ public class Student {
 	/**
 	 * Returns the zip code
 	 */
-	public String zip() {
+	public Zipcode zip() {
 		return zip;
 	}
 	
@@ -404,16 +332,7 @@ public class Student {
 	 *            code of the residence for this record
 	 */
 	public void zip(String zip) {
-		if (zip.length() < 5) {
-			throw new IllegalArgumentException("A zip code must have at least 5 characters");
-		}
-		
-		if (zip.contains("-") && zip.charAt(5) ==  '-' && (zip.length() < 10 || zip.length() > 10)) {
-			throw new IllegalArgumentException("An extended zip code must have exactly 9 characters with a dash ('-') "
-					+ "separating the first 5 characters from the last 4 characters");
-		}
-		
-		this.zip = zip;
+		this.zip = new Zipcode(zip);
 	}
 	
 	/**
@@ -514,16 +433,13 @@ public class Student {
 		this.childGrade = builder.childGrade;
 		this.childDOB = builder.childDOB;
 		this.specialNeeds = builder.specialNeeds;
+
 		this.childPhoto = builder.childPhoto;
-		this.childPhotoPath = builder.childPhotoPath;
-		this.childThumbnail = builder.childThumbnail;
-		this.childThumbnailPath = builder.childThumbnailPath;
+		this.parentPhoto = builder.parentPhoto;
+		
 		this.parentFirstName = builder.parentFirstName;
 		this.parentLastName = builder.parentLastName;
-		this.parentPhoto = builder.parentPhoto;
-		this.parentPhotoPath = builder.parentPhotoPath;
-		this.parentThumbnail = builder.parentThumbnail;
-		this.parentThumbnailPath = builder.parentThumbnailPath;
+		
 		this.address = builder.address;
 		this.city = builder.city;
 		this.state = builder.state;
@@ -552,20 +468,16 @@ public class Student {
 		private String childGrade;
 		private LocalDate childDOB;
 		private Set<String> specialNeeds;
-		private BufferedImage childPhoto;
-		private Path childPhotoPath;
-		private BufferedImage childThumbnail;
-		private Path childThumbnailPath;
-		private BufferedImage parentPhoto;
-		private Path parentPhotoPath;
-		private BufferedImage parentThumbnail;
-		private Path parentThumbnailPath;
+		
+		private Photo childPhoto;
+		private Photo parentPhoto;
+		
 		private String parentFirstName;
 		private String parentLastName;
 		private String address;
 		private String city;
 		private String state;
-		private String zip;
+		private Zipcode zip;
 		private List<PhoneNumber> phoneNumbers;
 		private String emailAddress;
 		private String emergencyContactName;
@@ -663,34 +575,8 @@ public class Student {
 		 * 
 		 * @return this builder for method chaining
 		 */
-		public Builder childPhoto(BufferedImage photo) {
+		public Builder childPhoto(Photo photo) {
 			this.childPhoto = photo;
-			return this;
-		}
-		
-		/**
-		 * Adds a {@link Path} to this students photo file.
-		 */
-		public Builder childPhotoPath(String path) {
-			this.childPhotoPath = Paths.get(path);
-			return this;
-		}
-		
-		/**
-		 * Adds a thumbnail photo to this students profile.
-		 * 
-		 * @return this builder for method chaining
-		 */
-		public Builder childThumbnail(BufferedImage thumbnail) {
-			this.childThumbnail = thumbnail;
-			return this;
-		}
-		
-		/**
-		 * Adds a {@link Path} to this students thumbnail photo file.
-		 */
-		public Builder childThumbnailPath(String path) {
-			this.childThumbnailPath = Paths.get(path);
 			return this;
 		}
 		
@@ -699,36 +585,11 @@ public class Student {
 		 * 
 		 * @return this builder for method chaining
 		 */
-		public Builder parentPhoto(BufferedImage photo) {
+		public Builder parentPhoto(Photo photo) {
 			this.parentPhoto = photo;
 			return this;
 		}
 		
-		/**
-		 * Adds a {@link Path} to this students parent photo file.
-		 */
-		public Builder parentPhotoPath(String path) {
-			this.parentPhotoPath = Paths.get(path);
-			return this;
-		}
-		
-		/**
-		 * Adds a parents thumbnail photo to this students profile.
-		 * 
-		 * @return this builder for method chaining
-		 */
-		public Builder parentThmbnail(BufferedImage thunbnail) {
-			this.parentThumbnail = thunbnail;
-			return this;
-		}
-		
-		/**
-		 * Adds a {@link Path} to this students parents thumbnail photo file.
-		 */
-		public Builder parentThumbnailPath(String path) {
-			this.parentThumbnailPath = Paths.get(path);
-			return this;
-		}
 		/**
 		 * Sets the parents first name associated with this student.
 		 * 
@@ -780,22 +641,25 @@ public class Student {
 		}
 		
 		/**
-		 * Sets the zip code associated with this students street address
+		 * Sets the 5 character zip code associated with this students street address in the form of '12345' only.
 		 * 
 		 * @return this builder for method chaining
+		 * @throws IllegalArgumentException if not supplying 5 numeric characters.
 		 */
 		public Builder zip(String zip) {
-			if(zip.length() < 5 || zip.length() > 10) {
-				throw new IllegalArgumentException("Zip code has the wrong number of characters");
-			}
-			
-			Pattern pattern = Pattern.compile("^?<code>[0-9]{5} | ?<code>[0-9{5}-?<extended>[0-9]{4}");
-			Matcher matcher = pattern.matcher(zip);
-			if (!matcher.matches()) {
-				throw new IllegalArgumentException("The zip code \" " + zip + "\" does not match a  standard zip code pattern"
-						+ " such as 12345 or 12345-6789");
-			}
-			this.zip = zip;
+			this.zip = new Zipcode(zip);
+			return this;
+		}
+		
+		/**
+		 * Sets the 9 character zipcode associated with this students street address in the form of '12345-6789'.
+		 * 
+		 * @param primary first 5 digits of the 9 character postal code
+		 * @param extended last 4 digits of the 9 character postal code
+		 * @throws IllegalArgumentException if not supplying 9 numeric characters.
+		 */
+		public Builder zip(String primary, String extended) {
+			this.zip = new Zipcode(primary, extended);
 			return this;
 		}
 		
@@ -816,13 +680,17 @@ public class Student {
 			return this;
 		}
 		
-		// FIXME this should check for correct formating of the email address
 		/**
 		 * Sets the email address associated with this student
 		 * 
 		 * @return this builder for method chaining
 		 */
 		public Builder emailAddress(String emailAddress) {
+			Pattern p = Pattern.compile("^[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]{3}");
+			Matcher m = p.matcher(emailAddress);
+			if (!m.matches()) {
+				throw new IllegalArgumentException("The email does not match the common pattern of xxxxx@xxx.XXX");
+			}
 			this.emailAddress = emailAddress;
 			return this;
 		}

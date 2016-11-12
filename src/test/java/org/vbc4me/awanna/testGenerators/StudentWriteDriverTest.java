@@ -21,7 +21,7 @@ public class StudentWriteDriverTest {
 	public static void main(String[] args) {
 		final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM-dd-yyyy");
 		
-		Builder stBuilder1 = Student.build().firstName("John").lastName("Doe");
+		Builder stBuilder1 = Student.builder().firstName("John").lastName("Doe");
 		stBuilder1.childGrade(String.valueOf(5));
 		stBuilder1.childDOB(LocalDate.parse("12-14-2005", dtf));
 		stBuilder1.specialNeeds("none");
@@ -36,7 +36,7 @@ public class StudentWriteDriverTest {
 						   .authPickup("Harry", "Johnson", "Brother", new BufferedImage(480,640, BufferedImage.TYPE_INT_RGB),
 								   																				new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB));
 		
-		Builder stBuilder2 = Student.build().firstName("Mary").lastName("Matlin");
+		Builder stBuilder2 = Student.builder().firstName("Mary").lastName("Matlin");
 		stBuilder2.childGrade(String.valueOf(3));
 		stBuilder2.childDOB(LocalDate.parse("07-21-2007", dtf));
 		stBuilder2.specialNeeds("asthma symptoms");

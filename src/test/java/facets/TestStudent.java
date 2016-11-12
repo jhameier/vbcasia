@@ -1,6 +1,7 @@
 package facets;
 
 import java.awt.image.BufferedImage;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -8,19 +9,27 @@ import java.util.Locale;
 import org.junit.Assert;
 import org.junit.Test;
 import org.vbc4me.awanna.facets.PhoneNumber;
+import org.vbc4me.awanna.facets.Photo;
 import org.vbc4me.awanna.facets.Student;
 
 public class TestStudent {
 	
 	@Test
-	public void TestStudentCreation() {
+	public void testEmailCreation() {
+		
+	}
+	
+	@Test
+	public void testStudentCreation() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 		formatter = formatter.withLocale(Locale.US);
 		LocalDate dob = LocalDate.parse("03/04/2012", formatter);
 		BufferedImage cimage = new BufferedImage(480, 640, BufferedImage.TYPE_INT_RGB);
 		BufferedImage cthumb = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+		Photo cPhoto = new Photo(Paths.get("child/cimage.jpg"), cimage, Paths.get("child/cthumb.jpg"), cthumb);
 		BufferedImage pimage = new BufferedImage(480, 640, BufferedImage.TYPE_INT_RGB);
 		BufferedImage pthumb = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+		Photo pPhoto = new Photo(Paths.get("child/pimage.jpg"), cimage, Paths.get("child/pthumb.jpg"), cthumb);
 		BufferedImage auth1image = new BufferedImage(480, 640, BufferedImage.TYPE_INT_RGB);
 		BufferedImage auth1thumb = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
 		BufferedImage auth2image = new BufferedImage(480, 640, BufferedImage.TYPE_INT_RGB);
@@ -30,18 +39,16 @@ public class TestStudent {
 		BufferedImage auth4image = new BufferedImage(480, 640, BufferedImage.TYPE_INT_RGB);
 		BufferedImage auth4thumb = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
 		
-		Student student = Student.build()
+		Student student = Student.builder()
 				                                          .firstName("First")
 				                                          .lastName("Last")
 				                                          .childDOB(dob)
 				                                          .childGrade("K")
 				                                          .specialNeeds("NA")
-				                                          .childPhoto(cimage)
-				                                          .childThumbnail(cthumb)
+				                                          .childPhoto(cPhoto)
 				                                          .parentFirstName("First")
 				                                          .parentLastName("Last")
-				                                          .parentPhoto(pimage)
-				                                          .parentThmbnail(pthumb)
+				                                          .parentPhoto(pPhoto)
 				                                          .address("123 Main Street")
 				                                          .city("Some City")
 				                                          .state("NJ")

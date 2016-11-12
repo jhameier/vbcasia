@@ -61,7 +61,7 @@ public final class MemberAndStaffGenerator {
 			LocalDate dob = parseDate(age, random);
 			int ap = random.nextInt(4) + 1; // number of authorized pickups
 			
-			Builder sb = Student.build();
+			Builder sb = Student.builder();
 			sb.firstName(cname[0].trim()).lastName(cname[1].trim()).childGrade(grade).childDOB(dob)
 					.parentFirstName(pname[0]).parentLastName(pname[1]).address(addr[0].trim()).city(addr[1].trim())
 					.state(addr[2].trim()).zip(addr[3].trim()).phoneNumber("home", addr[5].trim())
