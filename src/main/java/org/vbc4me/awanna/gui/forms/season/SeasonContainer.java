@@ -9,11 +9,11 @@ import org.vbc4me.awanna.gui.AppGui;
  */
 public final class SeasonContainer {
     public SeasonContainer(){}
-    public static SeasonButtonPanel buttonPanel = new SeasonButtonPanel();
-    public static SeasonEditForm editForm = new SeasonEditForm();
-    public static SeasonBlankForm blankForm = new SeasonBlankForm();
-    public static SeasonDisplayForm displayForm = new SeasonDisplayForm();
-    public static SeasonTableModel tableModel = new SeasonTableModel();
+    private static SeasonButtonPanel buttonPanel = new SeasonButtonPanel();
+    private static SeasonEditForm editForm = new SeasonEditForm();
+    private static SeasonBlankForm blankForm = new SeasonBlankForm();
+    private static SeasonDisplayForm displayForm = new SeasonDisplayForm();
+    private static SeasonTableModel tableModel = new SeasonTableModel();
 
     public static Season season;
 
@@ -26,4 +26,26 @@ public final class SeasonContainer {
       SeasonButtonPanel.saveAction.setEnabled(true);
       SeasonButtonPanel.saveAsAction.setEnabled(true);
     }
+    
+    public static SeasonButtonPanel buttonPanel() {
+    	return buttonPanel;
+    }
+    
+    public static SeasonEditForm editForm() {
+    	return editForm;
+    }
+    
+    public static SeasonBlankForm blankForm() {
+    	return blankForm;
+    }
+    
+    public static SeasonDisplayForm displayForm() {
+    	return displayForm;
+    }
+    
+    public static SeasonTableModel tableModel() {
+    	return tableModel;
+    }
+    
+    
 }

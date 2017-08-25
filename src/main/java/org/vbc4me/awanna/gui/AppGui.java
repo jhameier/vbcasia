@@ -67,7 +67,7 @@ public class AppGui extends JFrame {
         new SeasonContainer();
         new SessionContainer();
         new StudentContainer();
-		displayPanel.updateBottomLeft(SeasonContainer.blankForm);
+		displayPanel.updateBottomLeft(SeasonContainer.blankForm());
 		getContentPane().add(displayPanel, BorderLayout.CENTER);
 
 		/*

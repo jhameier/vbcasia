@@ -19,7 +19,7 @@ import org.vbc4me.awanna.gui.forms.season.SeasonButtonPanel;
 import org.vbc4me.awanna.gui.forms.season.SeasonContainer;
 
 /**
- * Used to test panel classes in the ide without having to run the entire
+ * Used to test panel classes in the IDE without having to run the entire
  * application.
  *
  * Created by John Hameier on July 2015.
@@ -67,7 +67,8 @@ public class TestGuiPanels extends JFrame {
 
         new SeasonContainer();
 		DisplayPanel panel = new DisplayPanel();
-		panel.updateAllDisplays(SeasonContainer.editForm, SeasonContainer.buttonPanel, new JPanel(), SeasonContainer.tableModel);
+		panel.updateAllDisplays(SeasonContainer.editForm(), SeasonContainer.buttonPanel(),
+				new JPanel(), SeasonContainer.tableModel());
 		JFrame window9 = new TestGuiPanels(panel, "Display Panel");
 		windows.add(window9);
 		
