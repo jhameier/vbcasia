@@ -12,7 +12,7 @@ public final class ProgramHelpAction extends AbstractAction {
 
     public ProgramHelpAction(JFrame frame) {
 	this.frame = frame;
-	putValue(NAME, "About");
+	putValue(NAME, "Help");
 	putValue(SHORT_DESCRIPTION, "Displays Information about this Application");
     }
 
