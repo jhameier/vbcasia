@@ -6,8 +6,7 @@ import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
 
 /**
- * Used to create a new blank record.
- *
+ * A set of steps used to close an opened Season
  * @author John Hameier: June 2015.
  */
 public final class CloseSeasonAction extends AbstractAction {
