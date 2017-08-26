@@ -15,11 +15,27 @@ public final class Season {
 	private Session session;
 	private Map<String, Student> students = new HashMap<>();
 	private Map<String, Staff> staff = new HashMap<>();
+	private boolean finalized;
 	
 	public Season(String name, Session session) {
 		this.id = UUID.randomUUID();
 		this.name = name;
 		this.session = session;
+		this.finalized = false;
+	}
+	
+	/**
+	 * Returns whether or not this season is closed.
+	 */
+	public boolean isFinalized() {
+		return finalized;
+	}
+	
+	/**
+	 * Closes out this season. This can not be undone (without proper knowledge of the system resources).
+	 */
+	public void finalize() {
+		finalized = true;
 	}
 	
 	/**
