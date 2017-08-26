@@ -67,7 +67,7 @@ public class AppGui extends JFrame {
         new SeasonContainer();
         new SessionContainer();
         new StudentContainer();
-		displayPanel.updateBottomLeft(SeasonContainer.blankForm());
+		displayPanel.updateBottomLeft(SeasonContainer.blankForm);
 		getContentPane().add(displayPanel, BorderLayout.CENTER);
 
 		/*
@@ -86,6 +86,12 @@ public class AppGui extends JFrame {
 		JMenuItem mntmOpenSeason = new JMenuItem(SeasonButtonPanel.openAction);
 		mnFile.add(mntmOpenSeason);
 		
+		JMenuItem mntmSaveSeason = new JMenuItem(SeasonButtonPanel.saveAction);
+		mnFile.add(mntmSaveSeason);
+		
+		JMenuItem mntmSaveasSeason = new JMenuItem(SeasonButtonPanel.saveAsAction);
+		mnFile.add(mntmSaveasSeason);
+		
 		mnFile.addSeparator();
 
 		JMenuItem mntmNewSession = new JMenuItem(SessionButtonPanel.newAction);
@@ -94,11 +100,11 @@ public class AppGui extends JFrame {
 		JMenuItem mntmOpenSession = new JMenuItem(SessionButtonPanel.openAction);
 		mnFile.add(mntmOpenSession);
 		
-		JMenuItem mntmCopySession = new JMenuItem(SessionButtonPanel.copyAction);
-		mnFile.add(mntmCopySession);
-		
 		JMenuItem mntmSaveSession = new JMenuItem(SessionButtonPanel.saveAction);
 		mnFile.add(mntmSaveSession);
+		
+		JMenuItem mntmSaveasSession = new JMenuItem("SaveAs Session");
+		mnFile.add(mntmSaveasSession);
 		
 		mnFile.addSeparator();
 		

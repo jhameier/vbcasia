@@ -43,9 +43,10 @@ public class SeasonEditForm extends JPanel {
 		nameField.setColumns(10);
         nameField.setSize(nameField.getWidth(), 25);
 		LocalDate date = LocalDate.now();
-		String name = "Awanna Season " + date.getYear();
+		String name = "Awanna Season " + date.getYear() + "/" + (date.getYear()+1);
 		nameField.setText(name);
 		infoPanel.add(nameField, "cell 3 1,growx");
+		this.setName(name);
 		
 		JLabel lblStartDate = new JLabel("Start Date:");
 		lblStartDate.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -68,21 +69,11 @@ public class SeasonEditForm extends JPanel {
 		infoPanel.add(lblNumberOfActivities, "cell 1 4 2 1,alignx right,aligny center");
 		
 		startdatePicker = new DatePicker();
-        startdatePicker.addDateChangeListener(new DateChangeListener() {
-            @Override
-            public void dateChanged(DateChangeEvent event) {
-                if (event.getNewDate() != null) {
-                    enddatePicker.setDate(startdatePicker.getDate().plusMonths(9));
-                    SeasonButtonPanel.createAction.setEnabled(true);
-                } else {
-                    enddatePicker.clear();
-					SeasonButtonPanel.createAction.setEnabled(true);
-                }
-            }
-        });
+        startdatePicker.addDateChangeListener(dcl);
 		infoPanel.add(startdatePicker, "cell 3 2");
 		
 		enddatePicker = new DatePicker();
+		enddatePicker.addDateChangeListener(dcl);
 		infoPanel.add(enddatePicker, "cell 3 3");
 
         JLabel lblNoOfActivities = new JLabel("");
@@ -117,5 +108,22 @@ public class SeasonEditForm extends JPanel {
     public LocalDate endDate() {
         return enddatePicker.getDate();
     }
+    
+    public String getFileName() {
+    	return nameField.getText();
+    }
+    
+   DateChangeListener dcl =  new DateChangeListener() {
+        @Override
+        public void dateChanged(DateChangeEvent event) {
+            if (event.getNewDate() != null) {
+                enddatePicker.setDate(startdatePicker.getDate().plusMonths(9));
+                SeasonButtonPanel.createAction.setEnabled(true);
+            } else {
+                enddatePicker.clear();
+				SeasonButtonPanel.createAction.setEnabled(false);
+            }
+        }
+    };
 
 }

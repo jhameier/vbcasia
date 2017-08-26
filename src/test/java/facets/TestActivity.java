@@ -8,10 +8,9 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.vbc4me.awanna.facets.Activity;
-
-import junit.framework.Assert;
 
 public class TestActivity {
 	private LocalDate date = LocalDate.now();
@@ -156,7 +155,7 @@ public class TestActivity {
 			Activity activity = activities.get(key.next());
 			Assert.assertEquals(date.plusWeeks(week), activity.date());
 			Assert.assertEquals(time, activity.time());
-			Assert.assertEquals(new BigDecimal(1.59).setScale(2, BigDecimal.ROUND_HALF_UP), activity.cost());
+			Assert.assertEquals(new BigDecimal(1.59).setScale(2, BigDecimal.ROUND_HALF_UP), activity.cost().getAmount());
 			Assert.assertEquals("Activity " + week, activity.name());
 		}
 	}

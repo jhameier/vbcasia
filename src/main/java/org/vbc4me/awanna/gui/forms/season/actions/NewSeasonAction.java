@@ -17,10 +17,8 @@ import javax.swing.AbstractAction;
  */
 public final class NewSeasonAction extends AbstractAction {
 	private static final long serialVersionUID = -6301577011454895115L;
-
 	
 	public NewSeasonAction() {
-
 		putValue(NAME, "New Season");
 		putValue(SHORT_DESCRIPTION, "Create a New Blank Season.");
 	}

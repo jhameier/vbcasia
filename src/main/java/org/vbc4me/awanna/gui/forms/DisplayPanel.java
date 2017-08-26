@@ -42,7 +42,8 @@ public final class DisplayPanel extends JPanel {
 		add(splitPane, BorderLayout.CENTER);
 		
 		/*
-		 * Upper scroll pane holds 3 panels, 1 panel with a border layout for content and the other for the button panel. 
+		 * Upper scroll pane holds 4 panels for various types of display panels such as button panels and/or edit panels
+		 * Lower scroll pane hold 1 panel for a table 
 		 * 
 		 *  | ------------------- | -------------------- |
 		 *  |                               |                                |
@@ -154,13 +155,15 @@ public final class DisplayPanel extends JPanel {
 	}
 	
 	/**
-	 * Initializes the entire panel with a dual display setup. The top panel will hold
-	 * a standard JPanel (usually used to display text information) and the
-	 * lower section is for holding a {@link JTable} for displaying spreadsheet
-	 * style data. It should be noted that the tableModel is what is passed in and
-	 * the table is updated with the then data set and layout.
+	 * Initializes the entire panel with a 3 table upper display setup. The top left panel will hold
+	 * a button panel and lower left a JPanel (usually used to display text information) and the
+	 * lower right section is for holding an additional JPanel while the lower section will always be for a {@link JTable} for displaying 
+	 * spreadsheet style data. 
+	 * 
+	 * <p>It should be noted that a tableModel is passed in (not the table itself) and
+	 * the single table container is updated with the dataset and layout.
 	 */
-	public void updateAllDisplays(JPanel content, JPanel btnPanel, JPanel sidePanel, TableModel model) {
+	public void update3PanelDisplay(JPanel content, JPanel btnPanel, JPanel sidePanel, TableModel model) {
 		upperLeftPanel.removeAll();
 		upperLeftPanel.add(btnPanel);
 		

@@ -1,55 +1,44 @@
 package org.vbc4me.awanna.gui.forms.session;
 
-import org.vbc4me.awanna.gui.forms.session.actions.CopySessionAction;
 import org.vbc4me.awanna.gui.forms.session.actions.NewSessionAction;
 import org.vbc4me.awanna.gui.forms.session.actions.OpenSessionAction;
+import org.vbc4me.awanna.gui.forms.session.actions.SaveAsSessionAction;
 import org.vbc4me.awanna.gui.forms.session.actions.SaveSessionAction;
 
+import net.miginfocom.swing.MigLayout;
+
+import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 public class SessionButtonPanel extends JPanel {
 	private static final long serialVersionUID = -169212683318427227L;
-	public final static CopySessionAction copyAction = new CopySessionAction(null);
+	
 	public final static NewSessionAction newAction = new NewSessionAction(null);
 	public final static OpenSessionAction openAction = new OpenSessionAction(null);
 	public final static SaveSessionAction saveAction = new SaveSessionAction(null);
+	public final static SaveAsSessionAction saveAsAction = new SaveAsSessionAction(null);
 	
 	public SessionButtonPanel() {
-		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		
-		Component horizontalStrut = Box.createHorizontalStrut(1);
-		add(horizontalStrut);
+		setBorder(new LineBorder(new Color(0, 0, 0)));
+		setLayout(new MigLayout("", "[50px][50px][50px][50px]", "[23px][][]"));
 
 		JButton btnNew = new JButton(newAction);
-		add(btnNew);
-		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(5);
-		add(horizontalStrut_1);
+		btnNew.setText("Create Session");
+		add(btnNew, "cell 0 0 2 1,growx,aligny center");
 		
 		JButton btnOpen = new JButton(openAction);
-		add(btnOpen);
-		
-		Component horizontalStrut_2 = Box.createHorizontalStrut(5);
-		add(horizontalStrut_2);
-		
-		JButton btnCopy = new JButton(copyAction);
-		add(btnCopy);
-		
-		Component horizontalStrut_3 = Box.createHorizontalStrut(5);
-		add(horizontalStrut_3);
+		add(btnOpen, "cell 2 0 2 1,growx,aligny center");
 		
 		JButton btnSave = new JButton(saveAction);
-		add(btnSave);
+		add(btnSave, "cell 0 1 2 1,growx,aligny center");
 		
-		Component horizontalStrut_4 = Box.createHorizontalStrut(5);
-		add(horizontalStrut_4);
-		
-		JButton btnNewActivity = new JButton();
-		add(btnNewActivity);
+		JButton btnSaveAs = new JButton(saveAsAction);
+		add(btnSaveAs, "cell 2 1 2 1,growx,aligny center");
 	}
 }

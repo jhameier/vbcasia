@@ -23,6 +23,8 @@ public final class CreateSeasonAction extends AbstractAction {
     }
 
     public void actionPerformed(ActionEvent e) {
+    	SeasonContainer.editForm.getName();
+    	
         int ans = JOptionPane.showConfirmDialog(AppGui.displayPanel(), "Create Season ");
         if (ans == JOptionPane.YES_OPTION) {
         	SeasonContainer.createSeason();

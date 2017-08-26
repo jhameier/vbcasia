@@ -20,7 +20,8 @@ public final class SaveSeasonAction extends AbstractAction {
     }
 
     public void actionPerformed(ActionEvent e) {
-        String message = "This is activated from Save Season Action";
+        String message = "This is activated from Save Season Action located in the season -> actions package.\n"
+        		+ "TODO Make this work";
         String title = "Save Currently Open Season";
         int messageType = JOptionPane.INFORMATION_MESSAGE;
         JOptionPane.showMessageDialog(null, message, title, messageType);
