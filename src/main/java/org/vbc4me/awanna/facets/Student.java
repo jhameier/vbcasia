@@ -13,7 +13,9 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+/**
+ * A student is an individual that partakes of an activity produced by the organization.
+ */
 public class Student {
 	private UUID childId;
 	private String recordType;

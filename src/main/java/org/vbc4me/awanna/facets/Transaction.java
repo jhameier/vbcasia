@@ -3,7 +3,7 @@ package org.vbc4me.awanna.facets;
 import org.joda.money.Money;
 
 /**
- * A class to represent a single transaction where money is received or credited
+ * Represents a single transaction where money is received or credited
  * to an account.
  */
 public class Transaction {

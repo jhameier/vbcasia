@@ -17,6 +17,7 @@ public class Photo {
 	 * Create an immutable structure to hold images.
 	 * @param path: the path to the image
 	 * @param photo: the image 
+	 * @param tpath: the path to the thumbnail image
 	 * @param thumbnail: the thumbnail of the image
 	 */
 	public Photo(Path path, BufferedImage image, Path tpath, BufferedImage thumb) {

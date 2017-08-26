@@ -21,12 +21,7 @@ public final class OpenSeasonAction extends AbstractAction {
 		putValue(SHORT_DESCRIPTION, "Opens an existing Season.");
 	}
 	
-	public void actionPerformed(ActionEvent e) {
-		// String message = "This is activated from Open SeasonContainer Action";
-		// String title = "Open Existing SeasonContainer";
-		// int messageType = JOptionPane.INFORMATION_MESSAGE;
-		// JOptionPane.showMessageDialog(frame, message, title, messageType);
-		
+	public void actionPerformed(ActionEvent e) {	
 		Preferences preferences = Preferences.userRoot();
 		String path = preferences.get("DEFAULT_PATH", "");
 		JFileChooser chooser = new JFileChooser();
@@ -43,6 +38,7 @@ public final class OpenSeasonAction extends AbstractAction {
 			File file = new File(chooser.getSelectedFile().getAbsolutePath());
 			chooser.setCurrentDirectory(file);
 			preferences.put("DEFAULT_PATH", file.getAbsolutePath());
+			System.out.println("Need to read in a file here!");
 			//FIXME read in file and setup SeasonDisplayForm
 		}
 

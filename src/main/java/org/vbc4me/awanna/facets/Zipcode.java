@@ -5,6 +5,9 @@ import java.util.regex.Pattern;
 
 import org.jdom2.IllegalAddException;
 
+/**
+ * A postal designation for an address.
+ */
 public class Zipcode {
 	private String primary;
 	private String extended;
