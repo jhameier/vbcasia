@@ -53,7 +53,7 @@ public enum Club {
 	 */
 	public static Club get(String name) {
 		if(!CLUB_MAP.containsKey(name))
-			throw new IllegalAddException("The club name: " + name + " does not exist.");
+			throw new IllegalArgumentException("The club name: " + name + " does not exist.");
 		return CLUB_MAP.get(name);
 	}
 }
