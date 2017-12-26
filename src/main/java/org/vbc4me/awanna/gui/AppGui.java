@@ -33,7 +33,7 @@ import org.vbc4me.awanna.gui.forms.student.StudentContainer;
 /**
  * Used to hold the primary applications layout and component panels. The only
  * necessary component to expose to outside classes is the card panel in which
- * all other panels will be placed allowing a seem-less transition to display
+ * all other panels will be placed allowing a seamless transition to display
  * different types of information.
  *
  * @author John Hameier: June 2015
