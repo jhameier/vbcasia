@@ -7,7 +7,9 @@ import java.util.Objects;
 import javax.swing.text.MaskFormatter;
 
 public class PhoneNumber {
-	private String type;
+
+    public enum Type {HOME, OFFICE, CELL, OTHER}
+	private Type type;
 	private String number;
 
 	/**
@@ -23,7 +25,7 @@ public class PhoneNumber {
 	 * <p>
 	 *  The type is used to classify the number such as home or cell or office etc.
 	 */
-	public PhoneNumber(String type, String number) {
+	public PhoneNumber(Type type, String number) {
 
 		Objects.requireNonNull(type, "Phone Type can not be empty");
 		Objects.requireNonNull(number, "Phone Number can not be empty");
@@ -49,7 +51,7 @@ public class PhoneNumber {
 	}
 
 	public String type() {
-		return type;
+		return type.name();
 	}
 
 	/**
@@ -85,11 +87,9 @@ public class PhoneNumber {
 	}
 
 	public boolean isEqualTo(PhoneNumber phoneNumber) {
-		if((this.number.equals(phoneNumber.number)))
-			return true;
-		
-		return false;
-	}
+        return this.number.equals(phoneNumber.number);
+
+    }
 
 	private String formatPhoneNumber(String number) {
 		String mask = "(###) ###-####";
