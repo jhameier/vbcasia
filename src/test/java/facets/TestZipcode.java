@@ -52,4 +52,17 @@ public class TestZipcode {
 		assertEquals("12345-6789", zipcode.toString());
 	}
 	
+	@Test
+	public void extendedEmpty() {
+		Zipcode zipcode = new Zipcode("98765", "");
+		assertEquals(zipcode.primary(), "98765");
+		assertEquals(zipcode.extended(), "");
+		assertEquals(zipcode.toString(), "98765");
+	}
+	
+	@Test (expected=NullPointerException.class)
+	public void extendThrows() {
+		new Zipcode("98765", null);
+	}
+	
 }

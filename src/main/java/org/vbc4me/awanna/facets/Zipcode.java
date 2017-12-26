@@ -5,6 +5,8 @@ import java.util.regex.Pattern;
 
 import org.jdom2.IllegalAddException;
 
+import com.privatejgoodies.common.base.Objects;
+
 /**
  * A postal designation for an address.
  */
@@ -13,16 +15,16 @@ public class Zipcode {
 	private String extended;
 	
 	public Zipcode(String primary) {
-		if (!verifyPrimary(primary)) {
-			throw new IllegalAddException("The primary zipcode \"" + primary + "\" is not a valid zipcode");
-		}
-		this.primary = primary;
-		this.extended = "";
+		this(primary,  "");
 	}
 	
+	/**
+	 * A postal designation for an address.  The extended code can be an empty string. A null string will throw a 
+	 * {@link NullPointerException}.
+	 */
 	public Zipcode(String primary, String extended) {
 		if (!verifyPrimary(primary) || (!verifyExtended(extended))) {
-			throw new IllegalAddException("The primary and exended zipcode \"" 
+			throw new IllegalArgumentException("The primary and exended zipcode \"" 
 																							+ primary + "-" + extended + "\" is not a valid zipcode");
 		}
 		this.primary = primary;
@@ -52,6 +54,12 @@ public class Zipcode {
 	}
 	
 	private boolean verifyExtended(String extended) {
+		if (extended.length() > 0 && extended.length() < 4) {
+			throw new IllegalArgumentException("The extended code must be 4 characters in length; found " 
+						+ extended.length());
+		} else if (extended.isEmpty() || extended.length() == 0) {
+			return true;
+		}
 		Pattern p = Pattern.compile("^[0-9]{4}");
 		Matcher m = p.matcher(extended);
 		return m.matches();
