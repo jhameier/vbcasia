@@ -21,6 +21,7 @@ public class Activity {
 	private final LocalDate date;
 	private final LocalTime time;
 	private final String name;
+	private final String description;
 	private final Money cost;
 
 	/** 
@@ -31,11 +32,12 @@ public class Activity {
 	}
 
 	/**
-	 * Return a Sessions worth of {@link Activity activities} sorted by the start date and containing the number of weeks,
-	 *  specific time (which is applied to all activities) and cost (which is applied to all activities). Weeks are automatically
-	 *  incremented.
+	 * Return a Sessions worth of {@link Activity activities} sorted by the start date and containing the number of
+     * weeks, specific time (which is applied to all activities) and cost (which is applied to all activities).  Weeks
+     * are automatically incremented.
 	 */
-	public static SortedMap<LocalDate, Activity>createActivities(LocalDate date, double numberOfWeeks, LocalTime time, double cost) {
+	public static SortedMap<LocalDate, Activity> createActivities(LocalDate date, double numberOfWeeks,
+                                                                  LocalTime time, double cost) {
 		Objects.requireNonNull(date);
 		Objects.requireNonNull(numberOfWeeks);
 		Objects.requireNonNull(time);
@@ -58,22 +60,69 @@ public class Activity {
 		this.date = builder.date;
 		this.time = builder.time;
 		this.name = builder.name;
+		this.description = builder.description;
 		this.cost = builder.cost;
 	}
 
 	/**
-	 * Returns the date associated with this actions.
+	 * Returns the date associated with this {@link Activity}.  Any changes to the returned value will not effect the
+     * {@link LocalDate date} associated with this {@link Activity}.  If the date needs to change use the provided
+     * method {@link #changeDate(LocalDate)}.
 	 */
 	public LocalDate date() {
-		return date;
+		return LocalDate.parse(date.toString());
 	}
 
+    /**
+     * Returns a new {@link Activity} with the {@link LocalDate date}.
+     */
+	public Activity changeDate(LocalDate date) {
+	    return Activity.builder()
+                .id(this.id)
+                .date(date)
+                .time(this.time)
+                .name(this.name)
+                .description(this.description)
+                .cost(this.cost)
+                .create();
+    }
+
 	/**
-	 * Returns the start time associated with this actions.
+	 * Returns the start time associated with this {@link Activity}.  Any changes to the returned value will not
+     * effect the {@link LocalTime time} associated with this {@link Activity}.  If the time need to change use the
+     * provided method {@link #changeTime(LocalTime)}.
 	 */
 	public LocalTime time() {
-		return time;
+		return LocalTime.parse(time.toString());
 	}
+
+    /**
+     * Returns a new {@link Activity} with the {@link LocalTime time}.
+     */
+	public Activity changeTime(LocalTime time) {
+        return Activity.builder()
+                .id(this.id)
+                .date(this.date)
+                .time(time)
+                .name(this.name)
+                .description(this.description)
+                .cost(this.cost)
+                .create();
+    }
+
+    /**
+     * Returns a new {@link Activity} with the {@link LocalDate date} and {@link LocalTime time}.
+     */
+    public Activity changeDateAndTime(LocalDate date, LocalTime time) {
+        return Activity.builder()
+                .id(this.id)
+                .date(date)
+                .time(time)
+                .name(this.name)
+                .description(this.description)
+                .cost(this.cost)
+                .create();
+    }
 
 	/**
 	 * Return the name of this actions.
@@ -81,6 +130,10 @@ public class Activity {
 	public String name() {
 		return name;
 	}
+
+	public String description() {
+	    return description;
+    }
 
 	/**
 	 * Returns the cost of this actions
@@ -111,6 +164,7 @@ public class Activity {
                 && date.equals(activity.date)
                 && time.equals(activity.time)
 				&& name.equals(activity.name)
+                && description.equals(activity.description)
                 && cost.equals(activity.cost);
 	}
 
@@ -123,6 +177,7 @@ public class Activity {
 		result = 31 * result + date.hashCode();
 		result = 31 * result + time.hashCode();
 		result = 31 * result + name.hashCode();
+		result = 31 * result + description.hashCode();
 		temp = 31 + result + cost.hashCode();
 		result = 31 * result + (int) (temp ^ (temp >>> 32));
 		return result;
@@ -133,6 +188,7 @@ public class Activity {
 		private LocalDate date;
 		private LocalTime time;
 		private String name;
+		private String description;
 		private Money cost;
 
 		public Builder id(UUID id) {
@@ -155,6 +211,11 @@ public class Activity {
 			return this;
 		}
 
+		public Builder description(String description) {
+		    this.description = description;
+		    return this;
+        }
+
 		public Builder cost(double cost) {
 			this.cost = Money.of(CurrencyUnit.USD, cost);
 			return this;
@@ -172,6 +233,7 @@ public class Activity {
 			Objects.requireNonNull(date);
 			Objects.requireNonNull(time);
 			Objects.requireNonNull(name);
+			Objects.requireNonNull(description);
 			Objects.requireNonNull(cost);
 			return new Activity(this);
 		}
