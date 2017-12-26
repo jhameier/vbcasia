@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.Objects;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.UUID;
 
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
@@ -16,6 +17,7 @@ import org.joda.money.Money;
  * @author John Hameier 2015
  */
 public class Activity {
+    private final UUID id;
 	private final LocalDate date;
 	private final LocalTime time;
 	private final String name;
@@ -52,6 +54,7 @@ public class Activity {
 	}
 	
 	private Activity(Builder builder) {
+        this.id = builder.id;
 		this.date = builder.date;
 		this.time = builder.time;
 		this.name = builder.name;
@@ -104,15 +107,20 @@ public class Activity {
 
 		Activity activity = (Activity) obj;
 
-		return cost.equals(activity.cost) && date.equals(activity.date) && time.equals(activity.time)
-				&& this.name.equals(activity.name);
+		return id.equals(activity.id)
+                && date.equals(activity.date)
+                && time.equals(activity.time)
+				&& name.equals(activity.name)
+                && cost.equals(activity.cost);
 	}
 
 	@Override
 	public int hashCode() {
 		int result;
 		long temp;
-		result = date.hashCode();
+
+		result = id.hashCode();
+		result = 31 * result + date.hashCode();
 		result = 31 * result + time.hashCode();
 		result = 31 * result + name.hashCode();
 		temp = 31 + result + cost.hashCode();
@@ -121,19 +129,20 @@ public class Activity {
 	}
 
 	public static class Builder {
+	    private UUID id;
 		private LocalDate date;
 		private LocalTime time;
 		private String name;
 		private Money cost;
 
+		public Builder id(UUID id) {
+		    this.id = id;
+		    return this;
+        }
+
 		public Builder date(LocalDate date) {
 			this.date = date;
 			return this;
-		}
-
-		public Builder cost(Money cost2) {
-			// TODO Auto-generated method stub
-			return null;
 		}
 
 		public Builder time(LocalTime time) {
@@ -151,7 +160,15 @@ public class Activity {
 			return this;
 		}
 
+        public Builder cost(Money cost) {
+            this.cost = cost;
+            return this;
+        }
+
 		public Activity create() {
+		    if (id == null) {
+		        id = UUID.randomUUID();
+            }
 			Objects.requireNonNull(date);
 			Objects.requireNonNull(time);
 			Objects.requireNonNull(name);
