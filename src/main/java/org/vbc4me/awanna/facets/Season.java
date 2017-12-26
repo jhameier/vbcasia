@@ -2,6 +2,7 @@ package org.vbc4me.awanna.facets;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -16,13 +17,17 @@ public final class Season {
 	private Map<String, Student> students = new HashMap<>();
 	private Map<String, Staff> staff = new HashMap<>();
 	private boolean finalized;
-	
-	public Season(String name, Session session) {
-		this.id = UUID.randomUUID();
-		this.name = name;
-		this.session = session;
-		this.finalized = false;
-	}
+
+	public Builder builder() {
+	    return new Builder();
+    }
+
+	private Season(Builder builder) {
+	    this.id = builder.id;
+	    this.name = builder.name;
+	    this.session = builder.session;
+	    this.finalized = builder.finalized;
+    }
 	
 	/**
 	 * Returns whether or not this season is closed.
@@ -60,18 +65,16 @@ public final class Season {
 	}
 	
 	/**
-	 * Returns all the {@link Student}s that are associated with this SeasonContainer.
+	 * Returns all the {@link Student}s that are associated with this {@code SeasonContainer}.
 	 */
 	public Map<String, Student> students() {
 		return students;
 	}
 	
 	/**
-	 * Returns a {@link Student} from this {@code SeasonContainer}'s list of
-	 * {@code Student}s.
+	 * Returns a {@link Student} from this {@code SeasonContainer}'s list of {@code Student}s.
 	 *
-	 * @param name
-	 *            of the student to retrieve (first last)
+	 * @param name of the student to retrieve (first last)
 	 */
 	public Student getStudentByName(String name) {
 		if (students.containsKey(name)) {
@@ -88,31 +91,91 @@ public final class Season {
 	}
 	
 	/**
-	 * Returns all the {@link Staff} associated with this SeasonContainer.
+	 * Adds an existing set of students to the currently loaded season.  This will overwrite the existing set of
+     * {@link Student}s if any were added with the {@link #addStudent(Student)} method.
 	 */
-	public Map<String, Staff> staff() {
-		return staff;
+	public void addStudents(Map<String, Student> students) {
+		this.students = students;
 	}
-	
+
 	/**
 	 * Adds a {@link Staff} member to this {@code Seasons} list of staff members
 	 */
 	public void addStaff(Staff staff) {
 		this.staff.put(staff.lastName(), staff);
 	}
-	
+
 	/**
-	 * Adds an existing set of students to the currently loaded season.
-	 */
-	public void addStudents(Map<String, Student> students) {
-		this.students = students;
-	}
-	
-	/**
-	 * Adds an existing set of staff to the currently loaded season.
+	 * Adds an existing set of staff to the currently loaded season.  This will overwrite the existing set of
+     * {@code Staff} if any were added with the {@link #addStaff(Staff)} method.
 	 */
 	public void addStaff(Map<String, Staff> staff) {
 		this.staff = staff;
 	}
-	
+
+	/**
+	 * Returns all the {@link Staff} associated with this SeasonContainer.
+	 */
+	public Map<String, Staff> staff() {
+		return staff;
+	}
+
+    /**
+     * Builder uitility for help in instantiating an new {@link Season}.
+     */
+	private class Builder {
+        private UUID id;
+        private String name;
+        private Session session;
+        boolean finalized = false;
+
+        /**
+         * The unique identifier for this {@link Season}.  If one is not supplied a random {@link UUID} will be
+         * generated.  Returns this builder for method chaining.
+         */
+        public Builder id(UUID id) {
+            this.id = id;
+            return this;
+        }
+
+        /**
+         * The name to associate with this {@link Season}.  Returns this builder for method chaining.
+         */
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        /**
+         * The {@link Session} to associate with this {@code Season}.  Return this builder for method chaining.
+         */
+        public Builder session(Session session) {
+            this.session = session;
+            return this;
+        }
+
+        /**
+         * Expresses if this {@code Season} can be modified within the running application.  By default a newly
+         * created {@code Season} is allowed to be modified unliess specified here.  Return this builder for method
+         * chaining.
+         */
+        public Builder finalized(boolean finalized) {
+            this.finalized = finalized;
+            return this;
+        }
+
+        /**
+         * Returns a fully qualified {@link Season}.  Any missing elements (name or session) will throw a
+         * {@link NullPointerException}.
+         */
+        public Season build() {
+            Objects.requireNonNull(name);
+            Objects.requireNonNull(session);
+            if (id == null) {
+                id = UUID.randomUUID();
+            }
+
+            return new Season(this);
+        }
+    }
 }
