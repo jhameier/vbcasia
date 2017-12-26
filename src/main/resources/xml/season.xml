@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE season>
+<season id="47ceda45-7fef-4539-87f4-c2bb09282685" name="Awanna Test 2017/2018">
+    <session id="54deea35-7abf-2317-65d2-f0dd27468421" finalized="false">
+        <startdate>01/01/2016</startdate>
+        <enddate>12/31/2016</enddate>
+        <activities>
+            <activity id= "3521fc63-3dac-2637-38d3-d1db43687465">
+                <event>name 1</event>
+                <description>some activity info</description>
+                <date>01/07/2016</date>
+                <time>06:30:00 PM</time>
+                <cost>0.50</cost>
+            </activity>
+            <activity id= "5432cf67-3dac-2637-38d3-d1db43687465">
+                <event>name 2</event>
+                <description>some activity info</description>
+                <date>01/14/2016</date>
+                <time>07:30:00 AM</time>
+                <cost>0.50</cost>
+            </activity>
+        </activities>
+    </session>
+    <students>
+        <student childId="541142cd-4a59-4f0f-92f1-2ef66c215b3c">
+            <name>
+                <first>Mary</first>
+                <last>Matlin</last>
+            </name>
+            <age>8</age>
+            <grade>3</grade>
+            <dob>2007-07-21</dob>
+            <special-needs>asthma symptoms</special-needs>
+            <club />
+            <parent>
+                <name>
+                    <first>Bart</first>
+                    <last>Hamstein</last>
+                </name>
+                <address>9587 3rd Street</address>
+                <city>Hammonton</city>
+                <state>New Jersey</state>
+                <zip-code>08037</zip-code>
+                <phone-number>
+                    <Home>6095617592</Home>
+                    <Cell>6092379514</Cell>
+                </phone-number>
+                <email-address>bhamstein1@email.com</email-address>
+            </parent>
+            <authorized-pickup>
+                <one>
+                    <first>Sarah</first>
+                    <last>Miller</last>
+                    <relationship>Grandmother</relationship>
+                </one>
+                <two>
+                    <first>Flex</first>
+                    <last>Hanson</last>
+                    <relationship>Uncle</relationship>
+                </two>
+            </authorized-pickup>
+        </student>
+        <student childId="47ceea35-7eef-4539-87f4-c2bb09282685">
+            <name>
+                <first>John</first>
+                <last>Doe</last>
+            </name>
+            <age>10</age>
+            <grade>5</grade>
+            <dob>2005-12-14</dob>
+            <special-needs>none</special-needs>
+            <club />
+            <parent>
+                <name>
+                    <first>Susan</first>
+                    <last>Doe</last>
+                </name>
+                <address>1234 Main Street</address>
+                <city>Hammonton</city>
+                <state>New Jersey</state>
+                <zip-code>08037</zip-code>
+                <phone-number>
+                    <Home>6095615432</Home>
+                    <Cell>6095679876</Cell>
+                </phone-number>
+                <email-address>jdoe@email.com</email-address>
+            </parent>
+            <authorized-pickup>
+                <one>
+                    <first>Bill</first>
+                    <last>Doe</last>
+                    <relationship>Dad</relationship>
+                </one>
+                <two>
+                    <first>Harry</first>
+                    <last>Johnson</last>
+                    <relationship>Brother</relationship>
+                </two>
+            </authorized-pickup>
+        </student>
+    </students>
+    <personnel>
+        <staff id="fba8fbff-c868-3110-94ca-b93c6b17bfd9" first="John" last = "Doe">
+            <residence>
+                <address>1234 Main Street</address>
+                <city>Hammonton</city>
+                <state>New Jersey</state>
+                <zipcode>08037</zipcode>
+            </residence>
+            <phonenumbers>
+                <Home>6095615432</Home>
+                <Cell>6095679876</Cell>
+            </phonenumbers>
+            <emailaddress>jdoe@gmail.com</emailaddress>
+            <emergencycontact first="Susan" last="Doe">
+                <phone type="cell">6095615432</phone>
+            </emergencycontact>
+            <specialneeds>none</specialneeds>
+            <club>cubbies</club>
+            <title>Instructor</title>
+            <photo>SomeDataOfFullSizeImage</photo>
+            <thumbnail>SomeDataOfThumbnailImage</thumbnail>
+        </staff>
+        <staff id="8586b70c-648d-327a-a2ee-1fd486154942" first = "Mary" last="Marlin">
+            <residence>
+                <address>9587 3rd Street</address>
+                <city>Hammonton</city>
+                <state>New Jersey</state>
+                <zipcode>08037</zipcode>
+            </residence>
+            <phonenumber>
+                <Home>6095617592</Home>
+                <Cell>6092379514</Cell>
+            </phonenumber>
+            <emailaddress>bhamstein1@gmail.com</emailaddress>
+            <emergencycontact first="Sara" last="Marlin">
+                <phone type="home">6095671258</phone>
+            </emergencycontact>
+            <special-needs>asthma symptoms</special-needs>
+            <club>puggles</club>
+            <title>Aide</title>
+            <photo>SomeDataOfFullSizeImage</photo>
+            <thumbnail>SomeDataOfThumbnailImage</thumbnail>
+        </staff>
+    </personnel>
+</season>
