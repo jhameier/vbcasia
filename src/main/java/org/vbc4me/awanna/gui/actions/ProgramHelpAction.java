@@ -32,7 +32,7 @@ public final class ProgramHelpAction extends AbstractAction {
 			+ " There is also information on the student's parents such as Name, Address, Phone Numbers etc,\n"
 			+ "    as well as a List of Authorized persons to Pick Up from  an Activity. There are also images of the Student,\n"
 			+ "    Parent and Authorized Pickups for visual reference. A students record also contains each event they have\n"
-			+ "    participated in which contains the information as to who dropped them off and who picked them off.\n\n"
+			+ "    participated in which contains the information as to who dropped them off and who picked them up.\n\n"
 			
 			+ "Each Student has an Account associated with them so that costs of the program and payments can be tracked.\n\n"
 			
@@ -41,6 +41,7 @@ public final class ProgramHelpAction extends AbstractAction {
 			
 			
 			+ "This is the basic of information on what things mean in the system. For detail program instuctions see the manual.";
+	
 	String title = "Hep With This App";
 	int messageType = JOptionPane.INFORMATION_MESSAGE;
 	JOptionPane.showMessageDialog(frame, message, title, messageType);
