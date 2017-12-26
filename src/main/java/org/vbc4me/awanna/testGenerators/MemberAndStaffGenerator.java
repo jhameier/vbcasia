@@ -11,11 +11,9 @@ import java.util.List;
 import java.util.Random;
 
 import org.vbc4me.awanna.facets.Club;
-import org.vbc4me.awanna.facets.Season;
 import org.vbc4me.awanna.facets.Staff;
 import org.vbc4me.awanna.facets.Student;
 import org.vbc4me.awanna.facets.Student.Builder;
-import org.vbc4me.awanna.utility.writers.StudentFileWriter;
 
 public final class MemberAndStaffGenerator {
 	

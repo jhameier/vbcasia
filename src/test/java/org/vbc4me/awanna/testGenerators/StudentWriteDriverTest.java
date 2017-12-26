@@ -8,10 +8,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import org.vbc4me.awanna.facets.PhoneNumber;
-import org.vbc4me.awanna.facets.Season;
 import org.vbc4me.awanna.facets.Student;
 import org.vbc4me.awanna.facets.Student.Builder;
-import org.vbc4me.awanna.utility.writers.StudentFileWriter;
 
 public class StudentWriteDriverTest {
 	

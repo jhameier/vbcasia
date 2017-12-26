@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import org.vbc4me.awanna.facets.Season;
 import org.vbc4me.awanna.facets.Student;
 import org.vbc4me.awanna.utility.readers.StudentFileReader;
 

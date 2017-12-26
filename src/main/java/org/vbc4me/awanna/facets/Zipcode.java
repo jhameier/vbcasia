@@ -3,10 +3,6 @@ package org.vbc4me.awanna.facets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.jdom2.IllegalAddException;
-
-import com.privatejgoodies.common.base.Objects;
-
 /**
  * A postal designation for an address.
  */

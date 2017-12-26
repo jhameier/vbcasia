@@ -4,7 +4,8 @@ import java.util.Objects;
 
 public abstract class Person {
 	
-	enum Type {STAFF, STUDENT, PICKUP}
+	public enum Type {STAFF, STUDENT, PICKUP}
+	
 	private String first;
 	private String last;
 	private Type type;

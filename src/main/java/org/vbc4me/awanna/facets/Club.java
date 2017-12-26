@@ -4,8 +4,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.jdom2.IllegalAddException;
-
 /**
  *  Contains the club names that students can belong to with in the Awana association.
  */

@@ -8,10 +8,6 @@ import org.vbc4me.awanna.gui.forms.session.actions.SaveSessionAction;
 import net.miginfocom.swing.MigLayout;
 
 import java.awt.Color;
-import java.awt.Component;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;

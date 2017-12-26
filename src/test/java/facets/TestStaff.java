@@ -1,13 +1,15 @@
 package facets;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.image.BufferedImage;
 
 import org.junit.Test;
 import org.vbc4me.awanna.facets.Club;
+import org.vbc4me.awanna.facets.Person;
 import org.vbc4me.awanna.facets.PhoneNumber;
 import org.vbc4me.awanna.facets.Staff;
-
-import junit.framework.Assert;
 
 public class TestStaff {
 	
@@ -36,25 +38,25 @@ public class TestStaff {
 											   .thumbnail(thumbnail)
 											   .done();
 		
-		Assert.assertEquals("staff", member.type());
-		Assert.assertEquals("Title", member.title());
-		Assert.assertEquals("First", member.firstName());
-		Assert.assertEquals("Last", member.lastName());
-		Assert.assertEquals("1234 Main Street", member.address());
-		Assert.assertEquals("Some City", member.city());
-		Assert.assertEquals("NJ", member.state());
-		Assert.assertEquals("12345-6789", member.zip());
+		assertEquals(member.recordType(), Person.Type.STUDENT);
+		assertEquals("Title", member.title());
+		assertEquals("First", member.firstName());
+		assertEquals("Last", member.lastName());
+		assertEquals("1234 Main Street", member.address());
+		assertEquals("Some City", member.city());
+		assertEquals("NJ", member.state());
+		assertEquals("12345-6789", member.zip());
 		PhoneNumber one = member.phoneNumbers().get(0);
 		PhoneNumber two = member.phoneNumbers().get(1);
 		PhoneNumber three = member.phoneNumbers().get(2);
-		Assert.assertEquals(3, member.phoneNumbers().size());
-		Assert.assertTrue(PhoneNumber.contains(member.phoneNumbers(), one));
-		Assert.assertTrue(PhoneNumber.contains(member.phoneNumbers(), two));
-		Assert.assertTrue(PhoneNumber.contains(member.phoneNumbers(), three));
-		Assert.assertEquals("NA", member.specialNeeds());
-		Assert.assertEquals("firstLast@email.com", member.email());
-		Assert.assertEquals(photo, member.photo());
-		Assert.assertEquals(thumbnail, member.thumbnail());
+		assertEquals(3, member.phoneNumbers().size());
+		assertTrue(PhoneNumber.contains(member.phoneNumbers(), one));
+		assertTrue(PhoneNumber.contains(member.phoneNumbers(), two));
+		assertTrue(PhoneNumber.contains(member.phoneNumbers(), three));
+		assertEquals("NA", member.specialNeeds());
+		assertEquals("firstLast@email.com", member.email());
+		assertEquals(photo, member.photo());
+		assertEquals(thumbnail, member.thumbnail());
 	}
 	
 	/**
@@ -63,39 +65,39 @@ public class TestStaff {
 	@Test
 	public void TestIndividualSettersWork() {
 		Staff member = Staff.build().firstName("First").lastName("Last").done();
-		Assert.assertEquals("First", member.firstName());
-		Assert.assertEquals("Last", member.lastName());
-		Assert.assertEquals("staff", member.type());
+		assertEquals("First", member.firstName());
+		assertEquals("Last", member.lastName());
+		assertEquals("staff", member.recordType());
 		member.title("Teacher");
-		Assert.assertEquals("Teacher", member.title());
+		assertEquals("Teacher", member.title());
 		member.address("123 Main Street");
-		Assert.assertEquals("123 Main Street", member.address());
+		assertEquals("123 Main Street", member.address());
 		member.city("Some City");
-		Assert.assertEquals("Some City", member.city());
+		assertEquals("Some City", member.city());
 		member.state("NJ");
-		Assert.assertEquals("NJ", member.state());
+		assertEquals("NJ", member.state());
 		member.zip("12345-6789");
-		Assert.assertEquals("12345-6789", member.zip());
+		assertEquals("12345-6789", member.zip());
 		member.addUnformattedPhoneNumber("Home", "1234567890");
 		member.addUnformattedPhoneNumber("Cell", "0987654321");
 		member.addUnformattedPhoneNumber("Other", "5467382910");
 		PhoneNumber one = member.phoneNumbers().get(0);
 		PhoneNumber two = member.phoneNumbers().get(1);
 		PhoneNumber three = member.phoneNumbers().get(2);
-		Assert.assertEquals(3, member.phoneNumbers().size());
-		Assert.assertTrue(PhoneNumber.contains(member.phoneNumbers(), one));
-		Assert.assertTrue(PhoneNumber.contains(member.phoneNumbers(), two));
-		Assert.assertTrue(PhoneNumber.contains(member.phoneNumbers(), three));
+		assertEquals(3, member.phoneNumbers().size());
+		assertTrue(PhoneNumber.contains(member.phoneNumbers(), one));
+		assertTrue(PhoneNumber.contains(member.phoneNumbers(), two));
+		assertTrue(PhoneNumber.contains(member.phoneNumbers(), three));
 		member.addSpecialNeed("NA");
-		Assert.assertEquals("NA", member.specialNeeds());
+		assertEquals("NA", member.specialNeeds());
 		member.email("firstLast@email.com");
-		Assert.assertEquals("firstLast@email.com", member.email());
+		assertEquals("firstLast@email.com", member.email());
 		BufferedImage photo = new BufferedImage(480, 640, BufferedImage.TYPE_INT_RGB);
 		member.photo(photo);
-		Assert.assertEquals(photo, member.photo());
+		assertEquals(photo, member.photo());
 		BufferedImage thumbnail = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
 		member.thumbnail(thumbnail);
-		Assert.assertEquals(thumbnail, member.thumbnail());
+		assertEquals(thumbnail, member.thumbnail());
 	}
 	
 	/**

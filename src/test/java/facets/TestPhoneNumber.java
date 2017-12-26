@@ -1,12 +1,14 @@
 package facets;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 import org.vbc4me.awanna.facets.PhoneNumber;
-
-import junit.framework.Assert;
 
 /**
  * Test class for {@link PhoneNumber}.
@@ -20,10 +22,10 @@ public class TestPhoneNumber {
 	@Test
 	public void TestPhoneNumberCreation() {
 		PhoneNumber phoneNumber = new PhoneNumber("Home", "1234567890");
-		Assert.assertEquals("Home", phoneNumber.type());
-		Assert.assertEquals("1234567890", phoneNumber.number(false));
-		Assert.assertEquals("(123) 456-7890", phoneNumber.number(true));
-		Assert.assertEquals("Home: (123) 456-7890", phoneNumber.toString());
+		assertEquals("Home", phoneNumber.type());
+		assertEquals("1234567890", phoneNumber.number(false));
+		assertEquals("(123) 456-7890", phoneNumber.number(true));
+		assertEquals("Home: (123) 456-7890", phoneNumber.toString());
 	}
 	
 	/**
@@ -111,11 +113,11 @@ public class TestPhoneNumber {
 		numbers.add(one);
 		numbers.add(four);
 		numbers.add(two);
-		Assert.assertTrue(PhoneNumber.contains(numbers, one));
-		Assert.assertTrue(PhoneNumber.contains(numbers, two));
-		Assert.assertTrue(PhoneNumber.contains(numbers, three));
-		Assert.assertTrue(PhoneNumber.contains(numbers, four));
-		Assert.assertTrue(PhoneNumber.contains(numbers, five));
-		Assert.assertFalse(PhoneNumber.contains(numbers, new PhoneNumber("Other", "9512357460")));	
+		assertTrue(PhoneNumber.contains(numbers, one));
+		assertTrue(PhoneNumber.contains(numbers, two));
+		assertTrue(PhoneNumber.contains(numbers, three));
+		assertTrue(PhoneNumber.contains(numbers, four));
+		assertTrue(PhoneNumber.contains(numbers, five));
+		assertFalse(PhoneNumber.contains(numbers, new PhoneNumber("Other", "9512357460")));	
 	}
 }

@@ -1,9 +1,9 @@
 package facets;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.vbc4me.awanna.facets.Club;
-
-import junit.framework.Assert;
 
 /**
  * Test class for {@link Club}.
@@ -21,22 +21,22 @@ public class TestClub {
 		Club tandt = Club.TANDT;
 		Club trek = Club.TREK;
 		Club journey = Club.JOURNEY;
-		Assert.assertEquals("Puggles", puggles.getName());
-		Assert.assertEquals("Cubbies", cubbies.getName());
-		Assert.assertEquals("Sparks", sparks.getName());
-		Assert.assertEquals("T&T", tandt.getName());
-		Assert.assertEquals("Trek", trek.getName());
-		Assert.assertEquals("Journey", journey.getName());
+		assertEquals("Puggles", puggles.getName());
+		assertEquals("Cubbies", cubbies.getName());
+		assertEquals("Sparks", sparks.getName());
+		assertEquals("T&T", tandt.getName());
+		assertEquals("Trek", trek.getName());
+		assertEquals("Journey", journey.getName());
 	}
 	
 	@Test
 	public void TestClubNamesExist() {
-		Assert.assertEquals(Club.PUGGLES, Club.get("Puggles"));
-		Assert.assertEquals(Club.CUBBIES, Club.get("Cubbies"));
-		Assert.assertEquals(Club.SPARKS, Club.get("Sparks"));
-		Assert.assertEquals(Club.TANDT, Club.get("T&T"));
-		Assert.assertEquals(Club.TREK, Club.get("Trek"));
-		Assert.assertEquals(Club.JOURNEY, Club.get("Journey"));
+		assertEquals(Club.PUGGLES, Club.get("Puggles"));
+		assertEquals(Club.CUBBIES, Club.get("Cubbies"));
+		assertEquals(Club.SPARKS, Club.get("Sparks"));
+		assertEquals(Club.TANDT, Club.get("T&T"));
+		assertEquals(Club.TREK, Club.get("Trek"));
+		assertEquals(Club.JOURNEY, Club.get("Journey"));
 	}
 	
 }
