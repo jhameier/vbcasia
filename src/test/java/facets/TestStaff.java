@@ -38,7 +38,7 @@ public class TestStaff {
 											   .thumbnail(thumbnail)
 											   .done();
 		
-		assertEquals(member.recordType(), Person.Type.STUDENT);
+		assertEquals(member.recordType(), Person.Type.STAFF.name());
 		assertEquals("Title", member.title());
 		assertEquals("First", member.firstName());
 		assertEquals("Last", member.lastName());
@@ -67,7 +67,7 @@ public class TestStaff {
 		Staff member = Staff.build().firstName("First").lastName("Last").done();
 		assertEquals("First", member.firstName());
 		assertEquals("Last", member.lastName());
-		assertEquals("staff", member.recordType());
+		assertEquals(member.recordType(), Person.Type.STAFF.name());
 		member.title("Teacher");
 		assertEquals("Teacher", member.title());
 		member.address("123 Main Street");
