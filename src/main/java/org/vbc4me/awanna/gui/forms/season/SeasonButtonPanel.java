@@ -4,18 +4,24 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
-import org.vbc4me.awanna.gui.forms.season.actions.*;
+import org.vbc4me.awanna.gui.forms.season.actions.CloseSeasonAction;
+import org.vbc4me.awanna.gui.forms.season.actions.CreateSeasonAction;
+import org.vbc4me.awanna.gui.forms.season.actions.NewSeasonAction;
+import org.vbc4me.awanna.gui.forms.season.actions.OpenSeasonAction;
+import org.vbc4me.awanna.gui.forms.season.actions.SaveAsSeasonAction;
+import org.vbc4me.awanna.gui.forms.season.actions.SaveSeasonAction;
+
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 
 public final class SeasonButtonPanel extends JPanel {
-	private static final long serialVersionUID = -8327426526043278048L;
-    public static CloseSeasonAction closeAction;
-    public static CreateSeasonAction createAction;
-    public static NewSeasonAction newAction;
-    public static OpenSeasonAction openAction;
-    public static SaveAsSeasonAction saveAsAction;
-    public static SaveSeasonAction saveAction;
+	private static final long serialVersionUID = -4124279123949931880L;
+	public  CloseSeasonAction closeAction;
+    public CreateSeasonAction createAction;
+    public NewSeasonAction newAction;
+    public OpenSeasonAction openAction;
+    public SaveAsSeasonAction saveAsAction;
+    public SaveSeasonAction saveAction;
 
     public SeasonButtonPanel() {
     	setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -43,5 +49,4 @@ public final class SeasonButtonPanel extends JPanel {
 		
 		newAction = new NewSeasonAction();
 	}
-
 }

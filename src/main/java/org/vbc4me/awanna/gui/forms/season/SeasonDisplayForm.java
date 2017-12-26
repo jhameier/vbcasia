@@ -21,7 +21,7 @@ public class SeasonDisplayForm extends JPanel {
 	private JLabel lblNoOfStudents;
 	private JLabel lblNoOfStaff;
 	
-	public SeasonDisplayForm() {
+	public SeasonDisplayForm(SeasonContainer season) {
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		
 		JPanel infoPanel = new JPanel();

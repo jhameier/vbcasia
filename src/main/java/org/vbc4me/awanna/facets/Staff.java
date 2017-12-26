@@ -56,7 +56,7 @@ public class Staff {
 	}
 	
 	/**
-	 *  Sets the title of this {@link Staff} memeber.
+	 *  Sets the title of this {@link Staff} member.
 	 */
 	public void title(String title) {
 		this.title = title;

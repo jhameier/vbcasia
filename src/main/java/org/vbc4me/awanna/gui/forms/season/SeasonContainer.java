@@ -5,25 +5,26 @@ import org.vbc4me.awanna.facets.Session;
 import org.vbc4me.awanna.gui.AppGui;
 
 /**
- * Contains all the components needed to work on a season
+ * Contains all the components needed to work on a season inside the GUI. There is only one container for the open Season.
  */
 public final class SeasonContainer {
-    public SeasonContainer(){}
-    public static final SeasonButtonPanel buttonPanel = new SeasonButtonPanel();
-    public static final SeasonEditForm editForm = new SeasonEditForm();
-    public static final SeasonBlankForm blankForm = new SeasonBlankForm();
-    public static final SeasonDisplayForm displayForm = new SeasonDisplayForm();
-    public static final SeasonTableModel tableModel = new SeasonTableModel();
+    
+    // the panels needed to operate on this season
+    public final SeasonButtonPanel buttonPanel = new SeasonButtonPanel();
+    public final SeasonEditForm editForm = new SeasonEditForm(this);
+    public final SeasonDisplayForm displayForm = new SeasonDisplayForm(this);
+    public final SeasonTableModel tableModel = new SeasonTableModel();
 
-    public static Season season;
-
-    public static void createSeason() {
-       season = new Season(editForm.getName(), new Session(editForm.startDate(), editForm.endDate()));
+    private Season season;
+    
+    public void createSeason() {
+    	season = new Season(SeasonEditForm.fileName(), new Session(SeasonEditForm.startDate(), SeasonEditForm.endDate()));
+       
        displayForm.updatePanel(season);
        AppGui.displayPanel().updateBottomLeft(displayForm);
        AppGui.displayPanel().updateLowerRight(new DashboardButtonPanel());
-      SeasonButtonPanel.createAction.setEnabled(false);
-      SeasonButtonPanel.saveAction.setEnabled(true);
-      SeasonButtonPanel.saveAsAction.setEnabled(true);
+      buttonPanel.createAction.setEnabled(false);
+      buttonPanel.saveAction.setEnabled(true);
+      buttonPanel.saveAsAction.setEnabled(true);
     }
 }

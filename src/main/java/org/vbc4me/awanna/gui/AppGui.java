@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
+import java.util.Collections;
+import java.util.List;
 
 import javax.swing.Action;
 import javax.swing.ButtonGroup;
@@ -23,10 +25,9 @@ import org.vbc4me.awanna.gui.actions.LookAndFeelAction;
 import org.vbc4me.awanna.gui.actions.PreferenceAction;
 import org.vbc4me.awanna.gui.actions.ProgramHelpAction;
 import org.vbc4me.awanna.gui.forms.DisplayPanel;
-import org.vbc4me.awanna.gui.forms.season.SeasonButtonPanel;
+import org.vbc4me.awanna.gui.forms.season.SeasonBlankForm;
 import org.vbc4me.awanna.gui.forms.season.SeasonContainer;
 import org.vbc4me.awanna.gui.forms.session.SessionButtonPanel;
-import org.vbc4me.awanna.gui.forms.session.SessionContainer;
 import org.vbc4me.awanna.gui.forms.student.StudentContainer;
 
 /**
@@ -37,11 +38,12 @@ import org.vbc4me.awanna.gui.forms.student.StudentContainer;
  *
  * @author John Hameier: June 2015
  */
-public class AppGui extends JFrame {
+public final class AppGui extends JFrame {
 	private static final long serialVersionUID = 5953409495403830350L;
 	
 	private static DisplayPanel displayPanel;
 	private static AppGui mainWindow;
+	private static List<SeasonContainer> seasonContainer;
 
 	private static LookAndFeelInfo[] lookList = UIManager.getInstalledLookAndFeels();
 
@@ -50,6 +52,21 @@ public class AppGui extends JFrame {
 	 */
 	public static DisplayPanel displayPanel() {
 		return displayPanel;
+	}
+	
+	/**
+	 * Sets the current working {@link SeasonContainer} for the GUI.
+	 */
+	public static void setCurrentSeason(SeasonContainer season) {
+		seasonContainer = Collections.singletonList(season) ;
+	}
+	
+	/**
+	 * Returns the current working {@link SeasonContainer season}.
+	 */
+	public static SeasonContainer season() {
+		// there can never be more than 1
+		return seasonContainer.get(0);
 	}
 	
 	/**
@@ -62,12 +79,9 @@ public class AppGui extends JFrame {
         /* *******************************************************************
 		 *  establish the basic windowing structure.
 		 *********************************************************************/
-		
 		displayPanel = new DisplayPanel();
-        new SeasonContainer();
-        new SessionContainer();
-        new StudentContainer();
-		displayPanel.updateBottomLeft(SeasonContainer.blankForm);
+		displayPanel.updateBottomLeft(new SeasonBlankForm());
+		setCurrentSeason(new SeasonContainer());
 		getContentPane().add(displayPanel, BorderLayout.CENTER);
 
 		/*
@@ -80,16 +94,16 @@ public class AppGui extends JFrame {
 		JMenu mnFile = new JMenu("File");
 		menuBar.add(mnFile);
 
-		JMenuItem mntmNewSeason = new JMenuItem(SeasonButtonPanel.newAction);
+		JMenuItem mntmNewSeason = new JMenuItem(season().buttonPanel.newAction);
 		mnFile.add(mntmNewSeason);
 		
-		JMenuItem mntmOpenSeason = new JMenuItem(SeasonButtonPanel.openAction);
+		JMenuItem mntmOpenSeason = new JMenuItem(season().buttonPanel.openAction);
 		mnFile.add(mntmOpenSeason);
 		
-		JMenuItem mntmSaveSeason = new JMenuItem(SeasonButtonPanel.saveAction);
+		JMenuItem mntmSaveSeason = new JMenuItem(season().buttonPanel.saveAction);
 		mnFile.add(mntmSaveSeason);
 		
-		JMenuItem mntmSaveasSeason = new JMenuItem(SeasonButtonPanel.saveAsAction);
+		JMenuItem mntmSaveasSeason = new JMenuItem(season().buttonPanel.saveAsAction);
 		mnFile.add(mntmSaveasSeason);
 		
 		mnFile.addSeparator();
@@ -103,10 +117,11 @@ public class AppGui extends JFrame {
 		JMenuItem mntmSaveSession = new JMenuItem(SessionButtonPanel.saveAction);
 		mnFile.add(mntmSaveSession);
 		
-		JMenuItem mntmSaveasSession = new JMenuItem("SaveAs Session");
+		JMenuItem mntmSaveasSession = new JMenuItem(SessionButtonPanel.saveAsAction);
 		mnFile.add(mntmSaveasSession);
 		
 		mnFile.addSeparator();
+		
 		
 		JMenuItem mntmNewRecord = new JMenuItem(StudentContainer.newAction);
 		mnFile.add(mntmNewRecord);

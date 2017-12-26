@@ -65,10 +65,10 @@ public class TestGuiPanels extends JFrame {
 //		JFrame window8 = new TestGuiPanels(seasonEditForm, "SeasonContainer Edit Form");
 //		windows.add(window8);
 
-        new SeasonContainer();
+        SeasonContainer seasonContainer = new SeasonContainer();
 		DisplayPanel panel = new DisplayPanel();
-		panel.update3PanelDisplay(SeasonContainer.editForm, SeasonContainer.buttonPanel,
-				new JPanel(), SeasonContainer.tableModel);
+		panel.update3PanelDisplay(seasonContainer.editForm, seasonContainer.buttonPanel,
+				new JPanel(), seasonContainer.tableModel);
 		JFrame window9 = new TestGuiPanels(panel, "Display Panel");
 		windows.add(window9);
 		

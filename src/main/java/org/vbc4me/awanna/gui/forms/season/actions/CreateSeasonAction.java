@@ -6,7 +6,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 
 import org.vbc4me.awanna.gui.AppGui;
-import org.vbc4me.awanna.gui.forms.season.SeasonContainer;
+import org.vbc4me.awanna.gui.forms.season.SeasonEditForm;
 
 /**
  * Used to create a new SeasonContainer with the name and date from the session panel.
@@ -23,11 +23,9 @@ public final class CreateSeasonAction extends AbstractAction {
     }
 
     public void actionPerformed(ActionEvent e) {
-    	SeasonContainer.editForm.getName();
-    	
-        int ans = JOptionPane.showConfirmDialog(AppGui.displayPanel(), "Create Season ");
+        int ans = JOptionPane.showConfirmDialog(AppGui.displayPanel(), "Create a new Season?");
         if (ans == JOptionPane.YES_OPTION) {
-        	SeasonContainer.createSeason();
+        	System.out.println(SeasonEditForm.fileName());
         }
     }
 }

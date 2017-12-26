@@ -16,13 +16,13 @@ import java.time.LocalDate;
 
 public class SeasonEditForm extends JPanel {
 	private static final long serialVersionUID = -6531861712233753720L;
+	private final SeasonContainer season;
+    private static DatePicker startdatePicker;
+	private static DatePicker enddatePicker;
+    private static JTextField nameField;
 
-    private DatePicker startdatePicker;
-	private DatePicker enddatePicker;
-    private JTextField nameField;
-
-	public SeasonEditForm() {
-
+	public SeasonEditForm(SeasonContainer season) {
+		this.season = season;
 		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(new MigLayout("", "[][][][grow][]", "[][][][][][][]"));
 		add(infoPanel);
@@ -101,15 +101,15 @@ public class SeasonEditForm extends JPanel {
 		infoPanel.add(lblDisplayNumberStaff, "cell 3 6");
 	}
 
-	public LocalDate startDate() {
+	public static LocalDate startDate() {
         return startdatePicker.getDate();
     }
 
-    public LocalDate endDate() {
+    public static LocalDate endDate() {
         return enddatePicker.getDate();
     }
     
-    public String getFileName() {
+    public static String fileName() {
     	return nameField.getText();
     }
     
@@ -118,10 +118,10 @@ public class SeasonEditForm extends JPanel {
         public void dateChanged(DateChangeEvent event) {
             if (event.getNewDate() != null) {
                 enddatePicker.setDate(startdatePicker.getDate().plusMonths(9));
-                SeasonButtonPanel.createAction.setEnabled(true);
+                season.buttonPanel.createAction.setEnabled(true);
             } else {
                 enddatePicker.clear();
-				SeasonButtonPanel.createAction.setEnabled(false);
+				season.buttonPanel.createAction.setEnabled(false);
             }
         }
     };
