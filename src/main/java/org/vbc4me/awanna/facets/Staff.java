@@ -13,11 +13,8 @@ import java.util.UUID;
 /**
  * A staff is a individual of the organization that helps to oversee some event.
  */
-public class Staff {
+public class Staff extends Person{
 	private UUID id;
-	private String recordType;
-	private String first;
-	private String last;
 	private String address;
 	private String city;
 	private String state;
@@ -49,13 +46,6 @@ public class Staff {
 	}
 	
 	/**
-	 * Returns the type of record this is (staff).
-	 */
-	public String type() {
-		return recordType;
-	}
-	
-	/**
 	 *  Sets the title of this {@link Staff} member.
 	 */
 	public void title(String title) {
@@ -74,31 +64,6 @@ public class Staff {
 	 */
 	public String assignedClub() {
 		return assignedClub.getName();
-	}
-	
-	/**
-	 * Returns the staff members first name
-	 */
-	public String firstName() {
-		return first;
-	}
-	
-	/**
-	 * Returns the staff members last name
-	 */
-	public String lastName() {
-		return last;
-	}
-	
-	/**
-	 * Allows changing this staff members last name. While this may never be
-	 * used there could be an instance where a female staff member gets married
-	 * and wants to update their current record.
-	 *
-	 * @param name to change to.
-	 */
-	public void changeLastName(String name) {
-		this.last = name;
 	}
 	
 	/**
@@ -334,11 +299,9 @@ public class Staff {
 	 * Constructs a new {@link Staff} object.
 	 */
 	private Staff(Builder builder) {
-		this.recordType = "staff";
+		super(builder.firstName, builder.lastName, Person.Type.STAFF);
 		this.title = builder.title;
 		this.assignedClub = builder.club;
-		this.first = builder.firstName;
-		this.last = builder.lastName;
 		this.address = builder.address;
 		this.city = builder.city;
 		this.state = builder.state;
@@ -354,7 +317,6 @@ public class Staff {
 	}
 	
 	public static class Builder {
-		
 		private String title;
 		private Club club;
 		private String firstName;
@@ -451,8 +413,6 @@ public class Staff {
 		}
 		
 		public Staff done() {
-			Objects.requireNonNull(firstName, "First name cannot be null");
-			Objects.requireNonNull(lastName, "Last name cannot be null");
 			return new Staff(this);
 		}
 	}

@@ -9,10 +9,8 @@ import java.util.Objects;
  * Represents a person authorized to pickup a child from the place where 
  * an activity is taking place.
  */
-public class Pickup {
-	private String first;
-	private String last;
-	private String relationship;
+public class Pickup extends Person{
+	private final String relationship;
 	private BufferedImage photo;
 	private Path photoPath;
 	private BufferedImage thumbnail;
@@ -23,8 +21,7 @@ public class Pickup {
 	}
 	
 	private Pickup(Builder builder) {
-		this.first = builder.first;
-		this.last = builder.last;
+		super(builder.first, builder.last, Person.Type.PICKUP);
 		this.relationship = builder.relationship;
 		this.photo = builder.photo;
 		this.photoPath = builder.photoPath;
@@ -32,14 +29,9 @@ public class Pickup {
 		this.thumbnailPath = builder.thumbnailPath;
 	}
 	
-	public String firstName() {
-		return first;
-	}
-	
-	public String lastName() {
-		return last;
-	}
-	
+	/**
+	 * Returns the relationship to the {@link Student} this {@link Pickup} is associated with.
+	 */
 	public String relationship() {
 		return relationship;
 	}
@@ -49,7 +41,7 @@ public class Pickup {
 	 */
 	@Override
 	public String toString() {
-		return first + " " + last + " (" + relationship + ")";
+		return firstName() + " " + lastName() + " (" + relationship + ")";
 	}
 	
 	public void addPhoto(BufferedImage photo) {

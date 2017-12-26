@@ -92,7 +92,7 @@ public final class StudentFileWriter {
 	 * @return the element to attach to the xml document
 	 */
 	private static Element getMemberElement(Student student) {
-		Element element = new Element(student.type());
+		Element element = new Element(student.recordType());
 		element.setAttribute("childId", student.childId());
 		
 		/* Set up Child portion of record */

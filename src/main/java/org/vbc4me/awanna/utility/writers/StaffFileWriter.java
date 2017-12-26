@@ -39,7 +39,7 @@ public final class StaffFileWriter {
 	 * @return the element to attach to the xml document
 	 */
 	private static Element getMemberElement(Staff staff) {
-		Element element = new Element(staff.type());
+		Element element = new Element(staff.recordType());
 		element.setAttribute("id", staff.id());
 		
 		// Name

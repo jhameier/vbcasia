@@ -16,11 +16,8 @@ import java.util.regex.Pattern;
 /**
  * A student is an individual that partakes of an activity produced by the organization.
  */
-public class Student {
+public class Student extends Person{
 	private UUID childId;
-	private String recordType;
-	private String childFirstName;
-	private String childLastName;
 	private String childGrade;
 	private LocalDate childDOB;
 	private Set<String> specialNeeds = new HashSet<>();
@@ -49,13 +46,6 @@ public class Student {
 	 */
 	public static Builder builder() {
 		return new Builder();
-	}
-	
-	/**
-	 * Return the type of record this represents
-	 */
-	public String type() {
-		return recordType;
 	}
 	
 	/**
@@ -93,14 +83,14 @@ public class Student {
 	 * Returns the childFirstName
 	 */
 	public String childFirstName() {
-		return childFirstName;
+		return firstName();
 	}
 	
 	/**
 	 * Returns the childLastName
 	 */
 	public String childLastName() {
-		return childLastName;
+		return lastName();
 	}
 	
 	public String childFullName() {
@@ -428,10 +418,8 @@ public class Student {
 	}
 	
 	private Student(Builder builder) {
-		this.recordType = "student";
+		super(builder.childFirstName, builder.childLastName, Person.Type.STUDENT);
 		this.club = builder.club;
-		this.childFirstName = builder.childFirstName;
-		this.childLastName = builder.childLastName;
 		this.childGrade = builder.childGrade;
 		this.childDOB = builder.childDOB;
 		this.specialNeeds = builder.specialNeeds;
