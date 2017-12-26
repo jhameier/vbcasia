@@ -18,7 +18,7 @@ public final class Season {
 	private Map<String, Staff> staff = new HashMap<>();
 	private boolean finalized;
 
-	public Builder builder() {
+	public static Builder builder() {
 	    return new Builder();
     }
 
@@ -123,7 +123,7 @@ public final class Season {
     /**
      * Builder uitility for help in instantiating an new {@link Season}.
      */
-	private class Builder {
+	public static class Builder {
         private UUID id;
         private String name;
         private Session session;
