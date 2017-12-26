@@ -33,7 +33,7 @@ public class Staff extends Person{
 	/**
 	 * Returns a builder that assures this object is built with all the necessary information.
 	 */
-	public static Builder build() {
+	public static Builder builder() {
 		return new Builder();
 	}
 	
@@ -316,6 +316,7 @@ public class Staff extends Person{
 	}
 	
 	public static class Builder {
+	    private UUID id;
 		private String title;
 		private Club club;
 		private String firstName;
@@ -332,8 +333,10 @@ public class Staff extends Person{
 		private String emerContactName;
 		private PhoneNumber emerContactNumber;
 		
-		private Builder() {
-		}
+		public Builder id(UUID id) {
+		    this.id = id;
+		    return this;
+        }
 		
 		public Builder firstName(String first) {
 			this.firstName = first;
@@ -412,6 +415,9 @@ public class Staff extends Person{
 		}
 		
 		public Staff done() {
+		    if (id == null) {
+		        id = UUID.randomUUID();
+            }
 			return new Staff(this);
 		}
 	}
