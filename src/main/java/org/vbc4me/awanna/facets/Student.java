@@ -36,7 +36,7 @@ public class Student extends Person{
 	private String emailAddress;
 	private String emergencyContactName;
 	private PhoneNumber emergencyContactPhone;
-	private List<Pickup> authPickup = new ArrayList<>();
+	private List<Pickup> authPickup;
 	
 	// Account is automatically created when a student record is created
 	private Account account = new Account();
@@ -102,8 +102,7 @@ public class Student extends Person{
 	 */
 	public Integer childAge() {
 		Period p = Period.between(childDOB, LocalDate.now());
-		int age = p.getYears();
-		return age;
+		return p.getYears();
 	}
 	
 	/**
@@ -111,8 +110,7 @@ public class Student extends Person{
 	 */
 	public Integer childAge(LocalDate date) {
 		Period p = Period.between(childDOB, LocalDate.now());
-		int age = p.getYears();
-		return age;
+		return p.getYears();
 	}
 	
 	/**
@@ -179,26 +177,10 @@ public class Student extends Person{
 	}
 	
 	/**
-	 * Returns the path to the image of this student.
-	 */
-	public Path childPhotoPath() {
-		return childPhoto.photoPath();
-	}
-	
-	/**
 	 * Returns the thumbnail image of this student
 	 */
 	public BufferedImage childThumbnail() {
 		return childPhoto.thumbnail();
-	}
-
-	/**
-	 * Returns the path to this students thumbnail image.
-	 * 
-	 * <p>This method does not guarantee that the path to the file exists.
-	 */
-	public Path childThumbnailPath() {
-		return childPhoto.thumbnailPath();
 	}
 
 	/**
@@ -209,28 +191,10 @@ public class Student extends Person{
 	}
 	
 	/**
-	 * Returns the path to this parents photo.
-	 * 
-	 * <p>This does not guarantee that the path to the file exists.
-	 */
-	public Path parentPhotoPath() {
-		return parentPhoto.photoPath();
-	}
-	
-	/**
 	 * Returns the thumbnail image of this student
 	 */
 	public BufferedImage parentThumbnail() {
 		return parentPhoto.thumbnail();
-	}
-
-	/**
-	 * Returns the path to this students thumbnail image.
-	 * 
-	 * <p>This method does not guarantee that the path to the file exists.
-	 */
-	public Path parentThumbnailPath() {
-		return parentPhoto.thumbnailPath();
 	}
 	
 	/**
@@ -345,7 +309,7 @@ public class Student extends Person{
 	 * @param number
 	 *            to add
 	 */
-	public void addPhoneNumber(String type, String number) {
+	public void addPhoneNumber(PhoneNumber.Type type, String number) {
 		PhoneNumber ph = new PhoneNumber(type, number);
 		this.phoneNumbers.add(ph);
 	}
@@ -550,7 +514,7 @@ public class Student extends Person{
 		
 		/**
 		 * Sets the special needs of this student.
-		 * @param specialNeeds
+		 * @param specialNeed
 		 * @return
 		 */
 		public Builder specialNeeds(String specialNeed) {
@@ -660,7 +624,7 @@ public class Student extends Person{
 		 * 
 		 * @return this builder for method chaining
 		 */
-		public Builder phoneNumber(String type, String number) {
+		public Builder phoneNumber(PhoneNumber.Type type, String number) {
 			if (phoneNumbers == null) {
 				phoneNumbers = new ArrayList<>();
 			}
