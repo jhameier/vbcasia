@@ -1,12 +1,14 @@
 package facets;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.image.BufferedImage;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.vbc4me.awanna.facets.PhoneNumber;
 import org.vbc4me.awanna.facets.Photo;
@@ -52,7 +54,7 @@ public class TestStudent {
 				                                          .address("123 Main Street")
 				                                          .city("Some City")
 				                                          .state("NJ")
-				                                          .zip("12345-1234")
+				                                          .zip("12345", "1234")
 				                                          .phoneNumber("Home", "1234567890")
 				                                          .phoneNumber("Cell", "9876543210")
 				                                          .phoneNumber("Work", "5647382910")
@@ -65,32 +67,32 @@ public class TestStudent {
 				                                          .authPickup("First", "Last", "Mother", auth3image, auth3thumb)
 				                                          .authPickup("First", "Last", "Father", auth4image, auth4thumb)
 														  .done();
-    	Assert.assertEquals("First", student.childFirstName());
-    	Assert.assertEquals("Last", student.childLastName());
-    	Assert.assertEquals("First Last", student.childFullName());
-    	Assert.assertEquals(dob, student.childDOB());
+    	assertEquals("First", student.childFirstName());
+    	assertEquals("Last", student.childLastName());
+    	assertEquals("First Last", student.childFullName());
+    	assertEquals(dob, student.childDOB());
     	// 2 ways to check age. 
     	//   From todays date (this changes over time) and from exact date which will always be accurate.
-    	Assert.assertEquals(4, student.childAge(dob), 0);
-    	Assert.assertEquals("K", student.childGrade());
-    	Assert.assertEquals(cimage, student.childPhoto());
-    	Assert.assertEquals(cthumb, student.childThumbnail());
-    	Assert.assertEquals("First", student.parentFirstName());
-    	Assert.assertEquals("Last", student.parentLastName());
-    	Assert.assertEquals(pimage, student.parentPhoto());
-    	Assert.assertEquals(pthumb, student.parentThumbnail());
-    	Assert.assertEquals("123 Main Street", student.address());
-    	Assert.assertEquals("Some City", student.city());
-    	Assert.assertEquals("NJ", student.state());
-    	Assert.assertEquals("12345-1234", student.zip());
-    	Assert.assertEquals(4, student.phoneNumbers().size());
-    	Assert.assertTrue(PhoneNumber.contains(student.phoneNumbers(), new PhoneNumber("Home", "1234567890")));
-    	Assert.assertTrue(PhoneNumber.contains(student.phoneNumbers(), new PhoneNumber("Cell", "9876543210")));
-    	Assert.assertTrue(PhoneNumber.contains(student.phoneNumbers(), new PhoneNumber("Work", "5647382910")));
-    	Assert.assertTrue(PhoneNumber.contains(student.phoneNumbers(), new PhoneNumber("Other","9182736450")));
-    	Assert.assertEquals("firstlast@email.com", student.email());
-    	Assert.assertEquals("First Last", student.emergencyContactName());
-    	Assert.assertTrue(new PhoneNumber("Cell", "1324576890").isEqualTo(student.emergencyContactPhone()));
+    	assertEquals(4, student.childAge(dob), 0);
+    	assertEquals("K", student.childGrade());
+    	assertEquals(cimage, student.childPhoto());
+    	assertEquals(cthumb, student.childThumbnail());
+    	assertEquals("First", student.parentFirstName());
+    	assertEquals("Last", student.parentLastName());
+    	assertEquals(pimage, student.parentPhoto());
+    	assertEquals(pthumb, student.parentThumbnail());
+    	assertEquals("123 Main Street", student.address());
+    	assertEquals("Some City", student.city());
+    	assertEquals("NJ", student.state());
+    	assertEquals("12345-1234", student.zip());
+    	assertEquals(4, student.phoneNumbers().size());
+    	assertTrue(PhoneNumber.contains(student.phoneNumbers(), new PhoneNumber("Home", "1234567890")));
+    	assertTrue(PhoneNumber.contains(student.phoneNumbers(), new PhoneNumber("Cell", "9876543210")));
+    	assertTrue(PhoneNumber.contains(student.phoneNumbers(), new PhoneNumber("Work", "5647382910")));
+    	assertTrue(PhoneNumber.contains(student.phoneNumbers(), new PhoneNumber("Other","9182736450")));
+    	assertEquals("firstlast@email.com", student.email());
+    	assertEquals("First Last", student.emergencyContactName());
+    	assertTrue(new PhoneNumber("Cell", "1324576890").isEqualTo(student.emergencyContactPhone()));
 	}
 	
 	// FIXME Need more tests for manual construction.
