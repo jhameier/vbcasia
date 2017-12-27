@@ -59,9 +59,11 @@ public class EmergencyContact extends Person {
             if (id == null) {
                 id = UUID.randomUUID();
             }
+            if (type == null) {
+                type = Type.CONTACT;
+            }
             Objects.requireNonNull(firstName);
             Objects.requireNonNull(lastName);
-            Objects.requireNonNull(type);
             Objects.requireNonNull(phoneNumber);
             return new EmergencyContact(this);
         }
