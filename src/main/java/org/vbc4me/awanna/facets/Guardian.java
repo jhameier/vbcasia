@@ -11,6 +11,7 @@ public class Guardian extends Person {
 
     private final Address address;
     private final List<PhoneNumber> phoneNumbers = new ArrayList<>();
+    private String emailAddress;
 
     public static Builder builder() {
         return new Builder();
@@ -20,10 +21,15 @@ public class Guardian extends Person {
         super(builder.id, builder.first, builder.last, Type.GUARDIAN);
         this.address = builder.address;
         this.phoneNumbers.addAll(builder.phoneNumbers);
+        this.emailAddress = builder.emailAddress;
     }
 
     public Address address() {
         return address;
+    }
+
+    public String emailAddress() {
+        return emailAddress;
     }
 
     /**
@@ -85,8 +91,13 @@ public class Guardian extends Person {
             return this;
         }
 
-        public Builder setPhoneNumbers(PhoneNumber phoneNumber) {
+        public Builder setPhoneNumber(PhoneNumber phoneNumber) {
             this.phoneNumbers.add(phoneNumber);
+            return this;
+        }
+
+        public Builder setAllPhoneNumbers(List<PhoneNumber> phoneNumbers) {
+            this.phoneNumbers.addAll(phoneNumbers);
             return this;
         }
 
