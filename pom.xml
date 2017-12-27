@@ -66,5 +66,11 @@
 		    <artifactId>LGoodDatePicker</artifactId>
 		    <version>7.6.3</version>
 		</dependency>
+		<dependency>
+			<groupId>org.immutables</groupId>
+			<artifactId>value</artifactId>
+			<version>2.5.5</version>
+			<scope>provided</scope>
+		</dependency>
     </dependencies>
 </project>
