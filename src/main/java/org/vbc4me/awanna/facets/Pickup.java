@@ -2,8 +2,8 @@ package org.vbc4me.awanna.facets;
 
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Represents a person authorized to pickup a child from the place where 
@@ -21,12 +21,10 @@ public class Pickup extends Person{
 	}
 	
 	private Pickup(Builder builder) {
-		super(builder.first, builder.last, Person.Type.PICKUP);
+		super(builder.id, builder.first, builder.last, Person.Type.PICKUP);
 		this.relationship = builder.relationship;
 		this.photo = builder.photo;
-		this.photoPath = builder.photoPath;
 		this.thumbnail = builder.thumbnail;
-		this.thumbnailPath = builder.thumbnailPath;
 	}
 	
 	/**
@@ -52,14 +50,6 @@ public class Pickup extends Person{
 		return photo;
 	}
 	
-	public void addPhotoPath(String path) {
-		this.photoPath = Paths.get(path);
-	}
-	
-	public Path photoPath() {
-		return photoPath;
-	}
-	
 	public void thumbnail(BufferedImage thumbnail) {
 		this.thumbnail = thumbnail;
 	}
@@ -68,24 +58,18 @@ public class Pickup extends Person{
 		return thumbnail;
 	}
 	
-	public void addThumbnailPath(String path) {
-		this.thumbnailPath = Paths.get(path);
-	}
-	
-	public Path thumbnailPath() {
-		return thumbnailPath;
-	}
-	
 	static class Builder {
+		private UUID id;
 		private String first;
 		private String last;
 		private String relationship;
 		private BufferedImage photo;
-		private Path photoPath;
 		private BufferedImage thumbnail;
-		private Path thumbnailPath;
 		
-		public Builder() {}
+		public Builder id(UUID id) {
+		    this.id = id;
+		    return this;
+        }
 		
 		public Builder first(String first) {
 			this.first = first;
@@ -107,22 +91,15 @@ public class Pickup extends Person{
 			return this;
 		}
 		
-		public Builder photoPath(String path) {
-			this.photoPath = Paths.get(path);
-			return this;
-		}
-		
 		public Builder thumbnail(BufferedImage thumbnail) {
 			this.thumbnail = thumbnail;
 			return this;
 		}
 		
-		public Builder thumbnailPath(String path) {
-			this.thumbnailPath = Paths.get(path);
-			return this;
-		}
-		
-		public Pickup done() {
+		public Pickup create() {
+		    if (id == null) {
+		        id = UUID.randomUUID();
+            }
 			Objects.requireNonNull(first, "First name is required");
 			Objects.requireNonNull(last, "Last name is required");
 			Objects.requireNonNull(relationship, "Relationship is required");
