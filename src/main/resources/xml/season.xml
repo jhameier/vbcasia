@@ -22,32 +22,26 @@
         </activities>
     </session>
     <students>
-        <student childId="541142cd-4a59-4f0f-92f1-2ef66c215b3c">
-            <name>
-                <first>Mary</first>
-                <last>Matlin</last>
-            </name>
+        <student id="541142cd-4a59-4f0f-92f1-2ef66c215b3c" first="Mary" last="Matlin">
             <age>8</age>
             <grade>3</grade>
             <dob>2007-07-21</dob>
-            <special-needs>asthma symptoms</special-needs>
-            <club />
-            <parent>
-                <name>
-                    <first>Bart</first>
-                    <last>Hamstein</last>
-                </name>
+            <specialneeds>asthma symptoms</specialneeds>
+            <photo>SomePhotoData</photo>
+            <thumb>SomeThumbData</thumb>
+            <club>Puggles</club>
+            <guardian id="541142cd-4a59-4f0f-92f1-2ef66c2161bc" first="Bart" last="Hamstein">
                 <address>9587 3rd Street</address>
                 <city>Hammonton</city>
                 <state>New Jersey</state>
                 <zip-code>08037</zip-code>
-                <phone-number>
+                <phonenumber>
                     <Home>6095617592</Home>
                     <Cell>6092379514</Cell>
-                </phone-number>
-                <email-address>bhamstein1@email.com</email-address>
-            </parent>
-            <authorized-pickup>
+                </phonenumber>
+                <emailaddress>bhamstein1@email.com</emailaddress>
+            </guardian>
+            <authorizedpickup>
                 <one>
                     <first>Sarah</first>
                     <last>Miller</last>
@@ -58,17 +52,13 @@
                     <last>Hanson</last>
                     <relationship>Uncle</relationship>
                 </two>
-            </authorized-pickup>
+            </authorizedpickup>
         </student>
-        <student childId="47ceea35-7eef-4539-87f4-c2bb09282685">
-            <name>
-                <first>John</first>
-                <last>Doe</last>
-            </name>
+        <student id="47ceea35-7eef-4539-87f4-c2bb09282685" first="John" last="Doe">
             <age>10</age>
             <grade>5</grade>
             <dob>2005-12-14</dob>
-            <special-needs>none</special-needs>
+            <specialneeds>none</specialneeds>
             <club />
             <parent>
                 <name>
@@ -85,7 +75,7 @@
                 </phone-number>
                 <email-address>jdoe@email.com</email-address>
             </parent>
-            <authorized-pickup>
+            <authorizedpickup>
                 <one>
                     <first>Bill</first>
                     <last>Doe</last>
@@ -96,11 +86,11 @@
                     <last>Johnson</last>
                     <relationship>Brother</relationship>
                 </two>
-            </authorized-pickup>
+            </authorizedpickup>
         </student>
     </students>
     <personnel>
-        <staff id="fba8fbff-c868-3110-94ca-b93c6b17bfd9" first="John" last = "Doe">
+        <staff id="fba8fbff-c868-3110-94ca-b93c6b17bfd9" first="Jack" last = "Doe">
             <residence>
                 <address>1234 Main Street</address>
                 <city>Hammonton</city>
@@ -121,7 +111,7 @@
             <photo>SomeDataOfFullSizeImage</photo>
             <thumbnail>SomeDataOfThumbnailImage</thumbnail>
         </staff>
-        <staff id="8586b70c-648d-327a-a2ee-1fd486154942" first = "Mary" last="Marlin">
+        <staff id="8586b70c-648d-327a-a2ee-1fd486154942" first = "Samantha" last="Marlin">
             <residence>
                 <address>9587 3rd Street</address>
                 <city>Hammonton</city>

@@ -13,15 +13,15 @@ public class Guardian extends Person {
     private final List<PhoneNumber> phoneNumbers = new ArrayList<>();
     private String emailAddress;
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
     private Guardian(Builder builder) {
-        super(builder.id, builder.first, builder.last, Type.GUARDIAN);
+        super(builder.id, builder.first, builder.last, Type.GUARDIAN, builder.photo);
         this.address = builder.address;
         this.phoneNumbers.addAll(builder.phoneNumbers);
         this.emailAddress = builder.emailAddress;
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
     public Address address() {
@@ -50,6 +50,7 @@ public class Guardian extends Person {
         private Address address;
         private List<PhoneNumber> phoneNumbers = new ArrayList<>();
         private String emailAddress;
+        private Photo photo;
 
         public Builder id(UUID id) {
             this.id = id;
@@ -106,6 +107,11 @@ public class Guardian extends Person {
             return this;
         }
 
+        public Builder photo(Photo photo) {
+            this.photo = photo;
+            return this;
+        }
+
         public Guardian create() {
             if (id == null) {
                 id = UUID.randomUUID();
@@ -125,7 +131,7 @@ public class Guardian extends Person {
                         .create();
             }
             if (phoneNumbers.isEmpty()) {
-                throw new IllegalArgumentException("There must be at least 1 phone number added");
+                throw new IllegalArgumentException("There must be at least 1 phone number added.");
             }
             return new Guardian(this);
         }

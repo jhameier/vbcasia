@@ -1,14 +1,14 @@
 package facets;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import org.junit.Test;
+import org.vbc4me.awanna.facets.PhoneNumber;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
-import org.vbc4me.awanna.facets.PhoneNumber;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test class for {@link PhoneNumber}.
@@ -21,7 +21,7 @@ public class TestPhoneNumber {
 	 */
 	@Test
 	public void TestPhoneNumberCreation() {
-		PhoneNumber phoneNumber = new PhoneNumber("Home", "1234567890");
+		PhoneNumber phoneNumber = PhoneNumber.of(PhoneNumber.Type.HOME, "1234567890");
 		assertEquals("Home", phoneNumber.type());
 		assertEquals("1234567890", phoneNumber.number(false));
 		assertEquals("(123) 456-7890", phoneNumber.number(true));
@@ -35,7 +35,7 @@ public class TestPhoneNumber {
 	@Test (expected = IllegalArgumentException.class)
 	public void TestOpenParenthesisCharacterThrows() {
 		@SuppressWarnings("unused")
-		PhoneNumber phoneNumber = new PhoneNumber("Home", "(");
+		PhoneNumber phoneNumber = PhoneNumber.of(PhoneNumber.Type.HOME, "(");
 	}
 	
 	/**
@@ -45,7 +45,7 @@ public class TestPhoneNumber {
 	@Test (expected = IllegalArgumentException.class)
 	public void TestCloseParenthesisCharacterThrows() {
 		@SuppressWarnings("unused")
-		PhoneNumber phoneNumber = new PhoneNumber("Home", ")");
+		PhoneNumber phoneNumber = PhoneNumber.of(PhoneNumber.Type.HOME, ")");
 	}
 	
 	/**
@@ -55,7 +55,7 @@ public class TestPhoneNumber {
 	@Test (expected = IllegalArgumentException.class)
 	public void TestDashCharacterThrows() {
 		@SuppressWarnings("unused")
-		PhoneNumber phoneNumber = new PhoneNumber("Home", "-");
+		PhoneNumber phoneNumber = PhoneNumber.of(PhoneNumber.Type.HOME, "-");
 	}
 	
 	/**
@@ -65,7 +65,7 @@ public class TestPhoneNumber {
 	@Test (expected = IllegalArgumentException.class)
 	public void TestSpecialCharacterThrows() {
 		@SuppressWarnings("unused")
-		PhoneNumber phoneNumber = new PhoneNumber("Home", "{");
+		PhoneNumber phoneNumber = PhoneNumber.of(PhoneNumber.Type.HOME, "{");
 	}
 	
 	/**
@@ -75,7 +75,7 @@ public class TestPhoneNumber {
 	@Test (expected = IllegalArgumentException.class)
 	public void TestCharacterThrows() {
 		@SuppressWarnings("unused")
-		PhoneNumber phoneNumber = new PhoneNumber("Home", "F");
+		PhoneNumber phoneNumber = PhoneNumber.of(PhoneNumber.Type.HOME, "F");
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class TestPhoneNumber {
 	@Test (expected = IllegalArgumentException.class)
 	public void TestLessThanTenNumbersThrows() {
 		@SuppressWarnings("unused")
-		PhoneNumber phoneNumber = new PhoneNumber("Home", "123456789");
+		PhoneNumber phoneNumber = PhoneNumber.of(PhoneNumber.Type.HOME, "123456789");
 	}
 	
 	/**
@@ -95,7 +95,7 @@ public class TestPhoneNumber {
 	@Test (expected = IllegalArgumentException.class)
 	public void TestMoreThanTenNumbersThrows() {
 		@SuppressWarnings("unused")
-		PhoneNumber phoneNumber = new PhoneNumber("Home", "12345678901");
+		PhoneNumber phoneNumber = PhoneNumber.of(PhoneNumber.Type.HOME, "12345678901");
 	}
 	
 	/**
@@ -103,11 +103,11 @@ public class TestPhoneNumber {
 	 */
 	public void TestContainsMethod() {
 		List<PhoneNumber> numbers = new ArrayList<>();
-		PhoneNumber one = new PhoneNumber("Home", "1234567890");
-		PhoneNumber two = new PhoneNumber("Office", "9876543210");
-		PhoneNumber three = new PhoneNumber("Work", "6549873210");
-		PhoneNumber four = new PhoneNumber("Other", "7412589630");
-		PhoneNumber five = new PhoneNumber("Cell", "3698521470");
+		PhoneNumber one = PhoneNumber.of(PhoneNumber.Type.HOME, "1234567890");
+		PhoneNumber two = PhoneNumber.of(PhoneNumber.Type.OFFICE, "9876543210");
+		PhoneNumber three = PhoneNumber.of(PhoneNumber.Type.OFFICE, "6549873210");
+		PhoneNumber four = PhoneNumber.of(PhoneNumber.Type.OTHER, "7412589630");
+		PhoneNumber five = PhoneNumber.of(PhoneNumber.Type.CELL, "3698521470");
 		numbers.add(five);
 		numbers.add(three);
 		numbers.add(one);
@@ -118,6 +118,6 @@ public class TestPhoneNumber {
 		assertTrue(PhoneNumber.contains(numbers, three));
 		assertTrue(PhoneNumber.contains(numbers, four));
 		assertTrue(PhoneNumber.contains(numbers, five));
-		assertFalse(PhoneNumber.contains(numbers, new PhoneNumber("Other", "9512357460")));	
+		assertFalse(PhoneNumber.contains(numbers, PhoneNumber.of(PhoneNumber.Type.OTHER, "9512357460")));
 	}
 }

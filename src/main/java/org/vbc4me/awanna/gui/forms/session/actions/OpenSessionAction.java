@@ -1,10 +1,7 @@
 package org.vbc4me.awanna.gui.forms.session.actions;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
-
-import javax.swing.AbstractAction;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 /**
  * Used to create a new blank record.

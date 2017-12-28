@@ -1,31 +1,27 @@
 package org.vbc4me.awanna.facets;
 
-import java.awt.image.BufferedImage;
 import java.util.UUID;
 
 public abstract class Person {
-	
-	public enum Type {STAFF, STUDENT, PICKUP, CONTACT, GUARDIAN}
-	UUID id;
-	String first;
-	String last;
-	Type type;
-	Photo photo;
 
-	Person(UUID id, String first, String last, Type type, Photo photo) {
-	    this.id = id;
-	    this.first = first;
-	    this.last = last;
-	    this.type = type;
-	    this.photo = photo;
+    UUID id;
+    String first;
+    String last;
+    Type type;
+    Photo photo;
+
+    Person(UUID id, String first, String last, Type type, Photo photo) {
+        this.id = id;
+        this.first = first;
+        this.last = last;
+        this.type = type;
+        this.photo = photo;
     }
-
-
 
     /**
      * Return the {@link UUID} associated with the {@link Person}.
      */
-    public  UUID id() {
+    public UUID id() {
         return id;
     }
 
@@ -33,34 +29,36 @@ public abstract class Person {
      * Return the first name associated with this {@link Person}.
      */
     public String firstName() {
-		return first;
-	}
+        return first;
+    }
 
     /**
      * Return the last name associated with this {@link Person}.
      */
-	public String lastName() {
-		return last;
-	}
+    public String lastName() {
+        return last;
+    }
 
     /**
      * Returns the full name (firstName lastName) of this {@link Person}.
      */
-	public String name() {
-	    return first + " " + last;
+    public String name() {
+        return first + " " + last;
     }
 
     /**
      * Return the type this {@link Person} represents.
      */
-	public String recordType() {
-		return type.name();
-	}
+    public String recordType() {
+        return type.name();
+    }
 
     /**
      * Return the {@link Photo} associated with this {@link Person}.
      */
-	public Photo photo() {
-	    return photo;
+    public Photo photo() {
+        return photo;
     }
+
+    public enum Type {STAFF, STUDENT, PICKUP, CONTACT, GUARDIAN}
 }

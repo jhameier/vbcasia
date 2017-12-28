@@ -7,13 +7,13 @@ public class EmergencyContact extends Person {
 
     private final PhoneNumber phoneNumber;
 
-    public static Builder builder() {
-        return new Builder();
+    private EmergencyContact(Builder builder) {
+        super(builder.id, builder.firstName, builder.lastName, builder.type, builder.photo);
+        this.phoneNumber = builder.phoneNumber;
     }
 
-    private EmergencyContact(Builder builder) {
-        super(builder.id, builder.firstName, builder.lastName, builder.type);
-        this.phoneNumber = builder.phoneNumber;
+    public static Builder builder() {
+        return new Builder();
     }
 
     /**
@@ -29,6 +29,7 @@ public class EmergencyContact extends Person {
         private String lastName;
         private Type type;
         private PhoneNumber phoneNumber;
+        private Photo photo;
 
         public Builder id(UUID id) {
             this.id = id;
@@ -52,6 +53,11 @@ public class EmergencyContact extends Person {
 
         public Builder phoneNumber(PhoneNumber phoneNumber) {
             this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public Builder photo(Photo photo) {
+            this.photo = photo;
             return this;
         }
 

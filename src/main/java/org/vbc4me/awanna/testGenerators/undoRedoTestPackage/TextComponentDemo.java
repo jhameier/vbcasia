@@ -35,31 +35,45 @@ package org.vbc4me.awanna.testGenerators.undoRedoTestPackage;
  *   DocumentSizeFilter.java
  */
 
+import javax.swing.*;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.UndoableEditEvent;
+import javax.swing.event.UndoableEditListener;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultEditorKit;
+import javax.swing.text.Document;
+import javax.swing.text.JTextComponent;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+import javax.swing.text.StyledEditorKit;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
+import javax.swing.undo.UndoManager;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
-import javax.swing.*;
-import javax.swing.text.*;
-import javax.swing.event.*;
-import javax.swing.undo.*;
-
 public class TextComponentDemo extends JFrame {
+    static final int MAX_CHARACTERS = 300;
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 937597521465049298L;
-    JTextPane textPane;
-    AbstractDocument doc;
-    static final int MAX_CHARACTERS = 300;
-    JTextArea changeLog;
-    String newline = "\n";
-    HashMap<Object, Action> actions;
-
     //undo helpers
     protected UndoAction undoAction;
     protected RedoAction redoAction;
     protected UndoManager undo = new UndoManager();
+    JTextPane textPane;
+    AbstractDocument doc;
+    JTextArea changeLog;
+    String newline = "\n";
+    HashMap<Object, Action> actions;
 
     public TextComponentDemo() {
         super("TextComponentDemo");
@@ -67,10 +81,10 @@ public class TextComponentDemo extends JFrame {
         //Create the text pane and configure it.
         textPane = new JTextPane();
         textPane.setCaretPosition(0);
-        textPane.setMargin(new Insets(5,5,5,5));
+        textPane.setMargin(new Insets(5, 5, 5, 5));
         StyledDocument styledDoc = textPane.getStyledDocument();
         if (styledDoc instanceof AbstractDocument) {
-            doc = (AbstractDocument)styledDoc;
+            doc = (AbstractDocument) styledDoc;
             doc.setDocumentFilter(new DocumentSizeFilter(MAX_CHARACTERS));
         } else {
             System.err.println("Text pane's document isn't an AbstractDocument!");
@@ -86,14 +100,14 @@ public class TextComponentDemo extends JFrame {
 
         //Create a split pane for the change log and the text area.
         JSplitPane splitPane = new JSplitPane(
-            JSplitPane.VERTICAL_SPLIT,
-            scrollPane, scrollPaneForLog);
+                JSplitPane.VERTICAL_SPLIT,
+                scrollPane, scrollPaneForLog);
         splitPane.setOneTouchExpandable(true);
 
         //Create the status area.
         JPanel statusPane = new JPanel(new GridLayout(1, 1));
         CaretListenerLabel caretListenerLabel =
-            new CaretListenerLabel("Caret Status");
+                new CaretListenerLabel("Caret Status");
         statusPane.add(caretListenerLabel);
 
         //Add the components.
@@ -101,7 +115,7 @@ public class TextComponentDemo extends JFrame {
         getContentPane().add(statusPane, BorderLayout.PAGE_END);
 
         //Set up the menu bar.
-        actions=createActionTable(textPane);
+        actions = createActionTable(textPane);
         JMenu editMenu = createEditMenu();
         JMenu styleMenu = createStyleMenu();
         JMenuBar mb = new JMenuBar();
@@ -122,88 +136,32 @@ public class TextComponentDemo extends JFrame {
         doc.addDocumentListener(new MyDocumentListener());
     }
 
-    //This listens for and reports caret movements.
-    protected class CaretListenerLabel extends JLabel
-        implements CaretListener {
-        /**
-	 * 
-	 */
-	private static final long serialVersionUID = -756211211612426384L;
+    /**
+     * Create the GUI and show it.  For thread safety,
+     * this method should be invoked from the
+     * event dispatch thread.
+     */
+    private static void createAndShowGUI() {
+        //Create and set up the window.
+        final TextComponentDemo frame = new TextComponentDemo();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-	public CaretListenerLabel(String label) {
-            super(label);
-        }
-
-        //Might not be invoked from the event dispatch thread.
-        public void caretUpdate(CaretEvent e) {
-            displaySelectionInfo(e.getDot(), e.getMark());
-        }
-
-        //This method can be invoked from any thread.  It
-        //invokes the setText and modelToView methods, which
-        //must run on the event dispatch thread. We use
-        //invokeLater to schedule the code for execution
-        //on the event dispatch thread.
-        protected void displaySelectionInfo(final int dot,
-                                            final int mark) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    if (dot == mark) {  // no selection
-                        try {
-                            Rectangle caretCoords = textPane.modelToView(dot);
-                            //Convert it to view coordinates.
-                            setText("caret: text position: " + dot
-                                + ", view location = ["
-                                + caretCoords.x + ", "
-                                + caretCoords.y + "]"
-                                + newline);
-                        } catch (BadLocationException ble) {
-                            setText("caret: text position: " + dot + newline);
-                        }
-                    } else if (dot < mark) {
-                        setText("selection from: " + dot
-                            + " to " + mark + newline);
-                    } else {
-                        setText("selection from: " + mark
-                            + " to " + dot + newline);
-                    }
-                }
-            });
-        }
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
     }
 
-    //This one listens for edits that can be undone.
-    protected class MyUndoableEditListener
-        implements UndoableEditListener {
-        public void undoableEditHappened(UndoableEditEvent e) {
-            //Remember the edit and update the menus.
-            undo.addEdit(e.getEdit());
-            undoAction.updateUndoState();
-            redoAction.updateRedoState();
-        }
-    }
-
-    //And this one listens for any changes to the document.
-    protected class MyDocumentListener
-        implements DocumentListener {
-        public void insertUpdate(DocumentEvent e) {
-            displayEditInfo(e);
-        }
-        public void removeUpdate(DocumentEvent e) {
-            displayEditInfo(e);
-        }
-        public void changedUpdate(DocumentEvent e) {
-            displayEditInfo(e);
-        }
-        private void displayEditInfo(DocumentEvent e) {
-            Document document = e.getDocument();
-            int changeLength = e.getLength();
-            changeLog.append(e.getType().toString() + ": " +
-                changeLength + " character" +
-                ((changeLength == 1) ? ". " : "s. ") +
-                " Text length = " + document.getLength() +
-                "." + newline);
-        }
+    //The standard main method.
+    public static void main(String[] args) {
+        //Schedule a job for the event dispatch thread:
+        //creating and showing this application's GUI.
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                //Turn off metal's use of bold fonts
+                UIManager.put("swing.boldMetal", Boolean.FALSE);
+                createAndShowGUI();
+            }
+        });
     }
 
     //Add a couple of emacs key bindings for navigation.
@@ -277,39 +235,39 @@ public class TextComponentDemo extends JFrame {
         menu.addSeparator();
 
         menu.add(new StyledEditorKit.FontFamilyAction("Serif",
-            "Serif"));
+                "Serif"));
         menu.add(new StyledEditorKit.FontFamilyAction("SansSerif",
-            "SansSerif"));
+                "SansSerif"));
 
         menu.addSeparator();
 
         menu.add(new StyledEditorKit.ForegroundAction("Red",
-            Color.red));
+                Color.red));
         menu.add(new StyledEditorKit.ForegroundAction("Green",
-            Color.green));
+                Color.green));
         menu.add(new StyledEditorKit.ForegroundAction("Blue",
-            Color.blue));
+                Color.blue));
         menu.add(new StyledEditorKit.ForegroundAction("Black",
-            Color.black));
+                Color.black));
 
         return menu;
     }
 
     protected void initDocument() {
         String initString[] =
-            { "Use the mouse to place the caret.",
-                "Use the edit menu to cut, copy, paste, and select text.",
-                "Also to undo and redo changes.",
-                "Use the style menu to change the style of the text.",
-                "Use the arrow keys on the keyboard or these emacs key bindings to move the caret:",
-                "Ctrl-f, Ctrl-b, Ctrl-n, Ctrl-p." };
+                {"Use the mouse to place the caret.",
+                        "Use the edit menu to cut, copy, paste, and select text.",
+                        "Also to undo and redo changes.",
+                        "Use the style menu to change the style of the text.",
+                        "Use the arrow keys on the keyboard or these emacs key bindings to move the caret:",
+                        "Ctrl-f, Ctrl-b, Ctrl-n, Ctrl-p."};
 
         SimpleAttributeSet[] attrs = initAttributes(initString.length);
 
         try {
-            for (int i = 0; i < initString.length; i ++) {
+            for (int i = 0; i < initString.length; i++) {
                 doc.insertString(doc.getLength(), initString[i] + newline,
-                    attrs[i]);
+                        attrs[i]);
             }
         } catch (BadLocationException ble) {
             System.err.println("Couldn't insert initial text.");
@@ -358,13 +316,100 @@ public class TextComponentDemo extends JFrame {
         return actions.get(name);
     }
 
+    //This listens for and reports caret movements.
+    protected class CaretListenerLabel extends JLabel
+            implements CaretListener {
+        /**
+         *
+         */
+        private static final long serialVersionUID = -756211211612426384L;
+
+        public CaretListenerLabel(String label) {
+            super(label);
+        }
+
+        //Might not be invoked from the event dispatch thread.
+        public void caretUpdate(CaretEvent e) {
+            displaySelectionInfo(e.getDot(), e.getMark());
+        }
+
+        //This method can be invoked from any thread.  It
+        //invokes the setText and modelToView methods, which
+        //must run on the event dispatch thread. We use
+        //invokeLater to schedule the code for execution
+        //on the event dispatch thread.
+        protected void displaySelectionInfo(final int dot,
+                                            final int mark) {
+            SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    if (dot == mark) {  // no selection
+                        try {
+                            Rectangle caretCoords = textPane.modelToView(dot);
+                            //Convert it to view coordinates.
+                            setText("caret: text position: " + dot
+                                    + ", view location = ["
+                                    + caretCoords.x + ", "
+                                    + caretCoords.y + "]"
+                                    + newline);
+                        } catch (BadLocationException ble) {
+                            setText("caret: text position: " + dot + newline);
+                        }
+                    } else if (dot < mark) {
+                        setText("selection from: " + dot
+                                + " to " + mark + newline);
+                    } else {
+                        setText("selection from: " + mark
+                                + " to " + dot + newline);
+                    }
+                }
+            });
+        }
+    }
+
+    //This one listens for edits that can be undone.
+    protected class MyUndoableEditListener
+            implements UndoableEditListener {
+        public void undoableEditHappened(UndoableEditEvent e) {
+            //Remember the edit and update the menus.
+            undo.addEdit(e.getEdit());
+            undoAction.updateUndoState();
+            redoAction.updateRedoState();
+        }
+    }
+
+    //And this one listens for any changes to the document.
+    protected class MyDocumentListener
+            implements DocumentListener {
+        public void insertUpdate(DocumentEvent e) {
+            displayEditInfo(e);
+        }
+
+        public void removeUpdate(DocumentEvent e) {
+            displayEditInfo(e);
+        }
+
+        public void changedUpdate(DocumentEvent e) {
+            displayEditInfo(e);
+        }
+
+        private void displayEditInfo(DocumentEvent e) {
+            Document document = e.getDocument();
+            int changeLength = e.getLength();
+            changeLog.append(e.getType().toString() + ": " +
+                    changeLength + " character" +
+                    ((changeLength == 1) ? ". " : "s. ") +
+                    " Text length = " + document.getLength() +
+                    "." + newline);
+        }
+    }
+
     class UndoAction extends AbstractAction {
         /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4161988103099157297L;
+         *
+         */
+        private static final long serialVersionUID = 4161988103099157297L;
 
-	public UndoAction() {
+        public UndoAction() {
             super("Undo");
             setEnabled(false);
         }
@@ -392,9 +437,9 @@ public class TextComponentDemo extends JFrame {
     }
 
     class RedoAction extends AbstractAction {
-	private static final long serialVersionUID = 2097032123482634054L;
+        private static final long serialVersionUID = 2097032123482634054L;
 
-	public RedoAction() {
+        public RedoAction() {
             super("Redo");
             setEnabled(false);
         }
@@ -419,33 +464,5 @@ public class TextComponentDemo extends JFrame {
                 putValue(Action.NAME, "Redo");
             }
         }
-    }
-
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event dispatch thread.
-     */
-    private static void createAndShowGUI() {
-        //Create and set up the window.
-        final TextComponentDemo frame = new TextComponentDemo();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-    }
-
-    //The standard main method.
-    public static void main(String[] args) {
-        //Schedule a job for the event dispatch thread:
-        //creating and showing this application's GUI.
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                //Turn off metal's use of bold fonts
-                UIManager.put("swing.boldMetal", Boolean.FALSE);
-                createAndShowGUI();
-            }
-        });
     }
 }

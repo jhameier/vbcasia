@@ -6,7 +6,11 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
-import org.vbc4me.awanna.facets.*;
+import org.vbc4me.awanna.facets.Activity;
+import org.vbc4me.awanna.facets.Season;
+import org.vbc4me.awanna.facets.Session;
+import org.vbc4me.awanna.facets.Staff;
+import org.vbc4me.awanna.facets.Student;
 
 import java.io.File;
 import java.io.IOException;
@@ -77,8 +81,6 @@ public class SeasonFileReader {
             for (Staff staff : personnel) {
                 season.addStaff(staff);
             }
-
-
 
 
         } catch (JDOMException | IOException e) {

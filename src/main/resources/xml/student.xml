@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <students>
-  <student childId="541142cd-4a59-4f0f-92f1-2ef66c215b3c">
+  <student id="541142cd-4a59-4f0f-92f1-2ef66c215b3c">
     <name>
       <first>Mary</first>
       <last>Matlin</last>
@@ -38,7 +38,7 @@
       </two>
     </authorized-pickup>
   </student>
-  <student childId="47ceea35-7eef-4539-87f4-c2bb09282685">
+  <student id="47ceea35-7eef-4539-87f4-c2bb09282685">
     <name>
       <first>John</first>
       <last>Doe</last>

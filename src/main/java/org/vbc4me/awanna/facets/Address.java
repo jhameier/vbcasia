@@ -8,15 +8,15 @@ public class Address {
     private final String state;
     private final Zipcode zipcode;
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
     private Address(Builder builder) {
         this.streetAddress = builder.streetAddress;
         this.city = builder.city;
         this.state = builder.state;
         this.zipcode = builder.zipcode;
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
     public String streetAddress() {
