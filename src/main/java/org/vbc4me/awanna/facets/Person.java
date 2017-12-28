@@ -12,7 +12,7 @@ public abstract class Person {
 	Type type;
 	Photo photo;
 
-	public Person(UUID id, String first, String last, Type type, Photo photo) {
+	Person(UUID id, String first, String last, Type type, Photo photo) {
 	    this.id = id;
 	    this.first = first;
 	    this.last = last;
@@ -44,24 +44,23 @@ public abstract class Person {
 	}
 
     /**
+     * Returns the full name (firstName lastName) of this {@link Person}.
+     */
+	public String name() {
+	    return first + " " + last;
+    }
+
+    /**
      * Return the type this {@link Person} represents.
      */
 	public String recordType() {
 		return type.name();
 	}
 
-
-
     /**
-     * Return the {@link BufferedImage image} associated with this {@link Person}.
+     * Return the {@link Photo} associated with this {@link Person}.
      */
-    public BufferedImage image() {
-        return photo.image();
-    }
-    /**
-     * Return the {@link BufferedImage thumbnail image} associated with this {@link Person}.
-     */
-    public BufferedImage thumbnail() {
-        return photo.thumbnail();
+	public Photo photo() {
+	    return photo;
     }
 }
