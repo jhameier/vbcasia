@@ -103,5 +103,37 @@ public class PhoneNumber {
 
 	}
 
+	/**
+	 * Returns true if the phone number is removed from the list of phone numbers otherwise returns false.
+     * The number can be formatted as xxx-xxx-xxxx or (xxx) xxx-xxxx or unformatted xxxxxxxxxx.
+	 */
+	public static boolean removePhoneNumber(List<PhoneNumber> phoneNumbers, String number) {
+        if (number.contains("(")) {
+            number = number.replace("(", "");
+        }
+
+        if (number.contains(")")) {
+            number = number.replace(")", "");
+        }
+
+        if (number.contains("-")) {
+            number = number.replace("-", "");
+        }
+
+        if (number.contains(" ")) {
+            number = number.replace(" ", "");
+        }
+
+        PhoneNumber pnumber = null;
+        for (PhoneNumber ph : phoneNumbers) {
+            if (ph.number(false).equals(number)) {
+                pnumber = ph;
+                break;
+            }
+        }
+        return pnumber != null && phoneNumbers.remove(pnumber);
+    }
+
+
 
 }
