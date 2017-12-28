@@ -1,27 +1,31 @@
 package org.vbc4me.awanna.facets;
 
-import java.util.Objects;
+import java.awt.image.BufferedImage;
 import java.util.UUID;
 
 public abstract class Person {
 	
 	public enum Type {STAFF, STUDENT, PICKUP, CONTACT, GUARDIAN}
-	private final UUID id;
-	private final String first;
-	private final String last;
-	private final Type type;
-	
-	public Person(UUID id, String first, String last, Type type) {
-		this.id = Objects.requireNonNull(id);
-	    this.first = Objects.requireNonNull(first);
-		this.last = Objects.requireNonNull(last);
-		this.type = Objects.requireNonNull(type);
-	}
+	UUID id;
+	String first;
+	String last;
+	Type type;
+	Photo photo;
+
+	public Person(UUID id, String first, String last, Type type, Photo photo) {
+	    this.id = id;
+	    this.first = first;
+	    this.last = last;
+	    this.type = type;
+	    this.photo = photo;
+    }
+
+
 
     /**
      * Return the {@link UUID} associated with the {@link Person}.
      */
-    public UUID id() {
+    public  UUID id() {
         return id;
     }
 
@@ -45,5 +49,19 @@ public abstract class Person {
 	public String recordType() {
 		return type.name();
 	}
-	
+
+
+
+    /**
+     * Return the {@link BufferedImage image} associated with this {@link Person}.
+     */
+    public BufferedImage image() {
+        return photo.image();
+    }
+    /**
+     * Return the {@link BufferedImage thumbnail image} associated with this {@link Person}.
+     */
+    public BufferedImage thumbnail() {
+        return photo.thumbnail();
+    }
 }
