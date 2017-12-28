@@ -31,7 +31,7 @@ public class StaffFileReader {
     try {
       Document document = saxBuilder.build(file);
       Element root = document.getRootElement();
-      List<Element> list = root.getChildren("personnel");
+      List<Element> list = root.getChild("personnel").getChildren();
 
       for (Element staff : list) {
 
@@ -40,12 +40,12 @@ public class StaffFileReader {
             .firstName(staff.getAttributeValue("first"))
             .lastName(staff.getAttributeValue("last"));
 
-        Element residence = staff.getChild("residence");
+        Element address = staff.getChild("address");
         builder.address(Address.builder()
-            .streetAddress(residence.getChildText("address"))
-            .city(residence.getChildText("city"))
-            .state(residence.getChildText("state"))
-            .zipcode(Zipcode.of(residence.getChildText("zipcode")))
+            .streetAddress(address.getChildText("streetaddress"))
+            .city(address.getChildText("city"))
+            .state(address.getChildText("state"))
+            .zipcode(Zipcode.of(address.getChildText("zipcode")))
             .create());
 
         Element phoneNumbers = staff.getChild("phone-numbers");
@@ -59,7 +59,7 @@ public class StaffFileReader {
         builder.emergencyContact(EmergencyContact.builder()
             .firstName(contact.getAttributeValue("first"))
             .lastName(contact.getAttributeValue("last"))
-            .phoneNumber(PhoneNumber.of(
+            .addPhoneNumber(PhoneNumber.of(
                 PhoneNumber.Type.valueOf(contact.getChild("phone").getAttributeValue("type")),
                 contact.getChildText("phone")))
             .create());

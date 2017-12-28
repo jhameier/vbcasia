@@ -58,6 +58,11 @@ public class Guardian extends Person {
       return this;
     }
 
+    public Builder id(String id) {
+      this.id = UUID.fromString(id);
+      return this;
+    }
+
     public Builder first(String first) {
       this.first = first;
       return this;

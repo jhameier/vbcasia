@@ -8,12 +8,12 @@ import java.util.concurrent.ConcurrentHashMap;
  * Contains the club names that students can belong to with in the Awana association.
  */
 public enum Club {
-  PUGGLES("Puggles"),
-  CUBBIES("Cubbies"),
-  SPARKS("Sparks"),
-  TANDT("T&T"),
-  TREK("Trek"),
-  JOURNEY("Journey");
+  PUGGLES("puggles"),
+  CUBBIES("cubbies"),
+  SPARKS("sparks"),
+  TANDT("t&t"),
+  TREK("trek"),
+  JOURNEY("journey");
 
   private static final Map<String, Club> CLUB_MAP;
 
@@ -24,7 +24,7 @@ public enum Club {
   static {
     Map<String, Club> map = new ConcurrentHashMap<>();
     for (Club club : Club.values()) {
-      map.put(club.getName(), club);
+      map.put(club.getName().toLowerCase(), club);
     }
     CLUB_MAP = Collections.unmodifiableMap(map);
   }
@@ -43,7 +43,7 @@ public enum Club {
    * the name passed in is not found in the internal mapping.
    */
   public static Club get(String name) {
-    if (!CLUB_MAP.containsKey(name)) {
+    if (!CLUB_MAP.containsKey(name.toLowerCase())) {
       throw new IllegalArgumentException("The club name: " + name + " does not exist.");
     }
     return CLUB_MAP.get(name);

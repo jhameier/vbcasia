@@ -2,6 +2,7 @@ package org.vbc4me.awanna.utility.writers;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.Format;
@@ -69,9 +70,16 @@ public final class StaffFileWriter {
     element.addContent(new Element("email-address").addContent(staff.email()));
 
     // Emergency Contact Info
-    Element emer = new Element("emergency-contact");
-    emer.addContent(new Element("name").addContent(staff.emergencyContact().name()));
-    emer.addContent(new Element("phone").addContent(staff.emergencyContact().phoneNumber().number(false)));
+    Element emer = new Element("emergencycontact");
+    emer.setAttribute(new Attribute("id", staff.emergencyContact().id().toString()))
+        .setAttribute(new Attribute("first", staff.emergencyContact().firstName()))
+        .setAttribute(new Attribute("last", staff.emergencyContact().lastName()));
+
+    Element phNumElement = new Element("phonenumber");
+    for (PhoneNumber number : staff.emergencyContact().phoneNumbers()) {
+      phNumElement.addContent(new Element(number.type()).addContent(number.number(false)));
+    }
+    emer.addContent(phNumElement);
     element.addContent(emer);
 
     // General Info

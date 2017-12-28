@@ -44,7 +44,7 @@ public class StudentWriteDriverTest {
 		stBuilder1.emergencyContact(EmergencyContact.builder()
                 .firstName("Susan")
                 .lastName("Doe")
-                .phoneNumber(PhoneNumber.of(PhoneNumber.Type.HOME, "6095615432"))
+                .addPhoneNumber(PhoneNumber.of(PhoneNumber.Type.HOME, "6095615432"))
                 .create());
 		stBuilder1.authPickup(Pickup.builder()
                 .first("Bill")
@@ -79,7 +79,7 @@ public class StudentWriteDriverTest {
 		stBuilder2.emergencyContact(EmergencyContact.builder()
                 .firstName("Sara")
                 .lastName("Marlin")
-                .phoneNumber(PhoneNumber.of(PhoneNumber.Type.CELL, "6095671258"))
+                .addPhoneNumber(PhoneNumber.of(PhoneNumber.Type.CELL, "6095671258"))
                 .create());
 		stBuilder2.authPickup(Pickup.builder()
                         .first("Sarah")

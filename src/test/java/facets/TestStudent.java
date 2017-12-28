@@ -70,7 +70,7 @@ public class TestStudent {
         .emergencyContact(EmergencyContact.builder()
             .firstName("First")
             .lastName("Last")
-            .phoneNumber(PhoneNumber.of(PhoneNumber.Type.CELL, "1324576890"))
+            .addPhoneNumber(PhoneNumber.of(PhoneNumber.Type.CELL, "1324576890"))
             .create())
         .authPickup(Pickup.builder()
             .first("First")
@@ -127,7 +127,7 @@ public class TestStudent {
     assertEquals("firstlast@email.com", student.guardian().emailAddress());
     assertEquals("First Last", student.emergencyContact().name());
     assertTrue(PhoneNumber.of(PhoneNumber.Type.CELL, "1324576890")
-        .isEqualTo(student.emergencyContact().phoneNumber()));
+        .isEqualTo(student.emergencyContact().phoneNumbers().get(0)));
   }
 
   // FIXME Need more tests for manual construction.

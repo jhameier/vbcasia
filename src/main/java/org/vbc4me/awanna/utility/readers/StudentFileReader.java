@@ -16,6 +16,7 @@ import org.vbc4me.awanna.facets.Account;
 import org.vbc4me.awanna.facets.Activity;
 import org.vbc4me.awanna.facets.Address;
 import org.vbc4me.awanna.facets.Club;
+import org.vbc4me.awanna.facets.EmergencyContact;
 import org.vbc4me.awanna.facets.Guardian;
 import org.vbc4me.awanna.facets.PhoneNumber;
 import org.vbc4me.awanna.facets.Photo;
@@ -40,56 +41,71 @@ public class StudentFileReader extends DefaultHandler {
     try {
       Document document = saxBuilder.build(file);
       Element root = document.getRootElement();
-      List<Element> list = root.getChildren("students");
+      List<Element> list = root.getChild("students").getChildren();
 
       for (Element student : list) {
 
-        UUID studentId = UUID.fromString(student.getAttributeValue("chileId"));
         String first = student.getAttributeValue("first");
         String last = student.getAttributeValue("last");
-        BufferedImage image = Utilities.decodePhoto(student.getChildText("image"));
-        BufferedImage thumb = Utilities.decodePhoto(student.getChildText("thumb"));
 
         Student.Builder studentBuilder = Student.builder().firstName(first).lastName(last)
-            .studentId(student.getAttributeValue("studentId"))
+            .studentId(student.getAttributeValue("id"))
             .grade(student.getChildText("grade"))
             .dateOfBirth(LocalDate.parse(student.getChildText("dob")))
             .specialNeeds(student.getChildText("specialneeds"))
-            .club(Club.valueOf(student.getChildText("club")))
-            .studentPhoto(new Photo(image, thumb));
+            .club(Club.get(student.getChildText("club")));
 
-        Element parent = student.getChild("parent");
-        Photo pphoto = new Photo(null, null);
-        Guardian guardian = Guardian.builder()
-            .first(parent.getChild("name").getChildText("first"))
-            .last(parent.getChild("name").getChildText("last"))
+        if (student.getChild("photo") != null) {
+          Element photo = student.getChild("photo");
+          BufferedImage image = Utilities.decodePhoto(photo.getChildText("image"));
+          BufferedImage thumb = Utilities.decodePhoto(photo.getChildText("thumbnail"));
+          studentBuilder.studentPhoto(new Photo(image, thumb));
+        }
+
+
+        Element guardianElement = student.getChild("guardian");
+        Guardian.Builder guardianBuilder = Guardian.builder()
+            .id(guardianElement.getAttributeValue("id"))
+            .first(guardianElement.getAttributeValue("first"))
+            .last(guardianElement.getAttributeValue("last"))
             .address(Address.builder()
-                .streetAddress(parent.getChildText("address"))
-                .city(parent.getChildText("city"))
-                .state(parent.getChildText("state"))
-                .zipcode(Zipcode.of(parent.getChildText("zipcode")))
+                .streetAddress(guardianElement.getChild("address").getChildText("streetAddress"))
+                .city(guardianElement.getChild("address").getChildText("city"))
+                .state(guardianElement.getChild("address").getChildText("state"))
+                .zipcode(Zipcode.of(guardianElement.getChild("address").getChildText("zipcode")))
                 .create())
-            .emailAddress(parent.getChildText("emailaddress"))
-            .photo(pphoto)
-            .create();
-        List<Element> ph = parent.getChild("phonenumber").getChildren();
+            .emailAddress(guardianElement.getChildText("emailaddress"));
+        List<Element> ph = guardianElement.getChild("phonenumber").getChildren();
         for (Element phone : ph) {
-
-          guardian.phoneNumbers().add(
+          guardianBuilder.setPhoneNumber(
               PhoneNumber.of(PhoneNumber.Type.valueOf(phone.getName().toUpperCase()), phone.getText()));
         }
-        studentBuilder.guardian(guardian);
+        studentBuilder.guardian(guardianBuilder.create());
 
         List<Element> pu = student.getChild("authorizedpickup").getChildren();
         for (Element pickup : pu) {
-          Pickup p = Pickup.builder()
+          Pickup.Builder pub = Pickup.builder()
               .first(pickup.getChildText("first"))
               .last(pickup.getChildText("last"))
-              .relationship(pickup.getChildText("relationship"))
-              .photo(new Photo(Utilities.decodePhoto(pickup.getChild("photo").getChildText("image")),
-                  Utilities.decodePhoto(pickup.getChild("photo").getChildText("thumb"))))
-              .create();
-          studentBuilder.authPickup(p);
+              .relationship(pickup.getChildText("relationship"));
+
+          if (pickup.getChild("photo") != null) {
+            pub.photo(new Photo(Utilities.decodePhoto(pickup.getChild("photo").getChildText("image")),
+                Utilities.decodePhoto(pickup.getChild("photo").getChildText("thumb"))));
+          }
+          studentBuilder.authPickup(pub.create());
+        }
+
+        Element emerContactElement = student.getChild("emergencycontact");
+        EmergencyContact.Builder emContactBuilder = EmergencyContact.builder()
+            .id(UUID.fromString(emerContactElement.getAttributeValue("id")))
+            .firstName(emerContactElement.getAttributeValue("first"))
+            .lastName(emerContactElement.getAttributeValue("last"));
+
+        List<Element> emPhone = emerContactElement.getChild("phonenumber").getChildren();
+        for (Element phone : emPhone) {
+          emContactBuilder.addPhoneNumber(
+              PhoneNumber.of(PhoneNumber.Type.valueOf(phone.getName().toUpperCase()), phone.getText()));
         }
 
         // builder the student model

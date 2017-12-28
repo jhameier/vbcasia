@@ -40,7 +40,7 @@ public class TestStaff {
         .emergencyContact(EmergencyContact.builder()
             .firstName("Emergency")
             .lastName("Contact")
-            .phoneNumber(PhoneNumber.of(PhoneNumber.Type.CELL, "9182734650"))
+            .addPhoneNumber(PhoneNumber.of(PhoneNumber.Type.CELL, "9182734650"))
             .create())
         .photo(new Photo(image, thumbnail))
         .create();

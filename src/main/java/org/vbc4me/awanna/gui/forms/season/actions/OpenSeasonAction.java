@@ -6,6 +6,8 @@ import java.util.prefs.Preferences;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.vbc4me.awanna.facets.Season;
+import org.vbc4me.awanna.utility.readers.SeasonFileReader;
 
 /**
  * Used to create a new blank actions record.
@@ -38,8 +40,9 @@ public final class OpenSeasonAction extends AbstractAction {
       File file = new File(chooser.getSelectedFile().getAbsolutePath());
       chooser.setCurrentDirectory(file);
       preferences.put("DEFAULT_PATH", file.getAbsolutePath());
-      System.out.println("Need to read in a file here!");
-      //FIXME read in file and setup SeasonDisplayForm
+
+      Season season = SeasonFileReader.parse(file);
+      // FIXME Populate the gui
     }
 
   }

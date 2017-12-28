@@ -21,7 +21,7 @@ import org.vbc4me.awanna.facets.Student;
 
 public class SeasonFileReader {
 
-  public Season parse(File file) {
+  public static Season parse(File file) {
     Objects.requireNonNull(file);
 
     SAXBuilder saxBuilder = new SAXBuilder();

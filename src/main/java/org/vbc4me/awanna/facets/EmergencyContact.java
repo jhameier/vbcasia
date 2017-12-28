@@ -1,16 +1,20 @@
 package org.vbc4me.awanna.facets;
 
+import com.google.common.base.Preconditions;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 public class EmergencyContact extends Person {
 
-  private final PhoneNumber phoneNumber;
+  private final List<PhoneNumber> phoneNumbers;
 
   private EmergencyContact(Builder builder) {
     super(builder.id, builder.firstName, builder.lastName, builder.type, builder.photo);
-    this.phoneNumber = builder.phoneNumber;
+    this.phoneNumbers = builder.phoneNumbers;
   }
+
 
   public static Builder builder() {
     return new Builder();
@@ -19,8 +23,8 @@ public class EmergencyContact extends Person {
   /**
    * Return the {@link PhoneNumber} associated with this {@link EmergencyContact}.
    */
-  public PhoneNumber phoneNumber() {
-    return phoneNumber;
+  public List<PhoneNumber> phoneNumbers() {
+    return phoneNumbers;
   }
 
   public static class Builder {
@@ -29,7 +33,7 @@ public class EmergencyContact extends Person {
     private String firstName;
     private String lastName;
     private Type type;
-    private PhoneNumber phoneNumber;
+    private List<PhoneNumber> phoneNumbers =  new ArrayList<>();
     private Photo photo;
 
     public Builder id(UUID id) {
@@ -52,8 +56,8 @@ public class EmergencyContact extends Person {
       return this;
     }
 
-    public Builder phoneNumber(PhoneNumber phoneNumber) {
-      this.phoneNumber = phoneNumber;
+    public Builder addPhoneNumber(PhoneNumber phoneNumber) {
+      this.phoneNumbers.add(phoneNumber);
       return this;
     }
 
@@ -71,8 +75,9 @@ public class EmergencyContact extends Person {
       }
       Objects.requireNonNull(firstName);
       Objects.requireNonNull(lastName);
-      Objects.requireNonNull(phoneNumber);
+      Preconditions.checkArgument(!phoneNumbers.isEmpty(), "At least 1 phone number is required.");
       return new EmergencyContact(this);
     }
+
   }
 }
