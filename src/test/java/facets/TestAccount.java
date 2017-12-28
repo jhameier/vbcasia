@@ -1,9 +1,7 @@
 package facets;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import org.junit.Assert;
@@ -75,14 +73,24 @@ public class TestAccount {
 		account.adjustBalance(Money.of(USD, 5.00));
 		Assert.assertEquals(Money.of(USD, 5.00), account.balance());
 		
-		Activity activity1 = 
-										Activity.builder().name("Debit").cost(1.51).date(LocalDate.now()).time(LocalTime.now()).create();
+		Activity activity1 = Activity.builder()
+        .name("Debit")
+        .description("A debit transaction")
+        .cost(1.51)
+        .date(LocalDate.of(2017, 12, 2))
+        .time(LocalTime.of(12, 0))
+        .create();
 		Transaction debit_transaction = new Transaction(Transaction.TYPE.DEBIT, activity1);
 		account.insertTransaction(debit_transaction);
 		Assert.assertEquals(Money.of(USD, 3.49), account.balance());
 				
-		Activity activity2 = 
-										 Activity.builder().name("Credit").cost(1.25).date(LocalDate.now()).time(LocalTime.now()).create();
+		Activity activity2 = Activity.builder()
+        .name("Credit")
+        .description("A credit transaction")
+        .cost(1.25)
+        .date(LocalDate.of(2017, 11, 3))
+        .time(LocalTime.of(13, 51))
+        .create();
 		Transaction credit_transaction = new Transaction(Transaction.TYPE.CREDIT, activity2);
 		account.insertTransaction(credit_transaction);
 		Assert.assertEquals(Money.of(USD, 4.74), account.balance());
