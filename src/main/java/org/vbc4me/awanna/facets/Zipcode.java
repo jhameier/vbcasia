@@ -44,8 +44,15 @@ public class Zipcode {
    * NullPointerException}.
    */
   public Zipcode(String primary, String extended) {
-    verifyPrimary(Objects.requireNonNull(primary));
-    verifyPrimary(Objects.requireNonNull(extended));
+    if (!verifyPrimary(Objects.requireNonNull(primary))) {
+      throw new IllegalArgumentException("Primary does not conform to a standard 5 digit postal code: " + primary);
+    }
+
+    if (!verifyExtended(Objects.requireNonNull(extended))) {
+      throw new IllegalArgumentException("The extended postal code does not conform to the standard 4 digit extended"
+          + "postal code format: " + extended);
+    }
+
     this.primary = primary;
     this.extended = extended;
   }

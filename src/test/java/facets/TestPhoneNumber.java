@@ -1,14 +1,13 @@
 package facets;
 
-import org.junit.Test;
-import org.vbc4me.awanna.facets.PhoneNumber;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.Test;
+import org.vbc4me.awanna.facets.PhoneNumber;
 
 /**
  * Test class for {@link PhoneNumber}.
@@ -22,10 +21,10 @@ public class TestPhoneNumber {
 	@Test
 	public void TestPhoneNumberCreation() {
 		PhoneNumber phoneNumber = PhoneNumber.of(PhoneNumber.Type.HOME, "1234567890");
-		assertEquals("Home", phoneNumber.type());
+		assertEquals(phoneNumber.type(), "HOME");
 		assertEquals("1234567890", phoneNumber.number(false));
 		assertEquals("(123) 456-7890", phoneNumber.number(true));
-		assertEquals("Home: (123) 456-7890", phoneNumber.toString());
+		assertEquals(phoneNumber.toString(), "HOME: (123) 456-7890");
 	}
 	
 	/**

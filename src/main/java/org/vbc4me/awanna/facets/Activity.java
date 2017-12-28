@@ -48,15 +48,14 @@ public class Activity {
   public static SortedMap<LocalDate, Activity> createActivities(LocalDate date, double numberOfWeeks,
       LocalTime time, double cost) {
     Objects.requireNonNull(date);
-    Objects.requireNonNull(numberOfWeeks);
     Objects.requireNonNull(time);
-    Objects.requireNonNull(cost);
     SortedMap<LocalDate, Activity> activities = new TreeMap<>();
     for (int week = 0; week < numberOfWeeks; week++) {
       Activity activity = Activity.builder()
           .date(date.plusWeeks(week))
           .time(time)
           .name("Activity " + week)
+          .description("description " + week)
           .cost(cost)
           .create();
       activities.put(activity.date(), activity);
@@ -148,7 +147,7 @@ public class Activity {
    */
   @Override
   public Activity clone() throws CloneNotSupportedException {
-    return Activity.builder().name(name).cost(cost).date(date).time(time).create();
+    return Activity.builder().name(name).description(description).cost(cost).date(date).time(time).create();
   }
 
   @Override
@@ -164,6 +163,17 @@ public class Activity {
 
     return id.equals(activity.id)
         && date.equals(activity.date)
+        && time.equals(activity.time)
+        && name.equals(activity.name)
+        && description.equals(activity.description)
+        && cost.equals(activity.cost);
+  }
+
+  /**
+   * Returns true if the contents (other than {@link UUID}) are the same, false otherwise.
+   */
+  public boolean isEqualTo(Activity activity) {
+    return date.equals(activity.date)
         && time.equals(activity.time)
         && name.equals(activity.name)
         && description.equals(activity.description)

@@ -33,7 +33,7 @@ public class Staff extends Person {
     this.specialNeeds.addAll(builder.specialNeeds);
     this.email = builder.email;
     this.emergencyContact = builder.emergencyContact;
-
+    this.photo = builder.photo;
   }
 
   /**
@@ -109,7 +109,12 @@ public class Staff extends Person {
    * Returns the staff members special needs
    */
   public String specialNeeds() {
-    return specialNeeds.toString();
+    StringBuilder sb = new StringBuilder();
+    for (String str : specialNeeds) {
+      sb.append(str).append(" : ");
+    }
+    sb.reverse().replace(0, 3, "").reverse();
+    return sb.toString();
   }
 
   /**
@@ -237,8 +242,6 @@ public class Staff extends Person {
       }
       Objects.requireNonNull(firstName);
       Objects.requireNonNull(lastName);
-      Objects.requireNonNull(title);
-      Objects.requireNonNull(club);
 
       return new Staff(this);
     }

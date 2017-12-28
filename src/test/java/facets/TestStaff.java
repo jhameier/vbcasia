@@ -1,5 +1,9 @@
 package facets;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.awt.image.BufferedImage;
 import org.junit.Test;
 import org.vbc4me.awanna.facets.Address;
 import org.vbc4me.awanna.facets.Club;
@@ -10,41 +14,36 @@ import org.vbc4me.awanna.facets.Photo;
 import org.vbc4me.awanna.facets.Staff;
 import org.vbc4me.awanna.facets.Zipcode;
 
-import java.awt.image.BufferedImage;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 public class TestStaff {
 	
 	@Test
 	public void TestStaffCreation() {
-		BufferedImage photo = new BufferedImage(480, 640, BufferedImage.TYPE_INT_RGB);
+		BufferedImage image = new BufferedImage(480, 640, BufferedImage.TYPE_INT_RGB);
 		BufferedImage thumbnail = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
 		
 		Staff member = Staff.builder()
 				.title("Title")
-                .club(Club.CUBBIES)
-                .firstName("First")
-                .lastName("Last")
-                .address(Address.builder()
-                        .streetAddress("1234 Main Street")
-                        .city("Some City")
-                        .state("NJ")
-                        .zipcode(Zipcode.of("12345-6789"))
-                        .create())
-                .phoneNumber(PhoneNumber.of(PhoneNumber.Type.HOME, "1234567890"))
-                .phoneNumber(PhoneNumber.of(PhoneNumber.Type.CELL, "0987654321"))
-                .phoneNumber(PhoneNumber.of(PhoneNumber.Type.OTHER, "5467382910"))
-                .specialNeeds("NA")
-                .email("firstLast@email.com")
-                .emergencyContact(EmergencyContact.builder()
-                        .firstName("Emergency")
-                        .lastName("Contact")
-                        .phoneNumber(PhoneNumber.of(PhoneNumber.Type.CELL, "9182734650"))
-                        .create())
-                .photo(new Photo(photo, thumbnail))
-                .create();
+        .club(Club.CUBBIES)
+        .firstName("First")
+        .lastName("Last")
+        .address(Address.builder()
+            .streetAddress("1234 Main Street")
+            .city("Some City")
+            .state("NJ")
+            .zipcode(Zipcode.of("12345-6789"))
+            .create())
+        .phoneNumber(PhoneNumber.of(PhoneNumber.Type.HOME, "1234567890"))
+        .phoneNumber(PhoneNumber.of(PhoneNumber.Type.CELL, "0987654321"))
+        .phoneNumber(PhoneNumber.of(PhoneNumber.Type.OTHER, "5467382910"))
+        .specialNeeds("NA")
+        .email("firstLast@email.com")
+        .emergencyContact(EmergencyContact.builder()
+            .firstName("Emergency")
+            .lastName("Contact")
+            .phoneNumber(PhoneNumber.of(PhoneNumber.Type.CELL, "9182734650"))
+            .create())
+        .photo(new Photo(image, thumbnail))
+        .create();
 		
 		assertEquals(member.recordType(), Person.Type.STAFF.name());
 		assertEquals("Title", member.title());
@@ -63,8 +62,8 @@ public class TestStaff {
 		assertTrue(PhoneNumber.contains(member.phoneNumbers(), three));
 		assertEquals("NA", member.specialNeeds());
 		assertEquals("firstLast@email.com", member.email());
-		assertEquals(photo, member.photo().image());
-		assertEquals(thumbnail, member.photo().thumbnail());
+		assertEquals(member.photo().image(), image);
+		assertEquals(member.photo().thumbnail(), thumbnail);
 	}
 	
 	/**

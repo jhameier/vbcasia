@@ -1,5 +1,9 @@
 package facets;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -7,8 +11,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import org.junit.Assert;
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
 import org.junit.Test;
 import org.vbc4me.awanna.facets.Activity;
 
@@ -20,11 +24,11 @@ public class TestActivity {
 	 */
 	@Test
 	public void TestActivityBuild() {
-		Activity activity = Activity.builder().name("Test1").cost(1.23).date(date).time(time).create();
-		Assert.assertEquals("Test1", activity.name());
-		Assert.assertEquals(new BigDecimal(1.23).setScale(2, BigDecimal.ROUND_HALF_UP), activity.cost());
-		Assert.assertEquals(date, activity.date());
-		Assert.assertEquals(time, activity.time());
+		Activity activity = Activity.builder().name("Test1").description("test1").cost(1.23).date(date).time(time).create();
+		assertEquals("Test1", activity.name());
+		assertEquals(activity.cost(), Money.of(CurrencyUnit.USD, 1.23));
+		assertEquals(date, activity.date());
+		assertEquals(time, activity.time());
 	}
 	
 	/**
@@ -64,48 +68,19 @@ public class TestActivity {
 	}
 	
 	/**
-	 * Test {@link Activity #clone()}.
-	 */
-	@Test
-	public void TestClone() {
-		Activity expected = Activity.builder().name("Test1").cost(1.23).date(date).time(time).create();
-		Activity actual = null;		
-		try {
-			actual = expected.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		Assert.assertEquals(expected, actual);
-	}
-	
-	/**
-	 * Test {@link Activity #hashCode()}.
-	 */
-	@Test
-	public void TestHashCode() {
-		Activity expected = Activity.builder().name("Test1").cost(1.23).date(date).time(time).create();
-		Activity actual = null;		
-		try {
-			actual = expected.clone();
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-		Assert.assertEquals(expected.hashCode(), actual.hashCode());
-	}
-	
-	/**
 	 * Test {@link 	Activity #equals(Object)}.
 	 */
 	@Test
-	public void TestEquals() {
-		Activity expected = Activity.builder().name("Test1").cost(1.23).date(date).time(time).create();
+	public void TestIsEqualTo() {
+		Activity expected = Activity.builder().name("Test1").description("test1").cost(1.23).date(date).time(time).create();
 		Activity actual = null;		
 		try {
 			actual = expected.clone();
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
-		Assert.assertTrue(expected.equals(actual));
+		assertFalse(expected.equals(actual));
+		assertTrue(expected.isEqualTo(actual));
 	}
 	
 	/**
@@ -146,17 +121,17 @@ public class TestActivity {
 	@Test
 	public void TestCreateActivities() {
 		Map<LocalDate, Activity> activities = Activity.createActivities(date, 20, time, 1.59);
-		Assert.assertEquals(20, activities.size());
+		assertEquals(20, activities.size());
 		SortedSet<LocalDate> keys = new TreeSet<>(activities.keySet());
 		Iterator<LocalDate> key = keys.iterator();
 		int week = -1;
 		while(key.hasNext()) {
 			week++;
 			Activity activity = activities.get(key.next());
-			Assert.assertEquals(date.plusWeeks(week), activity.date());
-			Assert.assertEquals(time, activity.time());
-			Assert.assertEquals(new BigDecimal(1.59).setScale(2, BigDecimal.ROUND_HALF_UP), activity.cost().getAmount());
-			Assert.assertEquals("Activity " + week, activity.name());
+			assertEquals(date.plusWeeks(week), activity.date());
+			assertEquals(time, activity.time());
+			assertEquals(new BigDecimal(1.59).setScale(2, BigDecimal.ROUND_HALF_UP), activity.cost().getAmount());
+			assertEquals("Activity " + week, activity.name());
 		}
 	}
 }
