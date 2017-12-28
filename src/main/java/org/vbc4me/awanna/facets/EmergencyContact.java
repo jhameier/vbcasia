@@ -5,73 +5,74 @@ import java.util.UUID;
 
 public class EmergencyContact extends Person {
 
-    private final PhoneNumber phoneNumber;
+  private final PhoneNumber phoneNumber;
 
-    private EmergencyContact(Builder builder) {
-        super(builder.id, builder.firstName, builder.lastName, builder.type, builder.photo);
-        this.phoneNumber = builder.phoneNumber;
+  private EmergencyContact(Builder builder) {
+    super(builder.id, builder.firstName, builder.lastName, builder.type, builder.photo);
+    this.phoneNumber = builder.phoneNumber;
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  /**
+   * Return the {@link PhoneNumber} associated with this {@link EmergencyContact}.
+   */
+  public PhoneNumber phoneNumber() {
+    return phoneNumber;
+  }
+
+  public static class Builder {
+
+    private UUID id;
+    private String firstName;
+    private String lastName;
+    private Type type;
+    private PhoneNumber phoneNumber;
+    private Photo photo;
+
+    public Builder id(UUID id) {
+      this.id = id;
+      return this;
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public Builder firstName(String firstName) {
+      this.firstName = firstName;
+      return this;
     }
 
-    /**
-     * Return the {@link PhoneNumber} associated with this {@link EmergencyContact}.
-     */
-    public PhoneNumber phoneNumber() {
-        return phoneNumber;
+    public Builder lastName(String lastName) {
+      this.lastName = lastName;
+      return this;
     }
 
-    public static class Builder {
-        private UUID id;
-        private String firstName;
-        private String lastName;
-        private Type type;
-        private PhoneNumber phoneNumber;
-        private Photo photo;
-
-        public Builder id(UUID id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder firstName(String firstName) {
-            this.firstName = firstName;
-            return this;
-        }
-
-        public Builder lastName(String lastName) {
-            this.lastName = lastName;
-            return this;
-        }
-
-        public Builder type(Type type) {
-            this.type = type;
-            return this;
-        }
-
-        public Builder phoneNumber(PhoneNumber phoneNumber) {
-            this.phoneNumber = phoneNumber;
-            return this;
-        }
-
-        public Builder photo(Photo photo) {
-            this.photo = photo;
-            return this;
-        }
-
-        public EmergencyContact create() {
-            if (id == null) {
-                id = UUID.randomUUID();
-            }
-            if (type == null) {
-                type = Type.CONTACT;
-            }
-            Objects.requireNonNull(firstName);
-            Objects.requireNonNull(lastName);
-            Objects.requireNonNull(phoneNumber);
-            return new EmergencyContact(this);
-        }
+    public Builder type(Type type) {
+      this.type = type;
+      return this;
     }
+
+    public Builder phoneNumber(PhoneNumber phoneNumber) {
+      this.phoneNumber = phoneNumber;
+      return this;
+    }
+
+    public Builder photo(Photo photo) {
+      this.photo = photo;
+      return this;
+    }
+
+    public EmergencyContact create() {
+      if (id == null) {
+        id = UUID.randomUUID();
+      }
+      if (type == null) {
+        type = Type.CONTACT;
+      }
+      Objects.requireNonNull(firstName);
+      Objects.requireNonNull(lastName);
+      Objects.requireNonNull(phoneNumber);
+      return new EmergencyContact(this);
+    }
+  }
 }
