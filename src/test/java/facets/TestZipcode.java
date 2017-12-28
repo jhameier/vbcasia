@@ -9,60 +9,46 @@ public class TestZipcode {
 	
 	@Test (expected = IllegalArgumentException.class)
 	public void tooFewPrimaryThrows() {
-		new Zipcode("1234");
+		Zipcode.of("1234");
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
 	public void tooManyPrimaryThrows() {
-		new Zipcode("123456");
+		Zipcode.of("123456");
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
 	public void nonNumericPrimayThrows() {
-		new Zipcode("12A45");
+		Zipcode.of("12A45");
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
 	public void tooFewExtendedThrows() {
-		new Zipcode("12345", "123");
+		Zipcode.of("12345-123");
 	}
 	
 	@Test  (expected = IllegalArgumentException.class)
 	public void tooManyExtendedThrows() {
-		new Zipcode("12345", "12345");
+		Zipcode.of("12345-12345");
 	}
 	
 	@Test (expected = IllegalArgumentException.class)
 	public void nonNumericExtendedThrows() {
-		new Zipcode("12345", "12B4");
+		Zipcode.of("12345-12B4");
 	}
 	
 	@Test
 	public void primaryBuildsAndReturnsCorrectly() {
-		Zipcode zip = new Zipcode("12345");
+		Zipcode zip = Zipcode.of("12345");
 		assertEquals("12345", zip.primary());
 		assertEquals("12345", zip.toString());
 	}
 	
 	@Test
 	public void extendedBuildsAndReturnsCorrectly() {
-		Zipcode zipcode = new Zipcode("12345", "6789");
-		assertEquals("12345", zipcode.primary());
-		assertEquals("6789", zipcode.extended());
-		assertEquals("12345-6789", zipcode.toString());
+		Zipcode zipcode = Zipcode.of("12345-6789");
+		assertEquals(zipcode.primary(), "12345");
+		assertEquals(zipcode.extended(), "6789");
+		assertEquals(zipcode.toString(), "12345-6789");
 	}
-	
-	@Test
-	public void extendedEmpty() {
-		Zipcode zipcode = new Zipcode("98765", "");
-		assertEquals(zipcode.primary(), "98765");
-		assertEquals(zipcode.extended(), "");
-		assertEquals(zipcode.toString(), "98765");
-	}
-	
-	@Test (expected=NullPointerException.class)
-	public void extendThrows() {
-		new Zipcode("98765", null);
-	}
-	
 }

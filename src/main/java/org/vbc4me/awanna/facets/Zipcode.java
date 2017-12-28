@@ -1,6 +1,5 @@
 package org.vbc4me.awanna.facets;
 
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,46 +12,30 @@ public class Zipcode {
   private static String extended;
 
   public static Zipcode of(String zipcode) {
+
+    String first;
+    String last;
     if (zipcode.length() == 10 && zipcode.contains("-")) {
       String[] zip = zipcode.split("-");
-      primary = zip[0];
-      extended = zip[1];
+      first = zip[0];
+      last = zip[1];
     } else if (zipcode.length() == 5) {
-      primary = zipcode;
+      first = zipcode;
+      last = "";
     } else {
       throw new IllegalArgumentException("Zip code must contain either 5 numeric characters in the form of xxxxx"
           + " or contain exactly 10 numeric characters in the form of xxxxx-xxxx  with a hyphen after the " +
           "5th character.");
     }
 
-    if (!verifyPrimary(primary) || (!verifyExtended(extended))) {
+    if (!verifyPrimary(first) || !verifyExtended(last)) {
       throw new IllegalArgumentException("The primary and exended zipcode \""
-          + primary + "-" + extended + "\" is not a valid zipcode");
+          + first + "-" + last + "\" is not a valid zipcode");
     }
-    if (extended.isEmpty()) {
-      return new Zipcode(primary);
-    }
-    return new Zipcode(primary, extended);
+    return new Zipcode(first, last);
   }
 
-  public Zipcode(String primary) {
-    this(primary, "");
-  }
-
-  /**
-   * A postal designation for an address.  The extended code can be an empty string. A null string will throw a {@link
-   * NullPointerException}.
-   */
-  public Zipcode(String primary, String extended) {
-    if (!verifyPrimary(Objects.requireNonNull(primary))) {
-      throw new IllegalArgumentException("Primary does not conform to a standard 5 digit postal code: " + primary);
-    }
-
-    if (!verifyExtended(Objects.requireNonNull(extended))) {
-      throw new IllegalArgumentException("The extended postal code does not conform to the standard 4 digit extended"
-          + "postal code format: " + extended);
-    }
-
+  private Zipcode(String primary, String extended) {
     this.primary = primary;
     this.extended = extended;
   }
@@ -73,6 +56,7 @@ public class Zipcode {
     return primary + "-" + extended;
   }
 
+
   private static boolean verifyPrimary(String primary) {
     if (primary.length() != 5) {
       throw new IllegalArgumentException("The zip code must be 5 characters in length; found "
@@ -84,11 +68,11 @@ public class Zipcode {
   }
 
   private static boolean verifyExtended(String extended) {
-    if (extended.length() > 0 && extended.length() < 4) {
-      throw new IllegalArgumentException("The extended code must be 4 characters in length; found "
-          + extended.length() + " characters.");
-    } else if (extended.isEmpty()) {
+    if (extended == null || extended.isEmpty()) {
       return true;
+    } else if (extended.length() != 4) {
+      throw new IllegalArgumentException("The extended code must be 4 characters in length; found "
+          + extended.length() + " characters : " + extended);
     }
     Pattern p = Pattern.compile("^[0-9]{4}");
     Matcher m = p.matcher(extended);
