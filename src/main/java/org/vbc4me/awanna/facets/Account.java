@@ -7,17 +7,24 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Holds information about a students financial info such as transactions and balanced owed.
  */
 public class Account {
-
+  private final UUID id;
   private final CurrencyUnit USD = CurrencyUnit.of("USD");
   private final Map<LocalDate, Transaction> transactions = new HashMap<>();
   private Money balance;
 
   public Account() {
+    this(UUID.randomUUID());
+  }
+
+  public Account(UUID id) {
+    this.id = Objects.requireNonNull(id);
     this.balance = Money.zero(USD);
   }
 
@@ -76,4 +83,10 @@ public class Account {
     return balance;
   }
 
+  /**
+   * Return the {@link UUID id} for this {@link Account}.
+   */
+  public UUID id() {
+    return id;
+  }
 }

@@ -11,6 +11,9 @@ import org.vbc4me.awanna.facets.Transaction;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.UUID;
+
+import static junit.framework.TestCase.assertEquals;
 
 /**
  * Test class for {@link Account}.
@@ -23,8 +26,10 @@ public class TestAccount {
 	 */
 	@Test
 	public void initialBalance() {
-		Account account = new Account();
-		Assert.assertEquals(Money.zero(USD), account.balance());
+	  UUID uuid = UUID.fromString("c5ece936-2018-44dd-8000-e3ecb29efaf2");
+		Account account = new Account(uuid);
+		assertEquals(Money.zero(USD), account.balance());
+		assertEquals(account.id(), uuid);
 	}
 	
 	/**
@@ -100,4 +105,21 @@ public class TestAccount {
 		account.insertTransaction(credit_transaction);
 		Assert.assertEquals(Money.of(USD, 4.74), account.balance());
 	}
+
+	@Test
+  public void test() {
+	  Money money = Money.zero(USD);
+    System.out.println(money.toString());
+    money = money.plus(Money.of(USD, .5));
+    System.out.println(money.toString());
+    money = money.plus(Money.of(USD, 6.21));
+    System.out.println(money.toString());
+    String m = money.toString();
+    money = Money.parse(m).plus(Money.of(USD, .1));
+    System.out.println(money.toString());
+
+    for (int i = 0; i < 10; i++) {
+      System.out.println(UUID.randomUUID());
+    }
+  }
 }
