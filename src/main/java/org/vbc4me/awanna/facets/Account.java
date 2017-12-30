@@ -28,10 +28,10 @@ public class Account {
   public void insertTransaction(Transaction transaction) {
     this.transactions.put(transaction.date(), transaction);
     switch (transaction.type()) {
-      case "CREDIT":
+      case CREDIT:
         add(transaction.amount());
         break;
-      case "DEBIT":
+      case DEBIT:
         subtract(transaction.amount());
         break;
       default:
