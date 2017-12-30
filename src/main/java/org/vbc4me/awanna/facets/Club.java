@@ -24,7 +24,7 @@ public enum Club {
   static {
     Map<String, Club> map = new ConcurrentHashMap<>();
     for (Club club : Club.values()) {
-      map.put(club.getName().toLowerCase(), club);
+      map.put(club.getName(), club);
     }
     CLUB_MAP = Collections.unmodifiableMap(map);
   }

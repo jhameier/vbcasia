@@ -1,8 +1,5 @@
 package org.vbc4me.awanna.utility.writers;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.nio.file.Path;
 import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -15,6 +12,10 @@ import org.vbc4me.awanna.facets.Season;
 import org.vbc4me.awanna.facets.Student;
 import org.vbc4me.awanna.facets.Transaction;
 import org.vbc4me.awanna.utility.Utilities;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
 
 public final class StudentFileWriter {
 
@@ -200,20 +201,20 @@ public final class StudentFileWriter {
     element.addContent(pickup);
 
     Account account = student.account();
-    Element acct = new Element("account");
-    acct.setAttribute(new Attribute("balance", String.valueOf(account.balance())));
+    Element acct = new Element("account")
+        .setAttribute(new Attribute("id", account.id().toString()))
+        .setAttribute(new Attribute("balance", String.valueOf(account.balance())));
     Element trans = new Element("transactions");
     acct.addContent(trans);
     for (Transaction t : account.transactions().values()) {
-      Element tr = new Element("transaction");
-      tr.setAttribute("type", t.type());
-      tr.setAttribute("amount", String.valueOf(t.amount()));
-
-      Element activity = new Element("actions");
-      activity.setAttribute("date", t.activity().date().toString());
-      activity.setAttribute("time", t.activity().time().toString());
-      activity.addContent(t.activity().name());
-      tr.addContent(activity);
+      Element tr = new Element("transaction")
+          .setAttribute(new Attribute("datetime", t.dateTime().toString()))
+          .setAttribute(new Attribute("type", t.type().name().toLowerCase()))
+          .setAttribute(new Attribute("amount", String.valueOf(t.amount())))
+          .addContent(new Element("description", t.description()));
+      if (t.activityId() != null) {
+        tr.addContent(new Element("activityId", t.activityId().toString()));
+      }
       trans.addContent(tr);
     }
     return element;

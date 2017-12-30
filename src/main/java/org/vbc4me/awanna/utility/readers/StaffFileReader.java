@@ -1,10 +1,5 @@
 package org.vbc4me.awanna.utility.readers;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -17,6 +12,12 @@ import org.vbc4me.awanna.facets.Photo;
 import org.vbc4me.awanna.facets.Staff;
 import org.vbc4me.awanna.facets.Zipcode;
 import org.vbc4me.awanna.utility.Utilities;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class StaffFileReader {
 
@@ -42,15 +43,16 @@ public class StaffFileReader {
 
         Element address = staff.getChild("address");
         builder.address(Address.builder()
-            .streetAddress(address.getChildText("streetaddress"))
+            .streetAddress(address.getChildText("streetAddress"))
             .city(address.getChildText("city"))
             .state(address.getChildText("state"))
             .zipcode(Zipcode.of(address.getChildText("zipcode")))
             .create());
 
-        Element phoneNumbers = staff.getChild("phone-numbers");
+        Element phoneNumbers = staff.getChild("phonenumbers");
         for (Element number : phoneNumbers.getChildren()) {
-          builder.phoneNumber(PhoneNumber.of(PhoneNumber.Type.valueOf(number.getName()), number.getText()));
+          builder.phoneNumber(
+              PhoneNumber.of(PhoneNumber.Type.valueOf(number.getName().toUpperCase()), number.getText()));
         }
 
         builder.email(staff.getChildText("emailaddress"));
@@ -60,15 +62,19 @@ public class StaffFileReader {
             .firstName(contact.getAttributeValue("first"))
             .lastName(contact.getAttributeValue("last"))
             .addPhoneNumber(PhoneNumber.of(
-                PhoneNumber.Type.valueOf(contact.getChild("phone").getAttributeValue("type")),
+                PhoneNumber.Type.valueOf(contact.getChild("phone").getAttributeValue("type").toUpperCase()),
                 contact.getChildText("phone")))
             .create());
 
         builder.specialNeeds(staff.getChildText("specialneeds"));
-        builder.club(Club.valueOf(staff.getChildText("club")));
+        builder.club(Club.get(staff.getChildText("club")));
         builder.title(staff.getChildText("title"));
-        builder.photo(new Photo(Utilities.decodePhoto(staff.getChildText("image")),
-            Utilities.decodePhoto(staff.getChildText("thumbnail"))));
+
+        if (staff.getChild("image") != null) {
+          builder.photo(new Photo(Utilities.decodePhoto(staff.getChildText("image")),
+              Utilities.decodePhoto(staff.getChildText("thumbnail"))));
+        }
+
         personnel.add(builder.create());
       }
 

@@ -1,5 +1,16 @@
 package org.vbc4me.awanna.utility.readers;
 
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
+import org.joda.money.Money;
+import org.vbc4me.awanna.facets.Activity;
+import org.vbc4me.awanna.facets.Season;
+import org.vbc4me.awanna.facets.Session;
+import org.vbc4me.awanna.facets.Staff;
+import org.vbc4me.awanna.facets.Student;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -7,17 +18,6 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.joda.money.CurrencyUnit;
-import org.joda.money.Money;
-import org.vbc4me.awanna.facets.Activity;
-import org.vbc4me.awanna.facets.Season;
-import org.vbc4me.awanna.facets.Session;
-import org.vbc4me.awanna.facets.Staff;
-import org.vbc4me.awanna.facets.Student;
 
 public class SeasonFileReader {
 
@@ -45,20 +45,13 @@ public class SeasonFileReader {
 
       // Add the activities to the Session
       for (Element element : sessionElement.getChild("activities").getChildren()) {
-        UUID activityId = UUID.fromString(element.getAttributeValue("id"));
-        String event = element.getChildText("event");
-        String description = element.getChildText("description");
-        LocalDate date = LocalDate.parse(element.getChildText("date"));
-        LocalTime time = LocalTime.parse(element.getChildText("time"));
-        double cost = Double.parseDouble(element.getChildText("cost"));
-
         Activity activity = Activity.builder()
-            .id(activityId)
-            .date(date)
-            .time(time)
-            .name(event)
-            .description(description)
-            .cost(Money.of(CurrencyUnit.USD, cost))
+            .id(UUID.fromString(element.getAttributeValue("id")))
+            .date(LocalDate.parse(element.getChildText("date")))
+            .time(LocalTime.parse(element.getChildText("time")))
+            .name(element.getChildText("event"))
+            .description(element.getChildText("description"))
+            .cost(Money.parse(element.getChildText("cost")))
             .create();
         sessionBuilder.activity(activity);
       }

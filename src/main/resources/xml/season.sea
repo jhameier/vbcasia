@@ -6,29 +6,36 @@
         <enddate>2016-12-31</enddate>
         <activities>
             <activity id="3521fc63-3dac-2637-38d3-d1db43687465">
-                <event>name 1</event>
+                <event>Activity 1</event>
                 <description>some activity info</description>
                 <date>2016-01-07</date>
                 <time>18:30:00</time>
-                <cost>0.50</cost>
+                <cost>USD 0.50</cost>
             </activity>
-            <activity id="5432cf67-3dac-2637-38d3-d1db43687465">
-                <event>name 2</event>
+            <activity id="5432cf67-3dac-2637-38d3-d1db43687466">
+                <event>Activity 2</event>
                 <description>some activity info</description>
                 <date>2016-01-14</date>
                 <time>07:30:00</time>
-                <cost>0.50</cost>
+                <cost>USD 0.50</cost>
+            </activity>
+            <activity id="5432cf67-3dac-2637-38d3-d1db43687467">
+                <event>Activity 3</event>
+                <description>some activity info</description>
+                <date>2016-01-14</date>
+                <time>07:30:00</time>
+                <cost>USD 0.50</cost>
             </activity>
         </activities>
     </session>
     <students>
         <student id="541142cd-4a59-4f0f-92f1-2ef66c215b3c" first="Mary" last="Matlin">
-          <age>8</age>
-          <grade>3</grade>
-          <dob>2007-07-21</dob>
-          <specialneeds>asthma symptoms</specialneeds>
-          <club>puggles</club>
-          <guardian id="541142cd-4a59-4f0f-92f1-2ef66c2161bc" first="Bart" last="Hamstein">
+            <age>8</age>
+            <grade>3</grade>
+            <dob>2007-07-21</dob>
+            <specialneeds>asthma symptoms</specialneeds>
+            <club>puggles</club>
+            <guardian id="541142cd-4a59-4f0f-92f1-2ef66c2161bc" first="Bart" last="Hamstein">
             <address>
               <streetAddress>9587 3rd Street</streetAddress>
               <city>Hammonton</city>
@@ -41,7 +48,7 @@
               </phonenumber>
               <emailaddress>bhamstein1@email.com</emailaddress>
           </guardian>
-          <authorizedpickup>
+            <authorizedpickup>
               <one>
                   <first>Sarah</first>
                   <last>Miller</last>
@@ -53,19 +60,38 @@
                   <relationship>Uncle</relationship>
               </two>
           </authorizedpickup>
-          <emergencycontact id="541142cd-4a59-4f0f-92f1-2ef66c215555" first="Bill" last="Hamstein">
-            <phonenumber>
-              <cell>6092379515</cell>
-            </phonenumber>
-          </emergencycontact>
+            <emergencycontact id="541142cd-4a59-4f0f-92f1-2ef66c215555" first="Bill" last="Hamstein">
+                <phonenumber>
+                    <cell>6092379515</cell>
+                </phonenumber>
+            </emergencycontact>
+            <account id="dd63d705-b229-4c7c-9618-77ab9d2a3780" balance="USD 2.00">
+                <transactions>
+                    <transaction id="3521fc63-3dac-2637-38d3-d1db43687475"
+                                 datetime="2017-07-15T18:15:00" type="debit" amount="USD 0.50">
+                        <description>Activity 1</description>
+                        <activityId>3521fc63-3dac-2637-38d3-d1db43687465</activityId>
+                    </transaction>
+                    <transaction id="3521fc63-3dac-2637-38d3-d1db43687476"
+                                 datetime="2017-07-22T18:22:00" type="debit" amount="USD 0.50">
+                        <description>Activity 2</description>
+                        <activityId>3521fc63-3dac-2637-38d3-d1db43687465</activityId>
+                    </transaction>
+                    <transaction id="3521fc63-3dac-2637-38d3-d1db43687477"
+                                 datetime="2017-07-29T18:29:00" type="debit" amount="USD 0.50">
+                        <description>Activity 3</description>
+                        <activityId>3521fc63-3dac-2637-38d3-d1db43687465</activityId>
+                    </transaction>
+                </transactions>
+            </account>
         </student>
         <student id="47ceea35-7eef-4539-87f4-c2bb09282685" first="John" last="Doe">
-          <age>10</age>
-          <grade>5</grade>
-          <dob>2005-12-14</dob>
-          <specialneeds>none</specialneeds>
-          <club />
-          <guardian id="47ceea35-7eef-4539-87f4-c2bb09285555" first="Susan" last="Doe">
+            <age>10</age>
+            <grade>5</grade>
+            <dob>2005-12-14</dob>
+            <specialneeds>none</specialneeds>
+            <club>sparks</club>
+            <guardian id="47ceea35-7eef-4539-87f4-c2bb09285555" first="Susan" last="Doe">
               <address>
                 <streetAddress>1234 Main Street</streetAddress>
                 <city>Hammonton</city>
@@ -78,7 +104,7 @@
               </phonenumber>
               <emailaddress>jdoe@email.com</emailaddress>
           </guardian>
-          <authorizedpickup>
+            <authorizedpickup>
               <one>
                   <first>Bill</first>
                   <last>Doe</last>
@@ -90,11 +116,29 @@
                   <relationship>Brother</relationship>
               </two>
           </authorizedpickup>
-          <emergencycontact id="541142cd-4a59-4f0f-92f1-2ef66c217777" first="Paul" last="Doe">
+            <emergencycontact id="541142cd-4a59-4f0f-92f1-2ef66c217777" first="Paul" last="Doe">
             <phonenumber>
               <cell>6092379517</cell>
             </phonenumber>
           </emergencycontact>
+            <account id="43aa96df-10ab-4d20-9199-a10cefbd251d" balance="USD 4.00">
+                <transactions>
+                    <transaction id="3521fc63-3dac-2637-38d3-d1db43687485"
+                                 datetime="2017-08-12T18:12:00" type="debit" amount="USD 0.50">
+                        <description>Activity 1</description>
+                        <activityId>3521fc63-3dac-2637-38d3-d1db43687465</activityId>
+                    </transaction>
+                    <transaction id="3521fc63-3dac-2637-38d3-d1db43687486"
+                                 datetime="2017-08-19T18:19:00" type="debit" amount="USD 0.50">
+                        <description>Activity 2</description>
+                        <activityId>3521fc63-3dac-2637-38d3-d1db43687466</activityId>
+                    </transaction>
+                    <transaction id="3521fc63-3dac-2637-38d3-d1db43687490"
+                                 datetime="2017-08-26T18:26:00" type="credit" amount="USD 0.50">
+                        <description>Account credit</description>
+                    </transaction>
+                </transactions>
+            </account>
         </student>
     </students>
     <personnel>
@@ -126,10 +170,10 @@
                 <state>New Jersey</state>
                 <zipcode>08037</zipcode>
             </address>
-            <phonenumber>
+            <phonenumbers>
                 <Home>6095617592</Home>
                 <Cell>6092379514</Cell>
-            </phonenumber>
+            </phonenumbers>
             <emailaddress>bhamstein1@gmail.com</emailaddress>
             <emergencycontact first="Sara" last="Marlin">
                 <phone type="home">6095671258</phone>

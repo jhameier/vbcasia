@@ -1,19 +1,10 @@
 package org.vbc4me.awanna.utility.readers;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
-import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import org.vbc4me.awanna.facets.Account;
-import org.vbc4me.awanna.facets.Activity;
 import org.vbc4me.awanna.facets.Address;
 import org.vbc4me.awanna.facets.Club;
 import org.vbc4me.awanna.facets.EmergencyContact;
@@ -26,6 +17,14 @@ import org.vbc4me.awanna.facets.Transaction;
 import org.vbc4me.awanna.facets.Zipcode;
 import org.vbc4me.awanna.utility.Utilities;
 import org.xml.sax.helpers.DefaultHandler;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class StudentFileReader extends DefaultHandler {
 
@@ -107,31 +106,27 @@ public class StudentFileReader extends DefaultHandler {
           emContactBuilder.addPhoneNumber(
               PhoneNumber.of(PhoneNumber.Type.valueOf(phone.getName().toUpperCase()), phone.getText()));
         }
+        studentBuilder.emergencyContact(emContactBuilder.create());
 
-        // builder the student model
-        Student st = studentBuilder.create();
-        Account account = st.account();
+        Element accountElement = student.getChild("account");
+        Account account = new Account(UUID.fromString(accountElement.getAttributeValue("id")));
+        account.adjustBalance(Money.parse(accountElement.getAttributeValue("balance")));
 
-        Element acct = student.getChild("account");
-
-        account.adjustBalance(Money.of(CurrencyUnit.USD, Double.parseDouble(acct.getAttributeValue("balance"))));
-
-        List<Element> transactions = acct.getChildren();
+        List<Element> transactions = accountElement.getChild("transactions").getChildren();
         for (Element trans : transactions) {
-          Element act = trans.getChild("actions");
-
-          LocalDate date = LocalDate.parse(act.getAttributeValue("date"));
-          LocalTime time = LocalTime.parse(act.getAttributeValue("time"));
-          String actName = act.getText();
-          Activity activity = Activity.builder().date(date).time(time).name(actName).cost(0.50).create();
-
-          Transaction.TYPE type = Transaction.TYPE.valueOf(trans.getAttributeValue("type"));
-
-          Transaction transaction = new Transaction(type, activity);
-          st.account().insertTransaction(transaction);
+          Transaction.Builder transBuilder = Transaction.builder()
+              .trasactionId(UUID.fromString(trans.getAttributeValue("id")))
+              .datetime(LocalDateTime.parse(trans.getAttributeValue("datetime")))
+              .type(Transaction.Type.valueOf(trans.getAttributeValue("type").toUpperCase()))
+              .amount(Money.parse(trans.getAttributeValue("amount")))
+              .description(trans.getChildText("description"));
+          if (trans.getChild("activityId") != null) {
+            transBuilder.activityId(UUID.fromString(trans.getChildText("activityId")));
+          }
+          account.insertTransaction(transBuilder.create());
         }
 
-        students.add(st);
+        students.add(studentBuilder.create());
       }
 
     } catch (Exception ex) {
