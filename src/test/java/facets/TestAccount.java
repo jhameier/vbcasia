@@ -1,7 +1,5 @@
 package facets;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import org.joda.money.CurrencyUnit;
 import org.joda.money.Money;
 import org.junit.Assert;
@@ -9,6 +7,10 @@ import org.junit.Test;
 import org.vbc4me.awanna.facets.Account;
 import org.vbc4me.awanna.facets.Activity;
 import org.vbc4me.awanna.facets.Transaction;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  * Test class for {@link Account}.
@@ -68,7 +70,7 @@ public class TestAccount {
 	 * Test the {@link Account #insertTransaction(Transaction)} method.
 	 */
 	@Test
-	public void insertTransaction() {
+	public void transactionInsertAddsAndSubtractsFromAccount() {
 		Account account = new Account();
 		account.adjustBalance(Money.of(USD, 5.00));
 		Assert.assertEquals(Money.of(USD, 5.00), account.balance());
@@ -80,18 +82,21 @@ public class TestAccount {
         .date(LocalDate.of(2017, 12, 2))
         .time(LocalTime.of(12, 0))
         .create();
-		Transaction debit_transaction = new Transaction(Transaction.TYPE.DEBIT, activity1);
+		Transaction debit_transaction = Transaction.builder()
+        .activityId(activity1.id())
+        .datetime(LocalDateTime.of(activity1.date(), activity1.time()))
+        .amount(activity1.cost())
+        .description(activity1.description())
+				.create();
 		account.insertTransaction(debit_transaction);
 		Assert.assertEquals(Money.of(USD, 3.49), account.balance());
-				
-		Activity activity2 = Activity.builder()
-        .name("Credit")
+
+		Transaction credit_transaction = Transaction.builder()
+        .type(Transaction.Type.CREDIT)
         .description("A credit transaction")
-        .cost(1.25)
-        .date(LocalDate.of(2017, 11, 3))
-        .time(LocalTime.of(13, 51))
+        .amount(Money.of(USD,1.25))
+        .datetime(LocalDateTime.of(2017, 11, 3, 13, 51))
         .create();
-		Transaction credit_transaction = new Transaction(Transaction.TYPE.CREDIT, activity2);
 		account.insertTransaction(credit_transaction);
 		Assert.assertEquals(Money.of(USD, 4.74), account.balance());
 	}

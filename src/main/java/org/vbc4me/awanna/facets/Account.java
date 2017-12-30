@@ -1,11 +1,12 @@
 package org.vbc4me.awanna.facets;
 
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
+
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import org.joda.money.CurrencyUnit;
-import org.joda.money.Money;
 
 /**
  * Holds information about a students financial info such as transactions and balanced owed.
@@ -25,7 +26,7 @@ public class Account {
    * {@link Account accounts} balance depending on the type of {@code transaction} this is.
    */
   public void insertTransaction(Transaction transaction) {
-    this.transactions.put(transaction.activity().date(), transaction);
+    this.transactions.put(transaction.date(), transaction);
     switch (transaction.type()) {
       case "CREDIT":
         add(transaction.amount());
