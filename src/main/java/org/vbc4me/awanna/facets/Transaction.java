@@ -56,10 +56,10 @@ public class Transaction {
   }
 
   /**
-   * Return the {@link Type} of {@link Transaction} this is (CREDIT or DEBIT)
+   * Return the {@link Type} of this {@link Transaction} either {@link Type#CREDIT} or {@link Type#DEBIT}.
    */
-  public String type() {
-    return type.name();
+  public Type type() {
+    return type;
   }
 
   /**
@@ -96,10 +96,10 @@ public class Transaction {
    */
   public static class Builder {
     private UUID id;
-    private LocalDateTime datetime;
     private Type type;
-    private Money amount;
     private UUID activityId;
+    private LocalDateTime datetime;
+    private Money amount;
     private String description;
 
     /**
@@ -165,10 +165,20 @@ public class Transaction {
         type = Type.DEBIT;
       }
       Objects.requireNonNull(datetime);
-      Objects.requireNonNull(type);
       Objects.requireNonNull(amount);
       Objects.requireNonNull(description);
       return new Transaction(this);
+    }
+
+    /**
+     * Returns a fully qualified {@link Transaction} built from an {@link Activity}.
+     */
+    public Transaction from(Activity activity) {
+      activityId(activity.id());
+      datetime(LocalDateTime.of(activity.date(), activity.time()));
+      amount(activity.cost());
+      description(activity.description());
+      return create();
     }
   }
 
