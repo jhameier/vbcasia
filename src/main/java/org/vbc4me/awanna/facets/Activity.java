@@ -1,13 +1,14 @@
 package org.vbc4me.awanna.facets;
 
+import org.joda.money.CurrencyUnit;
+import org.joda.money.Money;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.UUID;
-import org.joda.money.CurrencyUnit;
-import org.joda.money.Money;
 
 /**
  * An activity is an event that is planned for participation of a student and staff members including a date, time and a
@@ -87,6 +88,13 @@ public class Activity {
   }
 
   /**
+   * Return the {@link UUID unique identifier} for this {@link Activity}.
+   */
+  public UUID id() {
+    return id;
+  }
+
+  /**
    * Returns the start time associated with this {@link Activity}.  Any changes to the returned value will not effect
    * the {@link LocalTime time} associated with this {@link Activity}.  If the time need to change use the provided
    * method {@link #changeTime(LocalTime)}.
@@ -130,6 +138,9 @@ public class Activity {
     return name;
   }
 
+  /**
+   * Return the description of this {@link Activity}.
+   */
   public String description() {
     return description;
   }
