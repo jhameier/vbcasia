@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE session>
+<session id="54deea35-7abf-2317-65d2-f0dd27468421" finalized="false">
+    <startdate>2016-01-01</startdate>
+    <enddate>2016-12-31</enddate>
+    <activities>
+        <activity id="3521fc63-3dac-2637-38d3-d1db43687465">
+            <event>Activity 1</event>
+            <description>some activity info</description>
+            <date>2016-01-07</date>
+            <time>18:30:00</time>
+            <cost>USD 0.50</cost>
+        </activity>
+        <activity id="5432cf67-3dac-2637-38d3-d1db43687466">
+            <event>Activity 2</event>
+            <description>some activity info</description>
+            <date>2016-01-14</date>
+            <time>07:30:00</time>
+            <cost>USD 0.50</cost>
+        </activity>
+        <activity id="5432cf67-3dac-2637-38d3-d1db43687467">
+            <event>Activity 3</event>
+            <description>some activity info</description>
+            <date>2016-01-14</date>
+            <time>07:30:00</time>
+            <cost>USD 0.50</cost>
+        </activity>
+    </activities>
+</session>
