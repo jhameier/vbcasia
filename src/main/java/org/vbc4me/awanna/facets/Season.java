@@ -1,8 +1,8 @@
 package org.vbc4me.awanna.facets;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 import java.util.UUID;
 
 /**
@@ -14,8 +14,8 @@ public final class Season {
   private final UUID id;
   private final String name;
   private Session session;
-  private Map<String, Student> students = new HashMap<>();
-  private Map<String, Staff> staff = new HashMap<>();
+  private Map<String, Student> students = new TreeMap<>();
+  private Map<String, Staff> staff = new TreeMap<>();
   private boolean finalized;
 
   private Season(Builder builder) {
