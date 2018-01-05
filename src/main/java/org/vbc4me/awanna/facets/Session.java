@@ -3,10 +3,10 @@ package org.vbc4me.awanna.facets;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.TreeMap;
 import java.util.UUID;
 
 
@@ -110,7 +110,7 @@ public final class Session {
     private UUID id;
     private LocalDate startDate;
     private LocalDate endDate;
-    private Map<LocalDate, Activity> activities = new HashMap<>();
+    private Map<LocalDate, Activity> activities = new TreeMap<>();
 
     /**
      * The {@link UUID} to associate with this {@link Session}.  Returns this builder for method chaining.
