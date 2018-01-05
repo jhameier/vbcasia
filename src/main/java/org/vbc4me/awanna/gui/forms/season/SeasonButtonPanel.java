@@ -1,51 +1,34 @@
 package org.vbc4me.awanna.gui.forms.season;
 
-import java.awt.Color;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 import net.miginfocom.swing.MigLayout;
-import org.vbc4me.awanna.gui.forms.season.actions.CloseSeasonAction;
-import org.vbc4me.awanna.gui.forms.season.actions.CreateSeasonAction;
-import org.vbc4me.awanna.gui.forms.season.actions.NewSeasonAction;
-import org.vbc4me.awanna.gui.forms.season.actions.OpenSeasonAction;
-import org.vbc4me.awanna.gui.forms.season.actions.SaveAsSeasonAction;
-import org.vbc4me.awanna.gui.forms.season.actions.SaveSeasonAction;
+import org.vbc4me.awanna.gui.AppGui;
+
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 
 public final class SeasonButtonPanel extends JPanel {
 
   private static final long serialVersionUID = -4124279123949931880L;
-  public CloseSeasonAction closeAction;
-  public CreateSeasonAction createAction;
-  public NewSeasonAction newAction;
-  public OpenSeasonAction openAction;
-  public SaveAsSeasonAction saveAsAction;
-  public SaveSeasonAction saveAction;
 
   public SeasonButtonPanel() {
+
     setBorder(new LineBorder(new Color(0, 0, 0)));
     setLayout(new MigLayout("", "[50px][50px][50px][50px]", "[23px][][]"));
 
-    createAction = new CreateSeasonAction();
-    JButton btnCreate = new JButton(createAction);
+    JButton btnCreate = new JButton(AppGui.NewSeasonAction());
     add(btnCreate, "cell 0 0 2 1,growx,aligny center");
 
-    openAction = new OpenSeasonAction();
-    JButton btnOpen = new JButton(openAction);
+    JButton btnOpen = new JButton(AppGui.OpenSeasonAction());
     add(btnOpen, "cell 2 0 2 1,growx,aligny center");
 
-    saveAction = new SaveSeasonAction();
-    JButton btnSave = new JButton(saveAction);
+    JButton btnSave = new JButton(AppGui.SaveSeasonAction());
     add(btnSave, "cell 0 1 2 1,growx,aligny center");
 
-    saveAsAction = new SaveAsSeasonAction();
-    JButton btnSaveAs = new JButton(saveAsAction);
+    JButton btnSaveAs = new JButton(AppGui.SaveAsSeasonAction());
     add(btnSaveAs, "cell 2 1 2 1,growx,aligny center");
 
-    closeAction = new CloseSeasonAction();
-    JButton btnClose = new JButton(closeAction);
+    JButton btnClose = new JButton(AppGui.CloseSeasonAction());
     add(btnClose, "cell 1 2 2 1,growx,aligny center");
-
-    newAction = new NewSeasonAction();
   }
 }

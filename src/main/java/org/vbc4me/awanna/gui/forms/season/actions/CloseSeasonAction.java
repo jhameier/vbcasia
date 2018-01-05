@@ -1,8 +1,8 @@
 package org.vbc4me.awanna.gui.forms.season.actions;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
-import javax.swing.JOptionPane;
 
 /**
  * A set of steps used to close an opened Season
@@ -12,8 +12,10 @@ import javax.swing.JOptionPane;
 public final class CloseSeasonAction extends AbstractAction {
 
   private static final long serialVersionUID = -6301577011454895115L;
+  private final Container frame;
 
-  public CloseSeasonAction() {
+  public CloseSeasonAction(Container frame) {
+    this.frame = frame;
     putValue(NAME, "Close Season");
     putValue(SHORT_DESCRIPTION, "Closes an existing Season.");
     setEnabled(false);

@@ -1,22 +1,12 @@
 package org.vbc4me.awanna.testGenerators;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.WindowConstants;
-
 import org.vbc4me.awanna.gui.forms.DisplayPanel;
 import org.vbc4me.awanna.gui.forms.season.SeasonButtonPanel;
-import org.vbc4me.awanna.gui.forms.season.SeasonContainer;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Used to test panel classes in the IDE without having to run the entire
@@ -65,10 +55,8 @@ public class TestGuiPanels extends JFrame {
 //		JFrame window8 = new TestGuiPanels(seasonEditForm, "SeasonContainer Edit Form");
 //		windows.add(window8);
 
-        SeasonContainer seasonContainer = new SeasonContainer();
 		DisplayPanel panel = new DisplayPanel();
-		panel.update3PanelDisplay(seasonContainer.editForm, seasonContainer.buttonPanel,
-				new JPanel(), seasonContainer.tableModel);
+//		panel.update3PanelDisplay(seasonContainer.editForm, seasonContainer.buttonPanel, new JPanel(), seasonContainer.tableModel);
 		JFrame window9 = new TestGuiPanels(panel, "Display Panel");
 		windows.add(window9);
 		

@@ -1,17 +1,16 @@
 package org.vbc4me.awanna.gui.forms.activity.actions;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 public class SaveActivityRecordAction extends AbstractAction {
 
   private static final long serialVersionUID = -1288201101615570596L;
-  private JPanel panel;
+  private Container frame;
 
-  public SaveActivityRecordAction(JPanel panel) {
-    this.panel = panel;
+  public SaveActivityRecordAction(Container frame) {
+    this.frame = frame;
     putValue(NAME, "Save Activity");
     putValue(SHORT_DESCRIPTION, "Saves the currently loaded actions");
   }
@@ -20,6 +19,6 @@ public class SaveActivityRecordAction extends AbstractAction {
     String message = "This is activated from Save Activity Action";
     String title = "Save Activity";
     int messageType = JOptionPane.INFORMATION_MESSAGE;
-    JOptionPane.showMessageDialog(panel, message, title, messageType);
+    JOptionPane.showMessageDialog(frame, message, title, messageType);
   }
 }

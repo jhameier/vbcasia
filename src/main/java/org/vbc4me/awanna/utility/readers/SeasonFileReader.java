@@ -21,7 +21,7 @@ import java.util.UUID;
 
 public class SeasonFileReader {
 
-  public static Season parse(File file) {
+  public static Season parse(File file) throws Exception {
     Objects.requireNonNull(file);
 
     SAXBuilder saxBuilder = new SAXBuilder();
@@ -75,12 +75,12 @@ public class SeasonFileReader {
         season.addStaff(staff);
       }
 
+      return season;
 
     } catch (JDOMException | IOException e) {
       e.printStackTrace();
     }
 
-    String name = "AwannaTest";
-    return null;
+    throw new Exception("Unknown error occured reading the Season file exiting.");
   }
 }

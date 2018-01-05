@@ -1,20 +1,15 @@
 package org.vbc4me.awanna.gui.forms;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTable;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
 import javax.swing.table.TableModel;
+import java.awt.*;
 
 /**
- * This class handles the various spreadsheet styles and JPanels to display. This uses a JSplitPane to handle the proper
- * display setup for this panel to display correctly. This is a generic shell for a table, and can be changed by passing
- * in new table models to display different types of data in different ways by calling setTableDisplay(TableModel) and
- * passing in the model of the data that needs to be displayed.
+ * This class handles the various spreadsheet styles table models and JPanels to display.  This uses a JSplitPane to
+ * handle the proper display layout.  This is a generic shell for tables, and can be changed by passing
+ * in new table models by calling setTableDisplay(TableModel).
  *
  * @author John Hameier 2016
  */
@@ -24,17 +19,15 @@ public final class DisplayPanel extends JPanel {
   private final JTable table = new JTable();
   private final JPanel contentPanel = new JPanel();
   private final JSplitPane splitPane;
-  private JPanel bottomLeftPanel;
+  private JPanel lowerLeftPanel;
   private JPanel upperLeftPanel;
-  private JPanel leftPanel;
-  private JPanel rightPanel;
   private JPanel upperRightPanel;
   private JPanel lowerRightPanel;
 
   public DisplayPanel() {
     setLayout(new BorderLayout());
     splitPane = new JSplitPane();
-    splitPane.setResizeWeight(0.5);
+    splitPane.setResizeWeight(0.6);
     splitPane.setOneTouchExpandable(true);
     splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
     add(splitPane, BorderLayout.CENTER);
@@ -43,43 +36,58 @@ public final class DisplayPanel extends JPanel {
      * Upper scroll pane holds 4 panels for various types of display panels such as button panels and/or edit panels
      * Lower scroll pane hold 1 panel for a table
      *
-     *  | ------------------- | -------------------- |
-     *  |                               |                                |
-     *  |-------------------- | -------------------- |
-     *  |                               |                                |
-     *  |-------------------- | -------------------- |
-     *  |                                                                 |
-     *  |                                                                 |
-     *  | ------------------------------------------ |
+     *  |=== Upper Scroll Pane ========================|
+     *  |                                              |
+     *  | |---- Content Pane ------------------------| |
+     *  | |                                          | |
+     *  | | |--- Left Panel ---|--- Right Panel ---| | |
+     *  | | |                  |                   | | |
+     *  | | | |--------------| | |---------------| | | |
+     *  | | | |  upper left  | | |  upper right  | | | |
+     *  | | | |--------------| | |---------------| | | |
+     *  | | |                  |                   | | |
+     *  | | | |--------------| | |---------------| | | |
+     *  | | | | lower left   | | |  lower right  | | | |
+     *  | | | |--------------| | |---------------| | | |
+     *  | | |                  |                   | | |
+     *  | | |------------------|-------------------| | |
+     *  | |                                          | |
+     *  | |------------------------------------------| |
+     *  |                                              |
+     *  |==============================================|
+     *  |                                              |
+     *  |=== Lower Scroll Pane ========================|
+     *  |                                              |
+     *  | |---- JTable ------------------------------| |
+     *  | |                                          | |
+     *  | |             Table Model                  | |
+     *  | |                                          | |
+     *  | |------------------------------------------| |
+     *  |                                              |
+     *  |==============================================|
      */
     final JScrollPane upperScrollPane = new JScrollPane(contentPanel);
-    contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.X_AXIS));
+    contentPanel.setLayout(new MigLayout("", "[][]", "[]"));
 
-    leftPanel = new JPanel();
+    JPanel leftPanel = new JPanel();
+    leftPanel.setLayout(new MigLayout("", "[]", "[][]"));
     contentPanel.add(leftPanel);
-    leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
 
     upperLeftPanel = new JPanel();
-    leftPanel.add(upperLeftPanel);
-    FlowLayout fl_leftUpperPanel = (FlowLayout) upperLeftPanel.getLayout();
-    fl_leftUpperPanel.setAlignment(FlowLayout.LEADING);
-    upperLeftPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+    lowerLeftPanel = new JPanel();
 
-    bottomLeftPanel = new JPanel();
-    leftPanel.add(bottomLeftPanel);
-    FlowLayout fl_leftBottomPanel = (FlowLayout) bottomLeftPanel.getLayout();
-    fl_leftBottomPanel.setAlignment(FlowLayout.LEADING);
-    bottomLeftPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+    leftPanel.add(upperLeftPanel, "cell 0 0, align left");
+    leftPanel.add(lowerLeftPanel, "cell 0 1, align left");
 
-    rightPanel = new JPanel();
+    JPanel rightPanel = new JPanel();
+    rightPanel.setLayout(new MigLayout("", "[]", "[][]"));
     contentPanel.add(rightPanel);
-    rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 
     upperRightPanel = new JPanel();
-    rightPanel.add(upperRightPanel);
-
     lowerRightPanel = new JPanel();
-    rightPanel.add(lowerRightPanel);
+
+    rightPanel.add(upperRightPanel, "cell 0 0, align left");
+    rightPanel.add(lowerRightPanel, "cell 0 1, align left");
 
 
     /*
@@ -105,15 +113,6 @@ public final class DisplayPanel extends JPanel {
   }
 
   /**
-   * Sets the left bottom panel.
-   */
-  public void updateBottomLeft(JPanel panel) {
-    bottomLeftPanel.removeAll();
-    bottomLeftPanel.add(panel);
-    splitPane.setDividerLocation(-1);
-  }
-
-  /**
    * Sets the left upper panel.
    */
   public void updateUpperLeft(JPanel panel) {
@@ -123,11 +122,11 @@ public final class DisplayPanel extends JPanel {
   }
 
   /**
-   * Sets the right lower panel.
+   * Sets the left lower panel.
    */
-  public void updateLowerRight(JPanel panel) {
-    lowerRightPanel.removeAll();
-    lowerRightPanel.add(panel);
+  public void updateLowerLeft(JPanel panel) {
+    lowerLeftPanel.removeAll();
+    lowerLeftPanel.add(panel);
     splitPane.setDividerLocation(-1);
   }
 
@@ -141,39 +140,72 @@ public final class DisplayPanel extends JPanel {
   }
 
   /**
-   * Updates the upper content and button panels. The content panel requires a layout option to be set such as {@code
-   * BorderLayout.WEST}.
+   * Sets the right lower panel.
    */
-  public void updateUpperDisplay(JPanel content, JPanel btnPanel) {
+  public void updateLowerRight(JPanel panel) {
+    lowerRightPanel.removeAll();
+    lowerRightPanel.add(panel);
+    splitPane.setDividerLocation(-1);
+  }
+
+
+  /**
+   * Updates the left side upper and lower panels.
+   */
+  public void updateLeftDisplay(JPanel upperPanel, JPanel lowerPanel) {
     upperLeftPanel.removeAll();
-    upperLeftPanel.add(btnPanel);
-    bottomLeftPanel.removeAll();
-    bottomLeftPanel.add(content);
+    upperLeftPanel.add(upperPanel);
+    lowerLeftPanel.removeAll();
+    lowerLeftPanel.add(lowerPanel);
     splitPane.setDividerLocation(-1);
   }
 
   /**
-   * Initializes the entire panel with a 3 table upper display setup. The top left panel will hold a button panel and
-   * lower left a JPanel (usually used to display text information) and the lower right section is for holding an
-   * additional JPanel while the lower section will always be for a {@link JTable} for displaying spreadsheet style
-   * data. <p> <p>It should be noted that a tableModel is passed in (not the table itself) and the single table
-   * container is updated with the dataset and layout.
+   * Updates the right side upper and lower panels.
    */
-  public void update3PanelDisplay(JPanel content, JPanel btnPanel, JPanel sidePanel, TableModel model) {
-    upperLeftPanel.removeAll();
-    upperLeftPanel.add(btnPanel);
-
-    bottomLeftPanel.removeAll();
-    bottomLeftPanel.add(content);
-
+  public void updateRightDisplay(JPanel upperPanel, JPanel lowerPanel) {
+    upperRightPanel.removeAll();
+    upperRightPanel.add(upperPanel);
     lowerRightPanel.removeAll();
-    lowerRightPanel.add(sidePanel);
-
-    table.removeAll();
-    table.setModel(model);
-
-    contentPanel.revalidate();
-    table.revalidate();
+    lowerRightPanel.add(lowerPanel);
     splitPane.setDividerLocation(-1);
   }
+
+  /**
+   * Initialize the display with placement in the upper left, lower left and lower right
+   */
+  public void update3PanelDisplay(JPanel upperLeft, JPanel lowerLeft, JPanel lowerRight) {
+    upperLeftPanel.removeAll();
+    upperLeftPanel.add(upperLeft);
+
+    lowerLeftPanel.removeAll();
+    lowerLeftPanel.add(lowerLeft);
+
+    lowerRightPanel.removeAll();
+    lowerRightPanel.add(lowerRight);
+
+    contentPanel.revalidate();
+    splitPane.setDividerLocation(-1);
+  }
+
+  /**
+   * Initialize the display with placement in the upper left, lower left, upper right and lower right.
+   */
+  public void update4PanelDisplay(JPanel upperLeft, JPanel lowerLeft, JPanel upperRight, JPanel lowerRight) {
+    upperLeftPanel.removeAll();
+    upperLeftPanel.add(upperLeft);
+
+    lowerLeftPanel.removeAll();
+    lowerLeftPanel.add(lowerLeft);
+
+    upperRightPanel.removeAll();
+    upperRightPanel.add(upperRight);
+
+    lowerRightPanel.removeAll();
+    lowerRightPanel.add(lowerRight);
+
+    contentPanel.revalidate();
+    splitPane.setDividerLocation(-1);
+  }
+
 }

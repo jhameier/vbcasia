@@ -1,8 +1,8 @@
 package org.vbc4me.awanna.gui.forms.season.actions;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
-import javax.swing.JOptionPane;
 
 /**
  * Used to copy an existing SeasonContainer.
@@ -12,8 +12,10 @@ import javax.swing.JOptionPane;
 public final class SaveAsSeasonAction extends AbstractAction {
 
   private static final long serialVersionUID = -6301577011454895115L;
+  private final Container frame;
 
-  public SaveAsSeasonAction() {
+  public SaveAsSeasonAction(Container frame) {
+    this.frame = frame;
     putValue(NAME, "SaveAs Season");
     putValue(SHORT_DESCRIPTION, "Saves the currently open Season with a new name.");
     setEnabled(false);

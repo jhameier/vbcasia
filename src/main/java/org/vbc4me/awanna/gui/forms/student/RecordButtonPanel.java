@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import org.vbc4me.awanna.gui.forms.student.actions.CopyStudentRecordAction;
 import org.vbc4me.awanna.gui.forms.student.actions.EditStudentRecordAction;
-import org.vbc4me.awanna.gui.forms.student.actions.NewStudentRecordAction;
+import org.vbc4me.awanna.gui.forms.student.actions.CreateNewStudentRecordAction;
 import org.vbc4me.awanna.gui.forms.student.actions.SaveStudentRecordAction;
 
 public class RecordButtonPanel extends JPanel {
@@ -25,7 +25,7 @@ public class RecordButtonPanel extends JPanel {
     Component horizontalStrut = Box.createHorizontalStrut(1);
     add(horizontalStrut);
 
-    Action createNewRecordAction = new NewStudentRecordAction(this);
+    Action createNewRecordAction = new CreateNewStudentRecordAction(this);
     btnNew.setAction(createNewRecordAction);
     add(btnNew);
 

@@ -1,14 +1,16 @@
 package org.vbc4me.awanna.gui.forms.staff.activities;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
 
 public class EditStaffRecordActivity extends AbstractAction {
 
   private static final long serialVersionUID = -6890048834983802400L;
+  private final Container frame;
 
-  public EditStaffRecordActivity() {
-    // TODO Auto-generated constructor stub
+  public EditStaffRecordActivity(Container frame) {
+    this.frame = frame;
   }
 
   @Override

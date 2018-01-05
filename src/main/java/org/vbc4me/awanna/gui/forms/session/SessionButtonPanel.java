@@ -1,14 +1,14 @@
 package org.vbc4me.awanna.gui.forms.session;
 
-import java.awt.Color;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 import net.miginfocom.swing.MigLayout;
 import org.vbc4me.awanna.gui.forms.session.actions.NewSessionAction;
 import org.vbc4me.awanna.gui.forms.session.actions.OpenSessionAction;
 import org.vbc4me.awanna.gui.forms.session.actions.SaveAsSessionAction;
 import org.vbc4me.awanna.gui.forms.session.actions.SaveSessionAction;
+
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 
 public class SessionButtonPanel extends JPanel {
 
@@ -17,8 +17,10 @@ public class SessionButtonPanel extends JPanel {
   public final static SaveSessionAction saveAction = new SaveSessionAction(null);
   public final static SaveAsSessionAction saveAsAction = new SaveAsSessionAction(null);
   private static final long serialVersionUID = -169212683318427227L;
+  private final Container frame;
 
-  public SessionButtonPanel() {
+  public SessionButtonPanel(Container frame) {
+    this.frame = frame;
     setBorder(new LineBorder(new Color(0, 0, 0)));
     setLayout(new MigLayout("", "[50px][50px][50px][50px]", "[23px][][]"));
 

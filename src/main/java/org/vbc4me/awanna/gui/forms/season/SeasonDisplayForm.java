@@ -1,25 +1,25 @@
 package org.vbc4me.awanna.gui.forms.season;
 
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 import net.miginfocom.swing.MigLayout;
 import org.vbc4me.awanna.facets.Season;
+
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 
 public class SeasonDisplayForm extends JPanel {
 
   private static final long serialVersionUID = 8042688560259906107L;
-  private JLabel lblSeasonName;
-  private JLabel lblSessionStartDate;
-  private JLabel lblSessionEndDate;
-  private JLabel lblNoOfActivities;
-  private JLabel lblNoOfStudents;
-  private JLabel lblNoOfStaff;
+  private static JLabel lblSeasonName;
+  private static JLabel lblSessionStartDate;
+  private static JLabel lblSessionEndDate;
+  private static JLabel lblNoOfActivities;
+  private static JLabel lblNoOfStudents;
+  private static JLabel lblNoOfStaff;
 
-  public SeasonDisplayForm(SeasonContainer season) {
+  public SeasonDisplayForm() {
     setBorder(new LineBorder(new Color(0, 0, 0)));
+    setAlignmentX(LEFT_ALIGNMENT);
 
     JPanel infoPanel = new JPanel();
     infoPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -78,17 +78,15 @@ public class SeasonDisplayForm extends JPanel {
     infoPanel.add(lblNoOfStaff, "cell 3 6");
   }
 
-  /**
-   * Updates this panel with current information from the current season.
-   */
-  public void updatePanel(Season season) {
+  public static SeasonDisplayForm createForm(Season season) {
+    SeasonDisplayForm form = new SeasonDisplayForm();
     lblSeasonName.setText(season.name());
     lblSessionStartDate.setText(season.session().startDate().toString());
     lblSessionEndDate.setText(season.session().endDate().toString());
     lblNoOfActivities.setText(String.valueOf(season.session().activities().size()));
     lblNoOfStudents.setText(String.valueOf(season.students().size()));
     lblNoOfStaff.setText(String.valueOf(season.staff().size()));
-
+    return form;
   }
 
 }

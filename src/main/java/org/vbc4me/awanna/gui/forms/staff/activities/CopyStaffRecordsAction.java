@@ -1,14 +1,16 @@
 package org.vbc4me.awanna.gui.forms.staff.activities;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
 
 public class CopyStaffRecordsAction extends AbstractAction {
 
   private static final long serialVersionUID = -7463219726353361515L;
+  private final Container frame;
 
-  public CopyStaffRecordsAction() {
-    // TODO Auto-generated constructor stub
+  public CopyStaffRecordsAction(Container frame) {
+    this.frame = frame;
   }
 
   @Override

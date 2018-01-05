@@ -1,9 +1,8 @@
 package org.vbc4me.awanna.gui.forms.season.actions;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
-import org.vbc4me.awanna.gui.AppGui;
-import org.vbc4me.awanna.gui.forms.season.SeasonContainer;
 
 /**
  * Used to create a new blank SeasonContainer.
@@ -13,16 +12,16 @@ import org.vbc4me.awanna.gui.forms.season.SeasonContainer;
 public final class NewSeasonAction extends AbstractAction {
 
   private static final long serialVersionUID = -6301577011454895115L;
+  private final Container frame;
 
-  public NewSeasonAction() {
+  public NewSeasonAction(Container frame) {
+    this.frame = frame;
     putValue(NAME, "New Season");
     putValue(SHORT_DESCRIPTION, "Create a New Blank Season.");
   }
 
   public void actionPerformed(ActionEvent e) {
-    SeasonContainer season = AppGui.season();
-    AppGui.displayPanel().updateTableDisplay(season.tableModel);
-    AppGui.displayPanel().updateBottomLeft(season.editForm);
-    AppGui.displayPanel().updateUpperLeft(season.buttonPanel);
+
   }
+
 }

@@ -3,12 +3,12 @@ package org.vbc4me.awanna.gui.forms.season;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
-import java.awt.Font;
-import java.time.LocalDate;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
+import org.vbc4me.awanna.facets.Season;
+
+import javax.swing.*;
+import java.awt.*;
+import java.time.LocalDate;
 
 public class SeasonEditForm extends JPanel {
 
@@ -16,21 +16,22 @@ public class SeasonEditForm extends JPanel {
   private static DatePicker startdatePicker;
   private static DatePicker enddatePicker;
   private static JTextField nameField;
-  private final SeasonContainer season;
+  private final Season season;
   DateChangeListener dcl = new DateChangeListener() {
     @Override
     public void dateChanged(DateChangeEvent event) {
       if (event.getNewDate() != null) {
         enddatePicker.setDate(startdatePicker.getDate().plusMonths(9));
-        season.buttonPanel.createAction.setEnabled(true);
+        // FIXME
+//        season.buttonPanel.createAction.setEnabled(true);
       } else {
         enddatePicker.clear();
-        season.buttonPanel.createAction.setEnabled(false);
+//        season.buttonPanel.createAction.setEnabled(false);
       }
     }
   };
 
-  public SeasonEditForm(SeasonContainer season) {
+  public SeasonEditForm(Season season) {
     this.season = season;
     JPanel infoPanel = new JPanel();
     infoPanel.setLayout(new MigLayout("", "[][][][grow][]", "[][][][][][][]"));

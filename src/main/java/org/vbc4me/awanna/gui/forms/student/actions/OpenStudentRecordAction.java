@@ -1,9 +1,8 @@
 package org.vbc4me.awanna.gui.forms.student.actions;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  * Used to create a new blank record.
@@ -13,9 +12,9 @@ import javax.swing.JOptionPane;
 public final class OpenStudentRecordAction extends AbstractAction {
 
   private static final long serialVersionUID = -6301577011454895115L;
-  private JFrame frame;
+  private final Container frame;
 
-  public OpenStudentRecordAction(JFrame frame) {
+  public OpenStudentRecordAction(Container frame) {
     this.frame = frame;
     putValue(NAME, "Open Record");
     putValue(SHORT_DESCRIPTION, "Opens an existing Record.");

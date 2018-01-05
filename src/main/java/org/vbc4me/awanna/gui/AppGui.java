@@ -1,32 +1,47 @@
 package org.vbc4me.awanna.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
-import java.util.Collections;
-import java.util.List;
-import javax.swing.Action;
-import javax.swing.ButtonGroup;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.WindowConstants;
+import org.vbc4me.awanna.facets.Season;
 import org.vbc4me.awanna.gui.actions.AboutAction;
 import org.vbc4me.awanna.gui.actions.LookAndFeelAction;
 import org.vbc4me.awanna.gui.actions.PreferenceAction;
 import org.vbc4me.awanna.gui.actions.ProgramHelpAction;
+import org.vbc4me.awanna.gui.forms.DashboardButtonPanel;
 import org.vbc4me.awanna.gui.forms.DisplayPanel;
+import org.vbc4me.awanna.gui.forms.activity.actions.CopyActivityRecordAction;
+import org.vbc4me.awanna.gui.forms.activity.actions.DisplayActivatesAction;
+import org.vbc4me.awanna.gui.forms.activity.actions.EditActivityAction;
+import org.vbc4me.awanna.gui.forms.activity.actions.NewActivityRecordAction;
+import org.vbc4me.awanna.gui.forms.activity.actions.OpenActivityRecordAction;
+import org.vbc4me.awanna.gui.forms.activity.actions.SaveActivityRecordAction;
 import org.vbc4me.awanna.gui.forms.season.SeasonBlankForm;
-import org.vbc4me.awanna.gui.forms.season.SeasonContainer;
-import org.vbc4me.awanna.gui.forms.session.SessionButtonPanel;
+import org.vbc4me.awanna.gui.forms.season.SeasonDisplayForm;
+import org.vbc4me.awanna.gui.forms.season.actions.CloseSeasonAction;
+import org.vbc4me.awanna.gui.forms.season.actions.CreateSeasonAction;
+import org.vbc4me.awanna.gui.forms.season.actions.NewSeasonAction;
+import org.vbc4me.awanna.gui.forms.season.actions.OpenSeasonAction;
+import org.vbc4me.awanna.gui.forms.season.actions.SaveAsSeasonAction;
+import org.vbc4me.awanna.gui.forms.season.actions.SaveSeasonAction;
+import org.vbc4me.awanna.gui.forms.session.actions.NewSessionAction;
+import org.vbc4me.awanna.gui.forms.session.actions.OpenSessionAction;
+import org.vbc4me.awanna.gui.forms.session.actions.SaveAsSessionAction;
+import org.vbc4me.awanna.gui.forms.session.actions.SaveSessionAction;
+import org.vbc4me.awanna.gui.forms.staff.activities.CopyStaffRecordsAction;
+import org.vbc4me.awanna.gui.forms.staff.activities.CreateNewStaffRecordActivity;
+import org.vbc4me.awanna.gui.forms.staff.activities.EditStaffRecordActivity;
+import org.vbc4me.awanna.gui.forms.staff.activities.OpenStaffRecordActivity;
+import org.vbc4me.awanna.gui.forms.staff.activities.SaveStaffRecordActivity;
 import org.vbc4me.awanna.gui.forms.student.StudentContainer;
+import org.vbc4me.awanna.gui.forms.student.actions.CopyStudentRecordAction;
+import org.vbc4me.awanna.gui.forms.student.actions.CreateNewStudentRecordAction;
+import org.vbc4me.awanna.gui.forms.student.actions.EditStudentRecordAction;
+import org.vbc4me.awanna.gui.forms.student.actions.OpenStudentRecordAction;
+import org.vbc4me.awanna.gui.forms.student.actions.SaveStudentRecordAction;
+
+import javax.swing.*;
+import javax.swing.UIManager.LookAndFeelInfo;
+import java.awt.*;
+import java.util.Objects;
+
 
 /**
  * Used to hold the primary applications layout and component panels. The only necessary component to expose to outside
@@ -41,9 +56,36 @@ public final class AppGui extends JFrame {
 
   private static DisplayPanel displayPanel;
   private static AppGui mainWindow;
-  private static List<SeasonContainer> seasonContainer;
+  private static Season season = null;
 
   private static LookAndFeelInfo[] lookList = UIManager.getInstalledLookAndFeels();
+  
+  private static CopyActivityRecordAction copyActivityRecordAction;
+  private static DisplayActivatesAction displayActivitesAction;
+  private static EditActivityAction editActivityAction;
+  private static NewActivityRecordAction newActivityRecordAction;
+  private static OpenActivityRecordAction openActivityRecordAction;
+  private static SaveActivityRecordAction saveActivityRecordAction= new SaveActivityRecordAction(mainWindow);
+  private static CloseSeasonAction closeSeasonAction;
+  private static CreateSeasonAction createSeasonAction= new CreateSeasonAction(mainWindow);
+  private static NewSeasonAction newSeasonAction;
+  private static OpenSeasonAction openSeasonAction;
+  private static SaveAsSeasonAction saveAsSeasonAction= new SaveAsSeasonAction(mainWindow);
+  private static SaveSeasonAction saveSeasonAction;
+  private static NewSessionAction newSessionAction;
+  private static OpenSessionAction openSessionAction;
+  private static SaveAsSessionAction saveAsSessionAction;
+  private static SaveSessionAction saveSessionAction;
+  private static CopyStaffRecordsAction copyStaffRecordsAction;
+  private static CreateNewStaffRecordActivity createNewStaffRecordActivity;
+  private static EditStaffRecordActivity editStaffRecordActivity;
+  private static OpenStaffRecordActivity openStaffRecordActivity;
+  private static SaveStaffRecordActivity saveStaffRecordActivity;
+  private static CopyStudentRecordAction copyStudentRecordAction;
+  private static CreateNewStudentRecordAction createNewStudentRecordAction;
+  private static EditStudentRecordAction editStudentRecordAction;
+  private static OpenStudentRecordAction openStudentRecordAction;
+  private static SaveStudentRecordAction saveStudentRecordAction;
 
   /**
    * Primary constructor that lays out the basic application structure using a border layout with a menu bar, button
@@ -55,13 +97,43 @@ public final class AppGui extends JFrame {
      *  establish the basic windowing structure.
      *********************************************************************/
     displayPanel = new DisplayPanel();
-    displayPanel.updateBottomLeft(new SeasonBlankForm());
-    setCurrentSeason(new SeasonContainer());
+    displayPanel.updateLowerLeft(new SeasonBlankForm());
     getContentPane().add(displayPanel, BorderLayout.CENTER);
 
+    copyActivityRecordAction = new CopyActivityRecordAction(this);
+    displayActivitesAction = new DisplayActivatesAction(this);
+    editActivityAction = new EditActivityAction(this);
+    newActivityRecordAction = new NewActivityRecordAction(this);
+    openActivityRecordAction = new OpenActivityRecordAction(this);
+    saveActivityRecordAction= new SaveActivityRecordAction(this);
+    closeSeasonAction = new CloseSeasonAction(this);
+    createSeasonAction= new CreateSeasonAction(this);
+    newSeasonAction = new NewSeasonAction(this);
+    openSeasonAction = new OpenSeasonAction(this);
+    saveAsSeasonAction= new SaveAsSeasonAction(this);
+    saveSeasonAction = new SaveSeasonAction(this);
+    newSessionAction = new NewSessionAction(this);
+    openSessionAction = new OpenSessionAction(this);
+    saveAsSessionAction = new SaveAsSessionAction(this);
+    saveSessionAction = new SaveSessionAction(this);
+    copyStaffRecordsAction = new CopyStaffRecordsAction(this);
+    createNewStaffRecordActivity = new CreateNewStaffRecordActivity(this);
+    editStaffRecordActivity = new EditStaffRecordActivity(this);
+    openStaffRecordActivity = new OpenStaffRecordActivity(this);
+    saveStaffRecordActivity = new SaveStaffRecordActivity(this);
+    copyStudentRecordAction = new CopyStudentRecordAction(this);
+    createNewStudentRecordAction = new CreateNewStudentRecordAction(this);
+    editStudentRecordAction = new EditStudentRecordAction(this);
+    openStudentRecordAction = new OpenStudentRecordAction(this);
+    saveStudentRecordAction = new SaveStudentRecordAction(this);
+    
+    
+    
+    
     /*
      * ***************** FILE MENU ************************
      */
+
 
     JMenuBar menuBar = new JMenuBar();
     setJMenuBar(menuBar);
@@ -69,30 +141,30 @@ public final class AppGui extends JFrame {
     JMenu mnFile = new JMenu("File");
     menuBar.add(mnFile);
 
-    JMenuItem mntmNewSeason = new JMenuItem(season().buttonPanel.newAction);
+    JMenuItem mntmNewSeason = new JMenuItem(NewSeasonAction());
     mnFile.add(mntmNewSeason);
 
-    JMenuItem mntmOpenSeason = new JMenuItem(season().buttonPanel.openAction);
+    JMenuItem mntmOpenSeason = new JMenuItem(OpenSeasonAction());
     mnFile.add(mntmOpenSeason);
 
-    JMenuItem mntmSaveSeason = new JMenuItem(season().buttonPanel.saveAction);
+    JMenuItem mntmSaveSeason = new JMenuItem(SaveSeasonAction());
     mnFile.add(mntmSaveSeason);
 
-    JMenuItem mntmSaveasSeason = new JMenuItem(season().buttonPanel.saveAsAction);
+    JMenuItem mntmSaveasSeason = new JMenuItem(SaveAsSeasonAction());
     mnFile.add(mntmSaveasSeason);
 
     mnFile.addSeparator();
 
-    JMenuItem mntmNewSession = new JMenuItem(SessionButtonPanel.newAction);
+    JMenuItem mntmNewSession = new JMenuItem(CreateNewSessionAction());
     mnFile.add(mntmNewSession);
 
-    JMenuItem mntmOpenSession = new JMenuItem(SessionButtonPanel.openAction);
+    JMenuItem mntmOpenSession = new JMenuItem(OpenSessionAction());
     mnFile.add(mntmOpenSession);
 
-    JMenuItem mntmSaveSession = new JMenuItem(SessionButtonPanel.saveAction);
+    JMenuItem mntmSaveSession = new JMenuItem(SaveSessionAction());
     mnFile.add(mntmSaveSession);
 
-    JMenuItem mntmSaveasSession = new JMenuItem(SessionButtonPanel.saveAsAction);
+    JMenuItem mntmSaveasSession = new JMenuItem(SaveAsSessionAction());
     mnFile.add(mntmSaveasSession);
 
     mnFile.addSeparator();
@@ -153,6 +225,12 @@ public final class AppGui extends JFrame {
       mntmWindowLookAndFeel.add(radioButton);
     }
 
+    /*
+     * ***************** LOAD APPLICATION ACTIONS ************************
+     */
+
+
+    // HELP MENU ACTIONS
     Action aboutAction = new AboutAction(this);
     JMenuItem mntmAbout = new JMenuItem(aboutAction);
     mnHelp.add(mntmAbout);
@@ -175,18 +253,127 @@ public final class AppGui extends JFrame {
   }
 
   /**
-   * Sets the current working {@link SeasonContainer} for the GUI.
+   * Set the current {@link Season} to be displayed.
    */
-  public static void setCurrentSeason(SeasonContainer season) {
-    seasonContainer = Collections.singletonList(season);
+  public static void currentSeason(Season sea) {
+    season = Objects.requireNonNull(sea);
+
+    SeasonDisplayForm form = SeasonDisplayForm.createForm(season);
+    DashboardButtonPanel dashboard = new DashboardButtonPanel();
+
+    displayPanel.updateUpperLeft(form);
+    displayPanel.updateLowerLeft(dashboard);
   }
 
   /**
-   * Returns the current working {@link SeasonContainer season}.
+   * Return the current {@link Season} that is being displayed.
    */
-  public static SeasonContainer season() {
-    // there can never be more than 1
-    return seasonContainer.get(0);
+  public static Season currentSeason() {
+    return season;
+  }
+
+  public static CopyActivityRecordAction copyActivityRecordAction() {
+    return copyActivityRecordAction;
+  }
+
+  public static DisplayActivatesAction DisplayActivitesAction() {
+    return displayActivitesAction;
+  }
+
+  public static EditActivityAction EditActivityAction() {
+    return editActivityAction;
+  }
+
+  public static NewActivityRecordAction NewActivityRecordAction() {
+    return newActivityRecordAction;
+  }
+
+  public static OpenActivityRecordAction OpenActivityRecordAction() {
+    return openActivityRecordAction;
+  }
+
+  public static SaveActivityRecordAction SaveActivityRecordAction() {
+    return saveActivityRecordAction;
+  }
+
+  public static CloseSeasonAction CloseSeasonAction() {
+    return closeSeasonAction;
+  }
+
+  public static CreateSeasonAction CreateSeasonAction() {
+    return createSeasonAction;
+  }
+
+  public static NewSeasonAction NewSeasonAction() {
+    return newSeasonAction;
+  }
+
+  public static OpenSeasonAction OpenSeasonAction() {
+    return openSeasonAction;
+  }
+
+  public static SaveAsSeasonAction SaveAsSeasonAction() {
+    return saveAsSeasonAction;
+  }
+
+  public static SaveSeasonAction SaveSeasonAction() {
+    return saveSeasonAction;
+  }
+
+  public static NewSessionAction CreateNewSessionAction() {
+    return newSessionAction;
+  }
+
+  public static OpenSessionAction OpenSessionAction() {
+    return openSessionAction;
+  }
+
+  public static SaveAsSessionAction SaveAsSessionAction() {
+    return saveAsSessionAction;
+  }
+
+  public static SaveSessionAction SaveSessionAction() {
+    return saveSessionAction;
+  }
+
+  public static CopyStaffRecordsAction CopyStaffRecordsAction() {
+    return copyStaffRecordsAction;
+  }
+
+  public static CreateNewStaffRecordActivity CreateNewStaffRecordActivity() {
+    return createNewStaffRecordActivity;
+  }
+
+  public static EditStaffRecordActivity EditStaffRecordActivity() {
+    return editStaffRecordActivity;
+  }
+
+  public static OpenStaffRecordActivity OpenStaffRecordActivity() {
+    return openStaffRecordActivity;
+  }
+
+  public static SaveStaffRecordActivity SaveStaffRecordActivity() {
+    return saveStaffRecordActivity;
+  }
+
+  public static CopyStudentRecordAction CopyStudentRecordAction() {
+    return copyStudentRecordAction;
+  }
+
+  public static CreateNewStudentRecordAction CreateNewStudentRecordAction() {
+    return createNewStudentRecordAction;
+  }
+
+  public static EditStudentRecordAction EditStudentRecordAction() {
+    return editStudentRecordAction;
+  }
+
+  public static OpenStudentRecordAction OpenStudentRecordAction() {
+    return openStudentRecordAction;
+  }
+
+  public static SaveStudentRecordAction SaveStudentRecordAction() {
+    return saveStudentRecordAction;
   }
 
   public static void main(String[] args) {
