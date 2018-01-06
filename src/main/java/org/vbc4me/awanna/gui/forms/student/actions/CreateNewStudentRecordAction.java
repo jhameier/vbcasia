@@ -27,6 +27,7 @@ public final class CreateNewStudentRecordAction extends AbstractAction {
   }
 
   public void actionPerformed(ActionEvent e) {
-    AppGui.displayPanel().updateRightDisplay(new StudentEditForm(), new RecordButtonPanel());
+    AppGui.displayPanel().clearAllDisplays();
+    AppGui.displayPanel().updateLeftDisplay(new RecordButtonPanel(), new StudentEditForm());
   }
 }
