@@ -1,10 +1,12 @@
 package org.vbc4me.awanna.gui.forms;
 
+import java.awt.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import net.miginfocom.swing.MigLayout;
 
-import javax.swing.*;
-import javax.swing.table.TableModel;
-import java.awt.*;
+
 
 /**
  * This class handles the various spreadsheet styles table models and JPanels to display.  This uses a JSplitPane to
@@ -208,4 +210,14 @@ public final class DisplayPanel extends JPanel {
     splitPane.setDividerLocation(-1);
   }
 
+  /**
+   * Clear all the panels including the table model.
+   */
+  public void clearAllDisplays() {
+    upperLeftPanel.removeAll();
+    lowerLeftPanel.removeAll();
+    upperRightPanel.removeAll();
+    lowerRightPanel.removeAll();
+    table.setModel(new DefaultTableModel());
+  }
 }
