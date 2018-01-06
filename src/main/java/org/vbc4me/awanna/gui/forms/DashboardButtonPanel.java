@@ -36,17 +36,17 @@ public class DashboardButtonPanel extends JPanel {
 
     // Display the current Session's Activities
     JButton btnActivityDispplay = new JButton("Display");
-    btnActivityDispplay.setAction(AppGui.DisplayActivitesAction());
+    btnActivityDispplay.setAction(AppGui.displayAllActivitesAction());
     panelActivity.add(btnActivityDispplay, "cell 1 0,aligny center");
 
     // Create a new Activity in the current Session
     JButton btnActivityCreate = new JButton("Create");
-    btnActivityCreate.setAction(AppGui.NewActivityRecordAction());
+    btnActivityCreate.setAction(AppGui.newActivityRecordAction());
     panelActivity.add(btnActivityCreate, "cell 2 0,aligny center");
 
     // Open the current Activity for editing
     JButton btnActivityOpen = new JButton("Edit");
-    btnActivityOpen.setAction(AppGui.OpenActivityRecordAction());
+    btnActivityOpen.setAction(AppGui.openActivityRecordAction());
     panelActivity.add(btnActivityOpen, "cell 3 0,aligny center");
 
 
@@ -61,15 +61,15 @@ public class DashboardButtonPanel extends JPanel {
     panelStudent.add(lblStudent, "cell 0 0,alignx right,aligny center");
 
     JButton btnStudentDisplay = new JButton("Display");
-    btnStudentDisplay.setAction(AppGui.OpenStudentRecordAction());
+    btnStudentDisplay.setAction(AppGui.displayAllStudentRecordAction());
     panelStudent.add(btnStudentDisplay, "cell 1 0,aligny center");
 
     JButton btnStudentCreate = new JButton("Create");
-    btnStudentCreate.setAction(AppGui.CreateNewStudentRecordAction());
+    btnStudentCreate.setAction(AppGui.createNewStudentRecordAction());
     panelStudent.add(btnStudentCreate, "cell 2 0,aligny center");
 
     JButton btnStudentOpen = new JButton("Edit");
-    btnStudentOpen.setAction(AppGui.OpenStudentRecordAction());
+    btnStudentOpen.setAction(AppGui.openStudentRecordAction());
     panelStudent.add(btnStudentOpen, "cell 3 0,aligny center");
 
     /* ********************************************************************** */
@@ -84,15 +84,15 @@ public class DashboardButtonPanel extends JPanel {
     panelStaff.add(lblStaff, "cell 0 0,alignx right,aligny center");
 
     JButton btnStaffDisplay = new JButton("Display");
-    btnStaffDisplay.setAction(AppGui.OpenStaffRecordActivity());
+    btnStaffDisplay.setAction(AppGui.displayAllStaffRecordAction());
     panelStaff.add(btnStaffDisplay, "cell 1 0,aligny center");
 
     JButton btnStaffCreate = new JButton("Create");
-    btnStaffCreate.setAction(AppGui.CreateNewStaffRecordActivity());
+    btnStaffCreate.setAction(AppGui.createNewStaffRecordActivity());
     panelStaff.add(btnStaffCreate, "cell 2 0,aligny center");
 
     JButton btnStaffOpen = new JButton("Edit");
-    btnStaffOpen.setAction(AppGui.OpenStaffRecordActivity());
+    btnStaffOpen.setAction(AppGui.openStaffRecordActivity());
     panelStaff.add(btnStaffOpen, "cell 3 0,aligny center");
   }
 

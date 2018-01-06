@@ -1,9 +1,13 @@
 package org.vbc4me.awanna.gui.forms.activity;
 
+import org.vbc4me.awanna.facets.Activity;
+
+import javax.swing.table.AbstractTableModel;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.table.AbstractTableModel;
-import org.vbc4me.awanna.facets.Activity;
 
 public final class ActivitiesTableModel extends AbstractTableModel {
 
@@ -29,9 +33,9 @@ public final class ActivitiesTableModel extends AbstractTableModel {
     Activity activity = data.get(row);
     switch (column) {
       case DATE:
-        return activity.date();
+        return activity.date().format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
       case TIME:
-        return activity.time();
+        return activity.time().format(DateTimeFormatter.ofPattern("hh:mm:ss a"));
       case ACTIVITY:
         return activity.name();
     }
@@ -69,12 +73,12 @@ public final class ActivitiesTableModel extends AbstractTableModel {
   public Class<?> getColumnClass(int column) {
     switch (column) {
       case 0:
-        return Boolean.class;
+        return LocalDate.class;
       case 1:
+        return LocalTime.class;
       case 2:
-      case 3:
         return String.class;
-      case 4:
+      case 3:
         return Double.class;
       default:
         return Object.class;

@@ -1,23 +1,24 @@
 package org.vbc4me.awanna.gui.forms.student;
 
+import org.joda.money.format.MoneyFormatterBuilder;
+import org.vbc4me.awanna.facets.Student;
+
+import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.table.AbstractTableModel;
-import org.vbc4me.awanna.facets.Student;
 
 public class StudentTableModel extends AbstractTableModel {
 
-  public static final int CHECK_BOX = 0;
-  public static final int LAST_NAME = 1;
-  public static final int FIRST_NAME = 2;
-  public static final int CLUB_NAME = 3;
-  public static final int ACCOUNT_BALANCE = 4;
+  private static final int LAST_NAME = 0;
+  private static final int FIRST_NAME = 1;
+  private static final int CLUB_NAME = 2;
+  private static final int ACCOUNT_BALANCE = 3;
   private static final long serialVersionUID = 4272448093197382220L;
-  protected String[] columnNames;
-  protected List<Student> data;
+  private String[] columnNames;
+  private List<Student> data;
 
   public StudentTableModel() {
-    this.columnNames = new String[]{};
+    this.columnNames = new String[]{"Last Name", "First Name", "Club", "Account Balance"};
     data = new ArrayList<>();
   }
 
@@ -62,13 +63,10 @@ public class StudentTableModel extends AbstractTableModel {
   public Class<?> getColumnClass(int column) {
     switch (column) {
       case 0:
-        return Boolean.class;
       case 1:
       case 2:
       case 3:
         return String.class;
-      case 4:
-        return Double.class;
       default:
         return Object.class;
     }
@@ -77,12 +75,22 @@ public class StudentTableModel extends AbstractTableModel {
 
   @Override
   public Object getValueAt(int row, int column) {
-    return studentData(row)[column];
-  }
-
-  private String[] studentData(int index) {
-    Student s = data.get(index);
-    return new String[]{"false", s.lastName(), s.firstName(), s.currentClub(),
-        String.valueOf(s.account().balance())};
+    Student student = data.get(row);
+    switch (column) {
+      case LAST_NAME:
+        return student.lastName();
+      case FIRST_NAME:
+        return student.firstName();
+      case CLUB_NAME:
+        return student.currentClub();
+      case ACCOUNT_BALANCE:
+        return new MoneyFormatterBuilder()
+            .appendCurrencySymbolLocalized()
+            .appendAmount()
+            .toFormatter()
+            .print(student.account().balance());
+      default:
+        return null;
+    }
   }
 }

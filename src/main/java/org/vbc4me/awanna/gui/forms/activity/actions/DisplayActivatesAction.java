@@ -2,12 +2,11 @@ package org.vbc4me.awanna.gui.forms.activity.actions;
 
 import org.vbc4me.awanna.facets.Activity;
 import org.vbc4me.awanna.gui.AppGui;
+import org.vbc4me.awanna.gui.forms.activity.ActivitiesTableModel;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.AbstractAction;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
-import java.time.LocalDate;
-import java.util.Map;
 
 public class DisplayActivatesAction extends AbstractAction {
   private final Container frame;
@@ -20,7 +19,11 @@ public class DisplayActivatesAction extends AbstractAction {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    Map<LocalDate, Activity> activities = AppGui.currentSeason().session().activities();
+    ActivitiesTableModel model = new ActivitiesTableModel();
+    for (Activity activity: AppGui.currentSeason().session().activities().values()) {
+      model.addData(activity);
+    }
 
+    AppGui.displayPanel().updateTableDisplay(model);
   }
 }

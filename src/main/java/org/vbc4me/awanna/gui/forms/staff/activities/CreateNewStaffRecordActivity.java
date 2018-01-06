@@ -11,8 +11,8 @@ public class CreateNewStaffRecordActivity extends AbstractAction {
 
   public CreateNewStaffRecordActivity(Container frame) {
     this.frame = frame;
-    putValue(NAME, "Create");
-    putValue(SHORT_DESCRIPTION, "Creates new blank information record ");
+    putValue(NAME, "New Record");
+    putValue(SHORT_DESCRIPTION, "Creates new blank staff record");
   }
 
   @Override

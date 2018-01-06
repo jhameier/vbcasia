@@ -23,10 +23,10 @@ public final class CreateNewStudentRecordAction extends AbstractAction {
     this.frame = frame;
     putValue(NAME, "New Record");
     putValue(SHORT_DESCRIPTION, "Creates new blank information record ");
-    setEnabled(false);
+    setEnabled(true);
   }
 
   public void actionPerformed(ActionEvent e) {
-    AppGui.displayPanel().updateLeftDisplay(new StudentEditForm(), new RecordButtonPanel());
+    AppGui.displayPanel().updateRightDisplay(new StudentEditForm(), new RecordButtonPanel());
   }
 }

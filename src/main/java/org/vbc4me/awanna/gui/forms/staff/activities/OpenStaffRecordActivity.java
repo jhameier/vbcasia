@@ -11,6 +11,9 @@ public class OpenStaffRecordActivity extends AbstractAction {
 
   public OpenStaffRecordActivity(Container frame) {
     this.frame = frame;
+    putValue(NAME, "Open Record");
+    putValue(SHORT_DESCRIPTION, "Open the selected staff record for editing");
+    setEnabled(true);
   }
 
   @Override

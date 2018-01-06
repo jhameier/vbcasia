@@ -27,12 +27,13 @@ import org.vbc4me.awanna.gui.forms.session.actions.SaveAsSessionAction;
 import org.vbc4me.awanna.gui.forms.session.actions.SaveSessionAction;
 import org.vbc4me.awanna.gui.forms.staff.activities.CopyStaffRecordsAction;
 import org.vbc4me.awanna.gui.forms.staff.activities.CreateNewStaffRecordActivity;
+import org.vbc4me.awanna.gui.forms.staff.activities.DisplayAllStaffRecordAction;
 import org.vbc4me.awanna.gui.forms.staff.activities.EditStaffRecordActivity;
 import org.vbc4me.awanna.gui.forms.staff.activities.OpenStaffRecordActivity;
 import org.vbc4me.awanna.gui.forms.staff.activities.SaveStaffRecordActivity;
-import org.vbc4me.awanna.gui.forms.student.StudentContainer;
 import org.vbc4me.awanna.gui.forms.student.actions.CopyStudentRecordAction;
 import org.vbc4me.awanna.gui.forms.student.actions.CreateNewStudentRecordAction;
+import org.vbc4me.awanna.gui.forms.student.actions.DisplayAllStudentRecordAction;
 import org.vbc4me.awanna.gui.forms.student.actions.EditStudentRecordAction;
 import org.vbc4me.awanna.gui.forms.student.actions.OpenStudentRecordAction;
 import org.vbc4me.awanna.gui.forms.student.actions.SaveStudentRecordAction;
@@ -67,7 +68,7 @@ public final class AppGui extends JFrame {
   private static OpenActivityRecordAction openActivityRecordAction;
   private static SaveActivityRecordAction saveActivityRecordAction= new SaveActivityRecordAction(mainWindow);
   private static CloseSeasonAction closeSeasonAction;
-  private static CreateSeasonAction createSeasonAction= new CreateSeasonAction(mainWindow);
+  private static CreateSeasonAction createNewSeasonAction = new CreateSeasonAction(mainWindow);
   private static NewSeasonAction newSeasonAction;
   private static OpenSeasonAction openSeasonAction;
   private static SaveAsSeasonAction saveAsSeasonAction= new SaveAsSeasonAction(mainWindow);
@@ -78,6 +79,7 @@ public final class AppGui extends JFrame {
   private static SaveSessionAction saveSessionAction;
   private static CopyStaffRecordsAction copyStaffRecordsAction;
   private static CreateNewStaffRecordActivity createNewStaffRecordActivity;
+  private static DisplayAllStaffRecordAction displayAllStaffRecordAction;
   private static EditStaffRecordActivity editStaffRecordActivity;
   private static OpenStaffRecordActivity openStaffRecordActivity;
   private static SaveStaffRecordActivity saveStaffRecordActivity;
@@ -86,6 +88,7 @@ public final class AppGui extends JFrame {
   private static EditStudentRecordAction editStudentRecordAction;
   private static OpenStudentRecordAction openStudentRecordAction;
   private static SaveStudentRecordAction saveStudentRecordAction;
+  private static DisplayAllStudentRecordAction displayAllStudentRecordAction;
 
   /**
    * Primary constructor that lays out the basic application structure using a border layout with a menu bar, button
@@ -107,7 +110,7 @@ public final class AppGui extends JFrame {
     openActivityRecordAction = new OpenActivityRecordAction(this);
     saveActivityRecordAction= new SaveActivityRecordAction(this);
     closeSeasonAction = new CloseSeasonAction(this);
-    createSeasonAction= new CreateSeasonAction(this);
+    createNewSeasonAction = new CreateSeasonAction(this);
     newSeasonAction = new NewSeasonAction(this);
     openSeasonAction = new OpenSeasonAction(this);
     saveAsSeasonAction= new SaveAsSeasonAction(this);
@@ -118,16 +121,17 @@ public final class AppGui extends JFrame {
     saveSessionAction = new SaveSessionAction(this);
     copyStaffRecordsAction = new CopyStaffRecordsAction(this);
     createNewStaffRecordActivity = new CreateNewStaffRecordActivity(this);
+    displayAllStaffRecordAction = new DisplayAllStaffRecordAction(this);
     editStaffRecordActivity = new EditStaffRecordActivity(this);
     openStaffRecordActivity = new OpenStaffRecordActivity(this);
     saveStaffRecordActivity = new SaveStaffRecordActivity(this);
     copyStudentRecordAction = new CopyStudentRecordAction(this);
     createNewStudentRecordAction = new CreateNewStudentRecordAction(this);
+    displayAllStudentRecordAction = new DisplayAllStudentRecordAction(this);
     editStudentRecordAction = new EditStudentRecordAction(this);
     openStudentRecordAction = new OpenStudentRecordAction(this);
     saveStudentRecordAction = new SaveStudentRecordAction(this);
-    
-    
+
     
     
     /*
@@ -141,42 +145,42 @@ public final class AppGui extends JFrame {
     JMenu mnFile = new JMenu("File");
     menuBar.add(mnFile);
 
-    JMenuItem mntmNewSeason = new JMenuItem(NewSeasonAction());
+    JMenuItem mntmNewSeason = new JMenuItem(newSeasonAction);
     mnFile.add(mntmNewSeason);
 
-    JMenuItem mntmOpenSeason = new JMenuItem(OpenSeasonAction());
+    JMenuItem mntmOpenSeason = new JMenuItem(openSeasonAction);
     mnFile.add(mntmOpenSeason);
 
-    JMenuItem mntmSaveSeason = new JMenuItem(SaveSeasonAction());
+    JMenuItem mntmSaveSeason = new JMenuItem(saveSeasonAction);
     mnFile.add(mntmSaveSeason);
 
-    JMenuItem mntmSaveasSeason = new JMenuItem(SaveAsSeasonAction());
+    JMenuItem mntmSaveasSeason = new JMenuItem(saveAsSeasonAction);
     mnFile.add(mntmSaveasSeason);
 
     mnFile.addSeparator();
 
-    JMenuItem mntmNewSession = new JMenuItem(CreateNewSessionAction());
+    JMenuItem mntmNewSession = new JMenuItem(createNewSeasonAction);
     mnFile.add(mntmNewSession);
 
-    JMenuItem mntmOpenSession = new JMenuItem(OpenSessionAction());
+    JMenuItem mntmOpenSession = new JMenuItem(openSessionAction);
     mnFile.add(mntmOpenSession);
 
-    JMenuItem mntmSaveSession = new JMenuItem(SaveSessionAction());
+    JMenuItem mntmSaveSession = new JMenuItem(saveSessionAction);
     mnFile.add(mntmSaveSession);
 
-    JMenuItem mntmSaveasSession = new JMenuItem(SaveAsSessionAction());
+    JMenuItem mntmSaveasSession = new JMenuItem(saveAsSessionAction);
     mnFile.add(mntmSaveasSession);
 
     mnFile.addSeparator();
 
-    JMenuItem mntmNewRecord = new JMenuItem(StudentContainer.newAction);
-    mnFile.add(mntmNewRecord);
-
-    JMenuItem mntmEdit = new JMenuItem(StudentContainer.editAction);
-    mnFile.add(mntmEdit);
-
-    JMenuItem mntmSaveRecord = new JMenuItem(StudentContainer.saveAction);
-    mnFile.add(mntmSaveRecord);
+//    JMenuItem mntmNewRecord = new JMenuItem();
+//    mnFile.add(mntmNewRecord);
+//
+//    JMenuItem mntmEdit = new JMenuItem();
+//    mnFile.add(mntmEdit);
+//
+//    JMenuItem mntmSaveRecord = new JMenuItem();
+//    mnFile.add(mntmSaveRecord);
 
     /*
      * ***************** EDIT MENU ************************
@@ -195,7 +199,7 @@ public final class AppGui extends JFrame {
     JMenuItem mntmCut = new JMenuItem("Cut");
     mnEdit.add(mntmCut);
 
-    JMenuItem mntmCopy = new JMenuItem(StudentContainer.copyAction);
+    JMenuItem mntmCopy = new JMenuItem("Copy");
     mnEdit.add(mntmCopy);
 
     JMenuItem mntmPaste = new JMenuItem("Paste");
@@ -276,63 +280,63 @@ public final class AppGui extends JFrame {
     return copyActivityRecordAction;
   }
 
-  public static DisplayActivatesAction DisplayActivitesAction() {
+  public static DisplayActivatesAction displayAllActivitesAction() {
     return displayActivitesAction;
   }
 
-  public static EditActivityAction EditActivityAction() {
+  public static EditActivityAction editActivityAction() {
     return editActivityAction;
   }
 
-  public static NewActivityRecordAction NewActivityRecordAction() {
+  public static NewActivityRecordAction newActivityRecordAction() {
     return newActivityRecordAction;
   }
 
-  public static OpenActivityRecordAction OpenActivityRecordAction() {
+  public static OpenActivityRecordAction openActivityRecordAction() {
     return openActivityRecordAction;
   }
 
-  public static SaveActivityRecordAction SaveActivityRecordAction() {
+  public static SaveActivityRecordAction saveActivityRecordAction() {
     return saveActivityRecordAction;
   }
 
-  public static CloseSeasonAction CloseSeasonAction() {
+  public static CloseSeasonAction closeSeasonAction() {
     return closeSeasonAction;
   }
 
-  public static CreateSeasonAction CreateSeasonAction() {
-    return createSeasonAction;
+  public static CreateSeasonAction createSeasonAction() {
+    return createNewSeasonAction;
   }
 
-  public static NewSeasonAction NewSeasonAction() {
+  public static NewSeasonAction newSeasonAction() {
     return newSeasonAction;
   }
 
-  public static OpenSeasonAction OpenSeasonAction() {
+  public static OpenSeasonAction openSeasonAction() {
     return openSeasonAction;
   }
 
-  public static SaveAsSeasonAction SaveAsSeasonAction() {
+  public static SaveAsSeasonAction saveAsSeasonAction() {
     return saveAsSeasonAction;
   }
 
-  public static SaveSeasonAction SaveSeasonAction() {
+  public static SaveSeasonAction saveSeasonAction() {
     return saveSeasonAction;
   }
 
-  public static NewSessionAction CreateNewSessionAction() {
+  public static NewSessionAction createNewSessionAction() {
     return newSessionAction;
   }
 
-  public static OpenSessionAction OpenSessionAction() {
+  public static OpenSessionAction openSessionAction() {
     return openSessionAction;
   }
 
-  public static SaveAsSessionAction SaveAsSessionAction() {
+  public static SaveAsSessionAction saveAsSessionAction() {
     return saveAsSessionAction;
   }
 
-  public static SaveSessionAction SaveSessionAction() {
+  public static SaveSessionAction saveSessionAction() {
     return saveSessionAction;
   }
 
@@ -340,41 +344,51 @@ public final class AppGui extends JFrame {
     return copyStaffRecordsAction;
   }
 
-  public static CreateNewStaffRecordActivity CreateNewStaffRecordActivity() {
+  public static CreateNewStaffRecordActivity createNewStaffRecordActivity() {
     return createNewStaffRecordActivity;
   }
 
-  public static EditStaffRecordActivity EditStaffRecordActivity() {
+  public static DisplayAllStaffRecordAction displayAllStaffRecordAction() {
+    return displayAllStaffRecordAction;
+  }
+
+  public static EditStaffRecordActivity editStaffRecordActivity() {
     return editStaffRecordActivity;
   }
 
-  public static OpenStaffRecordActivity OpenStaffRecordActivity() {
+  public static OpenStaffRecordActivity openStaffRecordActivity() {
     return openStaffRecordActivity;
   }
 
-  public static SaveStaffRecordActivity SaveStaffRecordActivity() {
+  public static SaveStaffRecordActivity saveStaffRecordActivity() {
     return saveStaffRecordActivity;
   }
 
-  public static CopyStudentRecordAction CopyStudentRecordAction() {
+  public static CopyStudentRecordAction copyStudentRecordAction() {
     return copyStudentRecordAction;
   }
 
-  public static CreateNewStudentRecordAction CreateNewStudentRecordAction() {
+  public static CreateNewStudentRecordAction createNewStudentRecordAction() {
     return createNewStudentRecordAction;
   }
 
-  public static EditStudentRecordAction EditStudentRecordAction() {
+  public static DisplayAllStudentRecordAction displayAllStudentRecordAction() {
+    return displayAllStudentRecordAction;
+  }
+
+  public static EditStudentRecordAction editStudentRecordAction() {
     return editStudentRecordAction;
   }
 
-  public static OpenStudentRecordAction OpenStudentRecordAction() {
+  public static OpenStudentRecordAction openStudentRecordAction() {
     return openStudentRecordAction;
   }
 
-  public static SaveStudentRecordAction SaveStudentRecordAction() {
+  public static SaveStudentRecordAction saveStudentRecordAction() {
     return saveStudentRecordAction;
   }
+
+
 
   public static void main(String[] args) {
     SwingUtilities.invokeLater(AppGui::initializeAndShowGui);
