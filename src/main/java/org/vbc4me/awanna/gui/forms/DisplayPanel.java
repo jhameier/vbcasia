@@ -69,6 +69,7 @@ public final class DisplayPanel extends JPanel {
      *  |==============================================|
      */
     final JScrollPane upperScrollPane = new JScrollPane(contentPanel);
+    upperScrollPane.getVerticalScrollBar().setUnitIncrement(10);
     contentPanel.setLayout(new MigLayout("", "[][]", "[]"));
 
     JPanel leftPanel = new JPanel();
