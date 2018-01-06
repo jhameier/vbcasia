@@ -2,6 +2,7 @@ package org.vbc4me.awanna.gui;
 
 import org.vbc4me.awanna.facets.Season;
 import org.vbc4me.awanna.gui.actions.AboutAction;
+import org.vbc4me.awanna.gui.actions.DisplayDashboardAction;
 import org.vbc4me.awanna.gui.actions.LookAndFeelAction;
 import org.vbc4me.awanna.gui.actions.PreferenceAction;
 import org.vbc4me.awanna.gui.actions.ProgramHelpAction;
@@ -173,15 +174,6 @@ public final class AppGui extends JFrame {
 
     mnFile.addSeparator();
 
-//    JMenuItem mntmNewRecord = new JMenuItem();
-//    mnFile.add(mntmNewRecord);
-//
-//    JMenuItem mntmEdit = new JMenuItem();
-//    mnFile.add(mntmEdit);
-//
-//    JMenuItem mntmSaveRecord = new JMenuItem();
-//    mnFile.add(mntmSaveRecord);
-
     /*
      * ***************** EDIT MENU ************************
      */
@@ -204,6 +196,16 @@ public final class AppGui extends JFrame {
 
     JMenuItem mntmPaste = new JMenuItem("Paste");
     mnEdit.add(mntmPaste);
+
+    /*
+     * ***************** DISPLAY MENU ************************
+     */
+    JMenu mnDisplay = new JMenu("Display");
+    menuBar.add(mnDisplay);
+
+    Action displaySeason = new DisplayDashboardAction(this);
+    JMenuItem mntmSeason = new JMenuItem(displaySeason);
+    mnDisplay.add(mntmSeason);
 
     /*
      * ***************** HELP MENU ************************
@@ -246,7 +248,6 @@ public final class AppGui extends JFrame {
     Action preferences = new PreferenceAction(this);
     JMenuItem mntmPref = new JMenuItem(preferences);
     mnHelp.add(mntmPref);
-
   }
 
   /**
@@ -274,6 +275,14 @@ public final class AppGui extends JFrame {
    */
   public static Season currentSeason() {
     return season;
+  }
+
+  /**
+   * Display the current season's dashboard.
+   */
+  public static void displayDashboard() {
+    displayPanel.clearAllDisplays();
+    currentSeason(season);
   }
 
   public static CopyActivityRecordAction copyActivityRecordAction() {
