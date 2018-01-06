@@ -100,6 +100,7 @@ public final class DisplayPanel extends JPanel {
      * different types of data in a custom spreadsheet style layout.
      */
     final JScrollPane lowerScrollPane = new JScrollPane(table);
+    lowerScrollPane.getVerticalScrollBar().setUnitIncrement(10);
 
     splitPane.setTopComponent(upperScrollPane);
     splitPane.setBottomComponent(lowerScrollPane);
