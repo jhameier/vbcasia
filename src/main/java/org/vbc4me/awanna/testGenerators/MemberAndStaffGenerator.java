@@ -14,12 +14,12 @@ import org.vbc4me.awanna.facets.Club;
 import org.vbc4me.awanna.facets.EmergencyContact;
 import org.vbc4me.awanna.facets.Guardian;
 import org.vbc4me.awanna.facets.PhoneNumber;
-import org.vbc4me.awanna.facets.Photo;
 import org.vbc4me.awanna.facets.Pickup;
 import org.vbc4me.awanna.facets.Staff;
 import org.vbc4me.awanna.facets.Student;
 import org.vbc4me.awanna.facets.Student.Builder;
 import org.vbc4me.awanna.facets.Zipcode;
+import org.vbc4me.awanna.gui.picture.Photo;
 
 public final class MemberAndStaffGenerator {
 

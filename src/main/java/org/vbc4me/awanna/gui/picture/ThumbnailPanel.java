@@ -14,14 +14,14 @@ public class ThumbnailPanel extends JPanel {
   private static final long serialVersionUID = 1305893316185985570L;
   private final String panelName;
   private final JLabel label;
-  private ImageContainer originalContainer;
-  private ImageContainer imageContainer;
+  private Photo originalContainer;
+  private Photo imageContainer;
 
   public ThumbnailPanel(String panelName) {
     this.panelName = panelName;
     setLayout(new BorderLayout());
 
-    originalContainer = ImageContainer.intializeEmptyContainer();
+    originalContainer = Photo.intializeEmptyContainer();
     imageContainer = originalContainer;
 
     Color bColor = getBackground().darker();
@@ -48,10 +48,10 @@ public class ThumbnailPanel extends JPanel {
   }
 
   /**
-   * Updated the displayed thumbnail and attaches an {@link ImageContainer image container} containing the original
+   * Updated the displayed thumbnail and attaches an {@link Photo image container} containing the original
    * image with a thumbnail for additional processing.
    */
-  public void updateThumbnail(ImageContainer container) {
+  public void updateThumbnail(Photo container) {
     originalContainer = imageContainer;
     imageContainer = container;
     label.setIcon(new ImageIcon(imageContainer.cloneThumbnail()));
@@ -68,7 +68,7 @@ public class ThumbnailPanel extends JPanel {
     return panelName;
   }
 
-  public ImageContainer imageContainer() {
+  public Photo imageContainer() {
     return imageContainer;
   }
 }

@@ -1,8 +1,11 @@
 package org.vbc4me.awanna.gui.forms.student.actions;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import javax.swing.*;
+import org.vbc4me.awanna.facets.Student;
+import org.vbc4me.awanna.gui.AppGui;
+import org.vbc4me.awanna.gui.forms.student.StudentEditForm;
 
 public final class SaveStudentRecordAction extends AbstractAction {
 
@@ -17,9 +20,11 @@ public final class SaveStudentRecordAction extends AbstractAction {
   }
 
   public void actionPerformed(ActionEvent e) {
-    String message = "This is activated from Save Record Action";
-    String title = "Save Record";
-    int messageType = JOptionPane.INFORMATION_MESSAGE;
-    JOptionPane.showMessageDialog(frame, message, title, messageType);
+    JPanel panel = AppGui.displayPanel().lowerLeftPanel();
+    if (!(panel instanceof StudentEditForm)) {
+      throw new IllegalArgumentException("The returned panel is not a student edit form.");
+    }
+    Student student = ((StudentEditForm) panel).createStudent();
+    AppGui.currentSeason().students().put(student.lastName(), student);
   }
 }

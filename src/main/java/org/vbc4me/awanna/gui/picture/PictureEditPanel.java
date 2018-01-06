@@ -72,7 +72,7 @@ public class PictureEditPanel extends JPanel {
 
   protected void saveThumbnail() {
 
-    ImageContainer currentContainer = new ImageContainer(currentImage, ImageContainer.createThumbnail(currentImage));
+    Photo currentContainer = new Photo(currentImage, Photo.createThumbnail(currentImage));
     dialog.thumbnailPanel().updateThumbnail(currentContainer);
     BufferedImage scaledImage = dialog.thumbnailPanel().imageContainer().getScaledImage(currentDimension);
     int centerOfThisPanelX = getCenterCoordinate().x;      // also the center of the image
@@ -84,8 +84,8 @@ public class PictureEditPanel extends JPanel {
     Point cbOffset = new Point(cropBox.x - scaledImageOrigin.x, cropBox.y - scaledImageOrigin.y);
     Dimension cbDim = new Dimension(cropBox.width, cropBox.height);
 
-    BufferedImage thumbnail = ImageContainer.createThumbnail(scaledImage, cbOffset, cbDim);
-    ImageContainer container = new ImageContainer(currentImage, thumbnail);
+    BufferedImage thumbnail = Photo.createThumbnail(scaledImage, cbOffset, cbDim);
+    Photo container = new Photo(currentImage, thumbnail);
 
     dialog.thumbnailPanel().updateThumbnail(container);
     dialog.dispose();

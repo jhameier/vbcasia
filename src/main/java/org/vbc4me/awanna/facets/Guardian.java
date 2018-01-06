@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import org.vbc4me.awanna.gui.picture.Photo;
 
 public class Guardian extends Person {
 

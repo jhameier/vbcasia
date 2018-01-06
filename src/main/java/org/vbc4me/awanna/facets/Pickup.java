@@ -2,6 +2,7 @@ package org.vbc4me.awanna.facets;
 
 import java.util.Objects;
 import java.util.UUID;
+import org.vbc4me.awanna.gui.picture.Photo;
 
 /**
  * Represents a person authorized to pickup a child from the place where an activity is taking place.

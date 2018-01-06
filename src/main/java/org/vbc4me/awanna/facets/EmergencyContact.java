@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import org.vbc4me.awanna.gui.picture.Photo;
 
 public class EmergencyContact extends Person {
 

@@ -19,12 +19,15 @@ public final class DisplayPanel extends JPanel {
 
   private static final long serialVersionUID = -3284524458172373047L;
   private final JTable table = new JTable();
-  private final JPanel contentPanel = new JPanel();
   private final JSplitPane splitPane;
-  private JPanel lowerLeftPanel;
-  private JPanel upperLeftPanel;
-  private JPanel upperRightPanel;
-  private JPanel lowerRightPanel;
+  private final JPanel upperLeftContainer;
+  private final JPanel lowerLeftContainer;
+  private final JPanel upperRightContainer;
+  private final JPanel lowerRightContainer;
+  private JPanel upperLeftPanel = null;
+  private JPanel lowerLeftPanel = null;
+  private JPanel upperRightPanel = null;
+  private JPanel lowerRightPanel = null;
 
   public DisplayPanel() {
     setLayout(new BorderLayout());
@@ -68,6 +71,7 @@ public final class DisplayPanel extends JPanel {
      *  |                                              |
      *  |==============================================|
      */
+    JPanel contentPanel = new JPanel();
     final JScrollPane upperScrollPane = new JScrollPane(contentPanel);
     upperScrollPane.getVerticalScrollBar().setUnitIncrement(10);
     contentPanel.setLayout(new MigLayout("", "[][]", "[]"));
@@ -76,21 +80,21 @@ public final class DisplayPanel extends JPanel {
     leftPanel.setLayout(new MigLayout("", "[]", "[][]"));
     contentPanel.add(leftPanel);
 
-    upperLeftPanel = new JPanel();
-    lowerLeftPanel = new JPanel();
+    upperLeftContainer = new JPanel();
+    lowerLeftContainer = new JPanel();
 
-    leftPanel.add(upperLeftPanel, "cell 0 0, align left");
-    leftPanel.add(lowerLeftPanel, "cell 0 1, align left");
+    leftPanel.add(upperLeftContainer, "cell 0 0, align left");
+    leftPanel.add(lowerLeftContainer, "cell 0 1, align left");
 
     JPanel rightPanel = new JPanel();
     rightPanel.setLayout(new MigLayout("", "[]", "[][]"));
     contentPanel.add(rightPanel);
 
-    upperRightPanel = new JPanel();
-    lowerRightPanel = new JPanel();
+    upperRightContainer = new JPanel();
+    lowerRightContainer = new JPanel();
 
-    rightPanel.add(upperRightPanel, "cell 0 0, align left");
-    rightPanel.add(lowerRightPanel, "cell 0 1, align left");
+    rightPanel.add(upperRightContainer, "cell 0 0, align left");
+    rightPanel.add(lowerRightContainer, "cell 0 1, align left");
 
 
     /*
@@ -120,8 +124,9 @@ public final class DisplayPanel extends JPanel {
    * Sets the left upper panel.
    */
   public void updateUpperLeft(JPanel panel) {
-    upperLeftPanel.removeAll();
-    upperLeftPanel.add(panel);
+    upperLeftContainer.removeAll();
+    upperLeftPanel = panel;
+    upperLeftContainer.add(upperLeftPanel);
     splitPane.setDividerLocation(-1);
   }
 
@@ -129,8 +134,9 @@ public final class DisplayPanel extends JPanel {
    * Sets the left lower panel.
    */
   public void updateLowerLeft(JPanel panel) {
-    lowerLeftPanel.removeAll();
-    lowerLeftPanel.add(panel);
+    lowerLeftContainer.removeAll();
+    lowerLeftPanel = panel;
+    lowerLeftContainer.add(lowerLeftPanel);
     splitPane.setDividerLocation(-1);
   }
 
@@ -138,8 +144,9 @@ public final class DisplayPanel extends JPanel {
    * Sets the right upper panel.
    */
   public void updateUpperRight(JPanel panel) {
-    upperRightPanel.removeAll();
-    upperRightPanel.add(panel);
+    upperRightContainer.removeAll();
+    upperRightPanel = panel;
+    upperRightContainer.add(upperRightPanel);
     splitPane.setDividerLocation(-1);
   }
 
@@ -147,8 +154,9 @@ public final class DisplayPanel extends JPanel {
    * Sets the right lower panel.
    */
   public void updateLowerRight(JPanel panel) {
-    lowerRightPanel.removeAll();
-    lowerRightPanel.add(panel);
+    lowerRightContainer.removeAll();
+    lowerRightPanel = panel;
+    lowerRightContainer.add(lowerRightPanel);
     splitPane.setDividerLocation(-1);
   }
 
@@ -157,10 +165,10 @@ public final class DisplayPanel extends JPanel {
    * Updates the left side upper and lower panels.
    */
   public void updateLeftDisplay(JPanel upperPanel, JPanel lowerPanel) {
-    upperLeftPanel.removeAll();
-    upperLeftPanel.add(upperPanel);
-    lowerLeftPanel.removeAll();
-    lowerLeftPanel.add(lowerPanel);
+    upperLeftContainer.removeAll();
+    lowerLeftContainer.removeAll();
+    updateUpperLeft(upperPanel);
+    updateLowerLeft(lowerPanel);
     splitPane.setDividerLocation(-1);
   }
 
@@ -168,10 +176,10 @@ public final class DisplayPanel extends JPanel {
    * Updates the right side upper and lower panels.
    */
   public void updateRightDisplay(JPanel upperPanel, JPanel lowerPanel) {
-    upperRightPanel.removeAll();
-    upperRightPanel.add(upperPanel);
-    lowerRightPanel.removeAll();
-    lowerRightPanel.add(lowerPanel);
+    upperRightContainer.removeAll();
+    lowerRightContainer.removeAll();
+    updateUpperRight(upperPanel);
+    updateLowerRight(lowerPanel);
     splitPane.setDividerLocation(-1);
   }
 
@@ -179,16 +187,10 @@ public final class DisplayPanel extends JPanel {
    * Initialize the display with placement in the upper left, lower left and lower right
    */
   public void update3PanelDisplay(JPanel upperLeft, JPanel lowerLeft, JPanel lowerRight) {
-    upperLeftPanel.removeAll();
-    upperLeftPanel.add(upperLeft);
-
-    lowerLeftPanel.removeAll();
-    lowerLeftPanel.add(lowerLeft);
-
-    lowerRightPanel.removeAll();
-    lowerRightPanel.add(lowerRight);
-
-    contentPanel.revalidate();
+    clearAllDisplays();
+    updateUpperLeft(upperLeft);
+    updateLowerLeft(lowerLeft);
+    updateLowerRight(lowerRight);
     splitPane.setDividerLocation(-1);
   }
 
@@ -196,19 +198,11 @@ public final class DisplayPanel extends JPanel {
    * Initialize the display with placement in the upper left, lower left, upper right and lower right.
    */
   public void update4PanelDisplay(JPanel upperLeft, JPanel lowerLeft, JPanel upperRight, JPanel lowerRight) {
-    upperLeftPanel.removeAll();
-    upperLeftPanel.add(upperLeft);
-
-    lowerLeftPanel.removeAll();
-    lowerLeftPanel.add(lowerLeft);
-
-    upperRightPanel.removeAll();
-    upperRightPanel.add(upperRight);
-
-    lowerRightPanel.removeAll();
-    lowerRightPanel.add(lowerRight);
-
-    contentPanel.revalidate();
+    clearAllDisplays();
+    updateUpperLeft(upperLeft);
+    updateLowerLeft(lowerLeft);
+    updateUpperRight(upperRight);
+    updateLowerRight(lowerRight);
     splitPane.setDividerLocation(-1);
   }
 
@@ -216,10 +210,38 @@ public final class DisplayPanel extends JPanel {
    * Clear all the panels including the table model.
    */
   public void clearAllDisplays() {
-    upperLeftPanel.removeAll();
-    lowerLeftPanel.removeAll();
-    upperRightPanel.removeAll();
-    lowerRightPanel.removeAll();
+    upperLeftContainer.removeAll();
+    lowerLeftContainer.removeAll();
+    upperRightContainer.removeAll();
+    lowerRightContainer.removeAll();
     table.setModel(new DefaultTableModel());
+  }
+
+  /**
+   * Return the current {@link JPanel} attached to this container.
+   */
+  public JPanel upperLeftPanel() {
+    return upperLeftPanel;
+  }
+
+  /**
+   * Return the current {@link JPanel} attached to this container.
+   */
+  public JPanel lowerLeftPanel() {
+    return lowerLeftPanel;
+  }
+
+  /**
+   * Return the current {@link JPanel} attached to this container.
+   */
+  public JPanel upperRightPanel() {
+    return upperRightPanel;
+  }
+
+  /**
+   * Return the current {@link JPanel} attached to this container.
+   */
+  public JPanel lowerRightPanel() {
+    return lowerRightPanel;
   }
 }

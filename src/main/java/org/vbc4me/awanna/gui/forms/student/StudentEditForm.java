@@ -1,54 +1,59 @@
 package org.vbc4me.awanna.gui.forms.student;
 
-import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import java.awt.*;
+import java.text.ParseException;
+import java.time.LocalDate;
+import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import net.miginfocom.swing.MigLayout;
-import org.vbc4me.awanna.gui.picture.ImageContainer;
+import org.vbc4me.awanna.facets.EmergencyContact;
+import org.vbc4me.awanna.facets.Guardian;
+import org.vbc4me.awanna.facets.PhoneNumber;
+import org.vbc4me.awanna.facets.Pickup;
+import org.vbc4me.awanna.facets.Student;
+import org.vbc4me.awanna.facets.Zipcode;
+import org.vbc4me.awanna.gui.picture.Photo;
 import org.vbc4me.awanna.gui.picture.ThumbnailPanel;
 import org.vbc4me.awanna.gui.picture.actions.AttachPhotoAction;
 
 public class StudentEditForm extends JPanel {
 
   private static final long serialVersionUID = -6820054695958009796L;
-  public static ThumbnailPanel childPhotoPanel;
-  public static ThumbnailPanel parentPhotoPanel;
-  public static ThumbnailPanel auth1PhotoPanel;
-  public static ThumbnailPanel auth2PhotoPanel;
-  public static ThumbnailPanel auth3PhotoPanel;
-  public static ThumbnailPanel auth4PhotoPanel;
-  public JTextField txtChildFirstName;
-  public JTextField txtChildLastName;
-  public JTextField txtChildAge;
-  public JTextField txtChildGrade;
-  public JTextField txtChildDOB;
-  public JTextField txtParentFirstName;
-  public JTextField txtParentLastName;
-  public JTextField txtParentAddress;
-  public JTextField txtParentState;
-  public JTextField txtParentZipCode;
-  public JTextField txtParentCity;
-  public JTextField txtPhoneHome;
-  public JTextField txtPhoneCell;
-  public JTextField txtEmailAddress;
-  public JTextField txtChildSpecialNeeds;
-  public JTextField txtEmergencyPhone;
-  public JTextField txtEmergencyName;
-  public JTextField txtAuth1FirstName;
-  public JTextField txtAuth1LastName;
-  public JTextField txtAuth1Relationship;
-  public JTextField txtAuth2FirstName;
-  public JTextField txtAuth3FirstName;
-  public JTextField txtAuth4FirstName;
-  public JTextField txtAuth2LastName;
-  public JTextField txtAuth3LastName;
-  public JTextField txtAuth4LastName;
-  public JTextField txtAuth2Relationship;
-  public JTextField txtAuth3Relationship;
-  public JTextField txtAuth4Relationship;
+  private ThumbnailPanel studentPhotoPanel;
+  private ThumbnailPanel guardianPhotoPanel;
+  private ThumbnailPanel auth1PhotoPanel;
+  private ThumbnailPanel auth2PhotoPanel;
+  private ThumbnailPanel auth3PhotoPanel;
+  private ThumbnailPanel auth4PhotoPanel;
+  private JTextField txtStudentFirstName;
+  private JTextField txtStudentLastName;
+  private JTextField txtStudentGrade;
+  private JTextField txtStudentDOB;
+  private JTextField txtParentFirstName;
+  private JTextField txtParentLastName;
+  private JTextField txtParentAddress;
+  private JTextField txtParentState;
+  private JTextField txtParentZipCode;
+  private JTextField txtParentCity;
+  private JTextField txtPhoneHome;
+  private JTextField txtPhoneCell;
+  private JFormattedTextField txtPhoneAlt;
+  private JTextField txtEmailAddress;
+  private JTextField txtStudentSpecialNeeds;
+  private JTextField txtEmergencyPhone;
+  private JTextField txtEmergencyName;
+  private JTextField txtAuth1FirstName;
+  private JTextField txtAuth1LastName;
+  private JTextField txtAuth1Relationship;
+  private JTextField txtAuth2FirstName;
+  private JTextField txtAuth3FirstName;
+  private JTextField txtAuth4FirstName;
+  private JTextField txtAuth2LastName;
+  private JTextField txtAuth3LastName;
+  private JTextField txtAuth4LastName;
+  private JTextField txtAuth2Relationship;
+  private JTextField txtAuth3Relationship;
+  private JTextField txtAuth4Relationship;
 
   public StudentEditForm() {
     setLayout(new MigLayout("",
@@ -56,70 +61,72 @@ public class StudentEditForm extends JPanel {
         "[20px][20px][20px,grow][25px][20px][20px][20px,grow][25px][20px][20px][20px][20px][20px][20px][20px]"
             + "[25px,grow][25px,grow][25px,grow][25px,grow][20px]"));
 
-    JLabel lblChild = new JLabel("Child");
-    lblChild.setFont(new Font("Tahoma", Font.BOLD, 14));
-    add(lblChild, "cell 1 1 5 1,growx,aligny top");
+    MaskFormatter phoneNumberFormatter = null;
+    try {
+      phoneNumberFormatter = new MaskFormatter("(###) ###-####");
+      phoneNumberFormatter.setPlaceholderCharacter('_');
+      // FIXME update to take only numbers
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
 
-    childPhotoPanel = new ThumbnailPanel("child");
-    childPhotoPanel.setBorder(null);
-    add(childPhotoPanel, "cell 1 2 1 2,grow");
+    JLabel lblStudent = new JLabel("Student");
+    lblStudent.setFont(new Font("Tahoma", Font.BOLD, 14));
+    add(lblStudent, "cell 1 1 5 1,growx,aligny top");
 
-    JLabel lblChildFirst = new JLabel("First");
-    add(lblChildFirst, "cell 3 2,alignx right,aligny center");
+    studentPhotoPanel = new ThumbnailPanel("student");
+    studentPhotoPanel.setBorder(null);
+    add(studentPhotoPanel, "cell 1 2 1 2,grow");
 
-    txtChildFirstName = new JTextField();
-    lblChildFirst.setLabelFor(txtChildFirstName);
-    lblChild.setLabelFor(txtChildFirstName);
-    add(txtChildFirstName, "cell 5 2 3 1,growx,aligny center");
-    txtChildFirstName.setColumns(10);
+    JLabel lblStudentFirst = new JLabel("First");
+    add(lblStudentFirst, "cell 3 2,alignx right,aligny center");
 
-    JLabel lblChildLast = new JLabel("Last");
-    add(lblChildLast, "cell 9 2,alignx right,aligny center");
+    txtStudentFirstName = new JTextField();
+    lblStudentFirst.setLabelFor(txtStudentFirstName);
+    lblStudent.setLabelFor(txtStudentFirstName);
+    add(txtStudentFirstName, "cell 5 2 3 1,growx,aligny center");
+    txtStudentFirstName.setColumns(10);
 
-    txtChildLastName = new JTextField();
-    add(txtChildLastName, "cell 11 2 3 1,growx,aligny center");
-    txtChildLastName.setColumns(10);
+    JLabel lblStudentLast = new JLabel("Last");
+    add(lblStudentLast, "cell 9 2,alignx right,aligny center");
 
-    JLabel lblChildAge = new JLabel("Age");
-    add(lblChildAge, "cell 3 3,alignx right,aligny center");
+    txtStudentLastName = new JTextField();
+    add(txtStudentLastName, "cell 11 2 3 1,growx,aligny center");
+    txtStudentLastName.setColumns(10);
 
-    txtChildAge = new JTextField();
-    add(txtChildAge, "cell 5 3,growx,aligny center");
-    txtChildAge.setColumns(10);
+    JLabel lblStudentGrade = new JLabel("Grade");
+    add(lblStudentGrade, "cell 7 3,alignx right,aligny center");
 
-    JLabel lblChildGrade = new JLabel("Grade");
-    add(lblChildGrade, "cell 7 3,alignx right,aligny center");
+    txtStudentGrade = new JTextField();
+    add(txtStudentGrade, "cell 9 3,growx,aligny center");
+    txtStudentGrade.setColumns(10);
 
-    txtChildGrade = new JTextField();
-    add(txtChildGrade, "cell 9 3,growx,aligny center");
-    txtChildGrade.setColumns(10);
+    JLabel lblStudentDateOfBirth = new JLabel("Date of Birth");
+    add(lblStudentDateOfBirth, "cell 11 3,alignx center,aligny center");
 
-    JLabel lblChildDateOfBirth = new JLabel("Date of Birth");
-    add(lblChildDateOfBirth, "cell 11 3,alignx center,aligny center");
+    txtStudentDOB = new JTextField();
+    add(txtStudentDOB, "cell 13 3,growx,aligny center");
+    txtStudentDOB.setColumns(10);
 
-    txtChildDOB = new JTextField();
-    add(txtChildDOB, "cell 13 3,growx,aligny center");
-    txtChildDOB.setColumns(10);
-
-    JButton btnAddChildPhoto = new JButton("Add Photo");
-    add(btnAddChildPhoto, "cell 15 3,alignx left,aligny top");
-    AttachPhotoAction childPhotoAction = new AttachPhotoAction(childPhotoPanel);
-    btnAddChildPhoto.addActionListener(childPhotoAction);
+    JButton btnAddStudentPhoto = new JButton("Add Photo");
+    add(btnAddStudentPhoto, "cell 15 3,alignx left,aligny top");
+    AttachPhotoAction studentPhotoAction = new AttachPhotoAction(studentPhotoPanel);
+    btnAddStudentPhoto.addActionListener(studentPhotoAction);
 
     JLabel lblSpecialNeedsallergies = new JLabel("Special Needs/Allergies");
     add(lblSpecialNeedsallergies, "cell 1 4 3 1,alignx right,aligny center");
 
-    txtChildSpecialNeeds = new JTextField();
-    add(txtChildSpecialNeeds, "cell 5 4 9 1,growx,aligny top");
-    txtChildSpecialNeeds.setColumns(10);
+    txtStudentSpecialNeeds = new JTextField();
+    add(txtStudentSpecialNeeds, "cell 5 4 9 1,growx,aligny top");
+    txtStudentSpecialNeeds.setColumns(10);
 
     JLabel lblParentgardian = new JLabel("Parent/Gardian");
     lblParentgardian.setFont(new Font("Tahoma", Font.BOLD, 14));
     add(lblParentgardian, "cell 1 5 2 1,alignx left,aligny top");
 
-    parentPhotoPanel = new ThumbnailPanel("parent");
-    parentPhotoPanel.setBorder(null);
-    add(parentPhotoPanel, "cell 1 6 1 2,grow");
+    guardianPhotoPanel = new ThumbnailPanel("parent");
+    guardianPhotoPanel.setBorder(null);
+    add(guardianPhotoPanel, "cell 1 6 1 2,grow");
 
     JLabel label = new JLabel("First");
     add(label, "cell 3 6,alignx right,aligny center");
@@ -144,7 +151,7 @@ public class StudentEditForm extends JPanel {
 
     JButton btnAddParentPhoto = new JButton("Add Photo");
     add(btnAddParentPhoto, "cell 15 7,alignx left,aligny top");
-    AttachPhotoAction parentPhotoAction = new AttachPhotoAction(parentPhotoPanel);
+    AttachPhotoAction parentPhotoAction = new AttachPhotoAction(guardianPhotoPanel);
     btnAddParentPhoto.addActionListener(parentPhotoAction);
 
     JLabel lblCity = new JLabel("City");
@@ -189,7 +196,7 @@ public class StudentEditForm extends JPanel {
     JLabel lblAltPhone = new JLabel("Alt. Phone");
     add(lblAltPhone, "cell 11 10,alignx right,aligny center");
 
-    JFormattedTextField txtPhoneAlt = new JFormattedTextField();
+    txtPhoneAlt = new JFormattedTextField(phoneNumberFormatter);
     add(txtPhoneAlt, "cell 13 10,growx,aligny top");
 
     JLabel lblEmailAddress = new JLabel("Email Address");
@@ -343,16 +350,16 @@ public class StudentEditForm extends JPanel {
   }
 
   /**
-   * Attaches the {@link ImageContainer container} which has the selected image and thumbnail photos to associate with
+   * Attaches the {@link Photo container} which has the selected image and thumbnail photos to associate with
    * the input panel name.
    */
-  public void attachThumbnail(ImageContainer container, String panelName) {
+  public void attachThumbnail(Photo container, String panelName) {
     switch (panelName) {
-      case "child":
-        childPhotoPanel.updateThumbnail(container);
+      case "student":
+        studentPhotoPanel.updateThumbnail(container);
         break;
-      case "parent":
-        parentPhotoPanel.updateThumbnail(container);
+      case "guardian":
+        guardianPhotoPanel.updateThumbnail(container);
         break;
       case "auth1":
         auth1PhotoPanel.updateThumbnail(container);
@@ -369,5 +376,135 @@ public class StudentEditForm extends JPanel {
       default:
         throw new IllegalArgumentException("Unknown image panel: " + panelName);
     }
+  }
+
+  public Student createStudent() {
+    Photo studentPhoto = new Photo(
+        studentPhotoPanel.imageContainer().cloneImage(),
+        studentPhotoPanel.imageContainer().cloneThumbnail()
+    );
+
+    Photo guardianPhoto = new Photo(
+        guardianPhotoPanel.imageContainer().cloneImage(),
+        guardianPhotoPanel.imageContainer().cloneThumbnail()
+    );
+
+    Photo auth2Photo = new Photo(
+        auth2PhotoPanel.imageContainer().cloneImage(),
+        auth2PhotoPanel.imageContainer().cloneThumbnail()
+    );
+
+    Photo auth3Photo = new Photo(
+        auth3PhotoPanel.imageContainer().cloneImage(),
+        auth3PhotoPanel.imageContainer().cloneThumbnail()
+    );
+
+    Photo auth4Photo = new Photo(
+        auth4PhotoPanel.imageContainer().cloneImage(),
+        auth4PhotoPanel.imageContainer().cloneThumbnail()
+    );
+
+    Guardian.Builder guardian = Guardian.builder()
+        .first(txtParentFirstName.getText())
+        .last(txtParentLastName.getText())
+        .streetAddress(txtParentAddress.getText())
+        .city(txtParentCity.getText())
+        .state(txtParentState.getText())
+        .zipcode(Zipcode.of(txtParentZipCode.getText()))
+        .emailAddress(txtEmailAddress.getText())
+        .photo(guardianPhoto);
+    
+    if (!txtPhoneHome.getText().isEmpty()) {
+      guardian.setPhoneNumber(PhoneNumber.of(PhoneNumber.Type.HOME, txtPhoneHome.getText()));
+    }
+    if (!txtPhoneCell.getText().isEmpty()) {
+      guardian.setPhoneNumber(PhoneNumber.of(PhoneNumber.Type.CELL, txtPhoneCell.getText()));
+    }
+    if (!txtPhoneAlt.getText().isEmpty()) {
+      guardian.setPhoneNumber(PhoneNumber.of(PhoneNumber.Type.OTHER, txtPhoneAlt.getText()));
+    }
+    
+    EmergencyContact emergencyContact = EmergencyContact.builder()
+        .firstName(txtEmergencyName.getText().split(" ")[0])
+        .lastName(txtEmergencyName.getText().split(" ")[1])
+        .addPhoneNumber(PhoneNumber.of(PhoneNumber.Type.OTHER, txtEmergencyPhone.getText()))
+        // FIXME Change form to have first and last names, Phone Type drop down and photo option
+        .create();
+
+    Pickup auth2 = Pickup.builder().create();
+    Pickup auth3 = Pickup.builder().create();
+    Pickup auth4 = Pickup.builder().create();
+
+    Student.Builder studdent = Student.builder()
+        .firstName(txtStudentFirstName.getText())
+        .lastName(txtStudentLastName.getText())
+        .dateOfBirth(LocalDate.parse(txtStudentDOB.getText()))
+        .grade(txtStudentGrade.getText())
+        .specialNeeds(txtStudentSpecialNeeds.getText())
+        .studentPhoto(studentPhoto)
+        .guardian(guardian.create())
+        .emergencyContact(emergencyContact);
+
+    if (!txtAuth1FirstName.getText().isEmpty()) {
+      Photo photo = new Photo(
+          auth1PhotoPanel.imageContainer().cloneImage(),
+          auth1PhotoPanel.imageContainer().cloneThumbnail()
+      );
+
+      Pickup pickup = Pickup.builder()
+          .first(txtAuth1FirstName.getText())
+          .last(txtAuth1LastName.getText())
+          .relationship(txtAuth1Relationship.getText())
+          .photo(photo)
+          .create();
+      studdent.authPickup(pickup);
+    }
+
+    if (!txtAuth2FirstName.getText().isEmpty()) {
+      Photo photo = new Photo(
+          auth2PhotoPanel.imageContainer().cloneImage(),
+          auth2PhotoPanel.imageContainer().cloneThumbnail()
+      );
+
+      Pickup pickup = Pickup.builder()
+          .first(txtAuth2FirstName.getText())
+          .last(txtAuth2LastName.getText())
+          .relationship(txtAuth2Relationship.getText())
+          .photo(photo)
+          .create();
+      studdent.authPickup(pickup);
+    }
+
+    if (!txtAuth3FirstName.getText().isEmpty()) {
+      Photo photo = new Photo(
+          auth1PhotoPanel.imageContainer().cloneImage(),
+          auth1PhotoPanel.imageContainer().cloneThumbnail()
+      );
+
+      Pickup pickup = Pickup.builder()
+          .first(txtAuth3FirstName.getText())
+          .last(txtAuth3LastName.getText())
+          .relationship(txtAuth3Relationship.getText())
+          .photo(photo)
+          .create();
+      studdent.authPickup(pickup);
+    }
+
+    if (!txtAuth4FirstName.getText().isEmpty()) {
+      Photo photo = new Photo(
+          auth1PhotoPanel.imageContainer().cloneImage(),
+          auth1PhotoPanel.imageContainer().cloneThumbnail()
+      );
+
+      Pickup pickup = Pickup.builder()
+          .first(txtAuth4FirstName.getText())
+          .last(txtAuth4LastName.getText())
+          .relationship(txtAuth4Relationship.getText())
+          .photo(photo)
+          .create();
+      studdent.authPickup(pickup);
+    }
+    
+        return studdent.create();
   }
 }

@@ -1,5 +1,12 @@
 package org.vbc4me.awanna.utility.readers;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
@@ -10,21 +17,13 @@ import org.vbc4me.awanna.facets.Club;
 import org.vbc4me.awanna.facets.EmergencyContact;
 import org.vbc4me.awanna.facets.Guardian;
 import org.vbc4me.awanna.facets.PhoneNumber;
-import org.vbc4me.awanna.facets.Photo;
 import org.vbc4me.awanna.facets.Pickup;
 import org.vbc4me.awanna.facets.Student;
 import org.vbc4me.awanna.facets.Transaction;
 import org.vbc4me.awanna.facets.Zipcode;
+import org.vbc4me.awanna.gui.picture.Photo;
 import org.vbc4me.awanna.utility.Utilities;
 import org.xml.sax.helpers.DefaultHandler;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 public class StudentFileReader extends DefaultHandler {
 

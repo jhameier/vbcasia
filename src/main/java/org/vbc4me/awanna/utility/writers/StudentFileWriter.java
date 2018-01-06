@@ -107,8 +107,8 @@ public final class StudentFileWriter {
     String s_image = "";
     String s_thumb = "";
     try {
-      s_image = Utilities.encodePhoto(student.guardian().photo().image());
-      s_thumb = Utilities.encodePhoto(student.guardian().photo().thumbnail());
+      s_image = Utilities.encodePhoto(student.guardian().photo().cloneImage());
+      s_thumb = Utilities.encodePhoto(student.guardian().photo().cloneThumbnail());
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -144,8 +144,8 @@ public final class StudentFileWriter {
     String g_image = "";
     String g_thumb = "";
     try {
-      g_image = Utilities.encodePhoto(student.guardian().photo().image());
-      g_thumb = Utilities.encodePhoto(student.guardian().photo().thumbnail());
+      g_image = Utilities.encodePhoto(student.guardian().photo().cloneImage());
+      g_thumb = Utilities.encodePhoto(student.guardian().photo().cloneThumbnail());
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -187,8 +187,8 @@ public final class StudentFileWriter {
       String p_image = "";
       String p_thumb = "";
       try {
-        p_image = Utilities.encodePhoto(student.guardian().photo().image());
-        p_thumb = Utilities.encodePhoto(student.guardian().photo().thumbnail());
+        p_image = Utilities.encodePhoto(student.guardian().photo().cloneImage());
+        p_thumb = Utilities.encodePhoto(student.guardian().photo().cloneThumbnail());
       } catch (IOException e) {
         e.printStackTrace();
       }

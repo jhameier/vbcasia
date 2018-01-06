@@ -1,5 +1,10 @@
 package org.vbc4me.awanna.utility.readers;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -8,16 +13,10 @@ import org.vbc4me.awanna.facets.Address;
 import org.vbc4me.awanna.facets.Club;
 import org.vbc4me.awanna.facets.EmergencyContact;
 import org.vbc4me.awanna.facets.PhoneNumber;
-import org.vbc4me.awanna.facets.Photo;
 import org.vbc4me.awanna.facets.Staff;
 import org.vbc4me.awanna.facets.Zipcode;
+import org.vbc4me.awanna.gui.picture.Photo;
 import org.vbc4me.awanna.utility.Utilities;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 public class StaffFileReader {
 

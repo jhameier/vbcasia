@@ -1,6 +1,7 @@
 package org.vbc4me.awanna.facets;
 
 import java.util.UUID;
+import org.vbc4me.awanna.gui.picture.Photo;
 
 public abstract class Person {
 

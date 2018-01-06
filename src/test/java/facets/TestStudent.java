@@ -1,8 +1,5 @@
 package facets;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.awt.image.BufferedImage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -12,10 +9,13 @@ import org.vbc4me.awanna.facets.Address;
 import org.vbc4me.awanna.facets.EmergencyContact;
 import org.vbc4me.awanna.facets.Guardian;
 import org.vbc4me.awanna.facets.PhoneNumber;
-import org.vbc4me.awanna.facets.Photo;
 import org.vbc4me.awanna.facets.Pickup;
 import org.vbc4me.awanna.facets.Student;
 import org.vbc4me.awanna.facets.Zipcode;
+import org.vbc4me.awanna.gui.picture.Photo;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TestStudent {
 
@@ -105,12 +105,12 @@ public class TestStudent {
     //   From todays date (this changes over time) and from exact date which will always be accurate.
     assertEquals(student.age(dob), 5, 0);
     assertEquals("K", student.grade());
-    assertEquals(cimage, student.photo().image());
-    assertEquals(cthumb, student.photo().thumbnail());
+    assertEquals(cimage, student.photo().cloneImage());
+    assertEquals(cthumb, student.photo().cloneThumbnail());
     assertEquals("First", student.guardian().firstName());
     assertEquals("Last", student.guardian().lastName());
-    assertEquals(pimage, student.guardian().photo().image());
-    assertEquals(pthumb, student.guardian().photo().thumbnail());
+    assertEquals(pimage, student.guardian().photo().cloneImage());
+    assertEquals(pthumb, student.guardian().photo().cloneThumbnail());
     assertEquals("123 Main Street", student.guardian().address().streetAddress());
     assertEquals("Some City", student.guardian().address().city());
     assertEquals("NJ", student.guardian().address().state());

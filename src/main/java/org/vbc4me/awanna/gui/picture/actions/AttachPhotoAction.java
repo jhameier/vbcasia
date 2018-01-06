@@ -9,7 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import org.vbc4me.awanna.gui.picture.ImageContainer;
+import org.vbc4me.awanna.gui.picture.Photo;
 import org.vbc4me.awanna.gui.picture.PictureEditDialog;
 import org.vbc4me.awanna.gui.picture.ThumbnailPanel;
 
@@ -64,10 +64,10 @@ public final class AttachPhotoAction extends AbstractAction {
       try {
         // read in the image needed to make the thumbnail from and create an initial thumbnail from the entire image.
         origImage = ImageIO.read(file);
-        BufferedImage tempThumbnail = ImageContainer.createThumbnail(origImage);
+        BufferedImage tempThumbnail = Photo.createThumbnail(origImage);
 
         // Create a new image container
-        ImageContainer container = new ImageContainer(origImage, tempThumbnail);
+        Photo container = new Photo(origImage, tempThumbnail);
 
         // Attach the new image container to the thumbnail panel
         thumbnailPanel.updateThumbnail(container);

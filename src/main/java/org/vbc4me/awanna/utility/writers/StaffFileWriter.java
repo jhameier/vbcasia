@@ -91,8 +91,8 @@ public final class StaffFileWriter {
     String image = "";
     String thumb = "";
     try {
-      image = Utilities.encodePhoto(staff.photo().image());
-      thumb = Utilities.encodePhoto(staff.photo().thumbnail());
+      image = Utilities.encodePhoto(staff.photo().cloneImage());
+      thumb = Utilities.encodePhoto(staff.photo().cloneThumbnail());
     } catch (IOException e) {
       e.printStackTrace();
     }

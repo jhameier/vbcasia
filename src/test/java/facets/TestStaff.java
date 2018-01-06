@@ -1,8 +1,5 @@
 package facets;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.awt.image.BufferedImage;
 import org.junit.Test;
 import org.vbc4me.awanna.facets.Address;
@@ -10,9 +7,12 @@ import org.vbc4me.awanna.facets.Club;
 import org.vbc4me.awanna.facets.EmergencyContact;
 import org.vbc4me.awanna.facets.Person;
 import org.vbc4me.awanna.facets.PhoneNumber;
-import org.vbc4me.awanna.facets.Photo;
 import org.vbc4me.awanna.facets.Staff;
 import org.vbc4me.awanna.facets.Zipcode;
+import org.vbc4me.awanna.gui.picture.Photo;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TestStaff {
 	
@@ -62,8 +62,8 @@ public class TestStaff {
 		assertTrue(PhoneNumber.contains(member.phoneNumbers(), three));
 		assertEquals("NA", member.specialNeeds());
 		assertEquals("firstLast@email.com", member.email());
-		assertEquals(member.photo().image(), image);
-		assertEquals(member.photo().thumbnail(), thumbnail);
+		assertEquals(member.photo().cloneImage(), image);
+		assertEquals(member.photo().cloneThumbnail(), thumbnail);
 	}
 	
 	/**
@@ -105,8 +105,8 @@ public class TestStaff {
 		BufferedImage image = new BufferedImage(480, 640, BufferedImage.TYPE_INT_RGB);
 		BufferedImage thumbnail = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
 		member.photo(new Photo(image, thumbnail));
-		assertEquals(image, member.photo().image());
-		assertEquals(thumbnail, member.photo().thumbnail());
+		assertEquals(image, member.photo().cloneImage());
+		assertEquals(thumbnail, member.photo().cloneThumbnail());
 	}
 	
 	/**

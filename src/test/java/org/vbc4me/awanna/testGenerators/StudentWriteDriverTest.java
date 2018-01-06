@@ -1,20 +1,19 @@
 package org.vbc4me.awanna.testGenerators;
 
-import org.vbc4me.awanna.facets.Address;
-import org.vbc4me.awanna.facets.EmergencyContact;
-import org.vbc4me.awanna.facets.Guardian;
-import org.vbc4me.awanna.facets.PhoneNumber;
-import org.vbc4me.awanna.facets.Photo;
-import org.vbc4me.awanna.facets.Pickup;
-import org.vbc4me.awanna.facets.Student;
-import org.vbc4me.awanna.facets.Student.Builder;
-import org.vbc4me.awanna.facets.Zipcode;
-
 import java.awt.image.BufferedImage;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import org.vbc4me.awanna.facets.Address;
+import org.vbc4me.awanna.facets.EmergencyContact;
+import org.vbc4me.awanna.facets.Guardian;
+import org.vbc4me.awanna.facets.PhoneNumber;
+import org.vbc4me.awanna.facets.Pickup;
+import org.vbc4me.awanna.facets.Student;
+import org.vbc4me.awanna.facets.Student.Builder;
+import org.vbc4me.awanna.facets.Zipcode;
+import org.vbc4me.awanna.gui.picture.Photo;
 
 public class StudentWriteDriverTest {
 	
